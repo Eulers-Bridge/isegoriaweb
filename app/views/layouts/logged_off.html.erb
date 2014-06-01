@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  	<%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+ 	<title>Isegoria Web</title>
+       <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+    
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only"><%=capitalize_as_title(t(:toggle_navigation))%></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand visible-xs" href="/"><img src="/assets/isegoria-logo-xs.jpg" alt="Isegoria Logo" /> Isegoria</a>
+          <a class="navbar-brand visible-sm" href="/"><img src="/assets/isegoria-logo-sm.jpg" alt="Isegoria Logo" /> Isegoria</a>
+          <a class="navbar-brand hidden-xs hidden-sm" href="/"><img src="/assets/isegoria-logo-default.jpg" alt="Isegoria Logo" /> Isegoria</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#"><%=t(:introduction).capitalize%></a></li>
+            <li><a href="#"><%=t(:benefits).capitalize%></a></li>
+            <li><a href="#"><%=capitalize_as_title(t(:show_cases))%></a></li>
+          </ul>
+          <%= form_for(:session, url: sessions_path, :html =>{class: "navbar-form navbar-right"}) do |f| %>
+            <div class="form-group">
+              <%= f.label :username, t(:username).capitalize, class: "sr-only" %>
+              <%= f.text_field :username, class: "form-control", placeholder: t(:username).capitalize %>
+            </div>
+            <div class="form-group">
+              <%= f.label :password, t(:password).capitalize, class: "sr-only" %>
+              <%= f.password_field :password, class: "form-control", placeholder: t(:password).capitalize %>
+            </div>
+            <%= f.submit capitalize_as_title(t(:login)), class: "btn btn-info navbar-button" %>
+          <% end %>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+<div class="container">
+<% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+<%= yield %>
+</div>
+   </body>
+</html>
+
