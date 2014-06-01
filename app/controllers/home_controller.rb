@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  # Prevent CSRF attacks by raising an exception.
+  #Prevent CSRF attacks by raising an exception.
   protect_from_forgery with: :exception
 
   #Set the default layout for this controller, the views from this controller are available when the user is not looged in
