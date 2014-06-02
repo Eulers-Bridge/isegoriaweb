@@ -3,56 +3,56 @@
 <%= form_for(@user) do |f| %>
 <%= render 'shared/error_messages' %>
   <div class="form-group">
-    <%= f.label :first_name, "First Name" %>
-    <%= f.text_field :first_name, class: "form-control", placeholder: "Enter first name" %>
+    <%= f.label :first_name, capitalize_as_title(t (:first_name)) %>
+    <%= f.text_field :first_name, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:first_name)).capitalize %>
     <!--p class="help-block">Example block-level help text here.</p-->
   </div>
   <div class="form-group">
-    <%= f.label :last_name, "Last Name" %>
-    <%= f.text_field :last_name, class: "form-control", placeholder: "Enter last name" %>
+    <%= f.label :last_name, capitalize_as_title(t (:last_name)) %>
+    <%= f.text_field :last_name, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:last_name)).capitalize %>
   </div>
    <div class="form-group">
-    <%= f.label :email, "Email Addresss" %>
-    <%= f.text_field :email, class: "form-control", placeholder: "Enter email" %>
+    <%= f.label :email, capitalize_as_title(t (:email)) %>
+    <%= f.text_field :email, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:email)).capitalize %>
   </div>
   <div class="form-group">
-    <%= f.label :username, "Username" %>
-    <%= f.text_field :username, class: "form-control", placeholder: "Enter username" %>
+    <%= f.label :username, capitalize_as_title(t (:username)) %>
+    <%= f.text_field :username, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:username)).capitalize %>
   </div>
   <div class="form-group">
-    <%= f.label :password, "Password" %>
-    <%= f.password_field :password, class: "form-control", placeholder: "Enter password" %>
+    <%= f.label :password, capitalize_as_title(t (:password)) %>
+    <%= f.password_field :password, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:password)).capitalize %>
   </div>
   <div class="form-group">
-    <%= f.label :password_confirmation, "Confirm Password" %>
-    <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirm password" %>
+    <%= f.label :password_confirmation, capitalize_as_title(t (:password_confirmation)) %>
+    <%= f.password_field :password_confirmation, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:password_confirmation)).capitalize %>
   </div>
   <div class="form-group">
-  	<label>Account Type</label>
+  	<label><%=capitalize_as_title(t(:account_type))%></label>
   	<div class="radio">
     	<label>
-      		<input type="radio" name="user[account_type]" id="rbIndependentCandidate" value="ind" checked="true"> Independent Candidate
+      		<input type="radio" name="user[account_type]" id="rbIndependentCandidate" value="ind" checked="true"> <%=capitalize_as_title(t(:independent_candidate)) %>
     	</label>
     	<label>
-      	<input type="radio" name="user[account_type]" id="rbTicketManager" value="tkt"> Ticket Manager
+      	<input type="radio" name="user[account_type]" id="rbTicketManager" value="tkt"> <%=capitalize_as_title(t(:ticket_manager)) %>
     	</label>
   	</div>
   </div>
   <div class="form-group" id="divPosition">
-  	<label for="slPosition">Position</label>
+  	<label for="slPosition"><%=capitalize_as_title(t(:election_position))%></label>
   	<select class="form-control" name="user[position]">
-  		<option value="0">Select one</option>
-  		<option value="1">President</option>
-  		<option value="2">Vicepresident</option>
-  		<option value="3">Secretary</option>
-  		<option value="4">Treasurer</option>
+  		<option value="0"><%=t(:select_one).capitalize%></option>
+  		<option value="1"><%=t(:president).capitalize%></option>
+  		<option value="2"><%=t(:vicepresident).capitalize%></option>
+  		<option value="3"><%=t(:secretary).capitalize%></option>
+  		<option value="4"><%=t(:treasurer).capitalize%></option>
   	</select>
   </div>
   <div class="form-group" id="divTicketName" style="display: none">
-    <%= f.label :ticket_name, "Ticket Name" %>
-    <%= f.password_field :ticket_name, class: "form-control", placeholder: "Ticket name" %>
+    <%= f.label :ticket_name, t(:ticket_name).capitalize %>
+    <%= f.password_field :ticket_name, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:ticket_name)).capitalize %>
   </div>
-  <%= f.submit "Sign Up", class: "btn btn-large btn-default" %>
+  <%= f.submit capitalize_as_title(t(:signup)), class: "btn btn-large btn-default" %>
   <% end %>
 <script type="text/javascript">
 //This need to be put on the home.js.coffee file

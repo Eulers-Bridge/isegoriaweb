@@ -4,15 +4,16 @@ class User
   include ActiveModel::Model
   include BCrypt
 
-  attr_accessor :first_name, :last_name, :username, :email, :password,:password_confirmation, :account_type, :position, :ticket_name
-  attr_reader :id, :created, :modified, :access_granted
+  attr_accessor :first_name, :last_name, :username, :email, :password,:password_confirmation, :account_type, :position, :ticket_name, :locale
+  attr_reader :id, :created, :modified, :access_granted, :verified_email
   #validates_presence_of :email, :first_name, :password
+  PASSWORD_MIN_LENGHT = 8
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }
-  validates :username, presence: true
-  validates :first_name, presence: true
-  validates :password, presence: true, length: { minimum: 8 }
-  validates :password_confirmation, presence: true
+  validates :email, :presence => { :message => ApplicationHelper.validation_error(:email, :presence, nil) }, format: { with: VALID_EMAIL_REGEX, :message => ApplicationHelper.validation_error(:email, :format, "email@mail.com") }
+  validates :username, :presence => { :message => ApplicationHelper.validation_error(:username, :presence, nil) }
+  validates :first_name, :presence => { :message => ApplicationHelper.validation_error(:first_name, :presence, nil) }
+  validates :password, :presence => { :message => ApplicationHelper.validation_error(:password, :presence, nil) }, length: { minimum: PASSWORD_MIN_LENGHT, :message => ApplicationHelper.validation_error(:email, :length, PASSWORD_MIN_LENGHT.to_s) }
+  validates :password_confirmation, :presence => { :message => ApplicationHelper.validation_error(:password_confirmation, :presence, nil) }
 
   def initialize (attributes = {})
     @id = attributes[:id]
@@ -41,19 +42,21 @@ class User
   end
 
   def self.revoke_access(id)
-    puts "***************access revoked to user " + id.to_s
+    looger.debug "***************access revoked to user " + id.to_s
   end
 
   def self.grant_access(id)
-    puts "***************access granted to user " + id.to_s
+    looger.debug "***************access granted to user " + id.to_s
   end
 
   def self.find_by(attributes = {})
-  	puts "Not implemented yet. Keep learning Ruby!"
+  	looger.debug "Not implemented yet. Keep learning Ruby!"
   end
 
-  def authenticate(email, password)
-  	puts "authenticated!"
+  def authenticate
+  	#gets user info from the Middleware in order to login
+    @verified_email = true;
+    @locale = "en";
   end
 
   def self.all
@@ -65,11 +68,10 @@ class User
   def update_attributes(attributes = {})
   end
   
- # private
   def save  
     if self.valid?
     	@password_hash = Password.create(@password)
-  		puts "The user is valid!, hashed password: " + @password_hash
+  		logger.debug "The user is valid!, hashed password: " + @password_hash
       true
   	else
   		puts self.errors.full_messages

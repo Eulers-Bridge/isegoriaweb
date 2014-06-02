@@ -2,33 +2,28 @@ class UsersController < ApplicationController
 	require 'net/http'
 
 	def create
-	  puts "como pongo los datos que manda el post????"
-	  pp(params)
 	  @user=User.new(user_params)
 	  if @user.save
-	  	flash[:success] = t(:user_creation_success_flash)
-	    redirect_to users_path
+	  	flash[:success] = t(:user_creation_success_flash, user: @user.first_name)
+	    redirect_to home_unverified_email_path
 	  else
-		render 'home/signup', layout: "logged_off"
+      flash[:error] = t(:user_creation_error_flash)
+		  redirect_to home_signup_path, layout: "logged_off"
 	  end
 	end
 
 	def index
-    	puts "Entro a la accion index del controlador user"
-    	User.testReq
     	@users_list = User.all
   	end
 
   	def change_access
   	  case params[:action_type]
         when 'revoke_access'
-  		  pp(params)
   		  User.revoke_access (params[:id])
   		  flash[:success] = t(:user_access_revoked_flash)
   		  redirect_to users_path
   		when 'grant_access'
   		  User.grant_access (params[:id])
-  		  pp(params)
   		  flash[:success] = t(:user_access_granted_flash)
   		  redirect_to users_path
   	    else

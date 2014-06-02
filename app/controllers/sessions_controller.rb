@@ -5,13 +5,21 @@ class SessionsController < ApplicationController
   
   #Function to create and start a new session
   def create
-    if true
-      redirect_to home_unverified_email_path
+    
+    @user = User.new(username: params[:session][:username], password: params[:session][:password])
+
+    @user.authenticate
+
+     I18n.locale = @user.locale || I18n.default_locale
+
+    if !@user.verified_email
+    redirect_to home_unverified_email_path
     elsif true
     	#transfer any data to the new session
       reset_session
     	session[:username] = params[:session][:username]
     	session[:authenticated] = true
+      session[:locale] = @user.locale
     	logger.debug session[:username] + " authenticated " + session[:authenticated].to_s
 	    redirect_to users_path
     else

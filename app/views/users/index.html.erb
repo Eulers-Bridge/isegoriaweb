@@ -10,9 +10,9 @@
   </div>
   <div class="panel-footer">
   <% unless user.access_granted.is_a?(TrueClass) %>
-    <%= button_to "Grant Access", users_change_access_path(:id => user.id, :action_type => "grant_access"), method: :post, :class => 'btn btn-success' %> 
+    <%= button_to capitalize_as_title(t(:grant_access)), users_change_access_path(:id => user.id, :action_type => "grant_access"), method: :post, :class => 'btn btn-success' %> 
   <% else %>
-    <%= button_to "Revoke Access", users_change_access_path(:id => user.id, :action_type => "revoke_access"), method: :post, :class => 'btn btn-danger' %>
+    <%= button_to capitalize_as_title(t(:revoke_access)), users_change_access_path(:id => user.id, :action_type => "revoke_access"), method: :post, :class => 'btn btn-danger' %>
   <% end %>
   </div>
 </div>
