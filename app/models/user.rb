@@ -42,15 +42,15 @@ class User
   end
 
   def self.revoke_access(id)
-    looger.debug "***************access revoked to user " + id.to_s
+    Rails.logger.debug "***************access revoked to user " + id.to_s
   end
 
   def self.grant_access(id)
-    looger.debug "***************access granted to user " + id.to_s
+    Rails.logger.debug "***************access granted to user " + id.to_s
   end
 
   def self.find_by(attributes = {})
-  	looger.debug "Not implemented yet. Keep learning Ruby!"
+  	Rails.logger.debug "Not implemented yet. Keep learning Ruby!"
   end
 
   def authenticate
@@ -60,9 +60,9 @@ class User
   end
 
   def self.all
-      [User.new(id: 1, firts_name: "Juanito", last_name: "Perez", username: "jperez", email:"jperez@mail.com", password:"myPass"), 
-      User.new(id: 2, firts_name: "Marco", last_name: "Polo", username: "mpolo", email:"example@railstutorial.org", password:"map"), 
-      User.new(id: 3, firts_name: "Mega", last_name: "Man", username: "rockman", email:"mega@maverick.com", password:"zero", access_granted: true)]
+      [User.new(id: 1, first_name: "Juanito", last_name: "Perez", username: "jperez", email:"jperez@mail.com", password:"myPass"), 
+      User.new(id: 2, first_name: "Marco", last_name: "Polo", username: "mpolo", email:"example@railstutorial.org", password:"map"), 
+      User.new(id: 3, first_name: "Mega", last_name: "Man", username: "rockman", email:"mega@maverick.com", password:"zero", access_granted: true)]
   end
 
   def update_attributes(attributes = {})
@@ -71,15 +71,12 @@ class User
   def save  
     if self.valid?
     	@password_hash = Password.create(@password)
-  		logger.debug "The user is valid!, hashed password: " + @password_hash
+  		Rails.logger.debug "The user is valid!, hashed password: " + @password_hash
       true
   	else
-  		puts self.errors.full_messages
+  		Rails.logger.debug self.errors.full_messages
+      false
   	end	
-  end
-
-  public
-  def destroy
   end
 
   public

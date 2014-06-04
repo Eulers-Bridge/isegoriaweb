@@ -1,28 +1,31 @@
 Rails.application.routes.draw do
   
   get 'users/new', to: 'home#signup'
+  post 'users/change_access'
+  resources :users, only: [:index, :create]
 
-  resources :users
-
+  match '/logout', to: 'sessions#destroy',     via: 'delete'
+  match '/login', to: 'sessions#create',     via: 'post'
   resources :sessions, only: [:create, :destroy]
+  
+  get 'elections/verify_existence'
+  resources :elections, only: [:create, :update, :destroy, :new, :edit]
 
-  get 'sessions/test'
+  resources :articles, only: [:create, :update, :destroy, :new, :edit, :index]
+  resources :polls, only: [:create, :update, :destroy, :new, :edit, :index]
+
+
 
   get 'home/unverified_email'
 
   # You can have the root of your site routed with "root"
   root 'home#index'
 
-  match '/logout', to: 'sessions#destroy',     via: 'delete'
-  match '/login', to: 'sessions#create',     via: 'post'
-
   get 'home', to: 'home#index'
 
   get 'home/index'
 
   get 'home/signup'
-
-  post 'users/change_access'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

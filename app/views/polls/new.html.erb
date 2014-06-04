@@ -1,0 +1,26 @@
+<% provide(:title, t(:title_new_poll)) %>
+<h1><%=capitalize_as_title(t(:title_new_poll))%></h1>
+<div>
+<%= form_for(@poll) do |f| %>
+<%= f.submit capitalize_as_title(t(:create)), class: "btn btn-large btn-success" %>
+  <div class="form-group">
+    <%= f.label :question, capitalize_as_title(t (:question)) %>
+    <%= f.text_area :question, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:question)).capitalize %>
+  </div>
+  <div class="form-group">
+    <%= f.label t(:options).capitalize+":"%>
+    <%= f.label :A %>
+    <%= f.text_field :options, class: "form-control"%>
+    <%= f.label :B %>
+    <%= f.text_field :options, class: "form-control"%>
+  </div>
+  <div class="form-group">
+    <%= f.label :date, capitalize_as_title(t (:question)) %>
+    <%= f.date_select :date, with_css_classes: "", use_two_digit_numbers: true, date_separator: "/", start_year: Time.now.year, end_year: Time.now.year + 10, default: Time.now, order: [:year,:month,:day] %>
+  </div>
+   <div class="form-group">
+    <%= f.label :picture, capitalize_as_title(t (:picture)) %>
+    <%= f.file_field :picture, accept: "image/png,image/gif,image/jpeg" ,class: 'file_input', placeholder: t(:field_placeholder, field_name: t(:picture)).capitalize %>
+  </div>
+  <% end %>
+  </div>

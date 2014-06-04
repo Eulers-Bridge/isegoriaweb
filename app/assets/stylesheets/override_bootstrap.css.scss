@@ -4,6 +4,10 @@ $navbar-default-bg: #312312;
 $light-orange: #ff8c00;
 $navbar-default-color: $light-orange;
 
+.article_image {
+  float: right;
+}
+
 #error_explanation {
   color: #f00;
   ul {

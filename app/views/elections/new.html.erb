@@ -1,0 +1,22 @@
+<% provide(:title, t(:title_new_election)) %>
+<h1>capitalize_as_title(t(:title_new_election))</h1>
+<div>
+<%= form_for(@election) do |f| %>
+<%= f.submit capitalize_as_title(t(:create)), class: "btn btn-large btn-success" %>
+  <div class="form-group">
+    <%= f.label :title, capitalize_as_title(t (:title)) %>
+    <%= f.text_field :title, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:title)).capitalize %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, capitalize_as_title(t (:description)) %>
+    <%= f.text_field :description, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:description)).capitalize %>
+  </div>
+   <div class="form-group">
+    <%= f.label :process_image, capitalize_as_title(t (:process)) %>
+    <%= f.file_field :process_image, accept: "image/png,image/gif,image/jpeg" ,class: 'file_input', placeholder: t(:field_placeholder, field_name: t(:process)).capitalize %>
+  </div>
+  <div class="form-group" id="divPosition">
+  	<h2><%=t(:position).capitalize%></h2>
+  </div>
+  <% end %>
+  </div>

@@ -28,12 +28,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand visible-xs" href="/"><img src="/assets/isegoria-logo-xs.jpg" alt=<%=t(:app_name) + t(:logo)%> /> <%=t(:app_name)%></a>
-          <a class="navbar-brand visible-sm" href="/"><img src="/assets/isegoria-logo-sm.jpg" alt=<%=t(:app_name) + t(:logo)%> /> <%=t(:app_name)%></a>
-          <a class="navbar-brand hidden-xs hidden-sm" href="/"><img src="/assets/isegoria-logo-default.jpg" alt=<%=t(:app_name) + t(:logo)%> /> <%=t(:app_name)%></a>
+          <a class="navbar-brand visible-xs" href="/"><%=image_tag("isegoria-logo-xs.jpg", alt:t(:app_name) + t(:logo))%> <%=t(:app_name)%></a>
+          <a class="navbar-brand visible-sm" href="/"><%=image_tag("isegoria-logo-sm.jpg", alt:t(:app_name) + t(:logo))%> <%=t(:app_name)%></a>
+          <a class="navbar-brand hidden-xs hidden-sm" href="/"><%=image_tag("isegoria-logo-default.png", alt:t(:app_name) + t(:logo))%> <%=t(:app_name)%></a>
         </div>
         <div class="navbar-collapse collapse" id="top_navbar">
-          <%= button_to capitalize_as_title(t(:logout)), "logout", method: :delete, :class => 'btn btn-info navbar-btn navbar-right' %>
+          <%= button_to capitalize_as_title(t(:logout)), logout_path, method: :delete, :class => 'btn btn-info navbar-btn navbar-right' %>
         </div><!--/.navbar-collapse -->
       </div>
     </div>
@@ -54,11 +54,11 @@
           <div class="navbar-collapse collapse sidebar-navbar-collapse" id="main_menu">
             <ul class="nav navbar-pills navbar-stacked">
               <li><h3><%=capitalize_as_title(t(:manage))%>: </h2> </li>
-              <li><%= link_to t(:news).capitalize, "/#", class: "active" %></li>
+              <li><%= link_to t(:news).capitalize, articles_path, class: "active" %></li>
               <li><%= link_to t(:events).capitalize, "/#" %></li>
               <li><%= link_to t(:photos).capitalize, "/#" %></li>
-              <li><%= link_to t(:poll).capitalize, "/#" %></li>
-              <li><%= link_to t(:election).capitalize, "/#" %></li>
+              <li><%= link_to t(:poll).capitalize, polls_path %></li>
+              <li><%= link_to t(:election).capitalize, elections_verify_existence_path %></li>
               <li><%= link_to t(:users).capitalize, users_path %></li>
             </ul>
           </div><!--/.nav-collapse -->

@@ -1,0 +1,22 @@
+<% provide(:title, t(:title_new_article)) %>
+<h1><%=capitalize_as_title(t(:title_new_article))%></h1>
+<div>
+<%= form_for(@article) do |f| %>
+  <div class="form-group">
+    <%= f.label :title, capitalize_as_title(t (:title)) %>
+    <%= f.text_field :title, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:title)).capitalize %>
+  </div>
+  <div class="form-group">
+    <%= f.label :picture, capitalize_as_title(t (:picture)) %>
+    <%= f.file_field :picture, accept: "image/png,image/gif,image/jpeg" ,class: 'file_input', placeholder: t(:field_placeholder, field_name: t(:picture)).capitalize %>
+  </div>
+  <div>
+  <h2>Picture Preview</h2>
+  </div>
+  <div class="form-group">
+    <%= f.label :content, capitalize_as_title(t (:content)) %>
+    <%= f.text_area :content, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:content)).capitalize %>
+  </div>
+  <%= f.submit capitalize_as_title(t(:create)), class: "btn btn-large btn-success" %>
+  <% end %>
+  </div>

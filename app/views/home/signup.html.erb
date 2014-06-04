@@ -1,5 +1,6 @@
-<% provide(:title, 'Sign up') %>
-<h1>Sign Up </h1>
+<% provide(:title, t(:title_signup).capitalize) %>
+<h1>Sign Up</h1>
+<div>
 <%= form_for(@user) do |f| %>
 <%= render 'shared/error_messages' %>
   <div class="form-group">
@@ -52,8 +53,9 @@
     <%= f.label :ticket_name, t(:ticket_name).capitalize %>
     <%= f.password_field :ticket_name, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:ticket_name)).capitalize %>
   </div>
-  <%= f.submit capitalize_as_title(t(:signup)), class: "btn btn-large btn-default" %>
+  <%= f.submit capitalize_as_title(t(:signup)), class: "btn btn-large btn-success" %>
   <% end %>
+  </div>
 <script type="text/javascript">
 //This need to be put on the home.js.coffee file
     $(document).ready(function() {
