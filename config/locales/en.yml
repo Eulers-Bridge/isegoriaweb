@@ -21,6 +21,7 @@
 
 en:
   account_type: "account type"
+  add: "add"
   article_creation_error_flash: "An error has ocurred, the news article could not be created"
   article_creation_success_flash: "News article successfully created"
   app_name: "Isegoria"
@@ -41,6 +42,7 @@ en:
   events: "events"
   field_placeholder: "enter %{field_name}"
   first_name: "first name"
+  full_name: "full name"
   grant_access: "grant access"
   hello_world: "hello world"
   home_headline: "headline"

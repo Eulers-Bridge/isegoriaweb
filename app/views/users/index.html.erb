@@ -5,8 +5,8 @@
   </div>
   <div class="panel-body">
    <!--%= gravatar_for user %-->
-<p>Full Name: <%=user.full_name%> </p>
-<p>Email: <%=user.email%> </p>
+<p><%=t(:full_name).capitalize%>: <%=capitalize_as_title(user.full_name)%> </p>
+<p><%=t(:email).capitalize%>: <%=user.email%> </p>
   </div>
   <div class="panel-footer">
   <% unless user.access_granted.is_a?(TrueClass) %>
