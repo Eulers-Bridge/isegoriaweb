@@ -15,7 +15,7 @@
     <%= f.label :process_image, capitalize_as_title(t (:process)) %>
     <%= f.file_field :process_image, accept: "image/png,image/gif,image/jpeg" ,class: 'file_input', placeholder: t(:field_placeholder, field_name: t(:process)).capitalize %>
   </div>
-  <%= f.hidden_field :positions%>
+  <%= f.hidden_field :positions, id: "hdd_positions"%>
   <% end %>
   <hr>
   <h2><%=t(:position).capitalize%></h2>
@@ -32,18 +32,65 @@
         <p><label id="lbl_position_title"></label></p>
         <p><label id="lbl_position_description"></label></p>
       </div>
+      <div class="panel-footer">
+      <input type="button" class="btn btn-xs btn-danger" value=<%=t(:remove).capitalize%> id="btn_remove_position"/> 
+      <input type="hidden" id="hdd_position_index"/>
+      </div>
     </div>
-  </div>
-  <div id="testing">
   </div>
 </div>
 <script>
 $("#btn_add_position").click(function(){
+
+  var positions = [];
+  alert($("#hdd_positions").val());
+
+  try {
+    positions = $.parseJSON($("#hdd_positions").val());
+  } catch (e) {
+    if($("#hdd_positions").val()!="")
+    {
+      console.error("Parsing error:", e);
+      return;
+    }
+  }
+  
+  positions.push({id:"", title:$("#positions_title").val(),description:$("#positions_description").val()});
+  $("#hdd_positions").val(JSON.stringify(positions));
+
+
   $("#lbl_position_title").text("<%=t(:title).capitalize%>: " + $("#positions_title").val());
   $("#lbl_position_description").text("<%=t(:description).capitalize%>: " + $("#positions_description").val());
   $element = $("#position_list_item").clone().removeAttr("hidden").removeAttr("id");
   $element.find("#lbl_position_title").removeAttr("id");
-  $("#positions_list").append($element);
-});
+  $element.find("#hdd_position_index").val(positions.length -1);
+  $element.find("#btn_remove_position").bind("click",function(event){
+  
+    var positions = [];
+    var index;
 
+      alert($("#hdd_positions").val());
+  
+    try {
+      positions = $.parseJSON($("#hdd_positions").val());
+      index = parseInt($(event.target).closest(".panel-footer").find("#hdd_position_index").val());
+
+      if(isNaN(index))
+        throw new error("index is not a valid integer");
+    } catch (e) {
+        console.error("Parsing error:", e);
+        return;
+    }
+    
+      positions.splice(index, 1);
+      $("#hdd_positions").val(JSON.stringify(positions));
+    
+    
+    $(event.target).parents(".panel").remove();
+  });
+
+  $("#positions_list").append($element);
+  $("#positions_title").val("");
+  $("#positions_description").val("");
+});
 </script>
