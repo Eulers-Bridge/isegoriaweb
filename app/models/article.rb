@@ -6,7 +6,7 @@ class Article
 
   validates :title, :presence => { :message => ApplicationHelper.validation_error(:title, :presence, nil) }
   validates :content, :presence => { :message => ApplicationHelper.validation_error(:content, :presence, nil) }
-  validates :username, :presence => { :message => ApplicationHelper.validation_error(:username, :presence, nil) }
+  validates :creator, :presence => { :message => ApplicationHelper.validation_error(:username, :presence, nil) }
   validates :date, :presence => { :message => ApplicationHelper.validation_error(:date, :presence, nil) }
 
   def initialize (attributes = {})
@@ -14,7 +14,7 @@ class Article
     @title = attributes[:title]
     @content = attributes[:content]
     @picture = attributes[:picture]
-    @creator = ""#session[:username]#attributes[:creator]
+    @creator = "TestUser"#session[:username]#attributes[:creator]
     @date = Time.now#attributes[:date]
   end
 
@@ -43,6 +43,23 @@ It was under the permission of David Moyes. So we could control him, he has work
 Van Persie is likely to be given another run-out as Holland take on Wales in Amsterdam on Wednesday in their final friendly before flying to Brazil. The Dutch then begin their World Cup campaign against holders Spain in a repeat of the 2010 final in Salvador on 13 June. 
   They face Australia and Chile in their other Group B games.", 
         picture: "article_3.jpg", creator:"FIFA 3", date:"2014/06/03")]
+  end
+
+  def save
+    if self.valid?
+      Rails.logger.debug "The news article is valid!"
+      directory = "app/assets/images/articles"
+      #get ID from the Database to create the image file
+      @id = "id"
+      # create the file path
+      path = File.join(directory, @id+File.extname(@picture.original_filename))
+      # write the file
+      File.open(path, "wb") { |f| f.write(@picture.read) }
+      true
+    else
+      Rails.logger.debug self.errors.full_messages
+      false
+    end
   end
 
 end

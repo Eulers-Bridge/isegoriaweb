@@ -43,7 +43,6 @@
 $("#btn_add_position").click(function(){
 
   var positions = [];
-  alert($("#hdd_positions").val());
 
   try {
     positions = $.parseJSON($("#hdd_positions").val());
@@ -69,8 +68,6 @@ $("#btn_add_position").click(function(){
     var positions = [];
     var index;
 
-      alert($("#hdd_positions").val());
-  
     try {
       positions = $.parseJSON($("#hdd_positions").val());
       index = parseInt($(event.target).closest(".panel-footer").find("#hdd_position_index").val());

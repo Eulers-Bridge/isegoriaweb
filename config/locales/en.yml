@@ -22,6 +22,7 @@
 en:
   account_type: "account type"
   add: "add"
+  answer: "answer"
   article_creation_error_flash: "An error has ocurred, the news article could not be created"
   article_creation_success_flash: "News article successfully created"
   app_name: "Isegoria"
@@ -30,6 +31,7 @@ en:
   creator: "creator"
   content: "content"
   date: "date"
+  date_format_javascript: "yyyy-mm-dd"
   delete: "delete"
   description: "description"
   edit: "edit"
@@ -62,6 +64,7 @@ en:
   password_confirmation: "password confirmation"
   photos: "photos"
   picture: "picture"
+  picture_preview: "picture preview"
   poll: "poll"
   poll_creation_error_flash: "An error has ocurred, the poll question could not be created"
   poll_creation_success_flash: "Poll question successfully created"

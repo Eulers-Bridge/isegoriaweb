@@ -56,20 +56,4 @@
   <%= f.submit capitalize_as_title(t(:signup)), class: "btn btn-large btn-success" %>
   <% end %>
   </div>
-<script type="text/javascript">
-//This need to be put on the home.js.coffee file
-    $(document).ready(function() {
-        $('[name="user[account_type]"]').change(function () {
-    		if ($('[name="user[account_type]"]:checked').val() === "ind") {
-        		//alert("it's Independent now");
-        		$('#divPosition').toggle();
-        		$('#divTicketName').toggle();
-    			} 
-    		else {
-       			//alert("it's Ticket Manager now");
-       			$('#divTicketName').toggle();
-        		$('#divPosition').toggle();
-    			}
-			});
-        });
-</script>
+<%= javascript_include_tag "home_util" %>
