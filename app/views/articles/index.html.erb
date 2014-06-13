@@ -11,7 +11,7 @@
       <p><%=article.content%></p>
   </div>
   <div class="panel-footer">
-    <%= button_to t(:edit).capitalize, edit_article_path(:id => article.id), :class => 'btn btn-info' %> <%= button_to t(:delete).capitalize, article_path(:id => article.id), method: :delete, :class => 'btn btn-danger' %>
+    <%= link_to t(:edit).capitalize, edit_article_path(:id => article.id), :class => 'btn btn-info' %> <%= button_to t(:delete).capitalize, article_path(:id => article.id), method: :delete, :class => 'btn btn-danger' %>
   </div>
 </div>
 <% end %>

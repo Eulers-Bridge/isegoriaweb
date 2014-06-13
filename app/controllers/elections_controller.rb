@@ -4,6 +4,7 @@ class ElectionsController < ApplicationController
 	end
 
 	def edit
+		@election = Election.find(params[:id])
 	end
 
 	def create
@@ -19,6 +20,15 @@ class ElectionsController < ApplicationController
 	end
 
 	def update
+		@election = Election.find(params[:id])
+	  if @election.update_params(election_params)
+	  	flash[:success] = t(:election_modification_success_flash, election: @election.title)
+	    redirect_to edit_election_path
+	  else
+        flash[:error] = t(:election_modification_error_flash)
+      	@election = Election.new
+      	redirect_to edit_election_path
+	  end
 	end
 
 	def destroy

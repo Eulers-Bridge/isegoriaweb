@@ -1,0 +1,40 @@
+<% provide(:title, t(:title_edit_poll)) %>
+<h1><%=capitalize_as_title(t(:title_edit_poll))%></h1>
+<div>
+<%= form_for(@poll, :url => poll_path ,:html => {:method => :put}) do |f| %>
+<%= f.submit capitalize_as_title(t(:create)), class: "btn btn-large btn-success" %>
+  <div class="form-group">
+    <%= f.label :question, capitalize_as_title(t (:question)) %>
+    <%= f.text_area :question, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:question)).capitalize %>
+  </div>
+  <div class="form-group">
+    <%= f.label t(:options).capitalize%>
+    <ul class="list-group" id="options_list">
+    </ul>
+    <input type="text" class="form-control" id="txt_option" placeholder="<%=t(:field_placeholder, field_name: t(:answer)).capitalize%>"/>
+    <input type="button" class="btn btn-xs btn-info" id="btn_add_option" value="<%=t(:add).capitalize%>"/>
+    <%= f.hidden_field :options, id: "hdd_options"%>
+  </div>
+  <div class="form-group">
+    <%= f.label :date, capitalize_as_title(t (:date)) %>
+    <%= f.text_field :date, class: "form-control", id: "dpk_poll_date", placeholder: t(:field_placeholder, field_name: t(:date)).capitalize%>
+  </div>
+   <div class="form-group">
+    <%= f.label :picture, capitalize_as_title(t (:picture)) %>
+    <%= f.file_field :picture, accept: "image/png,image/gif,image/jpeg", class: 'file_input', placeholder: t(:field_placeholder, field_name: t(:picture)).capitalize %>
+  </div>
+  <% end %>
+  <div hidden="true">
+    <div class="list-group-item" id="options_list_item"><label id="lbl_options_list_item"></label><span class="badge" id="btn_remove_option"><%=t(:remove).capitalize%></span>
+      <input type="hidden" id="hdd_option_index"/>
+    </div>
+  </div>
+</div>
+
+<%= javascript_include_tag "polls_util" %>
+<script type="text/javascript">
+  $("#dpk_poll_date").datepicker({
+    format: '<%=t(:date_format_javascript)%>',
+    todayBtn: 'linked'
+  });
+</script>
