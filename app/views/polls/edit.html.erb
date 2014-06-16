@@ -13,7 +13,7 @@
     <% @index = 0 %>
     <% @poll.options.each do |option| %>
       <div class="list-group-item"><label><%=option.to_s%></label><span class="badge btn_remove_option" id="btn_remove_option"><%=t(:remove).capitalize%></span>
-        <input type="hidden" id="hdd_option_index" class="hdd_option_index"> value=<%=@index%>/>
+        <input type="hidden" id="hdd_option_index" class="hdd_option_index" value=<%=@index%>/>
       </div>
       <% @index = @index + 1 %>
     <% end %>

@@ -4,7 +4,6 @@ $("#btn_add_option").click(function(){
 
   try {
     options = $.parseJSON($("#hdd_options").val());
-    alert(options);
   } catch (e) {
     if($("#hdd_options").val()!="")
     {
