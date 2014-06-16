@@ -39,6 +39,11 @@ $("#btn_add_position").click(function(){
     
       positions.splice(index, 1);
       $("#hdd_positions").val(JSON.stringify(positions));
+      
+      $("#hdd_option_index").each(function(index){
+        alert(index);
+          $(this)val(index;
+        });
     
     
     $(event.target).parents(".panel").remove();

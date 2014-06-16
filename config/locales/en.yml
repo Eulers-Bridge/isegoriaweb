@@ -57,6 +57,7 @@ en:
   introduction: "introduction"
   invalid_login_flash: "Invalid username/password combination"
   last_name: "last name"
+  location: "location"
   login: "log in"
   logo: "logo"
   logout: "log out"

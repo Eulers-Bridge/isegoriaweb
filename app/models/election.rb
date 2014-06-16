@@ -71,23 +71,4 @@ class Election
         ))
   end
 
-  def add_position(position)
-    if @positions.is_a? Array
-      @positions.pust(position)
-    else
-      @positions = Array.new()
-      @positions.push(position)
-    end
-  end
-
-  def remove_position(index)
-    if @positions.is_a? Array
-      @positions.pust(position)
-      true
-    else
-      Rails.logger.debug "Error trying to delete a position from an invalid positions array"
-      false
-    end
-  end
-
 end

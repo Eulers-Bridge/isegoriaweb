@@ -34,7 +34,7 @@
       </div>
       <div class="panel-footer">
       <input type="button" class="btn btn-xs btn-danger" value=<%=t(:remove).capitalize%> id="btn_remove_position"/> 
-      <input type="hidden" id="hdd_position_index"/>
+      <input type="hidden" id="hdd_position_index" class="hdd_position_index"/>
       </div>
     </div>
   </div>
@@ -80,10 +80,15 @@ $("#btn_add_position").click(function(){
     }
     
       positions.splice(index, 1);
-      $("#hdd_positions").val(JSON.stringify(positions));
-    
+      $("#hdd_positions").val(JSON.stringify(positions));    
     
     $(event.target).parents(".panel").remove();
+
+    $(".hdd_position_index").each(function(){
+        aux_index = parseInt($(this).val());
+          if(aux_index > index)
+          $(this).val(aux_index-1);
+        });
   });
 
   $("#positions_list").append($element);

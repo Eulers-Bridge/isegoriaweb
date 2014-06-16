@@ -4,6 +4,7 @@ $("#btn_add_option").click(function(){
 
   try {
     options = $.parseJSON($("#hdd_options").val());
+    alert(options);
   } catch (e) {
     if($("#hdd_options").val()!="")
     {
@@ -34,16 +35,49 @@ $("#btn_add_option").click(function(){
         console.error("Parsing error:", e);
         return;
     }
-    
       options.splice(index, 1);
       $("#hdd_options").val(JSON.stringify(options));
     
     
     $(event.target).parents(".list-group-item").remove();
+
+    $(".hdd_option_index").each(function(){
+        aux_index = parseInt($(this).val());
+          if(aux_index > index)
+          $(this).val(aux_index-1);
+        });
   });
 
   $("#options_list").append($element);
   $("#txt_option").val("");
 });
+
+$(".btn_remove_option").click(function(event){
+
+    var options = [];
+    var index;
+
+    try {
+      options = $.parseJSON($("#hdd_options").val());
+      index = parseInt($(event.target).closest(".list-group-item").find("#hdd_option_index").val());
+      if(isNaN(index))
+        throw new error("index is not a valid integer");
+    } catch (e) {
+        console.error("Parsing error:", e);
+        return;
+    }
+    
+    options.splice(index, 1);
+    $("#hdd_options").val(JSON.stringify(options));
+    
+    $(event.target).parents(".list-group-item").remove();
+   
+    $(".hdd_option_index").each(function(){
+        aux_index = parseInt($(this).val());
+          if(aux_index > index)
+          $(this).val(aux_index-1);
+        });
+
+  });
 
 $('#dp3').datepicker();

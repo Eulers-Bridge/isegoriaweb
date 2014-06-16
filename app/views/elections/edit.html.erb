@@ -27,6 +27,20 @@
     <input type="button" class="btn btn-large btn-info" value=<%=t(:add).capitalize%> id="btn_add_position"/>
   </div>
   <div id="positions_list">
+    <% @index = 0 %>
+    <% @election.positions.each do |position| %>
+    <div class="panel panel-info">
+      <div class="panel-body">
+        <p><label><%=t(:title).capitalize%>:  <%=capitalize_as_title(position.title)%></label></p>
+        <p><label><%=t(:description).capitalize%>:  <%=position.description.capitalize%></label></p>
+      </div>
+      <div class="panel-footer">
+      <input type="button" class="btn btn-xs btn-danger" value=<%=t(:remove).capitalize%> id="btn_remove_position"/> 
+      <input type="hidden" id="hdd_position_index" class="hdd_position_index" value=<%=@index%>/>
+      </div>
+    </div>
+    <% @index = @index + 1 %>
+    <% end %>
     <div class="panel panel-info" hidden="true" id="position_list_item">
       <div class="panel-body">
         <p><label id="lbl_position_title"></label></p>
@@ -34,7 +48,7 @@
       </div>
       <div class="panel-footer">
       <input type="button" class="btn btn-xs btn-danger" value=<%=t(:remove).capitalize%> id="btn_remove_position"/> 
-      <input type="hidden" id="hdd_position_index"/>
+      <input type="hidden" id="hdd_position_index" class="hdd_position_index"/>
       </div>
     </div>
   </div>
@@ -62,6 +76,7 @@ $("#btn_add_position").click(function(){
   $("#lbl_position_description").text("<%=t(:description).capitalize%>: " + $("#positions_description").val());
   $element = $("#position_list_item").clone().removeAttr("hidden").removeAttr("id");
   $element.find("#lbl_position_title").removeAttr("id");
+  $element.find("#lbl_position_description").removeAttr("id");
   $element.find("#hdd_position_index").val(positions.length -1);
   $element.find("#btn_remove_position").bind("click",function(event){
   
@@ -84,6 +99,12 @@ $("#btn_add_position").click(function(){
     
     
     $(event.target).parents(".panel").remove();
+
+        $(".hdd_position_index").each(function(){
+        aux_index = parseInt($(this).val());
+          if(aux_index > index)
+          $(this).val(aux_index-1);
+        });
   });
 
   $("#positions_list").append($element);
