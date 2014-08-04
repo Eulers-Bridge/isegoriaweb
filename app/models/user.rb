@@ -1,26 +1,31 @@
-require 'bcrypt'
+#require 'bcrypt'
 
-class User
+class User 
+  #include HttpRequest
   include ActiveModel::Model
   include BCrypt
 
-  attr_accessor :first_name, :last_name, :username, :email, :password,:password_confirmation, :account_type, :position, :ticket_name, :locale
-  attr_reader :id, :created, :modified, :access_granted, :verified_email
+  attr_accessor :first_name, :last_name, :email, :gender, :nationality, :personality, :yob, :password,:password_confirmation, :account_type, :position, :ticket_name, :locale
+  attr_reader :id, :access_granted, :account_verified
+  
   #validates_presence_of :email, :first_name, :password
   PASSWORD_MIN_LENGHT = 8
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, :presence => { :message => ApplicationHelper.validation_error(:email, :presence, nil) }, format: { with: VALID_EMAIL_REGEX, :message => ApplicationHelper.validation_error(:email, :format, "email@mail.com") }
-  validates :username, :presence => { :message => ApplicationHelper.validation_error(:username, :presence, nil) }
   validates :first_name, :presence => { :message => ApplicationHelper.validation_error(:first_name, :presence, nil) }
   validates :password, :presence => { :message => ApplicationHelper.validation_error(:password, :presence, nil) }, length: { minimum: PASSWORD_MIN_LENGHT, :message => ApplicationHelper.validation_error(:email, :length, PASSWORD_MIN_LENGHT.to_s) }
   validates :password_confirmation, :presence => { :message => ApplicationHelper.validation_error(:password_confirmation, :presence, nil) }
 
   def initialize (attributes = {})
     @id = attributes[:id]
-    @username = attributes[:username]
     @first_name = attributes[:first_name]
     @last_name = attributes[:last_name]
     @email = attributes[:email].to_s.downcase
+    @gender = attributes[:gender]
+    @nationality = attributes[:nationality]
+    @personality = 'none'
+    @yob = attributes[:yob]
+    @account_verified = false
     @password = attributes[:password]
     @password_confirmation = attributes[:password_confirmation]
     @account_type = attributes[:account_type]
@@ -68,27 +73,52 @@ class User
   def update_attributes(attributes = {})
   end
   
-  def save  
+  def save
     if self.valid?
     	@password_hash = Password.create(@password)
   		Rails.logger.debug "The user is valid!, hashed password: " + @password_hash
-      true
+        puts 'aqui-------------------------------------------------------'
+        reqUrl = '/api/signUp'
+
+        user = {'email'=>self.email,
+                'firstName'=>self.first_name,
+                'lastName'=>self.last_name,
+                'gender'=>self.last_name,
+                'nationality'=>self.nationality,
+                'yearOfBirth'=>self.yob,
+                'personality'=>self.personality,
+                'accountVerified'=>self.account_verified,
+                'password'=>@password_hash,
+                'institutionId'=>26            
+                }
+        @rest_response = http_post_request(reqUrl,user)
+        Rails.logger.debug "Response from server: #{@rest_response.code} #{@rest_response.message}: #{@rest_response.body}"
+        if @rest_response.code == 200
+          return true, @rest_response
+        else
+          return false, "#{@rest_response.code} #{@rest_response.message}"
+        end
   	else
-  		Rails.logger.debug self.errors.full_messages
-      false
+  	  Rails.logger.debug self.errors.full_messages
+      return false, self.errors.full_messages
   	end	
   end
 
-  public
-  def self.testReq
+  private
+  def http_post_request (reqUrl, jsonObject)
+    require 'json'
     require 'net/http'
+    puts 'http request module-------------------------------------------------------'
+    uri = URI.parse('http://www.eulersbridge.com:8080/dbInterface' + reqUrl)
 
-  #url = URI.parse('http://eulersbridge.com:8080/dbInterface-0.1.0/general-info')
-  #req = Net::HTTP::Get.new(url.path)
-  #res = Net::HTTP.start(url.host, url.port) {|http|
-  #  http.request(req)
-  #  }
-  #  puts res.body
-end
-
+    http = Net::HTTP.new(uri.host, uri.port)
+    #http.use_ssl = true
+    #http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    request = Net::HTTP::Post.new(uri)
+    request.add_field('Content-Type', 'application/json')
+    request.add_field('Accept', 'application/json')
+    
+    json_data = jsonObject.to_json
+    http.request(request, json_data)
+  end
 end

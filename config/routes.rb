@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   
   get 'users/new', to: 'home#signup'
   post 'users/change_access'
+
   resources :users, only: [:index, :create]
 
   match '/logout', to: 'sessions#destroy',     via: 'delete'

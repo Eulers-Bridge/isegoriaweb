@@ -6,7 +6,6 @@
   <div class="form-group">
     <%= f.label :first_name, capitalize_as_title(t (:first_name)) %>
     <%= f.text_field :first_name, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:first_name)).capitalize %>
-    <!--p class="help-block">Example block-level help text here.</p-->
   </div>
   <div class="form-group">
     <%= f.label :last_name, capitalize_as_title(t (:last_name)) %>
@@ -17,8 +16,23 @@
     <%= f.text_field :email, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:email)).capitalize %>
   </div>
   <div class="form-group">
-    <%= f.label :username, capitalize_as_title(t (:username)) %>
-    <%= f.text_field :username, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:username)).capitalize %>
+    <%= f.label :yob, capitalize_as_title(t (:yob)) %>
+    <%= f.text_field :yob, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:yob)).capitalize %>
+  </div>
+  <div class="form-group">
+    <%= f.label :nationality, capitalize_as_title(t (:nationality)) %>
+    <%= f.text_field :nationality, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:nationality)).capitalize %>
+  </div>
+  <div class="form-group">
+    <label><%=capitalize_as_title(t(:gender))%></label>
+    <div class="radio">
+      <label>
+          <input type="radio" name="user[gender]" id="rbGenderFemale" value="Female" checked="true"> <%=capitalize_as_title(t(:female)) %>
+      </label>
+      <label>
+        <input type="radio" name="user[gender]" id="rbGenderMale" value="Male"> <%=capitalize_as_title(t(:male)) %>
+      </label>
+    </div>
   </div>
   <div class="form-group">
     <%= f.label :password, capitalize_as_title(t (:password)) %>

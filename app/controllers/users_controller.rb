@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
-	require 'net/http'
+  require 'json'
 
 	def create
 	  @user=User.new(user_params)
-	  if @user.save
+    resp = @user.save
+	  if resp[0]
+      @result = resp[1].body
 	  	flash[:success] = t(:user_creation_success_flash, user: @user.first_name)
 	    redirect_to home_unverified_email_path
 	  else
@@ -33,8 +35,12 @@ class UsersController < ApplicationController
   	  end
   	end
 
-  	private
-    def user_params
-      params.require(:user).permit(:first_name, :last_name, :username, :email, :password, :password_confirmation, :account_type, :position, :ticket_name)
-    end
+  private
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :username, :email, :password, :password_confirmation, :account_type, :position, :ticket_name)
+  end
 end
+
+
+
+

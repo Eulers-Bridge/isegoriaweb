@@ -1,8 +1,10 @@
 module ApplicationHelper
+	
 	#Function that capitalize every first letter on all words from a sentence
 	def capitalize_as_title (string)
 		string.split.map(&:capitalize).join(' ')
 	end
+	
 	#Function that generates an Internationalizated validation error for any field
 	def self.validation_error (field, error_type, parameter)
 	  @message = I18n.t(field)

@@ -1,17 +1,17 @@
 class event
 include ActiveModel::Model
 
-  attr_accessor :title, :date, :location, :description, :picture, :volunteers
+  attr_accessor :name, :date, :location, :description, :picture, :volunteers
   attr_reader :id, :created, :modified
 
-  validates :title, :presence => { :message => ApplicationHelper.validation_error(:title, :presence, nil) }
+  validates :name, :presence => { :message => ApplicationHelper.validation_error(:name, :presence, nil) }
   validates :date, :presence => { :message => ApplicationHelper.validation_error(:date, :presence, nil) }
   validates :location, :presence => { :message => ApplicationHelper.validation_error(:location, :presence, nil) }
   validates :description, :presence => { :message => ApplicationHelper.validation_error(:description, :presence, nil) }
 
   def initialize (attributes = {})
     @id = attributes[:id]
-    @title = attributes[:title]
+    @name = attributes[:name]
     @date = attributes[:date]
     @location = attributes[:location]
     @description = attributes[:description]
@@ -37,7 +37,7 @@ include ActiveModel::Model
   end
 
 #  def update_attributes(attributes={})
-#    @title = attributes[:title]
+#    @name = attributes[:name]
 #    @description = attributes[:description]
 #    @process_image = attributes[:process_image]
 #    @positions = attributes[:positions]
@@ -67,17 +67,17 @@ include ActiveModel::Model
       description: "Test Description", 
       process_image: "chuta", 
       positions: Array(
-        {:id=>1, :title => "President", :description => "This is the president"},
-        {:id=>2, :title => "Vicepresident", :description => "This is the vicepresident"},
-        {:id=>3, :title => "Secretary", :description => "This is the secretary"},
-        {:id=>4, :title => "Treasurer", :description => "This is the treasurer"}
+        {:id=>1, :name => "President", :description => "This is the president"},
+        {:id=>2, :name => "Vicepresident", :description => "This is the vicepresident"},
+        {:id=>3, :name => "Secretary", :description => "This is the secretary"},
+        {:id=>4, :name => "Treasurer", :description => "This is the treasurer"}
         ))
   end
 
   def self.all
-    [{id: 1, title: "BBQ1", date: "2014/01/02", location: "Melbourne", description: "Delicious free meal for out followers 1", picture: "1.jpg", volunteers:[{position_title: "Helper 11", description: "The first one that helps11"},{position_title: "Helper 12", description: "The second one that helps12"}]},
-     {id: 2, title: "BBQ2", date: "2014/02/03", location: "Sydney", description: "Delicious free meal for out followers 2", picture: "2.jpg", volunteers:[{position_title: "Helper 21", description: "The first one that helps21"},{position_title: "Helper 22", description: "The second one that helps22"}]},
-     {id: 3, title: "BBQ3", date: "2014/03/04", location: "London", description: "Delicious free meal for out followers 3", picture: "3.jpg", volunteers:[{position_title: "Helper 31", description: "The first one that helps31"},{position_title: "Helper 32", description: "The second one that helps32"}]}
+    [{id: 1, name: "BBQ1", date: "2014/01/02", location: "Melbourne", description: "Delicious free meal for out followers 1", picture: "1.jpg", volunteers:[{position_title: "Helper 11", description: "The first one that helps11"},{position_title: "Helper 12", description: "The second one that helps12"}]},
+     {id: 2, name: "BBQ2", date: "2014/02/03", location: "Sydney", description: "Delicious free meal for out followers 2", picture: "2.jpg", volunteers:[{position_title: "Helper 21", description: "The first one that helps21"},{position_title: "Helper 22", description: "The second one that helps22"}]},
+     {id: 3, name: "BBQ3", date: "2014/03/04", location: "London", description: "Delicious free meal for out followers 3", picture: "3.jpg", volunteers:[{position_title: "Helper 31", description: "The first one that helps31"},{position_title: "Helper 32", description: "The second one that helps32"}]}
     ]
   end
 end

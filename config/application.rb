@@ -25,6 +25,9 @@ module IsegoriaWeb
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
 
     config.session_store :cookie_store, key: 'EulersBridgeIsegoria1EulersBridgeIsegoria2EulersBridgeIsegoria3EulersBridgeIsegoria4EulersBridgeIsegoria5'
+    
+    #Load lib modules
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
   end
 end
