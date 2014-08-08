@@ -1,1 +1,12 @@
-<h1> <%= t(:verify_email_messagge)%>.capitalize </h1>
+<% provide(:title, t(:title_verify_email).capitalize) %>
+<div id="centering">
+   <div id="card">       
+    <div id="logo">
+      <%= image_tag "home/EmailBlue128.png", class: "logosmall", :alt => "Logosmall" %>
+    </div>
+    <div id="text">
+      <h1><%=t(:home_verify_email_message_title)%></h1>
+        <p><%=t(:home_verify_email_message)%></p>
+    </div>
+  </div> 
+</div>

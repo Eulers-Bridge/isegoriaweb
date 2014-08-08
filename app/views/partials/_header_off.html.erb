@@ -1,0 +1,35 @@
+<div id="header">
+<!--div class="navbar navbar-inverse navbar-fixed-top" role="navigation"-->
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only"><%=capitalize_as_title(t(:toggle_navigation))%></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand visible-xs" href="/"><%=image_tag("isegoria-logo-xs.jpg", alt:t(:app_name) + t(:logo))%> <%=t(:app_name)%></a>
+      <a class="navbar-brand visible-sm" href="/"><%=image_tag("isegoria-logo-sm.jpg", alt:t(:app_name) + t(:logo))%> <%=t(:app_name)%></a>
+      <a class="navbar-brand hidden-xs hidden-sm" href="/"><%=image_tag("isegoria-logo-default.png", alt:t(:app_name) + t(:logo))%> <%=t(:app_name)%></a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="#"><%=t(:introduction).capitalize%></a></li>
+        <li><a href="#"><%=t(:benefits).capitalize%></a></li>
+        <li><a href="#"><%=capitalize_as_title(t(:show_cases))%></a></li>
+      </ul>
+      <%= form_for(:session, url: sessions_path, :html =>{class: "navbar-form navbar-right"}) do |f| %>
+        <div class="form-group">
+          <%= f.label :username, t(:username).capitalize, class: "sr-only" %>
+          <%= f.text_field :username, class: "form-control", placeholder: t(:username).capitalize %>
+        </div>
+        <div class="form-group">
+          <%= f.label :password, t(:password).capitalize, class: "sr-only" %>
+          <%= f.password_field :password, class: "form-control", placeholder: t(:password).capitalize %>
+        </div>
+        <%= f.submit capitalize_as_title(t(:login)), class: "btn btn-info navbar-button" %>
+      <% end %>
+    </div><!--/.navbar-collapse -->
+  </div>
+<!--/div-->
+</div>

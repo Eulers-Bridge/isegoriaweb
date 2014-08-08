@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 	  	flash[:success] = t(:user_creation_success_flash, user: @user.first_name)
 	    redirect_to home_unverified_email_path
 	  else
-      flash[:error] = t(:user_creation_error_flash)
+      flash[:danger] = t(:user_creation_error_flash)
 		  redirect_to home_signup_path, layout: "logged_off"
 	  end
 	end
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   		  redirect_to users_path
   	  else
         logger.debug "Invalid user access option: " + params[:action_type].to_s
-  	    flash[:error] = t(:saving_error_flash)
+  	    flash[:danger] = t(:saving_error_flash)
   	    redirect_to users_path
   	  end
   	end

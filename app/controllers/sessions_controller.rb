@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
 
      I18n.locale = @user.locale || I18n.default_locale
 
-    if !@user.verified_email
+    if !@user.account_verified
     redirect_to home_unverified_email_path
     elsif true
     	#transfer any data to the new session

@@ -1,7 +1,8 @@
+<% provide(:title, t(:title_users_list).capitalize) %>
 <% @users_list.each do |user| %>
 <div class="panel panel-info">
   <div class="panel-heading">
-    <h3 class="panel-title"><%=user.username%></h3>
+    <h3 class="panel-title"><%=user.email%></h3>
   </div>
   <div class="panel-body">
    <!--%= gravatar_for user %-->

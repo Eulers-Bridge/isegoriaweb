@@ -1,0 +1,21 @@
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %> fade in" role="alert">
+    <button class="close" data-dismiss="alert" type="button">
+      <span aria-hidden="true">×</span>
+      <span class="sr-only">Close</span>
+    </button>
+    <strong>
+   	  <% case key %>
+	  <% when "success" %>
+        <%= t(:alert_success_start)%>
+      <% when "info" %>
+        <%= t(:alert_info_start)%>
+      <% when "warning" %>
+        <%= t(:alert_warning_start)%>
+      <% when "danger" %>
+        <%= t(:alert_danger_start)%>
+      <% end %>
+    </strong>
+    <%= value %>
+  </div>
+<% end %>

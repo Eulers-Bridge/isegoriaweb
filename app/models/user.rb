@@ -60,14 +60,14 @@ class User
 
   def authenticate
   	#gets user info from the Middleware in order to login
-    @verified_email = true;
+    @account_verified = true;
     @locale = "en";
   end
 
   def self.all
-      [User.new(id: 1, first_name: "Juanito", last_name: "Perez", username: "jperez", email:"jperez@mail.com", password:"myPass"), 
-      User.new(id: 2, first_name: "Marco", last_name: "Polo", username: "mpolo", email:"example@railstutorial.org", password:"map"), 
-      User.new(id: 3, first_name: "Mega", last_name: "Man", username: "rockman", email:"mega@maverick.com", password:"zero", access_granted: true)]
+      [User.new(id: 1, first_name: "Juanito", last_name: "Perez", email:"jperez@mail.com", password:"myPass"), 
+      User.new(id: 2, first_name: "Marco", last_name: "Polo", email:"example@railstutorial.org", password:"map"), 
+      User.new(id: 3, first_name: "Mega", last_name: "Man", email:"mega@maverick.com", password:"zero", access_granted: true)]
   end
 
   def update_attributes(attributes = {})
