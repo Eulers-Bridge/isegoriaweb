@@ -31,8 +31,8 @@
     <% @election.positions.each do |position| %>
     <div class="panel panel-info">
       <div class="panel-body">
-        <p><label><%=t(:title).capitalize%>:  <%=capitalize_as_title(position.title)%></label></p>
-        <p><label><%=t(:description).capitalize%>:  <%=position.description.capitalize%></label></p>
+        <p><label><%=t(:title).capitalize%>:  <%=capitalize_as_title(position[:title])%></label></p>
+        <p><label><%=t(:description).capitalize%>:  <%=position[:description].capitalize%></label></p>
       </div>
       <div class="panel-footer">
       <input type="button" class="btn btn-xs btn-danger" value=<%=t(:remove).capitalize%> id="btn_remove_position"/> 

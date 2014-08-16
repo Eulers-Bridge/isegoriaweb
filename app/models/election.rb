@@ -58,17 +58,17 @@ class Election
   end
 
   def self.find(id)
-    Election.new(
+  @election =  Election.new(
       id: id, 
-      tittle: "Test Title", 
+      title: "Test Title", 
       description: "Test Description", 
       process_image: "chuta", 
-      positions: Array(
+      positions: [
         {:id=>1, :title => "President", :description => "This is the president"},
         {:id=>2, :title => "Vicepresident", :description => "This is the vicepresident"},
         {:id=>3, :title => "Secretary", :description => "This is the secretary"},
-        {:id=>4, :title => "Treasurer", :description => "This is the treasurer"}
-        ))
+        {:id=>4, :title => "Treasurer", :description => "This is the treasurer"}]
+  )
   end
 
 end

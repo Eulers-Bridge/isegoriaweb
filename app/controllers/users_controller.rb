@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   require 'json'
 
+  #Set the default layout for this controller, the views from this controller are available when the user is looged in
+  layout 'application'
+
 	def create
 	  @user=User.new(user_params)
     resp = @user.save

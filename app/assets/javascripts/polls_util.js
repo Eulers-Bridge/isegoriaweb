@@ -78,5 +78,3 @@ $(".btn_remove_option").click(function(event){
         });
 
   });
-
-$('#dp3').datepicker();

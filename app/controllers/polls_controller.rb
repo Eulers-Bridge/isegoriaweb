@@ -1,4 +1,8 @@
 class PollsController < ApplicationController
+
+  #Set the default layout for this controller, the views from this controller are available when the user is looged in
+  layout 'application'
+
 	def index
 		@polls_list = Poll.all
 	end
@@ -14,10 +18,10 @@ class PollsController < ApplicationController
 	def create
 	  @poll = Poll.new(poll_params)
 	  if @poll.save
-	  	flash[:success] = t(:poll_creation_success_flash, election: @poll.date)
+	  	flash[:success] = t(:poll_creation_success_flash, poll: @poll.date)
 	    redirect_to polls_path
 	  else
-        flash[:error] = t(:poll_creation_error_flash)
+        flash[:danger] = t(:poll_creation_error_flash)
       	@poll = Poll.new
       	redirect_to new_poll_path
 	  end
@@ -26,10 +30,10 @@ class PollsController < ApplicationController
 	def update
 		@poll = Poll.find(params[:id])
 	  if @poll.update_attributes(poll_params)
-	  	flash[:success] = t(:poll_modification_success_flash, election: @poll.date)
+	  	flash[:success] = t(:poll_modification_success_flash, poll: @poll.date)
 	    redirect_to polls_path
 	  else
-        flash[:error] = t(:poll_modification_error_flash)
+        flash[:danger] = t(:poll_modification_error_flash)
       	@poll = Poll.new
       	redirect_to edit_poll_path
 	  end

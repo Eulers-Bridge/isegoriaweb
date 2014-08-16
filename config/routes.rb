@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   
   get 'elections/verify_existence'
   resources :elections, only: [:create, :update, :destroy, :new, :edit]
-
+  resources :events, only: [:create, :update, :destroy, :new, :edit, :index]
+  resources :photos, only: [:create, :update, :destroy, :new, :edit, :index]
   resources :articles, only: [:create, :update, :destroy, :new, :edit, :index]
   resources :polls, only: [:create, :update, :destroy, :new, :edit, :index]
 

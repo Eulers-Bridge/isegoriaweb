@@ -1,0 +1,18 @@
+<%= link_to t(:create).capitalize, new_event_path, :class => 'btn btn-success' %> 
+<% @events_list.each do |event| %>
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%=event.name%></h3>
+  </div>
+  <div class="panel-body">
+  <p><%=t(:date).capitalize+": "+event.date%></p>
+  <p><%=t(:description).capitalize+": "+event.description%></p>
+  <p><%=t(:location).capitalize+": "+event.location%></p>
+  <p><%= t(:created_by).capitalize+": "+event.creator%></p>
+  <p><%= image_tag "events/"+event.picture, class: "event_image_thumbnail" %></p>
+  </div>
+  <div class="panel-footer">
+    <%= link_to t(:edit).capitalize, edit_event_path(:id => event.id), :class => 'btn btn-info' %> <%= button_to t(:delete).capitalize, event_path(:id => event.id), method: :delete, :class => 'btn btn-danger' %>
+  </div>
+</div>
+<% end %>

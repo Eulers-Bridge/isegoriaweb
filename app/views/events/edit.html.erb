@@ -1,0 +1,68 @@
+<% provide(:title, t(:title_edit_event)) %>
+<h1><%=capitalize_as_title(t(:title_edit_event))%></h1>
+<div>
+<%= form_for(@event, :url => event_path ,:html => {:method => :put}) do |f| %>
+  <div class="form-group">
+    <%= f.label :name, capitalize_as_title(t (:name)) %>
+    <%= f.text_field :name, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:name)).capitalize %>
+  </div>
+  <div class="form-group">
+    <%= f.label :date, capitalize_as_title(t (:date)) %>
+    <%= f.text_field :date, class: "form-control", id: "dpk_event_date", placeholder: t(:field_placeholder, field_name: t(:date)).capitalize%>
+  </div>
+  <div class="form-group">
+    <%= f.label :location, capitalize_as_title(t (:location)) %>
+    <%= f.text_field :location, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:location)).capitalize %>
+  </div>
+    <div class="form-group">
+    <%= f.label :description, capitalize_as_title(t (:description)) %>
+    <%= f.text_area :description, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:description)).capitalize %>
+  </div>
+  <div class="form-group">
+    <%= f.label :picture, capitalize_as_title(t (:picture)) %>
+    <%= f.file_field :picture, accept: "image/png,image/gif,image/jpeg" ,class: 'file_input', placeholder: t(:field_placeholder, field_name: t(:picture)).capitalize %>
+  </div>
+  <div class="upload-preview">
+    <label><%=capitalize_as_title(t(:picture_preview))%></label>
+    <!--Image closing tag required by the upload-preview-->
+    <img />
+  </div>
+  <div class="form-group">
+    <%= f.label t(:volunteers).capitalize%>
+    <ul class="list-group" id="volunteers_list">
+      <% @index = 0 %>
+      <% @event.volunteers.each do |volunteer| %>
+        <div class="list-group-item">
+          <p><label><%= t(:position_title).capitalize + ': ' + volunteer.position_title%></label></p>
+          <label><%= t(:description).capitalize + ': ' + volunteer.description%></label>
+          <span class="badge btn_remove_volunteer" id="btn_remove_volunteer"><%=t(:remove).capitalize%></span>
+          <input type="hidden" id="hdd_volunteer_index" class="hdd_volunteer_index" value=<%=@index%> />
+        </div>
+        <% @index = @index + 1 %>
+      <% end %>
+    </ul>
+    <label><%= t(:position_title).capitalize%>: </label>
+    <input type="text" class="form-control" id="txt_volunteer_position" placeholder="<%=t(:field_placeholder, field_name: t(:position_title)).capitalize%>"/>
+    <label><%= t(:description).capitalize%>: </label>
+    <input type="textarea" class="form-control" id="txt_volunteer_description" placeholder="<%=t(:field_placeholder, field_name: t(:description)).capitalize%>"/>
+    <input type="button" class="btn btn-xs btn-info" id="btn_add_volunteer" value="<%=t(:add).capitalize%>"/>
+    <%= f.hidden_field :volunteers, id: "hdd_volunteers", :value=> @event.volunteers.to_json%>
+  </div>
+  <%= f.submit capitalize_as_title(t(:save_changes)), class: "btn btn-large btn-success" %>
+  <% end %>
+  <div hidden="true">
+    <div class="list-group-item" id="volunteers_list_item">
+      <p><label><%= t(:position_title).capitalize%>:</label><label id="lbl_volunteers_position"></label></p>
+      <label><%= t(:description).capitalize%>:</label><label id="lbl_volunteers_description"></label>
+      <span class="badge" id="btn_remove_volunteer"><%=t(:remove).capitalize%></span>
+      <input type="hidden" id="hdd_volunteer_index" class="hdd_volunteer_index"/>
+    </div>
+  </div>
+</div>
+<%= javascript_include_tag "events_util" %>
+<script type="text/javascript">
+  $("#dpk_event_date").datepicker({
+    format: '<%=t(:date_format_javascript)%>',
+    todayBtn: 'linked'
+  });
+</script>

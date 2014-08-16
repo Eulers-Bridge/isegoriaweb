@@ -55,20 +55,20 @@ class Poll
 
   def self.find(id)
     if id =='1'
-      Poll.new(id: 1, question: "Who will win the FIFA World Cup?", date:"2014/05/31", options: ["yes","no","maybe"])
+      Poll.new(id: 1, question: "Who will win the FIFA World Cup?", date:"2014/05/31", options: ["Brasil","Germany","Ecuador"])
     elsif id == '2'
-      Poll.new(id: 2, question: "Who will win Wimbledon?", date:"2014/06/01", options: ["yes","no","maybe"])
+      Poll.new(id: 2, question: "Who will win Wimbledon?", date:"2014/06/01", options: ["Novak Djokovik","Roger Federer","Rafael Nadal"])
     elsif id == '3'
-      Poll.new(id: 3, question: "What was first, the hen or the egg?", date:"2014/06/02", options: ["yes","no","maybe"])
+      Poll.new(id: 3, question: "What was first, the hen or the egg?", date:"2014/06/02", options: ["The hen","The egg","Neither"])
     else
       nil
     end      
   end
 
   def self.all
-      [Poll.new(id: 1, question: "Who will win the FIFA World Cup?", date:"2014/05/31", options: ["yes","no","maybe"]), 
-      Poll.new(id: 2, question: "Who will win Wimbledon?", date:"2014/06/01", options: ["yes","no","maybe"]),
-      Poll.new(id: 3, question: "What was first, the hen or the egg?", date:"2014/06/02", options: ["yes","no","maybe"])]
+      [Poll.new(id: 1, question: "Who will win the FIFA World Cup?", date:"2014/05/31", options: ["Brasil","Germany","Ecuador"]), 
+      Poll.new(id: 2, question: "Who will win Wimbledon?", date:"2014/06/01", options: ["Novak Djokovik","Roger Federer","Rafael Nadal"]),
+      Poll.new(id: 3, question: "What was first, the hen or the egg?", date:"2014/06/02", options: ["The hen","The egg","Neither"])]
   end
 
 end

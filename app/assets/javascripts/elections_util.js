@@ -42,7 +42,7 @@ $("#btn_add_position").click(function(){
       
       $("#hdd_option_index").each(function(index){
         alert(index);
-          $(this)val(index;
+          $(this).val(index);
         });
     
     

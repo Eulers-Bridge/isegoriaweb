@@ -1,4 +1,8 @@
 class ElectionsController < ApplicationController
+
+  #Set the default layout for this controller, the views from this controller are available when the user is looged in
+  layout 'application'
+
 	def new
 		@election = Election.new #Set a new election object to be filled by the user form
 	end
@@ -11,9 +15,9 @@ class ElectionsController < ApplicationController
 		@election = Election.new(election_params)
 	  if @election.save
 	  	flash[:success] = t(:election_creation_success_flash, election: @election.title)
-	    redirect_to edit_election_path
+	    redirect_to edit_election_path(:id => 1)
 	  else
-        flash[:error] = t(:election_creation_error_flash)
+        flash[:danger] = t(:election_creation_error_flash)
       	@election = Election.new
       	redirect_to new_election_path
 	  end
@@ -21,11 +25,11 @@ class ElectionsController < ApplicationController
 
 	def update
 		@election = Election.find(params[:id])
-	  if @election.update_params(election_params)
+	  if @election.update_attributes(election_params)
 	  	flash[:success] = t(:election_modification_success_flash, election: @election.title)
 	    redirect_to edit_election_path
 	  else
-        flash[:error] = t(:election_modification_error_flash)
+        flash[:danger] = t(:election_modification_error_flash)
       	@election = Election.new
       	redirect_to edit_election_path
 	  end

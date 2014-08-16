@@ -1,0 +1,26 @@
+<div class="col-sm-3">
+  <div class="sidebar-nav">
+    <div class="navbar navbar-default" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main_menu">
+          <span class="sr-only"<%=capitalize_as_title(t(:toggle_navigation))%></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <span class="visible-xs navbar-brand"><%=capitalize_as_title(t(:main_menu))%></span>
+      </div>
+      <div class="navbar-collapse collapse sidebar-navbar-collapse" id="main_menu">
+        <ul class="nav navbar-pills navbar-stacked">
+          <li><h3><%=capitalize_as_title(t(:manage))%>: </h2> </li>
+          <li><%= link_to t(:news).capitalize, articles_path, class: "active" %></li>
+          <li><%= link_to t(:events).capitalize, events_path %></li>
+          <li><%= link_to t(:photos).capitalize, photos_path %></li>
+          <li><%= link_to t(:poll).capitalize, polls_path %></li>
+          <li><%= link_to t(:election).capitalize, elections_verify_existence_path %></li>
+          <li><%= link_to t(:users).capitalize, users_path %></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>

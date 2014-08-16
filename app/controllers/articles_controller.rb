@@ -1,4 +1,8 @@
 class ArticlesController < ApplicationController
+
+	#Set the default layout for this controller, the views from this controller are available when the user is looged in
+  	layout 'application'
+
 	def index
 		@articles_list = Article.all
 	end
@@ -14,10 +18,10 @@ class ArticlesController < ApplicationController
 	def create
 	  @article = Article.new(article_params)
 	  if @article.save
-	  	flash[:success] = t(:article_creation_success_flash, election: @article.title)
+	  	flash[:success] = t(:article_creation_success_flash, article: @article.title)
 	    redirect_to articles_path
 	  else
-        flash[:error] = t(:article_creation_error_flash)
+        flash[:danger] = t(:article_creation_error_flash)
       	@article = Article.new
       	redirect_to new_article_path
 	  end
@@ -26,10 +30,10 @@ class ArticlesController < ApplicationController
 	def update
 		@article = Article.find(params[:id])
 	  if @article.update_attributes(article_params)
-	  	flash[:success] = t(:article_modification_success_flash, election: @article.title)
+	  	flash[:success] = t(:article_modification_success_flash, article: @article.title)
 	    redirect_to articles_path
 	  else
-        flash[:error] = t(:article_modification_error_flash)
+        flash[:danger] = t(:article_modification_error_flash)
       	redirect_to edit_article_path
 	  end
 	end
