@@ -69,7 +69,7 @@ include ActiveModel::Model
       id: id, 
       name: "BBQ1", 
       date: "2014/01/02", 
-      location: "Melbourne", 
+      location: Location.new(name:'Parque el Ejido',latitude: -0.21,longitude: -78.5), 
       description: "Delicious free meal for out followers 1", 
       picture: "1.jpg", 
       volunteers:[Volunteer.new(position_title: "Helper 11", description: "The first one that helps11"),Volunteer.new(position_title: "Helper 12", description: "The second one that helps12")]
@@ -78,9 +78,9 @@ include ActiveModel::Model
 
   def self.all
     [
-     Event.new(id: 1, name: "BBQ1", date: "2014/01/02", location: "Melbourne", description: "Delicious free meal for out followers 1", picture: "1.jpg", volunteers:[Volunteer.new(position_title: "Helper 11", description: "The first one that helps11"),Volunteer.new(position_title: "Helper 12", description: "The second one that helps12")]),
-     Event.new(id: 2, name: "BBQ2", date: "2014/02/03", location: "Sydney", description: "Delicious free meal for out followers 2", picture: "2.png", volunteers:[Volunteer.new(position_title: "Helper 21", description: "The first one that helps21"),Volunteer.new(position_title: "Helper 22", description: "The second one that helps22")]),
-     Event.new(id: 3, name: "BBQ3", date: "2014/03/04", location: "London", description: "Delicious free meal for out followers 3", picture: "3.jpg", volunteers:[Volunteer.new(position_title: "Helper 31", description: "The first one that helps31"),Volunteer.new(position_title: "Helper 32", description: "The second one that helps32")])
+     Event.new(id: 1, name: "BBQ1", date: "2014/01/02", location: Location.new(name:'Parque el Ejido',latitude: -0.21,longitude: -78.5), description: "Delicious free meal for out followers 1", picture: "1.jpg", volunteers:[Volunteer.new(position_title: "Helper 11", description: "The first one that helps11"),Volunteer.new(position_title: "Helper 12", description: "The second one that helps12")]),
+     Event.new(id: 2, name: "BBQ2", date: "2014/02/03", location: Location.new(name:'Central Park',latitude: 40.78,longitude: -73.9667), description: "Delicious free meal for out followers 2", picture: "2.png", volunteers:[Volunteer.new(position_title: "Helper 21", description: "The first one that helps21"),Volunteer.new(position_title: "Helper 22", description: "The second one that helps22")]),
+     Event.new(id: 3, name: "BBQ3", date: "2014/03/04", location: Location.new(name:'London Eye',latitude: 51.5,longitude: -0.1197), description: "Delicious free meal for out followers 3", picture: "3.jpg", volunteers:[Volunteer.new(position_title: "Helper 31", description: "The first one that helps31"),Volunteer.new(position_title: "Helper 32", description: "The second one that helps32")])
     ]
   end
 end

@@ -7,7 +7,8 @@
   <div class="panel-body">
   <p><%=t(:date).capitalize+": "+event.date%></p>
   <p><%=t(:description).capitalize+": "+event.description%></p>
-  <p><%=t(:location).capitalize+": "+event.location%></p>
+  <p><%=t(:location).capitalize+": "+event.location.name%></p>
+  <p><%= render 'partials/map', :latitude => event.location.latitude, :longitude => event.location.longitude, :title => event.location.name, :map_class => 'event_map_small', :map_id => event.id %><p>
   <p><%= t(:created_by).capitalize+": "+event.creator%></p>
   <p><%= image_tag "events/"+event.picture, class: "event_image_thumbnail" %></p>
   </div>
