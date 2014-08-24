@@ -1,0 +1,50 @@
+    <script type="text/javascript">
+    <% if (defined?(marker_image)).nil?
+        @image = MAP_MARKER_IMAGE
+      else
+        @image = marker_image
+      end
+      if (defined?(map_class)).nil?
+        @map_class = ''
+      else
+        @map_class = map_class
+      end
+      if (defined?(map_id)).nil?
+        console.log('Error, no map Id provided')
+      end
+    %>
+      $(function () {
+        var myLatlng = new google.maps.LatLng(<%=latitude%>,<%=longitude%>);
+        //var image = '/pin-marker.png';
+        // Origins, anchor positions and coordinates of the marker
+      // increase in the X direction to the right and in
+      // the Y direction down.
+      var image = {
+          url: '<%=@image%>',
+          // This marker is 20 pixels wide by 32 pixels tall.
+          //size: new google.maps.Size(200, 200),
+          // The origin for this image is 0,0.
+          //origin: new google.maps.Point(0,0),
+          // The anchor for this image is the base of the flagpole at 0,32.
+          //anchor: new google.maps.Point(0, 32)
+        };
+
+        var mapOptions = {
+          center: myLatlng,
+          zoom: 17
+        };
+        var map = new google.maps.Map(document.getElementById('<%=map_id%>'), mapOptions);
+        
+      // To add the marker to the map, use the 'map' property
+      var marker = new google.maps.Marker({
+      position: myLatlng,
+      title:'<%=@title%>',
+      animation: google.maps.Animation.DROP,
+      icon: image
+      });
+      // To add the marker to the map, call setMap();
+      marker.setMap(map);
+      });
+      //google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<div id='<%=map_id%>' style="height: 500px; width:500px;" class='<%=@map_class%>'/>
