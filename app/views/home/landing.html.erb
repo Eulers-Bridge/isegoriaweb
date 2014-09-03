@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  <title>Isegoria Web</title>
+</head>
+<body>
+<%= render "partials/facebook_SDK" %>
+<div class="container">
+	<div id="first_landing">
+		<div id="first_landing_header">
+			<div id="landing_logo">
+			logo
+			</div>
+			<div id="controls">
+				<button type="button"><%=capitalize_as_title(t(:isegoria_support))%></button>
+				<button type="button"><%=capitalize_as_title(t(:admin_login))%></button>
+			</div>
+		</div>
+		<div id="first_content">
+			<div id="left_content">
+				<div class="row">
+					<p><h1><%=t(:landing_modal).capitalize%></h1></p>
+					<p><h3><%=t(:landing_message)%></h3></p>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-md-2">
+						<%= image_tag "landing/hola.jpg", class: "" %>
+					</div>
+					<div class="col-md-4">
+						<p><%=t(:landing_download).capitalize%> Google Play Store</p>
+						<p><%=t(:landing_android_version)%></p>
+					</div>
+					<div class="col-md-2">
+						<%= image_tag "landing/hola.jpg", class: "" %>
+					</div>
+					<div class="col-md-4">
+						<p><%=t(:landing_download).capitalize%> App Store</p>
+						<p><%=t(:landing_ios_version)%></p>
+					</div>
+				</div>
+				<hr>
+			</div>
+			<div id="right_content">
+				<%= image_tag "landing/hola.jpg", class: "" %>
+			</div>
+		</div>
+	</div>
+	<div id="second_landing">
+		<div id="second_landing_top">
+			<div id="top_text">
+				<p><h1><%=t(:landing_title1).capitalize%></h1></p>
+				<p><h4><%=t(:landing_text_2_1).capitalize%></h4></p>
+			</div>
+			<div id="right_text">
+				<p><h4><%=t(:landing_text_2_2).capitalize%></h4></p>
+			</div>
+		</div>
+		<div id="second_landing_bottom">
+			<div id="right_text">
+    			<div class="row">
+    				<div class="col-md-12">
+    					<h1><%=t(:landing_title2).capitalize%></h1>
+    				</div>
+    			</div>
+    			<div class="row">
+    				<div class="col-md-2">
+    					<%= image_tag "landing/hola.jpg", class: "" %>
+    				</div>
+    				<div class="col-md-10">
+    					<p><%=t(:landing_text_2_3).capitalize%></p>
+    				</div>
+    			</div>
+    			<div class="row">
+    				<div class="col-md-2">
+    					<%= image_tag "landing/hola.jpg", class: "" %>
+    				</div>
+    				<div class="col-md-10">
+    					<p><%=t(:landing_text_2_4).capitalize%></p>
+    				</div>
+    			</div>
+    			<div class="row">
+    				<div class="col-md-2">
+    					<%= image_tag "landing/hola.jpg", class: "" %>
+    				</div>
+    				<div class="col-md-10">
+    					<p><%=t(:landing_text_2_5).capitalize%></p>
+    				</div>
+    			</div>
+			</div>
+		</div>
+		<div id="picture_carrousel">
+			<%= image_tag "landing/hola.jpg", class: "" %>
+		</div>
+	</div>
+	<hr>
+	<div id="third_landing">
+		<div class="row">
+			<%= image_tag "landing/hola.jpg", class: "" %>
+			<h1><%=t(:landing_title3).capitalize%></h1>
+			<h4><%=t(:landing_text_3_1).capitalize%></h4>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+    			<%= image_tag "landing/hola.jpg", class: "" %>
+    			<h5><%=t(:landing_text_3_2).capitalize%></h5>
+    		</div>
+    		<div class="col-md-4">
+    			<%= image_tag "landing/hola.jpg", class: "" %>
+    			<h5><%=t(:landing_text_3_3).capitalize%></h5>
+    		</div>
+    		<div class="col-md-4">
+    			<%= image_tag "landing/hola.jpg", class: "" %>
+    			<h5><%=t(:landing_text_3_4).capitalize%></h5>
+    		</div>
+		</div>
+	</div>
+	<div id="fourth_landing">
+		<div class="row">
+			<h1><%=t(:landing_title4).capitalize%></h1>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+    			<h3><%=capitalize_as_title(t(:profile))%></h3>
+    			<%= image_tag "landing/hola.jpg", class: "" %>
+    			<h5><%=t(:landing_text_4_1).capitalize%></h5>
+    		</div>
+    		<div class="col-md-4">
+    			<h3><%=capitalize_as_title(t(:friends))%></h3>
+    			<%= image_tag "landing/hola.jpg", class: "" %>
+    			<h5><%=t(:landing_text_4_2).capitalize%></h5>
+    		</div>
+    		<div class="col-md-4">
+    			<h3><%=capitalize_as_title(t(:tickets_and_groups))%></h3>
+    			<%= image_tag "landing/hola.jpg", class: "" %>
+    			<h5><%=t(:landing_text_4_3).capitalize%></h5>
+    		</div>
+		</div>
+	</div>
+	<div id="fifth_landing">
+		<div class="row">
+			<div class="col-md-3">
+			</div>
+			<div class="col-md-2">
+				<%= image_tag "landing/hola.jpg", class: "" %>
+			</div>
+			<div class="col-md-2">
+				<%= image_tag "landing/hola.jpg", class: "" %>
+			</div>
+			<div class="col-md-2">
+				<%= image_tag "landing/hola.jpg", class: "" %>
+			</div>
+			<div class="col-md-3">
+			</div>
+		</div>
+		<div class="row">
+			<p><h1><%=t(:landing_title5).capitalize%></h1></p>
+			<p><h4><%=t(:landing_text_5_1).capitalize%></h4></p>
+			<p><h4><%=t(:landing_text_5_privacy).capitalize%></h4></p>
+		</div>
+	</div>
+	<div id="landing_footer">
+		<div class="row">
+			<div id="footer_logo">
+				<%= image_tag "landing/hola.jpg", class: "" %>
+			</div>
+			<div id="footer_controls">
+				<button type="button"><%=capitalize_as_title(t(:privacy_policy))%></button>
+				<button type="button"><%=capitalize_as_title(t(:contact))%></button>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<p class="copyright"><h5><%=t(:copyright_text)%></h5></p>
+			<p><h5><%=t(:copyright_message)%></h5></p>
+		</div>
+	</div>
+	</div>
+</body>
+</html>

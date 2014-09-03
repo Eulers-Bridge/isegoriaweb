@@ -1,0 +1,180 @@
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+hr{
+	margin-left: 70px;
+	margin-right: 70px;
+}
+#first_landing{
+	background-color: #FFFFFF;
+	background: url(home/signup_background.jpg) no-repeat center center;
+	height: 800px;
+}
+
+#first_landing_header{
+ 	height: 75px;
+ 	width: 100%;
+}
+#landing_logo{
+	color: #FFFFFF;
+	border-style: solid;
+	float: left;
+	padding-right: 15px;
+	padding-left: 25px;
+	height: 75px;
+}
+
+#landing_logo .img{
+	vertical-align: middle;
+}
+
+#first_landing_header #controls{
+	color: #FFFFFF;
+	border-style: solid;
+	float: right;
+	padding-right: 25px;
+	padding-left: 15px;
+	height: 75px;
+}
+
+#first_landing_header #controls .button{
+	vertical-align: middle;
+}
+
+
+#first_content{
+color: #FFFFFF;
+height: 725px;
+width: 100%;
+padding: 70px;
+padding-top: 25px;
+}
+#first_content #left_content{
+border-style: solid;
+height: 630px;
+width: 545px;
+float: left;
+padding-top: 175px;
+padding-left: 15px;
+padding-right: 15px;
+}
+#first_content #right_content{
+border-style: solid;
+height: 630px;
+width: 420px;
+float: right;
+padding-left: 15px;
+padding-right: 15px;
+}
+
+#second_landing{
+	background-color: #FFFFF;
+	height: 1200px;
+}
+#second_landing_top{
+	background-color: #0099FF;
+	height: 550px;
+}
+#second_landing_top #top_text{
+	padding: 20px;
+	height: 250px;
+	width: 100%;
+	text-align: center;
+	color: #FFFFFF;
+}
+#second_landing_top #right_text{
+	padding: 20px;
+	height: 300px;
+	width: 575px;
+	float: right;
+	text-align: center;
+	color: #FFFFFF;
+}
+#second_landing_bottom{
+	height: 650px;
+}
+#second_landing_bottom #right_text{
+	padding: 20px;
+	height: 100%;
+	width: 575px;
+	float: right;
+	text-align: center;
+	color: #000000;
+}
+
+#second_landing_bottom #right_text .row{
+	padding: 20px;
+}
+#picture_carrousel{
+	padding: 20px;
+	position: relative;
+	top:-950px;
+	left:0px;
+	height: 950px;
+	width: 555px;
+	z-index: 10;
+	border-style: solid;
+}
+
+#third_landing{
+	background-color: #FFFFFF;
+	height: 600px;
+	text-align: center;
+	padding: 70px;
+}
+
+#fourth_landing{
+	background-color: #E2E2E2;
+	height: 900px;
+	text-align: center;
+	padding: 70px;
+}
+
+#fifth_landing{
+	background-color: #555560;
+	height: 500px;
+	text-align: center;
+	padding: 70px;
+	color: #DDDDDD;
+}
+
+#fifth_landing h1{
+	color: #CC6666;
+}
+
+#landing_footer{
+	background-color: #333333;
+	height: 250px;
+	text-align: center;
+	padding-left: 70px;
+	padding-right: 70px;
+	color: #DDDDDD;
+}
+
+
+#landing_footer #footer_logo{
+	color: red;
+	border-style: solid;
+	text-align: center;
+	vertical-align: center;
+	height: 100px;
+	width: 100px;
+	float: left;
+	margin-left: 465px;
+}
+
+#footer_logo .img{
+	vertical-align: middle;
+}
+
+#landing_footer #footer_controls{
+	color: red;
+	border-style: solid;
+	float: right;
+	padding-right: 25px;
+	padding-left: 15px;
+	height: 100px;
+}
+#landing_footer .copyright{
+	font-weight: bold;
+}

@@ -19,4 +19,9 @@ class HomeController < ApplicationController
     @stylesheet = 'home'
   end
 
+  def landing
+    render :layout => false
+    @stylesheet = 'landing'
+  end
+
 end

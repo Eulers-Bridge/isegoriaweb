@@ -1,1 +1,2 @@
 MAP_MARKER_IMAGE = '/pin-marker.png'
+FB_APP_ID = '650991778341447'

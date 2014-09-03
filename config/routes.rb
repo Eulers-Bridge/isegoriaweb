@@ -20,14 +20,15 @@ Rails.application.routes.draw do
   resources :polls, only: [:create, :update, :destroy, :new, :edit, :index]
 
   # You can have the root of your site routed with "root"
-  root 'home#index'
+  root 'home#landing'
 
-  get 'home', to: 'home#index'
+  get 'home', to: 'home#landing'
 
   get 'home/index'
   get 'home/signup'
   get 'home/unverified_email'
   get 'home/register_successfull'
+  get 'home/landing'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
