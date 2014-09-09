@@ -9,7 +9,7 @@ class ArticlesController < ApplicationController
 			@articles_list = resp[1]
 		else
 			flash[:danger] = t(:article_list_error_flash)
-			redirect_to users_path
+			redirect_to articles_path
 		end	
 	end
 
@@ -23,7 +23,7 @@ class ArticlesController < ApplicationController
 		@article = resp[1]
 	  else
 	    flash[:danger] = t(:article_get_error_flash)
-		redirect_to users_path
+		redirect_to articles_path
 	  end
 	end
 
@@ -46,7 +46,7 @@ class ArticlesController < ApplicationController
 		@article = resp[1]
 	  else
 	    flash[:danger] = t(:article_get_error_flash)
-		redirect_to users_path
+		redirect_to articles_path
 	  end
 	  resp2 = @article.update_attributes(article_params)
 	  if resp2[0]
@@ -59,6 +59,20 @@ class ArticlesController < ApplicationController
 	end
 
 	def destroy
+	  resp = Article.find(params[:id])
+	  if resp[0]
+		@article = resp[1]
+	  else
+	    flash[:danger] = t(:article_deletion_error_flash)
+		redirect_to articles_path
+	  end
+	  resp2 = @article.delete
+	  if resp2[0]
+	    flash[:success] = t(:article_deletion_success_flash, article: @article.title)
+	  else
+        flash[:danger] = t(:article_deletion_error_flash)
+      end
+      redirect_to articles_path
 	end
 
 	private
