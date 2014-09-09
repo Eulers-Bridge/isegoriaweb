@@ -18,7 +18,7 @@ class Article
     if !attributes[:creator_email].blank?
       @creator_email = attributes[:creator_email]
     else
-      @creator_email = "test@eulersbridge.com"
+      @creator_email = "david.rivera@unimelb.edu.au"
     end
     if !attributes[:date].blank?
       @date = attributes[:date]#milliseconds passed since epoch Jan/1/1970
@@ -47,9 +47,6 @@ class Article
                 }      
       reqUrl = "/api/newsArticle/"
 
-      puts reqUrl
-      puts article
-
       @rest_response = MwHttpRequest.http_post_request(reqUrl,article)
       Rails.logger.debug "Response from server: #{@rest_response.code} #{@rest_response.message}: #{@rest_response.body}"
       if @rest_response.code == "200"
@@ -63,6 +60,17 @@ class Article
     end
   end
 
+  def delete
+    reqUrl = "/api/newsArticle/#{self.id}"
+    puts reqUrl
+    @rest_response = MwHttpRequest.http_delete_request(reqUrl)
+    Rails.logger.debug "Response from server: #{@rest_response.code} #{@rest_response.message}: #{@rest_response.body}"
+    if @rest_response.code == "200"
+      return true, @rest_response
+    else
+      return false, "#{@rest_response.code} #{@rest_response.message}"
+    end
+  end
 
   def update_attributes(attributes = {})
     if self.valid?
@@ -82,9 +90,6 @@ class Article
                 'institutionId'=>26          
                 }      
       reqUrl = "/api/newsArticle/#{self.id}"
-
-      puts reqUrl
-      puts article
 
       @rest_response = MwHttpRequest.http_put_request(reqUrl,article)
       Rails.logger.debug "Response from server: #{@rest_response.code} #{@rest_response.message}: #{@rest_response.body}"
@@ -134,7 +139,6 @@ class Article
       @raw_articles_list = JSON.parse(@rest_response.body)
       @articles_list = Array.new
       for article in @raw_articles_list
-        puts article
         @articles_list << Article.new(
         id: article["articleId"], 
         title: article["title"], 
