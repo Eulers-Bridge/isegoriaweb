@@ -2,58 +2,105 @@ class Article
   include ActiveModel::Model
 
   attr_accessor :title, :content, :picture
-  attr_reader :id, :date, :creator, :created, :modified
+  attr_reader :id, :date, :creator_email, :student_year
 
   validates :title, :presence => { :message => ApplicationHelper.validation_error(:title, :presence, nil) }
   validates :content, :presence => { :message => ApplicationHelper.validation_error(:content, :presence, nil) }
-  validates :creator, :presence => { :message => ApplicationHelper.validation_error(:username, :presence, nil) }
+  validates :creator_email, :presence => { :message => ApplicationHelper.validation_error(:creator_email, :presence, nil) }
   validates :date, :presence => { :message => ApplicationHelper.validation_error(:date, :presence, nil) }
+  validates :student_year, :presence => { :message => ApplicationHelper.validation_error(:student_year, :presence, nil) }
 
   def initialize (attributes = {})
     @id = attributes[:id]
     @title = attributes[:title]
     @content = attributes[:content]
     @picture = attributes[:picture]
-    @creator = "TestUser"#session[:username]#attributes[:creator]
-    @date = Time.now#attributes[:date]
+    if !attributes[:creator_email].blank?
+      @creator_email = attributes[:creator_email]
+    else
+      @creator_email = "test@eulersbridge.com"
+    end
+    if !attributes[:date].blank?
+      @date = attributes[:date]#milliseconds passed since epoch Jan/1/1970
+    else
+      @date = Util.date_to_epoch(Time.now)
+    end
+    @student_year = Time.now.year.to_s
   end
 
   def save
     if self.valid?
       Rails.logger.debug "The news article is valid!"
-      directory = "app/assets/images/articles"
-      #get ID from the Database to create the image file
-      @id = "id"
+      #@picture = attributes[:picture]
+      #directory = "app/assets/images/articles"
       # create the file path
-      path = File.join(directory, @id+File.extname(@picture.original_filename))
+      #path = File.join(directory, @id+File.extname(@picture.original_filename))
       # write the file
-      File.open(path, "wb") { |f| f.write(@picture.read) }
-      true
+      #File.open(path, "wb") { |f| f.write(@picture.read) }
+      
+      article = {'title'=>self.title,
+                'content'=>self.content,
+                'picture'=>['article_2.jpg'],
+                'date'=> self.date,
+                'creatorEmail'=> self.creator_email,
+                'institutionId'=> 26          
+                }      
+      reqUrl = "/api/newsArticle/"
+
+      puts reqUrl
+      puts article
+
+      @rest_response = MwHttpRequest.http_post_request(reqUrl,article)
+      Rails.logger.debug "Response from server: #{@rest_response.code} #{@rest_response.message}: #{@rest_response.body}"
+      if @rest_response.code == "200"
+        return true, @rest_response
+      else
+        return false, "#{@rest_response.code} #{@rest_response.message}"
+      end
     else
       Rails.logger.debug self.errors.full_messages
-      false
+      return false, self.errors.full_messages
     end
   end
 
+
   def update_attributes(attributes = {})
-    @title = attributes[:title]
-    @content = attributes[:content]
-    @picture = attributes[:picture]
     if self.valid?
       Rails.logger.debug "The news article is valid!"
-      directory = "app/assets/images/articles"
+      #@picture = attributes[:picture]
+      #directory = "app/assets/images/articles"
       # create the file path
-      path = File.join(directory, @id+File.extname(@picture.original_filename))
+      #path = File.join(directory, @id+File.extname(@picture.original_filename))
       # write the file
-      File.open(path, "wb") { |f| f.write(@picture.read) }
-      true#call to the update function of the DB
+      #File.open(path, "wb") { |f| f.write(@picture.read) }
+      
+      article = {'title'=>attributes[:title],
+                'content'=>attributes[:content],
+                'picture'=>['article_2.jpg'],
+                'date'=>self.date,
+                'creatorEmail'=>self.creator_email,
+                'institutionId'=>26          
+                }      
+      reqUrl = "/api/newsArticle/#{self.id}"
+
+      puts reqUrl
+      puts article
+
+      @rest_response = MwHttpRequest.http_put_request(reqUrl,article)
+      Rails.logger.debug "Response from server: #{@rest_response.code} #{@rest_response.message}: #{@rest_response.body}"
+      if @rest_response.code == "200"
+        return true, @rest_response
+      else
+        return false, "#{@rest_response.code} #{@rest_response.message}"
+      end
     else
       Rails.logger.debug self.errors.full_messages
-      false
+      return false, self.errors.full_messages
     end
   end
 
   def self.all
+=begin
       [Article.new(id: 1, title: "Four-star Brazil stroll past Panama, Swiss win", 
         content: "FIFA World Cup™ hosts Brazil strolled to a 4-0 win over Panama in their penultimate warm-up on Tuesday, goals from Neymar, Daniel Alves, Hulk and Willian securing the victory margin.
           After a tentative opening, the Selecao easily saw off limited opponents as Neymar, with his 31st international goal, set the ball rolling, rifling in a free-kick for the opener on the half hour. 
@@ -78,9 +125,33 @@ class Article
           Van Persie is likely to be given another run-out as Holland take on Wales in Amsterdam on Wednesday in their final friendly before flying to Brazil. The Dutch then begin their World Cup campaign against holders Spain in a repeat of the 2010 final in Salvador on 13 June. 
           They face Australia and Chile in their other Group B games.", 
         picture: "article_3.jpg", creator:"FIFA 3", date:"2014/06/03")]
+=end
+    @newsFeedId = 6276
+    reqUrl = "/api/newsArticles/#{@newsFeedId}"
+    @rest_response = MwHttpRequest.http_get_request(reqUrl)
+    Rails.logger.debug "Response from server: #{@rest_response.code} #{@rest_response.message}: #{@rest_response.body}"
+    if @rest_response.code == '200'
+      @raw_articles_list = JSON.parse(@rest_response.body)
+      @articles_list = Array.new
+      for article in @raw_articles_list
+        puts article
+        @articles_list << Article.new(
+        id: article["articleId"], 
+        title: article["title"], 
+        content: article["content"], 
+        picture: "article_1.jpg", 
+        creator_email: article["creatorEmail"], 
+        date: article["date"],
+        student_year: article["studentYear"])
+      end
+      return true, @articles_list
+    else
+      return false, "#{@rest_response.code} #{@rest_response.message}"
+    end
   end
 
   def self.find(id)
+=begin
     if id == '1'
       puts "------------------unoooooooooooooooooooo"
       @article = Article.new(id: id, title: "Four-star Brazil stroll past Panama, Swiss win", 
@@ -114,6 +185,24 @@ class Article
     else
       puts '--------------veeerch'
       nil
+    end
+=end
+    reqUrl = "/api/newsArticle/#{id}"
+    @rest_response = MwHttpRequest.http_get_request(reqUrl)
+    Rails.logger.debug "Response from server: #{@rest_response.code} #{@rest_response.message}: #{@rest_response.body}"
+    if @rest_response.code == '200'
+      @raw_article = JSON.parse(@rest_response.body)
+      @article = Article.new(
+        id: @raw_article["articleId"], 
+        title: @raw_article["title"], 
+        content: @raw_article["content"], 
+        picture: "article_1.jpg", 
+        creator_email:@raw_article["creatorEmail"], 
+        date: @raw_article["date"],
+        student_year: @raw_article["studentYear"])
+      return true, @article
+    else
+      return false, "#{@rest_response.code} #{@rest_response.message}"
     end
   end
 

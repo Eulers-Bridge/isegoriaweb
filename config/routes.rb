@@ -20,9 +20,9 @@ Rails.application.routes.draw do
   resources :polls, only: [:create, :update, :destroy, :new, :edit, :index]
 
   # You can have the root of your site routed with "root"
-  root 'home#landing'
+  root 'home#index'
 
-  get 'home', to: 'home#landing'
+  get 'home', to: 'home#index'
 
   get 'home/index'
   get 'home/signup'

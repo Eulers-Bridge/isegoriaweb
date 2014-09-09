@@ -22,4 +22,6 @@
 
 //= require bootstrap-datepicker
 
+//= require owl.carousel
+
 

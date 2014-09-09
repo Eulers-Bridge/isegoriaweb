@@ -4,7 +4,13 @@ class ArticlesController < ApplicationController
   	layout 'application'
 
 	def index
-		@articles_list = Article.all
+		resp = Article.all
+		if resp[0]
+			@articles_list = resp[1]
+		else
+			flash[:danger] = t(:article_list_error_flash)
+			redirect_to users_path
+		end	
 	end
 
 	def new
@@ -12,12 +18,19 @@ class ArticlesController < ApplicationController
 	end
 
 	def edit
-		@article = Article.find(params[:id])
+	  resp = Article.find(params[:id])
+	  if resp[0]
+		@article = resp[1]
+	  else
+	    flash[:danger] = t(:article_get_error_flash)
+		redirect_to users_path
+	  end
 	end
 
 	def create
 	  @article = Article.new(article_params)
-	  if @article.save
+	  resp = @article.save
+	  if resp[0]
 	  	flash[:success] = t(:article_creation_success_flash, article: @article.title)
 	    redirect_to articles_path
 	  else
@@ -28,8 +41,15 @@ class ArticlesController < ApplicationController
 	end
 
 	def update
-		@article = Article.find(params[:id])
-	  if @article.update_attributes(article_params)
+	  resp = Article.find(params[:id])
+	  if resp[0]
+		@article = resp[1]
+	  else
+	    flash[:danger] = t(:article_get_error_flash)
+		redirect_to users_path
+	  end
+	  resp2 = @article.update_attributes(article_params)
+	  if resp2[0]
 	  	flash[:success] = t(:article_modification_success_flash, article: @article.title)
 	    redirect_to articles_path
 	  else
@@ -43,6 +63,6 @@ class ArticlesController < ApplicationController
 
 	private
     def article_params
-      params.require(:article).permit(:title, :content, :picture)
+      params.require(:article).permit(:title, :content, :picture, :creator_email)
     end
 end

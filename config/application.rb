@@ -21,6 +21,9 @@ module IsegoriaWeb
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    #Add the fonts directory to the assets pipeline
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
     #Compile  images in vendor assets
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
 

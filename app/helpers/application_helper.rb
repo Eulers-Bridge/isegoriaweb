@@ -19,4 +19,14 @@ module ApplicationHelper
 			@message = @message + " " + I18n.t(:validation_error_default)
 	  end
 	end
+	
+	#Funcion that converts epoch milliseconds to a regular Time
+	def epoch_to_date(epoch_milliseconds)
+	  Time.at(epoch_milliseconds/1000).strftime("%d/%m/%Y")
+	end
+
+	#Funcion that converts a regular Date to epoch in milliseconds
+	def date_to_epoch(date)
+	  date.strftime('%Q')
+	end
 end

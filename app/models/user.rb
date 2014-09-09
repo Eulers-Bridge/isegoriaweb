@@ -1,4 +1,5 @@
 #require 'bcrypt'
+require 'mw_http_request'
 
 class User 
   #include HttpRequest
@@ -77,7 +78,6 @@ class User
     if self.valid?
     	@password_hash = Password.create(@password)
   		Rails.logger.debug "The user is valid!, hashed password: " + @password_hash
-        puts 'aqui-------------------------------------------------------'
         reqUrl = '/api/signUp'
 
         user = {'email'=>self.email,
@@ -91,9 +91,9 @@ class User
                 'password'=>@password_hash,
                 'institutionId'=>26            
                 }
-        @rest_response = http_post_request(reqUrl,user)
+        @rest_response = MwHttpRequest.http_post_request(reqUrl,user)
         Rails.logger.debug "Response from server: #{@rest_response.code} #{@rest_response.message}: #{@rest_response.body}"
-        if @rest_response.code == 200
+        if @rest_response.code == "200"
           return true, @rest_response
         else
           return false, "#{@rest_response.code} #{@rest_response.message}"
@@ -102,23 +102,5 @@ class User
   	  Rails.logger.debug self.errors.full_messages
       return false, self.errors.full_messages
   	end	
-  end
-
-  private
-  def http_post_request (reqUrl, jsonObject)
-    require 'json'
-    require 'net/http'
-    puts 'http request module-------------------------------------------------------'
-    uri = URI.parse('http://www.eulersbridge.com:8080/dbInterface' + reqUrl)
-
-    http = Net::HTTP.new(uri.host, uri.port)
-    #http.use_ssl = true
-    #http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    request = Net::HTTP::Post.new(uri)
-    request.add_field('Content-Type', 'application/json')
-    request.add_field('Accept', 'application/json')
-    
-    json_data = jsonObject.to_json
-    http.request(request, json_data)
   end
 end

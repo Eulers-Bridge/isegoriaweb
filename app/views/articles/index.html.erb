@@ -3,11 +3,11 @@
 <div class="panel panel-info">
   <div class="panel-heading">
     <h3 class="panel-title"><%=article.title%></h3>
-    <%=article.date%>
-    <%= t(:created_by).capitalize+": "+article.creator%>
+    <%=epoch_to_date(article.date)%>
+    <%= t(:created_by).capitalize+": "+article.creator_email%>
   </div>
   <div class="panel-body">
-  <%= image_tag "articles/"+article.picture, class: "article_image" %>
+  <%= image_tag "articles/article_1.jpg", class: "article_image" %>
       <p><%=article.content%></p>
   </div>
   <div class="panel-footer">
