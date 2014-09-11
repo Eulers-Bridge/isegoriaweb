@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  #google maps test
-  get '/maps', :to => redirect('/gmaps.html')
+  #owl carousel test
+  #get '/owl', :to => redirect('/owltest.html')
   
   get 'users/new', to: 'home#signup'
   post 'users/change_access'

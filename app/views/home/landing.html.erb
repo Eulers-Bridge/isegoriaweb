@@ -4,6 +4,14 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
+    <!-- Basic stylesheet -->
+	<link rel="stylesheet" href="owl-carousel/owl.carousel.css">
+
+ 	<!-- Default Theme -->
+	<link rel="stylesheet" href="owl-carousel/owl.theme.css">
+
+	<!-- Include js plugin -->
+	<script src="owl-carousel/owl.carousel.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -22,7 +30,7 @@
 			</div>
 			<div id="controls">
 			  <button class="btn"><%=capitalize_as_title(t(:isegoria_support))%></button>
-			  <button class="btn landing_link_border"><%=capitalize_as_title(t(:admin_login))%></button>
+			  <button class="btn landing-link-border"><%=capitalize_as_title(t(:admin_login))%></button>
 			</div>
 		</div>
 		<div id="first_content">
@@ -37,15 +45,15 @@
 						<%= image_tag "landing/Android_app.png", class: "" %>
 					</div>
 					<div class="col-md-4">
-						<p class="mob_app_name"><%=t(:landing_download).capitalize%> Google Play Store</p>
-						<p class="mob_app_version"><%=t(:landing_android_version)%></p>
+						<p class="mob-app-name"><%=t(:landing_download).capitalize%> Google Play Store</p>
+						<p class="mob-app-version"><%=t(:landing_android_version)%></p>
 					</div>
 					<div class="col-md-2">
 						<%= image_tag "landing/iOS_app.png", class: "" %>
 					</div>
 					<div class="col-md-4">
-						<p class="mob_app_name"><%=t(:landing_download).capitalize%> App Store</p>
-						<p class="mob_app_version"><%=t(:landing_ios_version)%></p>
+						<p class="mob-app-name"><%=t(:landing_download).capitalize%> App Store</p>
+						<p class="mob-app-version"><%=t(:landing_ios_version)%></p>
 					</div>
 				</div>
 				<hr>
@@ -99,11 +107,40 @@
     			</div>
 			</div>
 		</div>
-		<div id="picture_carrousel" class="owl-carousel">
-          <div><%= image_tag "landing/iphone5c_blue_portrait.png", class: "" %></div>
-          <div><%= image_tag "landing/iphone5c_blue_portrait.png", class: "" %></div>
-          <div><%= image_tag "landing/iphone5c_blue_portrait.png", class: "" %></div>
-		</div>
+	<div id="picture_carousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#picture_carousel" data-slide-to="0" class="active carousel-indicator"></li>
+    <li data-target="#picture_carousel" data-slide-to="1" class="carousel-indicator"></li>
+    <li data-target="#picture_carousel" data-slide-to="2" class="carousel-indicator"></li>
+  </ol>
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <%= image_tag "landing/iphone5c_blue_portrait.png", class: "carousel-image" %>
+      <div class="carousel-caption">
+      </div>
+    </div>
+    <div class="item">
+      <%= image_tag "landing/iphone5c_blue_portrait.png", class: "carousel-image" %>
+      <div class="carousel-caption">
+      </div>
+    </div>
+    <div class="item">
+      <%= image_tag "landing/iphone5c_blue_portrait.png", class: "carousel-image" %>
+      <div class="carousel-caption">
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <!--a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a-->
+</div>
 	</div>
 	<hr id="section_divider_hr">
 	<div id="third_landing">
@@ -189,9 +226,4 @@
 	</div>
 	</div>
 </body>
-<script>
-  $(document).ready(function() {
-    $("#picture_carrousel").owlCarousel();
-  });
-</script>
 </html>
