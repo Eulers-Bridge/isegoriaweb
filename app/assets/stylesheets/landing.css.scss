@@ -2,11 +2,18 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #section_divider_hr{
-	margin-left: 70px;
-	margin-right: 70px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 884px;
     border-color: #AFAFAF;
 	background-color: #AFAFAF;
 	color: #AFAFAF;
+}
+
+.landing-section{
+	width: 1024px;
+  	margin-right: auto;
+  	margin-left: auto;
 }
 
 #first_landing{
@@ -93,7 +100,9 @@
 color: #FFFFFF;
 height: 725px;
 width: 100%;
-padding: 70px;
+padding-left: 50px;
+padding-bottom: 50px;
+padding-right: 50px;
 padding-top: 25px;
 }
 
@@ -107,10 +116,9 @@ padding-right: 15px;
 }
 #first_content #right_content{
 height: 630px;
-width: 420px;
+width: 370px;
 float: right;
 padding-left: 35px;
-//padding-right: 15px;
 }
 
 #first_content #left_content h1{
@@ -138,7 +146,7 @@ font-size: 95%;
 
 #second_landing{
 	background-color: #FFFFF;
-	height: 1100px;
+	height: 1200px;
 }
 #second_landing_top{
 	background-color: #4A90E2;
@@ -165,10 +173,10 @@ font-size: 95%;
 
 #second_landing_top #right_text{
 	padding-top: 40px;
-	padding-right: 70px;
+	padding-right: 50px;
 	padding-left: 40px;
 	height: 300px;
-	width: 575px;
+	width: 545px;
 	float: right;
 	text-align: center;
 	color: #FFFFFF;
@@ -179,14 +187,14 @@ font-size: 95%;
 	text-align: left;
 }
 #second_landing_bottom{
-	height: 550px;
+	height: 650px;
 }
 #second_landing_bottom #right_text{
 	padding-top: 20px;
-	padding-left: 10px;
-	padding-right: 70px;
+	padding-right: 50px;
+	padding-left: 40px;
 	height: 100%;
-	width: 575px;
+	width: 545px;
 	float: right;
 	text-align: left;
 	color: #000000;
@@ -206,12 +214,16 @@ font-size: 95%;
 	padding-bottom: 20px;
 }
 #picture_carousel{
-	padding: 40px;
+	margin-left: 40px;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 40px;
+	padding-bottom: 40px;
 	position: relative;
-	top:-850px;
+	top:-950px;
 	left:0px;
-	height: 850px;
-	width: 555px;
+	height: 950px;
+	width: 460px;
 	z-index: 10;
 }
 
@@ -221,9 +233,8 @@ font-size: 95%;
     //margin-top: auto;
     //margin-bottom: auto;
     vertical-align: middle !important;
-    width:70%;
+    width:90%;
 }
-
 .carousel-indicator {
 	border: none !important;
 	background-color: transparent !important;
@@ -235,7 +246,7 @@ font-size: 95%;
 
 #third_landing{
 	background-color: #FFFFFF;
-	height: 600px;
+	height: 640px;
 	text-align: center;
 	padding-right: 70px;
 	padding-left: 70px;
@@ -315,7 +326,7 @@ font-size: 95%;
 	height: 100px;
 	width: 100px;
 	float: left;
-	margin-left: 465px;
+	margin-left: 407px;
 }
 
 #footer_logo img{
@@ -326,7 +337,7 @@ font-size: 95%;
 #landing_footer #footer_controls{
 	float: right;
 	padding-top: 35px;
-	padding-right: 25px;
+	//padding-right: 25px;
 	padding-left: 15px;
 	height: 100px;
 }
