@@ -70,16 +70,17 @@
 	font-size: 120%;
 	height: 55px;
 	color: #FBFBFB;
+	width: 150px;
 }
 
 #controls button:hover{
-	//background: url(landing/Button_Rectangle_56.png) no-repeat center center !important;
-	color: #444444;
+	background: url(landing/Button_Rectangle_56.png) no-repeat center center !important;
+	color: #FBFBFB;
 }
 
 .landing-link-border
 {
-  background: url(landing/Button_Rectangle_56.png) no-repeat center center !important;
+  //background: url(landing/Button_Rectangle_56.png) no-repeat center center !important;
   width: 150px;
 }
 
@@ -336,11 +337,12 @@ font-size: 95%;
 	font-size: 125%;
 	height: 55px;
 	color: #DDDDDD;
+	width: 150px;
 }
 
 #landing_footer #footer_controls button:hover{
-	//background: url(landing/Button_Rectangle_56.png) no-repeat center center !important;
-	color: #FF6D65;
+	background: url(landing/Button_Rectangle_56.png) no-repeat center center !important;
+	color: #DDDDDD;
 }
 
 #landing_footer .copyright{
