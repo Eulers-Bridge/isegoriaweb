@@ -20,7 +20,7 @@
 <body>
 <%= render "partials/facebook_SDK" %>
 <div class="container">
-	<div id="first_landing">
+	<div id="first_landing" class="landing-section">
 	  <div id="first_landing_background">
 	  </div>
 	  <div id="first_landing_content">
@@ -41,17 +41,17 @@
 				</div>
 				<hr>
 				<div class="row">
-					<div class="col-md-2">
+					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 						<%= image_tag "landing/Android_app.png", class: "" %>
 					</div>
-					<div class="col-md-4">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 						<p class="mob-app-name"><%=t(:landing_download).capitalize%> Google Play Store</p>
 						<p class="mob-app-version"><%=t(:landing_android_version)%></p>
 					</div>
-					<div class="col-md-2">
+					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 						<%= image_tag "landing/iOS_app.png", class: "" %>
 					</div>
-					<div class="col-md-4">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 						<p class="mob-app-name"><%=t(:landing_download).capitalize%> App Store</p>
 						<p class="mob-app-version"><%=t(:landing_ios_version)%></p>
 					</div>
@@ -64,7 +64,7 @@
 		</div>
 	  </div>
 	</div>
-	<div id="second_landing">
+	<div id="second_landing" class="landing-section">
 		<div id="second_landing_top">
 			<div id="top_text">
 				<h1><%=t(:landing_title1).capitalize%></h1>
@@ -77,37 +77,37 @@
 		<div id="second_landing_bottom">
 			<div id="right_text">
     			<div class="row">
-    				<div class="col-md-12">
+    				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     					<h1><%=t(:landing_title2).capitalize%></h1>
     				</div>
     			</div>
     			<div class="row">
-    				<div class="col-md-2">
+    				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
     					<%= image_tag "landing/Photo_48.png", class: "" %>
     				</div>
-    				<div class="col-md-10">
+    				<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
     					<h4><%=t(:landing_text_2_3).capitalize%></h4>
     				</div>
     			</div>
     			<div class="row">
-    				<div class="col-md-2">
+    				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
     					<%= image_tag "landing/Event_48.png", class: "" %>
     				</div>
-    				<div class="col-md-10">
+    				<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
     					<h4><%=t(:landing_text_2_4).capitalize%></h4>
     				</div>
     			</div>
     			<div class="row">
-    				<div class="col-md-2">
+    				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
     					<%= image_tag "landing/News_48.png", class: "" %>
     				</div>
-    				<div class="col-md-10">
+    				<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
     					<h4><%=t(:landing_text_2_5).capitalize%></h4>
     				</div>
     			</div>
 			</div>
 		</div>
-	<div id="picture_carousel" class="carousel slide" data-ride="carousel">
+    <div id="picture_carousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#picture_carousel" data-slide-to="0" class="active carousel-indicator"></li>
@@ -143,63 +143,63 @@
 </div>
 	</div>
 	<hr id="section_divider_hr">
-	<div id="third_landing">
+	<div id="third_landing" class="landing-section">
 		<div class="row">
 			<%= image_tag "landing/Vote_in_Poll_128.png", class: "" %>
 			<h1><%=t(:landing_title3).capitalize%></h1>
 			<h4><%=t(:landing_text_3_1).capitalize%></h4>
 		</div>
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
     			<%= image_tag "landing/Calendar_election_48.png", class: "" %>
     			<h5><%=t(:landing_text_3_2).capitalize%></h5>
     		</div>
-    		<div class="col-md-4">
+    		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
     			<%= image_tag "landing/Ask_a_question_48.png", class: "" %>
     			<h5><%=t(:landing_text_3_3).capitalize%></h5>
     		</div>
-    		<div class="col-md-4">
+    		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
     			<%= image_tag "landing/Vote_in_Poll_48.png", class: "" %>
     			<h5><%=t(:landing_text_3_4).capitalize%></h5>
     		</div>
 		</div>
 	</div>
-	<div id="fourth_landing">
+	<div id="fourth_landing" class="landing-section">
 		<div class="row">
 			<h1><%=t(:landing_title4).capitalize%></h1>
 		</div>
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
     			<h3><%=capitalize_as_title(t(:profile))%></h3>
     			<%= image_tag "landing/iphone5c_blue_portrait_4.png", class: "" %>
     			<h4><%=t(:landing_text_4_1).capitalize%></h4>
     		</div>
-    		<div class="col-md-4">
+    		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
     			<h3><%=capitalize_as_title(t(:friends))%></h3>
     			<%= image_tag "landing/iphone5c_blue_portrait_4.png", class: "" %>
     			<h4><%=t(:landing_text_4_2).capitalize%></h4>
     		</div>
-    		<div class="col-md-4">
+    		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
     			<h3><%=capitalize_as_title(t(:tickets_and_groups))%></h3>
     			<%= image_tag "landing/iphone5c_blue_portrait_4.png", class: "" %>
     			<h4><%=t(:landing_text_4_3).capitalize%></h4>
     		</div>
 		</div>
 	</div>
-	<div id="fifth_landing">
+	<div id="fifth_landing" class="landing-section">
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 			</div>
-			<div class="col-md-2">
+			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 			  <%= image_tag "landing/icon_placeholder.png", class: "" %>
 			</div>
-			<div class="col-md-2">
+			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 			  <%= image_tag "landing/icon_placeholder.png", class: "" %>
 			</div>
-			<div class="col-md-2">
+			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 			  <%= image_tag "landing/icon_placeholder.png", class: "" %>
 			</div>
-			<div class="col-md-3">
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 			</div>
 		</div>
 		<div class="row">
@@ -208,7 +208,7 @@
 			<p><h4><%=t(:landing_text_5_privacy).capitalize%></h4></p>
 		</div>
 	</div>
-	<div id="landing_footer">
+	<div id="landing_footer" class="landing-section">
 		<div class="row">
 			<div id="footer_logo">
 			  <%= image_tag "landing/Logo_Stylized_20.png", class: "" %>
