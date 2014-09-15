@@ -10,6 +10,12 @@
 	color: #AFAFAF;
 }
 
+#landing_container{
+	width: 1024px !important;
+	padding-right: 0px !important;
+	padding-left: 0px !important;
+}
+
 .landing-section{
 	width: 1024px;
   	margin-right: auto;
@@ -17,8 +23,9 @@
 }
 
 #first_landing{
-	height: 730px;
+	height: 720px;
 	position: relative;
+	background: url(landing/bkg.png) no-repeat center center;
 	left: 0;
   	right: 0;
   	top:0;
@@ -98,7 +105,7 @@
 
 #first_content{
 color: #FFFFFF;
-height: 725px;
+//height: 650px;
 width: 100%;
 padding-left: 50px;
 padding-bottom: 50px;
