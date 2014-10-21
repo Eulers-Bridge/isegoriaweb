@@ -28,6 +28,8 @@ gem 'bootstrap-sass'
 gem 'json', '~> 1.8.1'
 #Use to encrytp passwords
 gem 'bcrypt', '~> 3.1.5'
+#Use date-picker
+gem 'bootstrap-datepicker-rails'
 
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring

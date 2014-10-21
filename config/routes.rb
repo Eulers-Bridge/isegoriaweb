@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   #owl carousel test
-  #get '/owl', :to => redirect('/owltest.html')
+  #get 'design/landing', :to => redirect('design_test/landing.html')
   
   get 'users/new', to: 'home#signup'
   post 'users/change_access'
@@ -29,6 +29,11 @@ Rails.application.routes.draw do
   get 'home/unverified_email'
   get 'home/register_successfull'
   get 'home/landing'
+  
+  get 'error/general_error'
+
+  put 'articles/like/:id(.:format)', :to => 'articles#like', :as => :article_like
+  put 'articles/unlike/:id(.:format)', :to => 'articles#unlike', :as => :article_unlike
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

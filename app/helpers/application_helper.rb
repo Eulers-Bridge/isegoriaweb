@@ -2,7 +2,7 @@ module ApplicationHelper
 	
 	#Function that capitalize every first letter on all words from a sentence
 	def capitalize_as_title (string)
-		string.split.map(&:capitalize).join(' ')
+		Util.capitalize_as_title(string)
 	end
 	
 	#Function that generates an Internationalizated validation error for any field
@@ -22,11 +22,11 @@ module ApplicationHelper
 	
 	#Funcion that converts epoch milliseconds to a regular Time
 	def epoch_to_date(epoch_milliseconds)
-	  Time.at(epoch_milliseconds/1000).strftime("%d/%m/%Y")
+	  Util.epoch_to_date(epoch_milliseconds)
 	end
 
 	#Funcion that converts a regular Date to epoch in milliseconds
 	def date_to_epoch(date)
-	  date.strftime('%Q')
+	  Util.date_to_epoch(date)
 	end
 end

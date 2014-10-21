@@ -7,11 +7,20 @@
     <%= t(:created_by).capitalize+": "+article.creator_email%>
   </div>
   <div class="panel-body">
-  <%= image_tag "articles/article_1.jpg", class: "article_image" %>
+  <%= image_tag "articles/"+article.picture, class: "article_image" %>
       <p><%=article.content%></p>
   </div>
   <div class="panel-footer">
-    <%= link_to t(:edit).capitalize, edit_article_path(:id => article.id), :class => 'btn btn-info' %> <%= button_to t(:delete).capitalize, article_path(:id => article.id), method: :delete, :class => 'btn btn-danger' %>
+    <%= link_to t(:edit).capitalize, edit_article_path(:id => article.id), :class => 'btn btn-info' %> <%= button_to t(:delete).capitalize, article_path(:id => article.id), method: :delete, :class => 'btn btn-danger' %> <%= button_to t(:like).capitalize, article_like_path(:id => article.id), method: :put, :class => 'btn btn-success' %>
+    <%= button_to t(:unlike).capitalize, article_unlike_path(:id => article.id), method: :put, :class => 'btn btn-success' %>
+    <div class="fb-like" 
+      data-send="true" 
+      data-width="450" 
+      data-show-faces="true" 
+      layout="button"
+      data-share="false"
+      href="<%=article._links['self']['href']%>">
+    </div>
   </div>
 </div>
 <% end %>

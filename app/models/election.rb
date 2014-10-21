@@ -1,8 +1,8 @@
 class Election
   include ActiveModel::Model
 
-  attr_accessor :title, :description, :process_image, :positions
-  attr_reader :id, :created, :modified, :status
+  attr_accessor :title, :description, :process_image, :positions, :_start, :_end, :startVoting, :endVoting
+  attr_reader :id, :status
 
   validates :title, :presence => { :message => ApplicationHelper.validation_error(:title, :presence, nil) }
   validates :description, :presence => { :message => ApplicationHelper.validation_error(:description, :presence, nil) }
@@ -14,6 +14,10 @@ class Election
     @process_image = attributes[:process_image]
     @positions = attributes[:positions]
     @status = attributes[:status]
+    @_start = attributes[:_start]
+    @_end = attributes[:_end]
+    @startVoting = attributes[:startVoting]
+    @endVoting = attributes[:endVoting]
   end
 
   def save  
@@ -58,17 +62,30 @@ class Election
   end
 
   def self.find(id)
-  @election =  Election.new(
-      id: id, 
-      title: "Test Title", 
-      description: "Test Description", 
-      process_image: "chuta", 
-      positions: [
+    reqUrl = "/api/election/#{id}"
+    @rest_response = MwHttpRequest.http_get_request(reqUrl)
+    Rails.logger.debug "Response from server: #{@rest_response.code} #{@rest_response.message}: #{@rest_response.body}"
+    if @rest_response.code == '200'
+      @raw_election = JSON.parse(@rest_response.body)
+      @election = Election.new(
+        id: @raw_election["electionId"], 
+        title: @raw_election["title"], 
+        description: "Not Implemented - Test Description", 
+        process_image: "election_1.jpg", 
+        positions: [
         {:id=>1, :title => "President", :description => "This is the president"},
         {:id=>2, :title => "Vicepresident", :description => "This is the vicepresident"},
         {:id=>3, :title => "Secretary", :description => "This is the secretary"},
-        {:id=>4, :title => "Treasurer", :description => "This is the treasurer"}]
-  )
+        {:id=>4, :title => "Treasurer", :description => "This is the treasurer"}],
+        _start: @raw_election["start"],
+        _end: @raw_election["end"],
+        startVoting: @raw_election["startVoting"],
+        endVoting: @raw_election["endVoting"],
+        )
+      return true, @election
+    else
+      return false, "#{@rest_response.code} #{@rest_response.message}"
+    end
   end
 
 end

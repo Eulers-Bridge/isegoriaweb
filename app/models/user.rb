@@ -60,9 +60,14 @@ class User
   end
 
   def authenticate
-  	#gets user info from the Middleware in order to login
-    @account_verified = true;
-    @locale = "en";
+    reqUrl = "/api/login/"
+    @rest_response = MwHttpRequest.http_get_request(reqUrl,self.email, self.password)
+    Rails.logger.debug "Response from server: #{@rest_response.code} #{@rest_response.message}: #{@rest_response.body}"
+    if @rest_response.code == "200"
+      return true, @rest_response.body
+    else
+      return false, "#{@rest_response.code} #{@rest_response.message}"
+    end
   end
 
   def self.all
@@ -81,19 +86,21 @@ class User
         reqUrl = '/api/signUp'
 
         user = {'email'=>self.email,
-                'firstName'=>self.first_name,
-                'lastName'=>self.last_name,
-                'gender'=>self.last_name,
+                'givenName'=>self.first_name,
+                'familyName'=>self.last_name,
+                'gender'=>self.gender,
                 'nationality'=>self.nationality,
                 'yearOfBirth'=>self.yob,
-                'personality'=>self.personality,
+                #'personality'=>self.personality,
                 'accountVerified'=>self.account_verified,
-                'password'=>@password_hash,
+                #'password'=>@password_hash,
+                'password'=>@password,
                 'institutionId'=>26            
                 }
-        @rest_response = MwHttpRequest.http_post_request(reqUrl,user)
+
+        @rest_response = MwHttpRequest.http_post_request_unauth(reqUrl,user)
         Rails.logger.debug "Response from server: #{@rest_response.code} #{@rest_response.message}: #{@rest_response.body}"
-        if @rest_response.code == "200"
+        if @rest_response.code == "200" || @rest_response.code == "201" || @rest_response.code == "202"
           return true, @rest_response
         else
           return false, "#{@rest_response.code} #{@rest_response.message}"

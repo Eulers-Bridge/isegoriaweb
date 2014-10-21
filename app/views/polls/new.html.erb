@@ -8,12 +8,12 @@
     <%= f.text_area :question, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:question)).capitalize %>
   </div>
   <div class="form-group">
-    <%= f.label t(:options).capitalize%>
+    <%= f.label t(:answers).capitalize%>
     <ul class="list-group" id="options_list">
     </ul>
     <input type="text" class="form-control" id="txt_option" placeholder="<%=t(:field_placeholder, field_name: t(:answer)).capitalize%>"/>
     <input type="button" class="btn btn-xs btn-info" id="btn_add_option" value="<%=t(:add).capitalize%>"/>
-    <%= f.hidden_field :options, id: "hdd_options"%>
+    <%= f.hidden_field :answers, id: "hdd_options"%>
   </div>
   <div class="form-group">
     <%= f.label :date, capitalize_as_title(t (:date)) %>

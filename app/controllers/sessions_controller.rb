@@ -6,26 +6,31 @@ class SessionsController < ApplicationController
   #Function to create and start a new session
   def create
     
-    @user = User.new(username: params[:session][:username], password: params[:session][:password])
+    @user = User.new(email: params[:session][:username], password: params[:session][:password])
 
-    @user.authenticate
+    resp = @user.authenticate
 
-     I18n.locale = @user.locale || I18n.default_locale
-
-    if !@user.account_verified
-    redirect_to home_unverified_email_path
-    elsif true
-    	#transfer any data to the new session
-      reset_session
-    	session[:username] = params[:session][:username]
-    	session[:authenticated] = true
-      session[:locale] = @user.locale
-    	logger.debug session[:username] + " authenticated " + session[:authenticated].to_s
-	    redirect_to users_path
+    if resp[0]
+      @user = JSON.parse(resp[1])['user']
+      I18n.locale = @user.has_key?("user") ? @user.locale : I18n.default_locale
+      if !@user['accountVerified']
+        redirect_to home_unverified_email_path
+      else
+        #transfer any data to the new session
+        reset_session
+        session[:user] = @user
+        session[:username] = params[:session][:username]
+        session[:password] = params[:session][:password]
+        session[:authenticated] = true
+        session[:locale] = I18n.locale
+        logger.debug session[:username] + " Authenticated: " + session[:authenticated].to_s
+        redirect_to articles_path
+      end
     else
-      flash.now[:error] = t(:invalid_login_flash).capitalize #User not authenticated
+      logger.debug params[:session][:username] + " Not authenticated: " + resp[1] 
+      flash[:danger] = t(:invalid_login_flash).capitalize
       redirect_to root_path
-    end
+    end 
   end
 
   def destroy
@@ -34,5 +39,4 @@ class SessionsController < ApplicationController
   	logger.debug username + " session destroyed"
   	redirect_to root_path
   end
-
 end

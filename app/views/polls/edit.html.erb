@@ -8,11 +8,11 @@
     <%= f.text_area :question, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:question)).capitalize %>
   </div>
   <div class="form-group">
-    <%= f.label t(:options).capitalize%>
+    <%= f.label t(:answers).capitalize%>
     <ul class="list-group" id="options_list">
     <% @index = 0 %>
-    <% @poll.options.each do |option| %>
-      <div class="list-group-item"><label><%=option.to_s%></label><span class="badge btn_remove_option" id="btn_remove_option"><%=t(:remove).capitalize%></span>
+    <% @poll.answers.each do |answer| %>
+      <div class="list-group-item"><label><%=answer.to_s%></label><span class="badge btn_remove_option" id="btn_remove_option"><%=t(:remove).capitalize%></span>
         <input type="hidden" id="hdd_option_index" class="hdd_option_index" value=<%=@index%>/>
       </div>
       <% @index = @index + 1 %>
@@ -20,7 +20,7 @@
     </ul>
     <input type="text" class="form-control" id="txt_option" placeholder="<%=t(:field_placeholder, field_name: t(:answer)).capitalize%>"/>
     <input type="button" class="btn btn-xs btn-info" id="btn_add_option" value="<%=t(:add).capitalize%>"/>
-    <%= f.hidden_field :options, id: "hdd_options"%>
+    <%= f.hidden_field :answers, id: "hdd_options"%>
   </div>
   <div class="form-group">
     <%= f.label :date, capitalize_as_title(t (:date)) %>
