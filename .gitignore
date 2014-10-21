@@ -16,4 +16,4 @@
 /tmp
 
 #Ignore public assets
-/public/assets
+/public/assets/*
