@@ -29,4 +29,8 @@ module ApplicationHelper
 	def date_to_epoch(date)
 	  Util.date_to_epoch(date)
 	end
+
+	def get_image_server
+		return "https://s3-ap-southeast-2.amazonaws.com/isegoria/"
+	end
 end

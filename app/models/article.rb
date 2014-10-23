@@ -4,7 +4,8 @@ class Article
 
   attr_accessor :title, :content, :picture, :_links, :creator_email, :previous_picture
   attr_reader :id, :date, :student_year
-  @@images_directory = "app/assets/images/articles"
+  #@@images_directory = "app/assets/images/articles"
+  @@images_directory = "UniversityOfMelbourne/NewsArticles"
 
   validates :title, :presence => { :message => ApplicationHelper.validation_error(:title, :presence, nil) }
   validates :content, :presence => { :message => ApplicationHelper.validation_error(:content, :presence, nil) }
@@ -37,13 +38,13 @@ class Article
       Rails.logger.debug "The news article is valid!"
       @picture = self.picture
       if !@picture.blank?
-        @filename = Util.upload_image(@@images_directory,@picture)
+        @file_s3_key = Util.upload_image(@@images_directory,@picture)
       else
-        @filename = nil
+        @file_s3_key = nil
       end
       article = {'title'=>self.title,
                 'content'=>self.content,
-                'picture'=>[@filename],
+                'picture'=>[@file_s3_key],
                 'date'=> Util.date_to_epoch(self.date),
                 'creatorEmail'=> self.creator_email,
                 'institutionId'=> 26          
@@ -63,6 +64,7 @@ class Article
   end
 
   def delete(user)
+    Util.delete_image(self.picture)
     reqUrl = "/api/newsArticle/#{self.id}"
     puts reqUrl
     @rest_response = MwHttpRequest.http_delete_request(reqUrl,user['email'],user['password'])
@@ -79,16 +81,16 @@ class Article
       Rails.logger.debug "The news article is valid!"
       @picture = attributes[:picture]
       if !@picture.blank?
+        @file_s3_key = Util.upload_image(@@images_directory,@picture)
         if !attributes[:previous_picture].blank?
-          Util.delete_image(@@images_directory+'/'+attributes[:previous_picture])
+          Util.delete_image(attributes[:previous_picture])
         end
-        @filename = Util.upload_image(@@images_directory,@picture)
       else
-        @filename = self.picture
+        @file_s3_key = self.picture
       end
       article = {'title'=>attributes[:title],
                 'content'=>attributes[:content],
-                'picture'=>[@filename],
+                'picture'=>[@file_s3_key],
                 'date'=>Util.date_to_epoch(attributes[:date]),
                 'creatorEmail'=>self.creator_email,
                 'institutionId'=>26          
@@ -144,7 +146,7 @@ class Article
       @articles_list = Array.new
       for article in @raw_articles_list
         if article["picture"].blank?
-          @picture = 'generic_article.png'
+          @picture = @@images_directory+'/generic_article.png'
         else
           @picture = article["picture"][0]
         end
@@ -171,7 +173,7 @@ class Article
     if @rest_response.code == '200'
       @raw_article = JSON.parse(@rest_response.body)
       if @raw_article["picture"].blank?
-        @picture = ['Gavacato.jpg']
+        @picture = [  ]
       else
         @picture = @raw_article["picture"]
       end

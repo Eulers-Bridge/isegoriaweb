@@ -7,7 +7,7 @@
     <%= t(:created_by).capitalize+": "+article.creator_email%>
   </div>
   <div class="panel-body">
-  <%= image_tag "articles/"+article.picture, class: "article_image" %>
+  <%= image_tag get_image_server()+article.picture, class: "article_image", alt: t(:picture) %>
       <p><%=article.content%></p>
   </div>
   <div class="panel-footer">

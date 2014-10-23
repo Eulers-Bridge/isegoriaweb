@@ -30,6 +30,8 @@ gem 'json', '~> 1.8.1'
 gem 'bcrypt', '~> 3.1.5'
 #Use date-picker
 gem 'bootstrap-datepicker-rails'
+#Use AWS API
+gem 'aws-sdk', '< 2'
 
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
