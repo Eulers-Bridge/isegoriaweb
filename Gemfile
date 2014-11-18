@@ -30,6 +30,9 @@ gem 'json', '~> 1.8.1'
 gem 'bcrypt', '~> 3.1.5'
 #Use date-picker
 gem 'bootstrap-datepicker-rails'
+#Use time-picker
+gem 'bootstrap-timepicker-rails', :require => 'bootstrap-timepicker-rails',
+                              :git => 'git://github.com/tispratik/bootstrap-timepicker-rails.git'
 #Use AWS API
 gem 'aws-sdk', '< 2'
 
