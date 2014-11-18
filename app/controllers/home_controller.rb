@@ -13,6 +13,24 @@ class HomeController < ApplicationController
   def signup
     @stylesheet = 'home'
   	@user = User.new #Set a new user object to be filled by the user form
+    resp = Util.get_institutions_catalog
+    if resp[0]
+      @institutions_catalog = resp[1]["countrys"]
+      @aux_string = "{"
+      @institutions_catalog.each do |country|
+        @aux_string << country['countryId'].to_s + ":["
+        country['institutions'].each do |institution|
+          @aux_string << "{id:" + institution['institutionId'].to_s + ", name:'" + institution['institutionName'] + "'},"
+        end
+        @aux_string << "],"
+      end
+      @aux_string << "}"
+      @js_institutions_catalog = @aux_string.gsub('},]','}]').gsub('],}',']}')
+      puts '------------------------' + @js_institutions_catalog
+    elsif validate_authorized_access(resp[1])
+      flash[:danger] = t(:institutions_list_error_flash)
+      redirect_to root
+    end
   end
 
   def register_successfull

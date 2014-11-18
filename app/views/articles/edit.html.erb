@@ -22,7 +22,7 @@
   <div class="form-group">
     <label for="hdd_previous_picture"><%=capitalize_as_title(t(:previous_picture))%></label>
     <% @article.picture.each do |picture| %>
-      <%= image_tag get_image_server()+picture, class: "article_image_thumbnail"%>
+      <%= image_tag picture, class: "article_image_thumbnail"%>
       <input type="hidden" id="hdd_previous_picture" name="article[previous_picture]" value="<%=@article.picture.blank? ? nil : @article.picture[0]%>">
     <%end%>
   </div>
