@@ -38,6 +38,7 @@ gem 'aws-sdk', '< 2'
 
 #Add javascript runtime
 gem 'execjs'
+gem 'therubyracer', :platform => :ruby
 
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
