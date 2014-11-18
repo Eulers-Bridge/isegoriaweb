@@ -10,11 +10,27 @@ module Util
 	  Time.at(epoch_milliseconds/1000).strftime(I18n.t(:date_format_ruby))
 	end
 
+  #Funcion that converts epoch milliseconds to a regular DateTime
+  def self.epoch_to_datetime(epoch_milliseconds)
+    Time.at(epoch_milliseconds/1000).strftime(I18n.t(:date_format_ruby)+" "+I18n.t(:time_format_ruby))
+  end
+
+  #Function that gets just the time part of an epoch date
+  def self.epoch_get_time(epoch_milliseconds)
+    Time.at(epoch_milliseconds/1000).strftime(I18n.t(:time_format_ruby))
+  end
+
 	#Funcion that converts a regular Date to epoch in milliseconds
 	def self.date_to_epoch(date)
 	 @date = Time.strptime(date, I18n.t(:date_format_ruby))
-	 @date.to_i*1000
+	 return @date.to_i*1000
 	end
+
+  #Funcion that converts a regular DateTime to epoch in milliseconds
+  def self.datetime_to_epoch(datetime)
+   @datetime = Time.strptime(datetime, I18n.t(:date_format_ruby)+" "+I18n.t(:time_format_ruby))
+   return @datetime.to_i*1000
+  end
 
 	#Function to upload an image
 	def self.upload_image(directory,file)
@@ -36,7 +52,7 @@ module Util
       #upload the file
       image_object = isegoria_bucket.objects.create(@path, file)
       image_object.acl = :public_read
-      return @path
+      return get_image_server+@path
 	end
 
 	#Function to delete an image
@@ -46,12 +62,49 @@ module Util
 	  require 'aws-sdk'
 	  #AWS.config(access_key_id: '...', secret_access_key: '...', region: 'us-west-2')
 	  s3 = AWS::S3.new(:access_key_id => 'AKIAJ7CSCKRSDNOK24IQ',:secret_access_key => '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')
-	  isegoria_bucket = s3.buckets['isegoria']# no request made
-      if isegoria_bucket.objects[path_to_file].exists?
-        isegoria_bucket.objects[path_to_file].delete()
+	  @file_key = path_to_file.gsub(get_image_server, "")
+    isegoria_bucket = s3.buckets['isegoria']# no request made
+      if isegoria_bucket.objects[@file_key].exists?
+        isegoria_bucket.objects[@file_key].delete()
       else
       	Rails.logger.debug "AWS image file not found: "+path_to_file
       end
 	  #File.delete(path_to_file) if File.exist?(path_to_file)
 	end
+
+	#Function to retrieve the Institutions Catalog
+	def self.get_institutions_catalog
+	  reqUrl = '/api/general-info'
+
+      @rest_response = MwHttpRequest.http_get_request_unauth(reqUrl)
+      Rails.logger.debug "Response from server: #{@rest_response.code} #{@rest_response.message}: #{@rest_response.body}"
+      if @rest_response.code == '200'
+      @raw_institutions_catalog = JSON.parse(@rest_response.body)
+      #@articles_list = Array.new
+      #for article in @raw_articles_list
+      #  if article["picture"].blank?
+      #    @picture = @@images_directory+'/generic_article.png'
+      #  else
+      #    @picture = article["picture"][0]
+      #  end
+      #  @articles_list << Article.new(
+      #  id: article["articleId"], 
+      #  title: article["title"], 
+      #  content: article["content"], 
+      #  picture: @picture, 
+      #  creator_email: article["creatorEmail"], 
+      #  date: article["date"],
+      #  student_year: article["studentYear"],
+      #  _links: article["_links"])
+      #end
+      return true, @raw_institutions_catalog
+    else
+      return false, "#{@rest_response.code}", "#{@rest_response.message}"
+    end
+	end
+
+  #Function that retrieve the default server where images are being saved
+  def self.get_image_server
+    return "https://s3-ap-southeast-2.amazonaws.com/isegoria/"
+  end
 end
