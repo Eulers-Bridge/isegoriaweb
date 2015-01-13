@@ -1,33 +1,30 @@
-<%= link_to t(:create).capitalize, new_article_path, :class => 'btn btn-success' %>
-<% if @previous_page >=0 %>
-<%= link_to t(:previous).capitalize, articles_path(:page =>@previous_page), :class => 'btn btn-info' %> 
-<%end%>
-<%=@page+1%>
-<% if @next_page >=0 %>
-<%= link_to t(:next).capitalize, articles_path(:page =>@next_page), :class => 'btn btn-info' %> 
-<%end%> 
-<% @articles_list.each do |article| %>
-<div class="panel panel-info">
-  <div class="panel-heading">
-    <h3 class="panel-title"><%=article.title%></h3>
-    <%=epoch_to_date(article.date)%>
-    <%= t(:created_by).capitalize+": "+article.creator_email%>
-  </div>
-  <div class="panel-body">
-  <%= image_tag article.picture, class: "article_image", alt: t(:picture) %>
-      <p><%=article.content%></p>
-  </div>
-  <div class="panel-footer">
-    <%= link_to t(:edit).capitalize, edit_article_path(:id => article.id), :class => 'btn btn-info' %> <%= button_to t(:delete).capitalize, article_path(:id => article.id), method: :delete, :class => 'btn btn-danger' %> <%= button_to t(:like).capitalize, article_like_path(:id => article.id), method: :put, :class => 'btn btn-success' %>
-    <%= button_to t(:unlike).capitalize, article_unlike_path(:id => article.id), method: :put, :class => 'btn btn-success' %>
-    <div class="fb-like" 
-      data-send="true" 
-      data-width="450" 
-      data-show-faces="true" 
-      layout="button"
-      data-share="false"
-      href="<%=article._links['self']['href']%>">
+<div class="section_controls">
+<%= link_to capitalize_as_title(t(:create_post)), new_article_path, :class => 'create_link' %>
+<div class="pagination_controls">
+  <% if @previous_page >=0 %>
+  <%= link_to "<< ", articles_path(:page =>@previous_page), :class => 'nav_control' %> 
+  <%end%>
+  <%=(@page+1)%>
+  <% if @next_page >=0 %>
+  <%= link_to " >>", articles_path(:page =>@next_page), :class => 'nav_control' %> 
+  <%end%> 
+</div>
+</div>
+<div id="articles_list">
+  <% @articles_list.each do |article| %>
+  <div class="article_item">
+    <div class="item_image">
+        <%= image_tag article.picture, class: "article_image_thumbnail", alt: t(:picture) %>
+    </div>
+    <div class="item_controls">
+      <%= link_to t(:edit).capitalize, edit_article_path(:id => article.id), :class => 'edit_link' %> 
+      <%= link_to t(:delete).capitalize, article_path(:id => article.id), method: :delete, :class => 'delete_link' %>
+    </div>
+    <div>
+    <h3><%=article.title%></h3>
+    <h4><%= t(:created_by).capitalize+" "+article.creator_email + ' ' + t(:the)+ ' ' + epoch_to_date(article.date)%></h4>
     </div>
   </div>
+  <!--hr-->
+  <% end %>
 </div>
-<% end %>

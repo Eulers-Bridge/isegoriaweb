@@ -1,26 +1,32 @@
-<%= link_to t(:create).capitalize, new_event_path, :class => 'btn btn-success' %>
-<% if @previous_page >=0 %>
-<%= link_to t(:previous).capitalize, events_path(:page =>@previous_page), :class => 'btn btn-info' %> 
-<%end%>
-<%=@page+1%>
-<% if @next_page >=0 %>
-<%= link_to t(:next).capitalize, events_path(:page =>@next_page), :class => 'btn btn-info' %> 
-<%end%> 
-<% @events_list.each do |event| %>
-<div class="panel panel-info">
-  <div class="panel-heading">
-    <h3 class="panel-title"><%=event.name%></h3>
-  </div>
-  <div class="panel-body">
-  <p><%=t(:start_date).capitalize+": "+epoch_to_datetime(event.start_date)%>. <%=t(:end_date).capitalize+": "+epoch_to_datetime(event.end_date)%></p>
-  <p><%=t(:description).capitalize+": "+event.description%></p>
-  <p><%=t(:location).capitalize+": "+event.location.name%></p>
-  <p><%= t(:organizer).capitalize+": "+event.organizer+" ("+event.organizer_email+")"%></p>
-  <%= image_tag event.picture, class: "event_image_thumbnail", alt: t(:picture) %>
-  <%= render 'partials/map', :latitude => event.location.latitude, :longitude => event.location.longitude, :title => event.location.name, :map_class => 'event_map_small', :map_id => event.id %></div>
-  </div>
-  <div class="panel-footer">
-    <%= link_to t(:edit).capitalize, edit_event_path(:id => event.id), :class => 'btn btn-info' %> <%= button_to t(:delete).capitalize, event_path(:id => event.id), method: :delete, :class => 'btn btn-danger' %>
-  </div>
+<div class="section_controls">
+  <%= link_to t(:create_event).capitalize, new_event_path, :class => 'create_link' %>
+<div class="pagination_controls">
+  <% if @previous_page >=0 %>
+  <%= link_to "<< ", events_path(:page =>@previous_page), :class => 'nav_control' %> 
+  <%end%>
+  <%=(@page+1)%>
+  <% if @next_page >=0 %>
+  <%= link_to " >>", events_path(:page =>@next_page), :class => 'nav_control' %> 
+  <%end%> 
 </div>
-<% end %>
+</div>
+<div id="events_list">
+  <% @events_list.each do |event| %>
+  <div class="event_item">
+    <div class="item_image">
+        <%= image_tag event.picture, class: "event_image_thumbnail", alt: t(:picture) %>
+    </div>
+    <div class="item_controls">
+      <%= link_to t(:edit).capitalize, edit_event_path(:id => event.id), :class => 'edit_link' %> 
+      <%= link_to t(:delete).capitalize, event_path(:id => event.id), method: :delete, :class => 'delete_link' %>
+    </div>
+    <div>
+    <h3><%=event.name%></h3>
+    <h4>@ <%=event.location.name%></h4>
+    <h4><%=t(:start_date).capitalize+": "+epoch_to_datetime(event.start_date)%>. <%=t(:end_date).capitalize+": "+epoch_to_datetime(event.end_date)%></h4>
+    <h4><%= t(:created_by).capitalize+" "+event.organizer + ' ' + t(:the)+ ' ' + epoch_to_date(event.created)%></h4>
+    </div>
+  </div>
+  <!--hr-->
+  <% end %>
+</div>

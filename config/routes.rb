@@ -18,11 +18,12 @@ Rails.application.routes.draw do
   resources :photos, only: [:create, :update, :destroy, :new, :edit, :index]
   resources :articles, only: [:create, :update, :destroy, :new, :edit, :index]
   resources :polls, only: [:create, :update, :destroy, :new, :edit, :index]
+  resources :photo_albums, only: [:index]
 
   # You can have the root of your site routed with "root"
-  root 'home#index'
+  root 'home#landing'
 
-  get 'home', to: 'home#index'
+  get 'home', to: 'home#landing'
 
   get 'home/index'
   get 'home/signup'

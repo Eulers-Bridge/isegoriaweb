@@ -19,8 +19,8 @@ class SessionsController < ApplicationController
         #transfer any data to the new session
         reset_session
         session[:user] = @user
-        session[:username] = params[:session][:username]
-        session[:password] = params[:session][:password]
+        session[:username] = @user['email']
+        session[:password] = @user['password']
         session[:authenticated] = true
         session[:locale] = I18n.locale
         logger.debug session[:username] + " Authenticated: " + session[:authenticated].to_s

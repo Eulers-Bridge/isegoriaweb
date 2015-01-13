@@ -1,0 +1,11 @@
+<%= link_to t(:create).capitalize, new_photo_album_path, :class => 'btn btn-success' %>
+<% if @previous_page >=0 %>
+<%= link_to t(:previous).capitalize, photo_albums_path(:page =>@previous_page), :class => 'btn btn-info' %> 
+<%end%>
+<%=@page+1%>
+<% if @next_page >=0 %>
+<%= link_to t(:next).capitalize, photo_albums_path(:page =>@next_page), :class => 'btn btn-info' %> 
+<%end%> 
+<% @photo_albums_list.each do |photo_album| %>
+jojojo
+<% end %>

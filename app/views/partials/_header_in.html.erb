@@ -1,18 +1,18 @@
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top_navbar">
-        <span class="sr-only"><%=capitalize_as_title(t(:toggle_navigation))%></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand visible-xs" href="/"><%=image_tag("isegoria-logo-xs.jpg", alt:t(:app_name) + t(:logo))%> <%=t(:app_name)%></a>
-        <a class="navbar-brand visible-sm" href="/"><%=image_tag("isegoria-logo-sm.jpg", alt:t(:app_name) + t(:logo))%> <%=t(:app_name)%></a>
-        <a class="navbar-brand hidden-xs hidden-sm" href="/"><%=image_tag("Eulers_Logo_White_50.png", alt:t(:app_name) + t(:logo))%> <%=t(:app_name)%></a>
-    </div>
-    <div class="navbar-collapse collapse" id="top_navbar">
-      <%= button_to capitalize_as_title(t(:logout)), logout_path, method: :delete, :class => 'btn btn-info navbar-btn navbar-right' %>
-    </div><!--/.navbar-collapse -->
+<div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top_navbar">
+      <span class="sr-only"><%=capitalize_as_title(t(:toggle_navigation))%></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <%= link_to image_tag("navigation/Home.png", alt:t(:app_name) + t(:home)) + " " + t(:home) , articles_path, :class => "visible-xs visible-sm isegoria_navbar_link navbar-left" %>
+    <%= link_to image_tag("navigation/Home.png", alt:t(:app_name) + t(:home)) + " " + t(:home) , articles_path, :class => "hidden-xs hidden-sm isegoria_navbar_link navbar-left" %>
   </div>
+  <div class="navbar-collapse collapse" id="top_navbar">
+  <%= link_to image_tag("navigation/Log Off.png", alt:t(:logout)) + " " + t(:logout).capitalize, logout_path, method: :delete, :class => "visible-xs visible-sm isegoria_navbar_link" %>
+  <%= link_to image_tag("navigation/Log Off.png", alt:t(:logout)) + " " + t(:logout).capitalize, logout_path, method: :delete, :class => "hidden-xs hidden-sm navbar-right isegoria_navbar_link" %>
+  <%= link_to t(:notifications).capitalize, '#', :class => "navbar-right isegoria_navbar_link" %>
+  <%= link_to t(:activity).capitalize, '#', :class => "navbar-right isegoria_navbar_link" %>
+  </div><!--/.navbar-collapse -->
 </div>

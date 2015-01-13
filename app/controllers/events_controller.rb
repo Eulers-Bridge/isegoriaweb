@@ -15,7 +15,6 @@ class EventsController < ApplicationController
       flash[:danger] = t(:event_list_error_flash)
       redirect_to error_general_error_path
     end
-
   end
 
   def new

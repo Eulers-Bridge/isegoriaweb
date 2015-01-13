@@ -4,6 +4,8 @@ class Photo
   attr_accessor :title, :description, :path, :alter_text
   attr_reader :id
 
+
+
   #validates :title, :presence => { :message => ApplicationHelper.validation_error(:title, :presence, nil) }
   #validates :description, :presence => { :message => ApplicationHelper.validation_error(:description, :presence, nil) }
   validates :path, :presence => { :message => ApplicationHelper.validation_error(:path, :presence, nil) }

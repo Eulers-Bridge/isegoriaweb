@@ -20,18 +20,17 @@ include ActiveModel::Model
     @start_time = attributes[:start_time]
     @end_date = attributes[:end_date]
     @end_time = attributes[:end_time]
-    if !attributes[:created].blank?
-      @created = attributes[:created]#milliseconds passed since epoch Jan/1/1970
-    else
-      @created = Util.date_to_epoch(Time.now.strftime(I18n.t(:date_format_ruby)))
-    end
-    @modified = Util.date_to_epoch(Time.now.strftime(I18n.t(:date_format_ruby)))
     @location = attributes[:location]
     @description = attributes[:description]
     @picture = attributes[:picture]
     @volunteers = attributes[:volunteers]
     @organizer = attributes[:organizer]
     @organizer_email = attributes[:organizer_email]
+    if !attributes[:created].blank?
+      @created = attributes[:created]#milliseconds passed since epoch Jan/1/1970
+    else
+      @created = 0
+    end
   end
  
   def save (user)  
@@ -42,6 +41,7 @@ include ActiveModel::Model
       else
         @file_s3_path = nil
       end
+
       event = {
               'name'=>self.name,
               'starts'=>Util.datetime_to_epoch(self.start_date+" "+self.start_time),
@@ -53,8 +53,8 @@ include ActiveModel::Model
               'organizer'=>self.organizer,
               'organizerEmail'=>self.organizer_email,
               'institutionId'=>26,#change to user institution
-              'created'=>self.created,
-              'modified'=>self.modified
+              'created'=>Util.date_to_epoch(Time.now.strftime(I18n.t(:date_format_ruby))),
+              'modified'=>Util.date_to_epoch(Time.now.strftime(I18n.t(:date_format_ruby)))
       }
       reqUrl = "/api/event/"
       @rest_response = MwHttpRequest.http_post_request(reqUrl,event,user['email'],user['password'])
@@ -92,11 +92,10 @@ include ActiveModel::Model
               'volunteerPositions'=>nil,
               'organizer'=>attributes["organizer"],
               'organizerEmail'=>attributes["organizer_email"],
-              'institutionId'=>26,#change to user institution
-              'modified'=>self.modified
+              'institutionId'=>26,#change to user institution,
+              'modified'=>Util.date_to_epoch(Time.now.strftime(I18n.t(:date_format_ruby)))
       }      
       reqUrl = "/api/event/#{self.id}"
-
       @rest_response = MwHttpRequest.http_put_request(reqUrl,event,user['email'],user['password'])
       Rails.logger.debug "Response from server: #{@rest_response.code} #{@rest_response.message}: #{@rest_response.body}"
       if @rest_response.code == "200"
@@ -186,7 +185,10 @@ include ActiveModel::Model
         description: event["description"],
         picture: @picture,
         organizer: event["organizer"],
-        organizer_email: event["organizerEmail"])
+        organizer_email: event["organizerEmail"],
+        institution_id: event["institutionId"],
+        created: event["created"],
+        modified: event["modified"])
       end
       return true, @events_list, @total_events, @total_pages
     else
