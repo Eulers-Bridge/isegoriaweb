@@ -32,6 +32,15 @@ module Util
    return @datetime.to_i*1000
   end
 
+  #Function to format validation error messages
+  def self.format_validation_errors (errors_array)
+    @message = ''
+    errors_array.each do |message|
+        @message = @message + ' * ' + message
+    end
+    return @message
+  end
+
 	#Function to upload an image
 	def self.upload_image(directory,file)
       #Use the Amazon Web Server API to upload images

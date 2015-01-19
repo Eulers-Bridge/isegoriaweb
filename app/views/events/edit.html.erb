@@ -76,7 +76,7 @@
   <div class="form-group">
     <label for="hdd_previous_picture"><%=capitalize_as_title(t(:previous_picture))%></label>
     <% @event.picture.each do |picture| %>
-      <%= image_tag picture, class: "event_image_thumbnail"%>
+      <%= image_tag picture, class: "event_image"%>
       <input type="hidden" id="hdd_previous_picture" name="event[previous_picture]" value="<%=@event.picture.blank? ? nil : @event.picture[0]%>">
     <%end%>
   </div>

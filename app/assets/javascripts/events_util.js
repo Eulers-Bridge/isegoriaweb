@@ -8,6 +8,7 @@
        reader.onload = function(e){
            image_base64 = e.target.result;
            preview.attr("src", image_base64);
+           preview.attr("class", "event_image");
        };
        reader.readAsDataURL(file);
     });

@@ -7,7 +7,7 @@ module ApplicationHelper
 	
 	#Function that generates an Internationalizated validation error for any field
 	def self.validation_error (field, error_type, parameter)
-	  @message = I18n.t(field)
+	  @message = ''
 	  case error_type
 		when :presence
 			@message = @message + " " + I18n.t(:validation_error_presence)
@@ -19,7 +19,7 @@ module ApplicationHelper
 			@message = @message + " " + I18n.t(:validation_error_default)
 	  end
 	end
-	
+
 	#Funcion that converts epoch milliseconds to a regular Time
 	def epoch_to_date(epoch_milliseconds)
 	  Util.epoch_to_date(epoch_milliseconds)

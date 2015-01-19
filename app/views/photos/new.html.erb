@@ -1,0 +1,41 @@
+<% provide(:title, t(:title_new_photo)) %>
+<h1><%=capitalize_as_title(t(:title_new_photo))%></h1>
+<div>
+<%= form_for(@photo) do |f| %>
+  <div class="form-group">
+    <%= f.label :title, capitalize_as_title(t (:title)) %>
+    <%= f.text_field :title, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:title)).capitalize %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, capitalize_as_title(t (:description)) %>
+    <%= f.text_field :description, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:description)).capitalize %>
+  </div>
+  <div class="form-group">
+    <label for="photo_date"><%=capitalize_as_title(t(:date))%></label>
+    <div class="input-group date" id="dpk_date" >
+      <input type="text" readonly="true" class="form-control" placeholder="Enter date" name="photo[date]">
+      <span class="input-group-addon">
+        <i class="glyphicon glyphicon-th"></i>
+      </span>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :file, capitalize_as_title(t (:picture)) %>
+    <%= f.file_field :file, accept: "image/png,image/gif,image/jpeg" ,class: 'file_input', placeholder: t(:field_placeholder, field_name: t(:picture)).capitalize %>
+  </div>
+  <div class="upload-preview">
+    <label><%=capitalize_as_title(t(:picture_preview))%></label>
+    <!--Image closing tag required by the upload-preview-->
+    <img />
+  </div>
+  <%= f.submit capitalize_as_title(t(:create)), class: "btn btn-large btn-success" %>
+  <% end %>
+</div>
+<%= javascript_include_tag "photos_util" %>
+<script type="text/javascript">
+  $("#dpk_date").datepicker({
+    format: '<%=t(:date_format_javascript)%>',
+    todayBtn: 'linked',
+    autoclose: true
+  });
+</script>

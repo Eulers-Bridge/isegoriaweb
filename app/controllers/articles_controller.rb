@@ -41,6 +41,9 @@ class ArticlesController < ApplicationController
 	  	flash[:success] = t(:article_creation_success_flash, article: @article.title)
 	    redirect_to articles_path
 	  elsif validate_authorized_access(resp[1])
+	  	if(resp[1].kind_of?(Array))
+          flash[:warning] = Util.format_validation_errors(resp[1])
+        end
         flash[:danger] = t(:article_creation_error_flash)
       	@article = Article.new
       	redirect_to new_article_path
@@ -60,6 +63,9 @@ class ArticlesController < ApplicationController
 	  	flash[:success] = t(:article_modification_success_flash, article: @article.title)
 	    redirect_to articles_path
 	  elsif validate_authorized_access(resp[1])
+	  	if(resp[1].kind_of?(Array))
+          flash[:warning] = Util.format_validation_errors(resp[1])
+        end
         flash[:danger] = t(:article_modification_error_flash)
       	redirect_to edit_article_path
 	  end
@@ -70,7 +76,7 @@ class ArticlesController < ApplicationController
 	  if resp[0]
 		@article = resp[1]
 	  elsif validate_authorized_access(resp[1])
-	    flash[:danger] = t(:article_deletion_error_flash)
+	    flash[:danger] = t(:article_get_error_flash)
 		redirect_to articles_path
 	  end
 	  resp2 = @article.delete(session[:user])

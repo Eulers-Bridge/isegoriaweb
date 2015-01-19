@@ -1,41 +1,32 @@
-<% provide(:title, t(:title_photos)) %>
-<h1><%=capitalize_as_title(t(:title_photos))%></h1>
-<div>
-<h2><%=capitalize_as_title(t(:upload_photo))%></h2>
-<%= form_for(@photo) do |f| %>
-  <div class="form-group">
-    <%= f.label :title, capitalize_as_title(t (:title)) %>
-    <%= f.text_field :title, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:title)).capitalize %>
+<div class="section_controls">
+  <%= link_to capitalize_as_title(t(:upload_photo)), new_photo_path, :class => 'create_link' %>
+  <div class="pagination_controls">
+    <% if @previous_page >=0 %>
+      <%= link_to "<< ", photos_path(:page =>@previous_page), :class => 'nav_control' %> 
+    <%end%>
+    <%=(@page+1)%>
+    <% if @next_page >=0 %>
+      <%= link_to " >>", photos_path(:page =>@next_page), :class => 'nav_control' %> 
+    <%end%> 
   </div>
-  <div class="form-group">
-    <%= f.label :path, capitalize_as_title(t (:picture)) %>
-    <%= f.file_field :path, accept: "image/png,image/gif,image/jpeg" ,class: 'file_input', placeholder: t(:field_placeholder, field_name: t(:picture)).capitalize %>
+</div>
+
+<div id="photos_list">
+  <% @photos_list.each do |photo| %>
+  <div class="photo_item">
+    <div class="item_image">
+        <%= image_tag photo.file, class: "photo_thumbnail", alt: t(:picture) %>
+    </div>
+    <div class="item_controls">
+      <%= link_to t(:edit).capitalize, edit_photo_path(:id => photo.id), :class => 'edit_link' %> 
+      <%= link_to t(:delete).capitalize, photo_path(:id => photo.id), method: :delete, :class => 'delete_link' %>
+    </div>
+    <div>
+      <h3><%=photo.title%></h3>
+      <h4><%=photo.description%></h4>
+    </div>
   </div>
-  <div class="upload-preview">
-    <label><%=capitalize_as_title(t(:picture_preview))%></label>
-    <!--Image closing tag required by the upload-preview-->
-    <img />
-  </div>
-  <%= f.submit capitalize_as_title(t(:upload)), class: "btn btn-large btn-success" %>
+  <!--hr-->
   <% end %>
 </div>
-<br>
-<hr>
-<br>
-<div>
-<% @photos_list.each do |photo| %>
-<div class="panel panel-info">
-  <div class="panel-heading">
-    <h3 class="panel-title"><%=photo.title%></h3>
-  </div>
-  <div class="panel-body">
-  <p><%= image_tag "photos/"+photo.path, class: "photo_thumbnail" %></p>
-  </div>
-  <div class="panel-footer">
-    <p><%=t(:description).capitalize+": "+photo.description%></p>
-    <%= button_to t(:delete).capitalize, photo_path(:id => photo.id), method: :delete, :class => 'btn btn-danger' %>
-  </div>
-</div>
-<% end %>
-<div>
 <%= javascript_include_tag "photos_util" %>

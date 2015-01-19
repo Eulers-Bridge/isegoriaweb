@@ -39,6 +39,9 @@ class EventsController < ApplicationController
   	  flash[:success] = t(:event_creation_success_flash, event: @event.name)
       redirect_to events_path
     elsif validate_authorized_access(resp[1])
+      if(resp[1].kind_of?(Array))
+        flash[:warning] = Util.format_validation_errors(resp[1])
+      end
       flash[:danger] = t(:event_creation_error_flash)
    	  @event = Event.new
    	  redirect_to new_event_path
@@ -58,8 +61,11 @@ class EventsController < ApplicationController
       flash[:success] = t(:event_modification_success_flash, event: @event.name)
       redirect_to events_path
     elsif validate_authorized_access(resp[1])
-        flash[:danger] = t(:event_modification_error_flash)
-        redirect_to edit_event_path
+      if(resp[1].kind_of?(Array))
+        flash[:warning] = Util.format_validation_errors(resp[1])
+      end
+      flash[:danger] = t(:event_modification_error_flash)
+      redirect_to edit_event_path
     end
   end
 
