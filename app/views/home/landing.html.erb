@@ -12,17 +12,16 @@
   <title>Isegoria Web</title>
 </head>
 <body id="landing_body">
-<%= render "partials/facebook_SDK" %>
   <div id= "landing_container_section_1" class="landing_container">
     <div id="section_1" class="landing-section">
       <div id="section_1_header">
 		    <!--%= image_tag "landing/Isegoria_logo.png", class: "landing_logo" %-->
         <div id="header_app_name"><%=t(:isegoria).capitalize%></div>
 		    <button class="btn landing-link-border" id="admin_login"><%=capitalize_as_title(t(:admin_login))%></button>
-        <button class="btn landing-link-border" id="more_info_header" aria-label="Right Align">
-          <%=capitalize_as_title(t(:more_info))%>
-          <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
-        </button>
+        <%= link_to capitalize_as_title(t(:more_info)), 
+        home_more_info_path,
+        :id =>"more_info_header", 
+        :class => "btn landing-link-border"%>
       </div>
       <hr>
       <div id="section_1_content">
@@ -158,25 +157,7 @@
       <button class="btn landing-link-border" id="btn_more_info"><%=capitalize_as_title(t(:more_info))%></button>
 	  </div>
   </div>
-  <div id= "landing_container_footer" class="landing_container">
-	<div id="landing_footer" class="landing-section">
-      <%= image_tag "landing/Logo_Stylized_20.png"%>
-	  <div id="landing_footer_links_bar">
-	    <button class="btn"><%=capitalize_as_title(t(:home))%></button>
-	    <button class="btn"><%=capitalize_as_title(t(:about_us))%></button>
-      <button class="btn"><%=capitalize_as_title(t(:media_enquires))%></button>
-      <button class="btn"><%=capitalize_as_title(t(:pricing))%></button>      
-      <button class="btn"><%=capitalize_as_title(t(:security))%></button>
-      <button class="btn"><%=capitalize_as_title(t(:privacy_policy))%></button>
-      <button class="btn"><%=capitalize_as_title(t(:terms_of_service))%></button>
-      <button class="btn"><%=capitalize_as_title(t(:contact_us))%></button>
-	  </div>
-	  <hr>
-	  <h5 class="copyright"><%=t(:copyright_text)%></h5>
-	  <h5 class="copyright_message"><%=t(:copyright_message_1)%></h5>
-    <h5 class="copyright_message"><%=t(:copyright_message_2)%></h5>
-	</div>
-  </div>
+  <%= render "partials/landing_footer" %>
   <div id= "landing_container_menu_bar" class="landing_container">
 	<div id="landing_menu_bar" class="landing-section">
 	  <button class="btn"><%=capitalize_as_title(t(:about_isegoria))%></button>

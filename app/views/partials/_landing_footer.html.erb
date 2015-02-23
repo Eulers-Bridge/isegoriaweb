@@ -1,0 +1,19 @@
+<div id= "landing_container_footer" class="landing_container">
+  <div id="landing_footer" class="landing-section">
+    <%= image_tag "landing/Logo_Stylized_20.png"%>
+    <div id="landing_footer_links_bar">
+      <%= link_to capitalize_as_title(t(:home)),home_path,:class => "btn"%>
+      <%= link_to capitalize_as_title(t(:about_us)),home_more_info_path,:class => "btn"%>
+      <%= link_to capitalize_as_title(t(:media_enquiries)),home_more_info_path(:anchor => "media_enquiries_anchor"),:class => "btn"%>
+      <%= link_to capitalize_as_title(t(:pricing)),home_more_info_path(:anchor => "pricing_anchor"),:class => "btn"%>
+      <%= link_to capitalize_as_title(t(:security)),home_more_info_path(:anchor => "security_anchor"),:class => "btn"%>
+      <%= link_to capitalize_as_title(t(:privacy_policy)),home_more_info_path(:anchor => "privacy_policy_anchor"),:class => "btn"%>
+      <%= link_to capitalize_as_title(t(:terms_of_service)),home_more_info_path(:anchor => "terms_of_service_anchor"),:class => "btn"%>
+      <%= link_to capitalize_as_title(t(:contact_us)),home_more_info_path(:anchor => "contact_us_anchor"),:class => "btn"%>
+    </div>
+    <hr>
+    <h5 class="copyright"><%=t(:copyright_text)%></h5>
+    <h5 class="copyright_message"><%=t(:copyright_message_1)%></h5>
+    <h5 class="copyright_message"><%=t(:copyright_message_2)%></h5>
+  </div>
+</div>

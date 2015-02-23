@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+
+	<!-- Include js plugin -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  <title>Isegoria Web</title>
+</head>
+<body id="landing_body">
+  <%= render "partials/facebook_SDK" %>
+  <div id= "more_info_container_section_1" class="landing_container">
+    <div id="section_1" class="landing-section">
+      <div id="section_1_header">
+        <div id="header_app_name"><%=t(:isegoria).capitalize%></div>
+		    <button class="btn landing-link-border" id="admin_login"><%=capitalize_as_title(t(:admin_login))%></button>
+        <%= link_to capitalize_as_title(t(:more_info)), 
+        home_more_info_path,
+        :id =>"more_info_header", 
+        :class => "btn landing-link-border" %>
+      </div>
+      <hr>
+      <div id="section_1_content">
+        <h1><%=t(:more_into_modal_1)%> <span class="blue_modal"><%=t(:more_into_modal_2)%></span></h1>
+	      <h3><%=capitalize_as_title(t(:about_us))%></h3>
+        <h4><%=t(:about_us_message)%></h4>
+      </div>
+      <hr>
+      <div id="about_us_profiles">
+        <div class='row'>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <div id="jamesK_prof" class="profile_picture">
+            </div>
+            <span class="profile_name"><%=t(:profile_james_kostias) %></span>
+            <br>
+            <span class="profile_role"><%=t(:profile_james_kostias_role).upcase %></span>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <div id="drewS_prof" class="profile_picture">
+            </div>
+            <span class="profile_name"><%=t(:profile_drew_smith) %></span>
+            <br>
+            <span class="profile_role"><%=t(:profile_drew_smith_role).upcase %></span>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <div id="charlieE_prof" class="profile_picture">
+            </div>
+            <span class="profile_name"><%=t(:profile_charlie_eastaugh) %></span>
+            <br>
+            <span class="profile_role"><%=t(:profile_charlie_eastaugh_role).upcase %></span>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <div id="miguelW_prof" class="profile_picture">
+            </div>
+            <span class="profile_name"><%=t(:profile_miguel_wood) %></span>
+            <br>
+            <span class="profile_role"><%=t(:profile_miguel_wood_role).upcase %></span>
+          </div>
+        </div>
+        <div class='row'>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <div id="alanG_prof" class="profile_picture">
+            </div>
+            <span class="profile_name"><%=t(:profile_alan_gao) %></span>
+            <br>
+            <span class="profile_role"><%=t(:profile_alan_gao_role) %></span>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <div id="anthonyQ_prof" class="profile_picture">
+            </div>
+            <span class="profile_name"><%=t(:profile_anthony_quattrone) %></span>
+            <br>
+            <span class="profile_role"><%=t(:profile_anthony_quattrone_role).upcase %></span>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <div id="davidR_prof" class="profile_picture">
+            </div>
+            <span class="profile_name"><%=t(:profile_david_rivera) %></span>
+            <br>
+            <span class="profile_role"><%=t(:profile_david_rivera_role).upcase %></span>
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <div id="gregN_prof" class="profile_picture">
+            </div>
+            <span class="profile_name"><%=t(:profile_greg_newitt) %></span>
+            <br>
+            <span class="profile_role"><%=t(:profile_greg_newitt_role).upcase %></span>
+          </div>
+        </div>
+        <div class='row'>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <div id="yikaiG_prof" class="profile_picture">
+            </div>
+            <span class="profile_name"><%=t(:profile_yikai_gong) %></span>
+            <br>
+            <span class="profile_role"><%=t(:profile_yikai_gong_role).upcase %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+	</div>
+  <div id= "more_info_container_section_2" class="landing_container">
+    <div id="section_2" class="landing-section">
+      <div id="landing_now_hiring">
+        <h4><%=(t(:currently_hiring_adv))%></h4>
+      </div>
+      <a name="media_enquiries_anchor"></a>
+      <h1><%=capitalize_as_title(t(:media_enquiries))%></h1>
+      <h4><%=t(:media_enquiries_message).capitalize%></h4>
+      <hr>
+      <div class="more_info_section_link">
+        <button class="btn"><span class="glyphicon glyphicon-download"></span><%=t(:download_presskit).upcase%></button>
+      </div>
+      <hr>
+      <a name="pricing_anchor"></a>
+      <h1><%=capitalize_as_title(t(:pricing))%></h1>
+      <h4><%=t(:pricing_message).capitalize%></h4>
+      <a name="security_anchor"></a>
+      <h1><%=capitalize_as_title(t(:security))%></h1>
+      <h4><%=t(:security_message).capitalize%></h4>
+      <a name="privacy_policy_anchor"></a>
+      <h1><%=capitalize_as_title(t(:privacy_policy))%></h1>
+      <h4><%=t(:privacy_policy_message).capitalize%></h4>
+      <a name="terms_of_service_anchor"></a>
+      <h1><%=capitalize_as_title(t(:terms_of_service))%></h1>
+      <h4><%=t(:terms_of_service_message).capitalize%></h4>
+      <hr>
+      <div class="more_info_section_link">
+          <button class="btn"><span class="glyphicon glyphicon-ok-circle"></span><%=t(:read_terms_and_conditions).upcase%></button>
+      </div>
+      <hr>
+      <a name="contact_us_anchor"></a>
+      <h1><%=capitalize_as_title(t(:contact_us))%></h1>
+      <h4><%=t(:contact_us_message).capitalize%></h4>
+      <hr>
+      <div class="more_info_section_link">
+        <button class="btn"><%=t(:email_us).upcase%></button>
+        <button class="btn"><%=t(:facebook).upcase%></button>
+        <button class="btn"><%=t(:company_twitter).upcase%></button>
+        <h4><%=t(:for_tech_support_message).capitalize%></h4>
+      </div>
+      <hr>
+    </div>
+  </div>
+  <%= render "partials/landing_footer" %>
+  <div id="login_form">
+    <%= form_for(:session, url: sessions_path, :html =>{class: "navbar-form navbar-right"}) do |f| %>
+      <div class="form-group">
+        <%= f.label :username, t(:username).capitalize, class: "sr-only" %>
+        <%= f.text_field :username, class: "form-control", placeholder: t(:username).capitalize %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password, t(:password).capitalize, class: "sr-only" %>
+        <%= f.password_field :password, class: "form-control", placeholder: t(:password).capitalize %>
+      </div>
+      <%= f.submit capitalize_as_title(t(:login)), class: "btn btn-success navbar-button login_form_button" %>
+      <input class="btn btn-danger navbar-button login_form_button" id="cancel_login" type="button" value="<%=capitalize_as_title(t(:cancel))%>" />
+    <% end %>
+  </div>
+  <%= render "partials/flash_messages" %>
+</body>
+<script>
+
+$(document).ready(function(){
+  $('#admin_login').click(function(e){
+    $('#login_form').toggleClass('show');
+    e.preventDefault();
+    });
+  $('#cancel_login').click(function(e){
+    $('#login_form').removeClass('show');
+    e.preventDefault();
+    });
+  });
+
+</script>  
+</html>

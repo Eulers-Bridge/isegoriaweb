@@ -42,4 +42,9 @@ class HomeController < ApplicationController
     @stylesheet = 'landing'
   end
 
+  def more_info
+    render :layout => false
+    @stylesheet = 'more_info'
+  end
+
 end

@@ -60,7 +60,7 @@ video{
 	background: url(landing/Background.png) no-repeat center center;
 	background-size: cover;
 }
-#section_1{
+#landing_container_section_1 #section_1{
 	height: 660px;
 	color: #FFFFFF;
 	@media only screen and (min-width: 1024px){
@@ -96,12 +96,15 @@ video{
 }*/
 #header_app_name{
 	padding-top: 20px;
-	font-family: 'SourceSansPro';
+	font-weight: bold;
 	font-size: 160%;
 	float: left;
 }
 
 #section_1_header button:hover{
+	opacity: 0.50;
+}
+#more_info_header:hover{
 	opacity: 0.50;
 }
 #more_info_header{
@@ -115,6 +118,7 @@ video{
 	font-family: 'SourceSansPro';
 	margin-right: 10px;
 }
+
 #admin_login {
 	float: right;
 	background: transparent;
@@ -265,7 +269,7 @@ font-family: 'SourceSansPro';
 	border-bottom: 1px solid #DDDDDD;
 	background-color: #FFFFFF;
 }
-#section_2{
+#landing_container_section_2 #section_2{
 	padding-top: 80px;
 	padding-bottom: 70px;
 	@media only screen and (min-width: 1024px){
@@ -342,7 +346,7 @@ font-family: 'SourceSansPro';
 #landing_container_section_3{
    background-color: #FFFFFF;
 }
-#section_3{
+#landing_container_section_3 #section_3{
 	padding-top: 60px;
 	padding-bottom: 50px;
 	@media only screen and (min-width: 1024px){
@@ -431,7 +435,7 @@ font-family: 'SourceSansPro';
 	background-color: #000000;
 	border-bottom: 1px solid #DDDDDD;
 }
-#section_4{
+#landing_container_section_4 #section_4{
 	padding-top: 70px;
 	padding-bottom: 60px;
 	color: #FFFFFF;
@@ -515,7 +519,7 @@ font-family: 'SourceSansPro';
 #landing_container_section_5{
 	background-color: #000000;
 }
-#section_5{
+#landing_container_section_5 #section_5{
 	padding-top: 95px;
 	padding-bottom: 200px;
 	text-align: center;
@@ -562,7 +566,7 @@ font-family: 'SourceSansPro';
 #landing_container_section_6{
 	background-color: #FFFFFF;
 }
-#section_6{
+#landing_container_section_6 #section_6{
 	padding-top: 85px;
 	padding-bottom: 50px;
 	text-align: center;
@@ -645,14 +649,15 @@ font-family: 'SourceSansPro';
 	padding-top: 45px;
 	padding-bottom: 15px;
 }
-#landing_footer_links_bar button{
+#landing_footer_links_bar .btn{
 	background: transparent;
 	font-family: 'SourceSansPro';
 	font-size: 110%;
 	transition:all 200ms ease;
 	font-weight: bold;
+	color: #FFFFFF;
 }
-#landing_footer_links_bar button:hover{
+#landing_footer_links_bar .btn:hover{
 	color: #DDDDDD;
 	opacity: 0.50;
 }
@@ -693,7 +698,6 @@ font-family: 'SourceSansPro';
 #landing_container_menu_bar{
 	background-color: #FFFFFF;
 	height: 60px;
-	z-index: 1;
 	border-bottom: 1px solid #DDDDDD;
 	top: 600px;
 	z-index: 2;

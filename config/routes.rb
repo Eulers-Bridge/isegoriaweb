@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   root 'home#landing'
 
   get 'home', to: 'home#landing'
+  get 'home/more_info'
 
   get 'home/index'
   get 'home/signup'

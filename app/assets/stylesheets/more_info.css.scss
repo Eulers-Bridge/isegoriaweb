@@ -1,0 +1,231 @@
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+//SECTION 1
+#more_info_container_section_1{
+	background-color: #000000;
+}
+#more_info_container_section_1 hr{
+	 border-color: #707070 !important;
+}
+#more_info_container_section_1 #section_1{
+	color: #FFFFFF;
+	@media only screen and (min-width: 1024px){
+		padding-right: 40px;
+		padding-left: 40px;
+	}
+	@media only screen and (min-width: 768px) and (max-width : 1023px){
+		padding-right: 30px;
+		padding-left: 30px;
+	}
+	@media only screen and (min-width: 480px) and (max-width : 767px){
+		padding-right: 15px;
+		padding-left: 15px;
+	}
+	@media only screen and (max-width : 480px){
+		padding-right: 5px;
+		padding-left: 5px;
+	}
+}
+#more_info_container_section_1 #section_1_content h1{
+	margin-bottom: 100px !important;
+}
+#more_info_container_section_1 #section_1_content h3{
+	font-weight: bold;
+	margin-bottom: 20px;
+	font-family: 'SourceSansPro';
+}
+#more_info_container_section_1 #section_1_content h4{
+	margin-left: 10px !important;
+	margin-right: 10px !important;
+	font-size: 130%;
+	color: #707070;
+	font-family: 'SourceSansPro';
+}
+#about_us_profiles{
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+#about_us_profiles .row{
+	padding-top: 15px;
+	padding-bottom: 15px;
+	text-align: center;
+}
+.profile_picture{
+	background-repeat: no-repeat;
+    background-position: 50%;
+    //border-radius: 50%;
+    background-size: contain !important;
+    margin-left: auto !important;
+	margin-right: auto !important;
+	margin-bottom: 10px !important;
+    @media only screen and (min-width: 1024px){
+		width: 130px;
+    	height: 130px;
+	}
+	@media only screen and (min-width: 768px) and (max-width : 1023px){
+		width: 110px;
+    	height: 110px;
+	}
+	@media only screen and (min-width: 480px) and (max-width : 767px){
+		width: 70px;
+    	height: 70px;
+	}
+	@media only screen and (max-width : 480px){
+		width: 50px;
+    	height: 50px;
+	}
+}
+.profile_name{
+	font-size: 150%;
+	font-family: 'SourceSansPro';
+}
+.profile_role{
+	color: #707070;
+	font-size: 110%;
+	font-weight: bold;
+	font-family: 'SourceSansPro';
+}
+.blue_modal
+{
+	color: #0080FF;
+}
+
+//PROFILE PICTURES
+#jamesK_prof{
+	background: url(landing/profile_pictures/JK_Medium.png)
+}
+#drewS_prof{
+	background: url(landing/profile_pictures/DS_Medium.png)
+}
+#charlieE_prof{
+	background: url(landing/profile_pictures/CE_Medium.png)
+}
+#miguelW_prof{
+	background: url(landing/profile_pictures/MW_Medium.png)
+}
+#alanG_prof{
+	background: url(landing/profile_pictures/AG_Medium.png)
+}
+#anthonyQ_prof{
+	background: url(landing/profile_pictures/JK_Medium.png)
+}
+#davidR_prof{
+	background: url(landing/profile_pictures/DR_Medium.png)
+}
+#gregN_prof{
+	background: url(landing/profile_pictures/JK_Medium.png)
+}
+#yikaiG_prof{
+	background: url(landing/profile_pictures/YG_Medium.png)
+}
+
+//SECTION 2
+#more_info_container_section_2{
+	background-color: #FFFFFF;
+}
+#more_info_container_section_2 #section_2{
+	color: #000000;
+	padding-bottom: 70px;
+	@media only screen and (min-width: 1024px){
+		padding-right: 40px;
+		padding-left: 40px;
+	}
+	@media only screen and (min-width: 768px) and (max-width : 1023px){
+		padding-right: 30px;
+		padding-left: 30px;
+	}
+	@media only screen and (min-width: 480px) and (max-width : 767px){
+		padding-right: 15px;
+		padding-left: 15px;
+	}
+	@media only screen and (max-width : 480px){
+		padding-right: 5px;
+		padding-left: 5px;
+	}
+}
+#more_info_container_section_2 hr{
+	 border-color: #dddddd !important;
+}
+#more_info_container_section_2 h1{
+	margin-top: 80px !important;
+	margin-bottom: 30px !important;
+	font-size: 200%;
+	font-weight: bold;
+}
+#more_info_container_section_2 h4{
+	margin-bottom: 30px;
+	font-size: 130%;
+}
+#landing_container_now_hiring{
+	background-color: #FFFFFF;
+	height: 60px;
+	border-bottom: 1px solid #DDDDDD;
+	@media only screen and (max-width : 767px){
+		height: 75px;
+	}
+}
+#landing_now_hiring{
+	background-color: #FFFFFF;
+	height: 60px;
+	border-bottom: 1px solid #DDDDDD;
+	width: 100%;
+	text-align: center;
+	@media only screen and (max-width : 767px){
+		height: 75px;
+	}
+}
+#landing_now_hiring h4{
+	font-weight: bold;
+	font-family: 'SourceSansPro';
+	font-size: 110%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	color: #707070;
+}
+.more_info_section_link{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.more_info_section_link button{
+	background: transparent;
+	font-size: 110%;
+	transition:all 200ms ease;
+	font-weight: bold;
+	margin-left: 0px;
+	padding-left: 0px;
+	margin-right: 10px;
+	color: #000000;
+	@media only screen and (min-width: 768px) and (max-width : 1023px){
+		margin-right: 5px;
+	}
+}
+.more_info_section_link button:hover{
+	color: #3A80D2;
+}
+.more_info_section_link h4{
+	color: #3A80D2;
+	font-weight: bold;
+	font-family: 'SourceSansPro';
+	font-size: 110%;
+	margin-bottom: 1px !important;
+	@media only screen and (min-width: 767px){
+	float: right;
+	}
+}
+
+.more_info_section_link span.glyphicon-download {
+    font-size: 110%;
+    color: #3A80D2;
+    margin-right: 15px;
+}
+.more_info_section_link span.glyphicon-ok-circle {
+    font-size: 110%;
+    color: #3AD280;
+    margin-right: 15px;
+}
+
+//End Login Pop Up
