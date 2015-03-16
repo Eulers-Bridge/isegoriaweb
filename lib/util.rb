@@ -20,16 +20,29 @@ module Util
     Time.at(epoch_milliseconds/1000).strftime(I18n.t(:time_format_ruby))
   end
 
-	#Funcion that converts a regular Date to epoch in milliseconds
+	#Fuction that converts a regular Date to epoch in milliseconds
 	def self.date_to_epoch(date)
 	 @date = Time.strptime(date, I18n.t(:date_format_ruby))
 	 return @date.to_i*1000
 	end
 
-  #Funcion that converts a regular DateTime to epoch in milliseconds
+  #Function that converts a regular DateTime to epoch in milliseconds
   def self.datetime_to_epoch(datetime)
    @datetime = Time.strptime(datetime, I18n.t(:date_format_ruby)+" "+I18n.t(:time_format_ruby))
    return @datetime.to_i*1000
+  end
+
+  #Function that converst an Array to CSV(Comma Separated Values) String
+  def self.array_to_csv(array)
+    return array.map(&:inspect).join(', ')
+  end
+
+  #Function that converts an Array in string form to CSV(Comma Separated Values) String
+  def self.arraystring_to_csv(arraystring)
+    arraystring=arraystring.remove("[")
+    arraystring=arraystring.remove("]")
+    arraystring=arraystring.remove("\"")
+    return arraystring
   end
 
   #Function to format validation error messages

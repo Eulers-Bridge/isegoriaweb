@@ -9,7 +9,7 @@
   <div class="form-group">
     <label for="article_date"><%=capitalize_as_title(t(:date))%></label>
     <div class="input-group date" id="dpk_date" >
-      <input type="text" readonly="true" class="form-control" placeholder="Enter date" name="article[date]">
+      <input type="text" readonly="true" class="form-control" placeholder="<%=t(:field_placeholder, field_name: t(:date)).capitalize%>" name="article[date]">
       <span class="input-group-addon">
         <i class="glyphicon glyphicon-th"></i>
       </span>

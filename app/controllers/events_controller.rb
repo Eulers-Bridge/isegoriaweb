@@ -36,6 +36,10 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     resp = @event.save(session[:user])
     if resp[0]
+      @event = resp[1]
+      if !resp[2]
+        flash[:warning] = t(:event_photo_creation_error_flash)
+      end
   	  flash[:success] = t(:event_creation_success_flash, event: @event.name)
       redirect_to events_path
     elsif validate_authorized_access(resp[1])

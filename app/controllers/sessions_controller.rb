@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
 
     if resp[0]
       @user = JSON.parse(resp[1])['user']
+      @user['id']=JSON.parse(resp[1])['userId']
       I18n.locale = @user.has_key?("user") ? @user.locale : I18n.default_locale
       if !@user['accountVerified']
         redirect_to home_unverified_email_path

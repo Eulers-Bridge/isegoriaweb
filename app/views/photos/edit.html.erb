@@ -13,7 +13,7 @@
   <div class="form-group">
     <label for="photo_date"><%=capitalize_as_title(t(:date))%></label>
     <div class="input-group date" id="dpk_date" >
-      <input type="text" readonly="true" class="form-control" placeholder="Enter date" name="photo[date]" value="<%=@photo.date%>">
+      <input type="text" readonly="true" class="form-control" placeholder="<%=t(:field_placeholder, field_name: t(:date)).capitalize%>" name="photo[date]" value="<%=@photo.date%>">
       <span class="input-group-addon">
         <i class="glyphicon glyphicon-th"></i>
       </span>
@@ -34,7 +34,7 @@
     <%= f.label :file, capitalize_as_title(t (:picture)) %>
     <%= f.file_field :file, accept: "image/png,image/gif,image/jpeg" ,class: 'file_input', placeholder: t(:field_placeholder, field_name: t(:picture)).capitalize %>
   </div>
-  <%= f.submit capitalize_as_title(t(:create)), class: "btn btn-large btn-success" %>
+  <%= f.submit capitalize_as_title(t(:edit)), class: "btn btn-large btn-success" %>
   <% end %>
 </div>
 <%= javascript_include_tag "photos_util" %>

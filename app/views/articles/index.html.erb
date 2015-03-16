@@ -14,7 +14,7 @@
   <% @articles_list.each do |article| %>
   <div class="article_item">
     <div class="item_image">
-        <%= image_tag article.picture, class: "article_image_thumbnail", alt: t(:picture) %>
+        <%= image_tag article.picture.blank? ? GENERIC_ARTICLE_IMAGE : article.picture[0], class: "article_image_thumbnail", alt: t(:picture) %>
     </div>
     <div class="item_controls">
       <%= link_to t(:edit).capitalize, edit_article_path(:id => article.id), :class => 'edit_link' %> 
@@ -22,7 +22,7 @@
     </div>
     <div>
     <h3><%=article.title%></h3>
-    <h4><%= t(:created_by).capitalize+" "+article.creator_email + ' ' + t(:the)+ ' ' + epoch_to_date(article.date)%></h4>
+    <h4><%= t(:created_by).capitalize+" "+article.creator_email + ' ' + t(:the)+ ' ' + article.date%></h4>
     </div>
   </div>
   <!--hr-->

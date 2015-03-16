@@ -35,34 +35,44 @@ include ActiveModel::Model
  
   def save (user)  
    if self.valid?
-      @picture = self.picture
-      if !@picture.blank?
-        @file_s3_path = Util.upload_image(@@images_directory,@picture)
+      picture = self.picture
+      if !picture.blank?
+        file_s3_path = Util.upload_image(@@images_directory,picture)
       else
-        @file_s3_path = nil
+        file_s3_path = nil
       end
 
-      event = {
+      event_req = {
               'name'=>self.name,
               'starts'=>Util.datetime_to_epoch(self.start_date+" "+self.start_time),
               'ends'=>Util.datetime_to_epoch(self.end_date+" "+self.end_time),
               'location'=>self.location,
               'description'=>self.description,
-              'picture'=>[@file_s3_path],
+              'picture'=>[file_s3_path],
               'volunteerPositions'=>nil,
               'organizer'=>self.organizer,
               'organizerEmail'=>self.organizer_email,
-              'institutionId'=>26,#change to user institution
+              'institutionId'=>user['institutionId'],
               'created'=>Util.date_to_epoch(Time.now.strftime(I18n.t(:date_format_ruby))),
               'modified'=>Util.date_to_epoch(Time.now.strftime(I18n.t(:date_format_ruby)))
       }
       reqUrl = "/api/event/"
-      @rest_response = MwHttpRequest.http_post_request(reqUrl,event,user['email'],user['password'])
-      Rails.logger.debug "Response from server: #{@rest_response.code} #{@rest_response.message}: #{@rest_response.body}"
-      if @rest_response.code == "200" || @rest_response.code == "201" || @rest_response.code == "202"
-        return true, @rest_response
+      rest_response = MwHttpRequest.http_post_request(reqUrl,event_req,user['email'],user['password'])
+      Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
+      if rest_response.code == "200" || rest_response.code == "201" || rest_response.code == "202"
+      event = Event.rest_to_event(rest_response.body)
+      #Create Photo node for new news article
+        if event.picture.any?
+          Rails.logger.debug 'Create Photo node for new event: ' + event.id.to_s
+          photo = Photo.new(title:event.name,description:event.description, file:event.picture[0], owner_id:event.id, date:Time.now.strftime(I18n.t(:date_format_ruby)), previous_picture:"")
+          resp = photo.save_photo_node(user)
+          if !resp[0]
+            return true, event, false
+          end
+        end
+        return true, event, true
       else
-        return false, "#{@rest_response.code} #{@rest_response.message}"
+        return false, "#{rest_response.code} #{rest_response.message}"
       end
     else
       Rails.logger.debug self.errors.full_messages
@@ -73,35 +83,36 @@ include ActiveModel::Model
   def update_attributes(attributes={}, user)
     if self.valid?
       Rails.logger.debug "The event is valid!"
-      @picture = attributes[:picture]
-      if !@picture.blank?
-        @file_s3_path = Util.upload_image(@@images_directory,@picture)
+      picture = attributes[:picture]
+      if !picture.blank?
+        file_s3_path = Util.upload_image(@@images_directory,picture)
         if !attributes[:previous_picture].blank?
           Util.delete_image(attributes[:previous_picture])
         end
       else
-        @file_s3_path = self.picture
+        file_s3_path = self.picture
       end
-      event = {
+      event_req = {
               'name'=>attributes["name"],
               'starts'=>Util.datetime_to_epoch(attributes["start_date"]+" "+attributes["start_time"]),
               'ends'=>Util.datetime_to_epoch(attributes["end_date"]+" "+attributes["end_time"]),
               'location'=>attributes["location"],
               'description'=>attributes["description"],
-              'picture'=>[@file_s3_path],
+              'picture'=>[file_s3_path],
               'volunteerPositions'=>nil,
               'organizer'=>attributes["organizer"],
               'organizerEmail'=>attributes["organizer_email"],
-              'institutionId'=>26,#change to user institution,
+              'institutionId'=>user['institutionId'],
               'modified'=>Util.date_to_epoch(Time.now.strftime(I18n.t(:date_format_ruby)))
       }      
       reqUrl = "/api/event/#{self.id}"
-      @rest_response = MwHttpRequest.http_put_request(reqUrl,event,user['email'],user['password'])
-      Rails.logger.debug "Response from server: #{@rest_response.code} #{@rest_response.message}: #{@rest_response.body}"
-      if @rest_response.code == "200"
-        return true, @rest_response
+      rest_response = MwHttpRequest.http_put_request(reqUrl,event_req,user['email'],user['password'])
+      Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
+      if rest_response.code == "200"
+        event = Event.rest_to_event(rest_response.body)
+        return true, event
       else
-        return false, "#{@rest_response.code} #{@rest_response.message}"
+        return false, "#{rest_response.code} #{rest_response.message}"
       end
     else
       Rails.logger.debug self.errors.full_messages
@@ -116,83 +127,72 @@ include ActiveModel::Model
     end
     reqUrl = "/api/event/#{self.id}"
     puts reqUrl
-    @rest_response = MwHttpRequest.http_delete_request(reqUrl,user['email'],user['password'])
-    Rails.logger.debug "Response from server: #{@rest_response.code} #{@rest_response.message}: #{@rest_response.body}"
-    if @rest_response.code == "200"
-      return true, @rest_response
+    rest_response = MwHttpRequest.http_delete_request(reqUrl,user['email'],user['password'])
+    Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
+    if rest_response.code == "200"
+      return true, rest_response
     else
-      return false, "#{@rest_response.code} #{@rest_response.message}"
+      return false, "#{rest_response.code} #{rest_response.message}"
     end
   end
 
   def self.find(id,user)
     reqUrl = "/api/event/#{id}"
-    @rest_response = MwHttpRequest.http_get_request(reqUrl,user['email'],user['password'])
-    Rails.logger.debug "Response from server: #{@rest_response.code} #{@rest_response.message}: #{@rest_response.body}"
-    if @rest_response.code == '200'
-      @raw_event = JSON.parse(@rest_response.body)
-      if @raw_event["picture"].blank?
-        @picture = [  ]
-      else
-        @picture = @raw_event["picture"]
-      end
-      @event = Event.new(
-        id: @raw_event["eventId"], 
-        name: @raw_event["name"],
-        start_date: Util.epoch_to_date(@raw_event["starts"]),
-        end_date: Util.epoch_to_date(@raw_event["ends"]),
-        start_time: Util.epoch_get_time(@raw_event["starts"]),
-        end_time: Util.epoch_get_time(@raw_event["ends"]),
-        location: Location.new(name:@raw_event["location"],latitude: -37.7963,longitude: 144.9614),
-        description: @raw_event["description"], 
-        picture: @picture, 
-        volunteers:[],
-        #volunteers:[Volunteer.new(position_title: "Helper 11", description: "The first one that helps11"),Volunteer.new(position_title: "Helper 12", description: "The second one that helps12")]
-        organizer: @raw_event["organizer"],
-        organizer_email: @raw_event["organizerEmail"],
-        institution_id: @raw_event["institutionId"],
-        created: @raw_event["created"],
-        modified: @raw_event["modified"])
-      return true, @event
+    rest_response = MwHttpRequest.http_get_request(reqUrl,user['email'],user['password'])
+    Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
+    if rest_response.code == '200'
+      event = Event.rest_to_event(rest_response.body)
+      return true, event
     else
-      return false, "#{@rest_response.code} #{@rest_response.message}"
+      return false, "#{rest_response.code} #{rest_response.message}"
     end
   end
 
   def self.all(user, page)
-    @institutionId = user['institutionId']
-    @page = page != nil ? page : 0 
-    reqUrl = "/api/events/#{@institutionId}?page=#{@page}&pageSize=10"
-    @rest_response = MwHttpRequest.http_get_request(reqUrl,user['email'],user['password'])
-    Rails.logger.debug "Response from server: #{@rest_response.code} #{@rest_response.message}: #{@rest_response.body}"
-    if @rest_response.code == '200'
-      @raw_events_list = JSON.parse(@rest_response.body)
-      @total_events = @raw_events_list['totalEvents']
-      @total_pages = @raw_events_list['totalPages']
-      @events_list = Array.new
-      for event in @raw_events_list['events']
-        if event["picture"].blank?
-          @picture = Util.get_image_server+@@images_directory+'/generic_event.png'
-        else
-          @picture = event["picture"][0]
-        end
-        @events_list << Event.new(
-        id: event["eventId"], 
-        name: event["name"], 
-        start_date: event["starts"],
-        end_date: event["ends"],  
-        location: Location.new(name:event["location"],latitude: -37.7963,longitude: 144.9614),
-        description: event["description"],
-        picture: @picture,
-        organizer: event["organizer"],
-        organizer_email: event["organizerEmail"],
-        institution_id: event["institutionId"],
-        created: event["created"],
-        modified: event["modified"])
+    institutionId = user['institutionId']
+    page = page != nil ? page : 0 
+    reqUrl = "/api/events/#{institutionId}?page=#{page}&pageSize=10"
+    rest_response = MwHttpRequest.http_get_request(reqUrl,user['email'],user['password'])
+    Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
+    if rest_response.code == '200'
+      raw_events_list = JSON.parse(rest_response.body)
+      total_events = raw_events_list['totalEvents']
+      total_pages = raw_events_list['totalPages']
+      events_list = Array.new
+      for raw_event in raw_events_list['events']
+        events_list << event = Event.rest_to_event(raw_event.to_json)
       end
-      return true, @events_list, @total_events, @total_pages
+      return true, events_list, total_events, total_pages
     else
-      return false, "#{@rest_response.code}", "#{@rest_response.message}"
+      return false, "#{rest_response.code}", "#{rest_response.message}"
     end
+  end
+
+  private
+  def self.rest_to_event(rest_body)
+    raw_event = JSON.parse(rest_body)
+    if raw_event["picture"].blank?
+      picture = [  ]
+    else
+      picture = raw_event["picture"]
+      end
+      event = Event.new(
+        id: raw_event["eventId"], 
+        name: raw_event["name"],
+        start_date: Util.epoch_to_date(raw_event["starts"]),
+        end_date: Util.epoch_to_date(raw_event["ends"]),
+        start_time: Util.epoch_get_time(raw_event["starts"]),
+        end_time: Util.epoch_get_time(raw_event["ends"]),
+        location: Location.new(name:raw_event["location"],latitude: -37.7963,longitude: 144.9614),
+        description: raw_event["description"], 
+        picture: picture, 
+        volunteers:[],
+        #volunteers:[Volunteer.new(position_title: "Helper 11", description: "The first one that helps11"),Volunteer.new(position_title: "Helper 12", description: "The second one that helps12")]
+        organizer: raw_event["organizer"],
+        organizer_email: raw_event["organizerEmail"],
+        institution_id: raw_event["institutionId"],
+        created: Util.epoch_to_date(raw_event["created"]),
+        modified: Util.epoch_to_date(raw_event["modified"])) 
+      return event    
   end
 end

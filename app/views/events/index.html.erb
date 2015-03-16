@@ -14,7 +14,7 @@
   <% @events_list.each do |event| %>
   <div class="event_item">
     <div class="item_image">
-        <%= image_tag event.picture, class: "event_image_thumbnail", alt: t(:picture) %>
+        <%= image_tag event.picture.blank? ? '' : event.picture[0], class: "event_image_thumbnail", alt: t(:picture) %>
     </div>
     <div class="item_controls">
       <%= link_to t(:edit).capitalize, edit_event_path(:id => event.id), :class => 'edit_link' %> 
@@ -23,8 +23,8 @@
     <div>
     <h3><%=event.name%></h3>
     <h4>@ <%=event.location.name%></h4>
-    <h4><%=t(:start_date).capitalize+": "+epoch_to_datetime(event.start_date)%>. <%=t(:end_date).capitalize+": "+epoch_to_datetime(event.end_date)%></h4>
-    <h4><%= t(:created_by).capitalize+" "+event.organizer + ' ' + t(:the)+ ' ' + epoch_to_date(event.created)%></h4>
+    <h4><%=t(:start_date).capitalize+": "+event.start_date%>. <%=t(:end_date).capitalize+": "+event.end_date%></h4>
+    <h4><%= t(:created_by).capitalize+" "+event.organizer + ' ' + t(:the)+ ' ' + event.created%></h4>
     </div>
   </div>
   <!--hr-->

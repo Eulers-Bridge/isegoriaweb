@@ -5,7 +5,7 @@ class PhotosController < ApplicationController
   def index
     @page_aux = params[:page]
     @page = @page_aux =~ /\A\d+\z/ ? @page_aux.to_i : 0 
-    resp = Photo.all(session[:user],@page,'7849')
+    resp = Photo.all(session[:user],@page,session[:user]['id'])
     if resp[0]
       @photos_list = resp[1]
       @total_pages = resp[3].to_i
@@ -23,8 +23,8 @@ class PhotosController < ApplicationController
 
   def create
     @photo = Photo.new(photo_params)
-    @photo.owner_id = session[:user]['nodeId']
-    resp = @photo.save(session[:user])
+    @photo.owner_id = session[:user]['id']
+    resp = @photo.save(session[:user],nil)
     if resp[0]
       flash[:success] = t(:photo_creation_success_flash, article: @photo.title)
       redirect_to photos_path
@@ -56,7 +56,7 @@ class PhotosController < ApplicationController
       flash[:danger] = t(:photo_get_error_flash)
     redirect_to photos_path
     end
-    resp2 = @photo.update_attributes(photo_params,session[:user])
+    resp2 = @photo.update_attributes(photo_params,session[:user],nil)
     if resp2[0]
       flash[:success] = t(:photo_modification_success_flash, photo: @photo.title)
       redirect_to photos_path
@@ -88,6 +88,6 @@ class PhotosController < ApplicationController
 
   private
     def photo_params
-      params.require(:photo).permit(:title, :description, :file, :owner_id, :date)
+      params.require(:photo).permit(:title, :description, :file, :owner_id, :date, :previous_picture)
     end
 end

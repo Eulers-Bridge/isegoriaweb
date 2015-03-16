@@ -16,12 +16,17 @@
     <%= f.hidden_field :answers, id: "hdd_options"%>
   </div>
   <div class="form-group">
-    <%= f.label :date, capitalize_as_title(t (:date)) %>
-    <%= f.text_field :date, class: "form-control", id: "dpk_poll_date", placeholder: t(:field_placeholder, field_name: t(:date)).capitalize%>
+    <label for="poll_start_date"><%=capitalize_as_title(t(:start_date))%></label>
+    <div class="input-group date" id="dpk_poll_date" >
+      <input type="text" readonly="true" class="form-control" placeholder="<%=t(:field_placeholder, field_name: t(:start_date)).capitalize%>" name="poll[start_date]">
+      <span class="input-group-addon">
+        <i class="glyphicon glyphicon-th"></i>
+      </span>
+    </div>
   </div>
-   <div class="form-group">
-    <%= f.label :picture, capitalize_as_title(t (:picture)) %>
-    <%= f.file_field :picture, accept: "image/png,image/gif,image/jpeg", class: 'file_input', placeholder: t(:field_placeholder, field_name: t(:picture)).capitalize %>
+  <div class="form-group">
+    <%= f.label :duration, capitalize_as_title(t (:duration))+" ("+t(:minutes)+")" %>
+    <%= f.text_field :duration, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:duration)).capitalize%>
   </div>
   <% end %>
   <div hidden="true">
@@ -35,6 +40,7 @@
 <script type="text/javascript">
   $("#dpk_poll_date").datepicker({
     format: '<%=t(:date_format_javascript)%>',
-    todayBtn: 'linked'
+    todayBtn: 'linked',
+    autoclose: true
   });
 </script>

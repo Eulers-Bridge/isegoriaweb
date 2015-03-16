@@ -2,6 +2,7 @@ class ArticlesController < ApplicationController
 
 	#Set the default layout for this controller, the views from this controller are available when the user is looged in
   	layout 'application'
+  	@@images_directory = "UniversityOfMelbourne/NewsArticles"
   	#check_session
 
 	def index
@@ -38,6 +39,10 @@ class ArticlesController < ApplicationController
 	  @article.creator_email = session[:user]['email']
 	  resp = @article.save(session[:user])
 	  if resp[0]
+	  	@article = resp[1]
+	  	if !resp[2]
+	      flash[:warning] = t(:article_photo_creation_error_flash)
+	  	end
 	  	flash[:success] = t(:article_creation_success_flash, article: @article.title)
 	    redirect_to articles_path
 	  elsif validate_authorized_access(resp[1])

@@ -13,7 +13,7 @@
   <div class="form-group">
     <label for="photo_date"><%=capitalize_as_title(t(:date))%></label>
     <div class="input-group date" id="dpk_date" >
-      <input type="text" readonly="true" class="form-control" placeholder="Enter date" name="photo[date]">
+      <input type="text" readonly="true" class="form-control" placeholder="<%=t(:field_placeholder, field_name: t(:date)).capitalize%>" name="photo[date]">
       <span class="input-group-addon">
         <i class="glyphicon glyphicon-th"></i>
       </span>

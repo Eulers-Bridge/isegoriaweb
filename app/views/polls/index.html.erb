@@ -1,14 +1,29 @@
-<%= link_to t(:create).capitalize, new_poll_path, :class => 'btn btn-success' %> 
-<% @polls_list.each do |poll| %>
-<div class="panel panel-info">
-  <div class="panel-heading">
-    <h3 class="panel-title"><%=poll.date%></h3>
-  </div>
-  <div class="panel-body">
-      <p><%=poll.question%></p>
-  </div>
-  <div class="panel-footer">
-    <%= link_to t(:edit).capitalize, edit_poll_path(:id => poll.id), :class => 'btn btn-info' %> <%= button_to t(:delete).capitalize, poll_path(:id => poll.id), method: :delete, :class => 'btn btn-danger' %>
+<div class="section_controls">
+  <%= link_to t(:create).capitalize, new_poll_path, :class => 'create_link' %> 
+  <div class="pagination_controls">
+    <% if @previous_page >=0 %>
+      <%= link_to "<< ", photos_path(:page =>@previous_page), :class => 'nav_control' %> 
+    <%end%>
+    <%=(@page+1)%>
+    <% if @next_page >=0 %>
+      <%= link_to " >>", photos_path(:page =>@next_page), :class => 'nav_control' %> 
+    <%end%> 
   </div>
 </div>
-<% end %>
+
+<div id="photos_list">
+  <% @polls_list.each do |poll| %>
+    <div class="poll_item">
+      <div class="item_controls">
+        <%= link_to t(:edit).capitalize, edit_poll_path(:id => poll.id), :class => 'edit_link' %> 
+        <%= link_to t(:delete).capitalize, poll_path(:id => poll.id), method: :delete, :class => 'delete_link' %>
+      </div>
+      <div>
+        <h3><%=poll.question%></h3>
+        <h4><%= t(:start_date).capitalize+" "+poll.start_date%></h4>
+        <h4><%= t(:duration).capitalize+" "+poll.duration.to_s+" "+t(:minutes)%></h4>
+      </div>
+    </div>
+  <% end %>
+</div>
+<%= javascript_include_tag "photos_util" %>

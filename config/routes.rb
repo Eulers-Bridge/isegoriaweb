@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  #owl carousel test
-  #get 'design/landing', :to => redirect('design_test/landing.html')
-  
   get 'users/new', to: 'home#signup'
   post 'users/change_access'
 
