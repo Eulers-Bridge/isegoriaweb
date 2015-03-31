@@ -5,7 +5,7 @@ class PollsController < ApplicationController
 
 =begin
 --------------------------------------------------------------------------------------------------------------------------------
-  Function to retrieve and list all the polls from the model
+  Function to retrieve and list all the polls from the model by institution
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def index
@@ -43,7 +43,7 @@ class PollsController < ApplicationController
     @poll.creator_id = session[:user]['id'] #Set the logged user as creator
     response = @poll.save(session[:user]) #Save the new Poll object
     if response[0] #Validate if the response was successfull
-      flash[:success] = t(:poll_creation_success_flash, article: @poll.question) #Set the success message for the user
+      flash[:success] = t(:poll_creation_success_flash, poll: @poll.question) #Set the success message for the user
       redirect_to polls_path #Redirect the user to the polls list page
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
         if(response[1].kind_of?(Array)) #If the response was unsucessful, validate if it was caused by an invalid Poll object sent to the model. If so the server would have returned an array with the errors
@@ -89,7 +89,6 @@ class PollsController < ApplicationController
       redirect_to polls_path #Redirect the user to the polls list page
     elsif validate_authorized_access(response2[1])#If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       if(response2[1].kind_of?(Array))#If the response was unsucessful, validate if it was caused by an invalid Poll object sent to the model. If so the server would have returned an array with the errors
-        Rails.logger.debug "***************hay erroressss!!!"
         flash[:warning] = Util.format_validation_errors(response2[1]) #Set the invalid object message for the user
       end
         flash[:danger] = t(:poll_modification_error_flash) #Set the error message for the user

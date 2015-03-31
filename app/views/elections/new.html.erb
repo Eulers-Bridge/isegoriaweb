@@ -8,91 +8,71 @@
     <%= f.text_field :title, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:title)).capitalize %>
   </div>
   <div class="form-group">
-    <%= f.label :description, capitalize_as_title(t (:description)) %>
-    <%= f.text_area :description, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:description)).capitalize %>
+    <%= f.label :introduction, capitalize_as_title(t (:introduction)) %>
+    <%= f.text_field :introduction, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:introduction)).capitalize %>
   </div>
-   <div class="form-group">
-    <%= f.label :process_image, capitalize_as_title(t (:process)) %>
-    <%= f.file_field :process_image, accept: "image/png,image/gif,image/jpeg" ,class: 'file_input', placeholder: t(:field_placeholder, field_name: t(:process)).capitalize %>
+  <div class="form-group">
+    <%= f.label :process, capitalize_as_title(t (:process)) %>
+    <%= f.text_field :process, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:process)).capitalize %>
   </div>
-  <%= f.hidden_field :positions, id: "hdd_positions"%>
-  <% end %>
-  <hr>
-  <h2><%=t(:position).capitalize%></h2>
-  <div class="form-group" id="divPosition">
-    <label for="position_title"><%=t(:title).capitalize%></label>
-    <input id ="positions_title" type="text" class="form-control" placeholder="<%= t(:field_placeholder, field_name: t(:title)).capitalize%>" />
-    <label for="positions_description"><%=t(:description).capitalize%></label>
-    <textarea id="positions_description" class="form-control" placeholder="<%=t(:field_placeholder, field_name: t(:description)).capitalize%>" > </textarea>
-    <input type="button" class="btn btn-large btn-info" value=<%=t(:add).capitalize%> id="btn_add_position"/>
-  </div>
-  <div id="positions_list">
-    <div class="panel panel-info" hidden="true" id="position_list_item">
-      <div class="panel-body">
-        <p><label id="lbl_position_title"></label></p>
-        <p><label id="lbl_position_description"></label></p>
-      </div>
-      <div class="panel-footer">
-      <input type="button" class="btn btn-xs btn-danger" value=<%=t(:remove).capitalize%> id="btn_remove_position"/> 
-      <input type="hidden" id="hdd_position_index" class="hdd_position_index"/>
-      </div>
+  <div class="form-group">
+    <label for="election_start_date"><%=capitalize_as_title(t(:start_date))%></label>
+    <div class="input-group date" id="dpk_start_date" >
+      <input type="text" readonly="true" class="form-control" placeholder="<%=t(:field_placeholder, field_name: t(:start_date)).capitalize%>" name="election[start_date]">
+      <span class="input-group-addon">
+        <i class="glyphicon glyphicon-th"></i>
+      </span>
     </div>
   </div>
+  <div class="form-group">
+    <label for="election_end_date"><%=capitalize_as_title(t(:end_date))%></label>
+    <div class="input-group date" id="dpk_end_date" >
+      <input type="text" readonly="true" class="form-control" placeholder="<%=t(:field_placeholder, field_name: t(:end_date)).capitalize%>" name="election[end_date]">
+      <span class="input-group-addon">
+        <i class="glyphicon glyphicon-th"></i>
+      </span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="election_start_voting_date"><%=capitalize_as_title(t(:start_voting_date))%></label>
+    <div class="input-group date" id="dpk_start_voting_date" >
+      <input type="text" readonly="true" class="form-control" placeholder="<%=t(:field_placeholder, field_name: t(:start_voting_date)).capitalize%>" name="election[start_voting_date]">
+      <span class="input-group-addon">
+        <i class="glyphicon glyphicon-th"></i>
+      </span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="election_end_voting_date"><%=capitalize_as_title(t(:end_voting_date))%></label>
+    <div class="input-group date" id="dpk_end_voting_date" >
+      <input type="text" readonly="true" class="form-control" placeholder="<%=t(:field_placeholder, field_name: t(:end_voting_date)).capitalize%>" name="election[end_voting_date]">
+      <span class="input-group-addon">
+        <i class="glyphicon glyphicon-th"></i>
+      </span>
+    </div>
+  </div>
+  <% end %>
 </div>
-<script>
-$("#btn_add_position").click(function(){
-
-  var positions = [];
-
-  try {
-    positions = $.parseJSON($("#hdd_positions").val());
-  } catch (e) {
-    if($("#hdd_positions").val()!="")
-    {
-      console.error("Parsing error:", e);
-      return;
-    }
-  }
-  
-  positions.push({id:"", title:$("#positions_title").val(),description:$("#positions_description").val()});
-  $("#hdd_positions").val(JSON.stringify(positions));
-
-
-  $("#lbl_position_title").text("<%=t(:title).capitalize%>: " + $("#positions_title").val());
-  $("#lbl_position_description").text("<%=t(:description).capitalize%>: " + $("#positions_description").val());
-  $element = $("#position_list_item").clone().removeAttr("hidden").removeAttr("id");
-  $element.find("#lbl_position_title").removeAttr("id");
-  $element.find("#hdd_position_index").val(positions.length -1);
-  $element.find("#btn_remove_position").bind("click",function(event){
-  
-    var positions = [];
-    var index;
-
-    try {
-      positions = $.parseJSON($("#hdd_positions").val());
-      index = parseInt($(event.target).closest(".panel-footer").find("#hdd_position_index").val());
-
-      if(isNaN(index))
-        throw new error("index is not a valid integer");
-    } catch (e) {
-        console.error("Parsing error:", e);
-        return;
-    }
-    
-      positions.splice(index, 1);
-      $("#hdd_positions").val(JSON.stringify(positions));    
-    
-    $(event.target).parents(".panel").remove();
-
-    $(".hdd_position_index").each(function(){
-        aux_index = parseInt($(this).val());
-          if(aux_index > index)
-          $(this).val(aux_index-1);
-        });
+<%= javascript_include_tag "elections_util" %>
+<script type="text/javascript">
+  $("#dpk_start_date").datepicker({
+    format: '<%=t(:date_format_javascript)%>',
+    todayBtn: 'linked',
+    autoclose: true
   });
-
-  $("#positions_list").append($element);
-  $("#positions_title").val("");
-  $("#positions_description").val("");
-});
+  $("#dpk_end_date").datepicker({
+    format: '<%=t(:date_format_javascript)%>',
+    todayBtn: 'linked',
+    autoclose: true
+  });
+  $("#dpk_start_voting_date").datepicker({
+    format: '<%=t(:date_format_javascript)%>',
+    todayBtn: 'linked',
+    autoclose: true
+  });
+  $("#dpk_end_voting_date").datepicker({
+    format: '<%=t(:date_format_javascript)%>',
+    todayBtn: 'linked',
+    autoclose: true
+  });
 </script>

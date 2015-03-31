@@ -9,8 +9,7 @@ Rails.application.routes.draw do
   match '/login', to: 'sessions#create',     via: 'post'
   resources :sessions, only: [:create, :destroy]
   
-  get 'elections/verify_existence'
-  resources :elections, only: [:create, :update, :destroy, :new, :edit]
+  resources :elections, only: [:create, :update, :destroy, :new, :edit, :index]
   resources :events, only: [:create, :update, :destroy, :new, :edit, :index]
   resources :photos, only: [:create, :update, :destroy, :new, :edit, :index]
   resources :articles, only: [:create, :update, :destroy, :new, :edit, :index]

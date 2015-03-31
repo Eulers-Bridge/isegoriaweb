@@ -49,7 +49,7 @@ class Poll
                 'start'=> Util.date_to_epoch(self.start_date), #Turn the start_date to epoch
                 'duration'=> self.duration.to_i*60000, #Turn minutes to milliseconds
                 'ownerId'=> self.owner_id,
-                'creatorId'=> self.creator_id,
+                'creatorId'=> self.creator_id
                 }
       reqUrl = "/api/poll/" #Set the request url
       rest_response = MwHttpRequest.http_post_request(reqUrl,poll_req,user['email'],user['password']) #Make the POST call to the server with the required parameters
