@@ -1,0 +1,32 @@
+<div class="section_controls">
+  <%= link_to t(:create).capitalize, new_election_path, :class => 'create_link' %> 
+  <div class="pagination_controls">
+    <% if @previous_page >=0 %>
+      <%= link_to "<< ", elections_path(:page =>@previous_page), :class => 'nav_control' %> 
+    <%end%>
+    <%=(@page+1)%>
+    <% if @next_page >=0 %>
+      <%= link_to " >>", elections_path(:page =>@next_page), :class => 'nav_control' %> 
+    <%end%> 
+  </div>
+</div>
+
+<div id="elections_list">
+  <% @elections_list.each do |election| %>
+    <div class="election_item">
+      <div class="item_controls">
+        <%= link_to t(:edit).capitalize, edit_election_path(:id => election.id), :class => 'edit_link' %> 
+        <%= link_to t(:delete).capitalize, election_path(:id => election.id), method: :delete, :class => 'delete_link' %>
+      </div>
+      <div>
+        <h3><%=election.title%></h3>
+        <h4><%= t(:start_date).capitalize+" "+election.start_date%></h4>
+        <h4><%= t(:end_date).capitalize+" "+election.end_date%></h4>
+        <h4><%= t(:start_voting_date).capitalize+" "+election.start_voting_date%></h4>
+        <h4><%= t(:end_voting_date).capitalize+" "+election.end_voting_date%></h4>
+        <h4><%= t(:introduction).capitalize+" "+election.introduction%></h4>
+      </div>
+    </div>
+  <% end %>
+</div>
+<%= javascript_include_tag "elections_util" %>
