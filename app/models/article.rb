@@ -11,8 +11,12 @@ class Article
   validates :content, :presence => { :message => ApplicationHelper.validation_error(:content, :presence, nil) }
   validates :creator_email, :presence => { :message => ApplicationHelper.validation_error(:creator_email, :presence, nil) }
   validates :date, :presence => { :message => ApplicationHelper.validation_error(:date, :presence, nil) }
-  #validates :student_year, :presence => { :message => ApplicationHelper.validation_error(:student_year, :presence, nil) }
-
+  
+=begin
+--------------------------------------------------------------------------------------------------------------------
+  Article object constructor
+--------------------------------------------------------------------------------------------------------------------
+=end
   def initialize (attributes = {})
     @id = attributes[:id]
     @title = attributes[:title]
@@ -28,11 +32,20 @@ class Article
     end
   end
 
-  #Function to save an article
-  #Returns saveStatus,savedArticle/ServerResponse,photoNodeSaveStatus
+=begin
+--------------------------------------------------------------------------------------------------------------------
+  Function to create a new Article
+  Param 1: logged user object
+  Return if successful: 1.execution result(true), 
+                        2.created election object
+  Return if unsuccessful: 1.execution result(false), 
+                          2.response code from the server, or array of validation errors
+                          3.response message from the server
+--------------------------------------------------------------------------------------------------------------------
+=end
   def save (user)
     Rails.logger.debug "Call to article.save"
-    if self.valid?
+    if self.valid? #Validate if the Article object is valid
       Rails.logger.debug "The news article is valid!"
       picture = self.picture
       if !picture.blank?
@@ -40,6 +53,7 @@ class Article
       else
         file_s3_path = nil
       end
+      #Create a raw article object
       article = {'title'=>self.title,
                 'content'=>self.content,
                 'picture'=>[file_s3_path],
@@ -47,11 +61,11 @@ class Article
                 'creatorEmail'=> self.creator_email,
                 'institutionId'=> user['institutionId']          
                 }      
-      reqUrl = "/api/newsArticle/"
-      rest_response = MwHttpRequest.http_post_request(reqUrl,article,user['email'],user['password'])
+      reqUrl = "/api/newsArticle/" #Set the request url
+      rest_response = MwHttpRequest.http_post_request(reqUrl,article,user['email'],user['password']) #Make the POST call to the server with the required parameters
       Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
-      if rest_response.code == "200" || rest_response.code == "201" || rest_response.code == "202"
-        article = Article.rest_to_article(rest_response.body)
+      if rest_response.code == "200" || rest_response.code == "201" || rest_response.code == "202" #Validate if the response from the server is satisfactory
+        article = Article.rest_to_article(rest_response.body) #Turn the response object to an Article object
         #Create Photo node for new news article
         if article.picture.any?
           Rails.logger.debug 'Create Photo node for new news article: ' + article.id.to_s
@@ -101,7 +115,7 @@ class Article
       end
       article = {'title'=>attributes[:title],
                 'content'=>attributes[:content],
-                'picture'=>[file_s3_path],
+                'photos'=>[file_s3_path],
                 'date'=>Util.date_to_epoch(attributes[:date]),
                 'creatorEmail'=>self.creator_email,
                 'institutionId'=>user['institutionId']          
@@ -156,37 +170,21 @@ class Article
     end
   end
 
-  def self.like(id,user)
-    Rails.logger.debug "Call to article.like"
-    reqUrl = "/api/newsArticle/#{id}/likedBy/"+user['email']+"/"
-    rest_response = MwHttpRequest.http_put_request_simple(reqUrl,user['email'],user['password'])
-    Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
-    if rest_response.code == '200'
-      return true
-    else
-      return false, "#{rest_response.code} #{rest_response.message}"
-    end
-  end
-
-  def self.unlike(id,user)
-    Rails.logger.debug "Call to article.unlike"
-    reqUrl = "/api/newsArticle/#{id}/unlikedBy/"+user['email']+"/"
-    rest_response = MwHttpRequest.http_put_request_simple(reqUrl,user['email'],user['password'])
-    Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
-    if rest_response.code == '200'
-      return true
-    else
-      return false, "#{rest_response.code} #{rest_response.message}"
-    end
-  end
-  
-  private
+=begin
+--------------------------------------------------------------------------------------------------------------------
+  Function to transform the raw object received from the middleware to an Article object
+  Param 1: Raw object
+  Return 1: Transformed Article object
+--------------------------------------------------------------------------------------------------------------------
+=end
+private
   def self.rest_to_article(rest_body)
-    raw_article = JSON.parse(rest_body)
-      if raw_article["picture"].blank?
+    raw_article = JSON.parse(rest_body) #Turn the object to JSON to be able to manipulate it
+      if raw_article["photos"].blank?
         picture = []
       else
-        picture = raw_article["picture"]
+        raw_pictures = raw_article["photos"]
+        picture=JSON.parse(raw_pictures.to_json)
       end
       article = Article.new(
         id: raw_article["articleId"], 
@@ -194,8 +192,8 @@ class Article
         content: raw_article["content"], 
         picture: picture, 
         creator_email:raw_article["creatorEmail"], 
-        date: Util.epoch_to_date(raw_article["date"]),
+        date: Util.epoch_to_date(raw_article["date"]),#Turn the epoch time to a string date, format defined by the locale parameter
         _links: raw_article["_links"])  
-      return article    
+      return article #Return the transformed object  
   end
 end

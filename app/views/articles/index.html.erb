@@ -14,7 +14,7 @@
   <% @articles_list.each do |article| %>
   <div class="article_item">
     <div class="item_image">
-        <%= image_tag article.picture.blank? ? GENERIC_ARTICLE_IMAGE : article.picture[0], class: "article_image_thumbnail", alt: t(:picture) %>
+        <%= image_tag article.picture.blank? ? GENERIC_ARTICLE_IMAGE : article.picture[0]["url"], class: "article_image_thumbnail", alt: t(:picture) %>
     </div>
     <div class="item_controls">
       <%= link_to t(:edit).capitalize, edit_article_path(:id => article.id), :class => 'edit_link' %> 

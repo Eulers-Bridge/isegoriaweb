@@ -13,6 +13,11 @@ include ActiveModel::Model
   validates :picture, :presence => { :message => ApplicationHelper.validation_error(:picture, :presence, nil) }
   validates :organizer, :presence => { :message => ApplicationHelper.validation_error(:organizer, :presence, nil) }
 
+=begin
+--------------------------------------------------------------------------------------------------------------------
+  Event object constructor
+--------------------------------------------------------------------------------------------------------------------
+=end
   def initialize (attributes = {})
     @id = attributes[:id]
     @name = attributes[:name]
@@ -171,10 +176,11 @@ include ActiveModel::Model
   private
   def self.rest_to_event(rest_body)
     raw_event = JSON.parse(rest_body)
-    if raw_event["picture"].blank?
-      picture = [  ]
-    else
-      picture = raw_event["picture"]
+      if raw_event["photos"].blank?
+        picture = []
+      else
+        raw_pictures = raw_event["photos"]
+        picture=JSON.parse(raw_pictures.to_json)
       end
       event = Event.new(
         id: raw_event["eventId"], 

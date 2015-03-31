@@ -14,7 +14,7 @@
   <% @events_list.each do |event| %>
   <div class="event_item">
     <div class="item_image">
-        <%= image_tag event.picture.blank? ? '' : event.picture[0], class: "event_image_thumbnail", alt: t(:picture) %>
+        <%= image_tag event.picture.blank? ? '' : event.picture[0]["url"], class: "event_image_thumbnail", alt: t(:picture) %>
     </div>
     <div class="item_controls">
       <%= link_to t(:edit).capitalize, edit_event_path(:id => event.id), :class => 'edit_link' %> 
