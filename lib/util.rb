@@ -72,7 +72,8 @@ module Util
       end 
 
       #upload the file
-      image_object = isegoria_bucket.objects.create(@path, file)
+      cache_time_seconds = 2419200 #Time for which the image will remain cached
+      image_object = isegoria_bucket.objects.create(@path, file, :cache_control => "max-age=#{cache_time_seconds}")
       image_object.acl = :public_read
       return get_image_server+@path
 	end
@@ -93,6 +94,17 @@ module Util
       end
 	  #File.delete(path_to_file) if File.exist?(path_to_file)
 	end
+
+  #Function to delete an images folder
+  def self.delete_image_folder(path_to_folder,folder_id)
+
+    #Use the Amazon Web Server API to upload images
+    require 'aws-sdk'
+    #AWS.config(access_key_id: '...', secret_access_key: '...', region: 'us-west-2')
+    s3 = AWS::S3.new(:access_key_id => 'AKIAJ7CSCKRSDNOK24IQ',:secret_access_key => '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')
+    isegoria_bucket = s3.buckets['isegoria']# no request made
+    isegoria_bucket.objects.with_prefix(path_to_folder+"/"+folder_id).delete_all
+  end
 
 	#Function to retrieve the Institutions Catalog
 	def self.get_institutions_catalog
