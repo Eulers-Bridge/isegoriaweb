@@ -5,7 +5,7 @@ class PhotosController < ApplicationController
   def index
     @page_aux = params[:page]
     @page = @page_aux =~ /\A\d+\z/ ? @page_aux.to_i : 0 
-    resp = Photo.all(session[:user],@page,session[:user]['id'])
+    resp = Photo.all(session[:user],@page)
     if resp[0]
       @photos_list = resp[1]
       @total_pages = resp[3].to_i

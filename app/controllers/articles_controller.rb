@@ -76,6 +76,44 @@ class ArticlesController < ApplicationController
 	  end
 	end
 
+	def upload_picture
+	  resp = Article.find(params[:id],session[:user])
+	  if resp[0]
+		@article = resp[1]
+	  elsif validate_authorized_access(resp[1])
+	    flash[:danger] = t(:article_get_error_flash)
+		redirect_to :back
+	  end
+	  resp2 = @article.upload_picture(article_params,session[:user])
+	  if resp2[0]
+	  	flash[:success] = t(:picture_uploading_success_flash, article: @article.title)
+	    redirect_to :back
+	  elsif validate_authorized_access(resp[1])
+	  	if(resp[1].kind_of?(Array))
+          flash[:warning] = Util.format_validation_errors(resp[1])
+        end
+        flash[:danger] = t(:picture_uploading_error_flash)
+      	redirect_to :back
+	  end
+	end
+
+	def delete_picture
+	  resp = Photo.find(params[:id],session[:user])
+      if resp[0]
+      photo = resp[1]
+      elsif validate_authorized_access(resp[1])
+        flash[:danger] = t(:photo_get_error_flash)
+        redirect_to :back
+      end
+      resp2 = photo.delete(session[:user])
+      if resp2[0]
+        flash[:success] = t(:picture_deletion_success_flash, photo: photo.title)
+      elsif validate_authorized_access(resp[1])
+        flash[:danger] = t(:picture_deletion_error_flash)
+      end
+      redirect_to :back
+	end
+
 	def destroy
 	  resp = Article.find(params[:id],session[:user])
 	  if resp[0]
@@ -91,26 +129,6 @@ class ArticlesController < ApplicationController
         flash[:danger] = t(:article_deletion_error_flash)
       end
       redirect_to articles_path
-	end
-
-	def like
-	  resp = Article.like(params[:id],session[:user])
-	  if resp
-		flash[:success] = t(:article_like_success_flash)
-	  elsif validate_authorized_access(resp[1])
-	    flash[:danger] = t(:article_like_error_flash)
-	  end
-	  redirect_to articles_path
-	end
-
-	def unlike
-      resp = Article.unlike(params[:id],session[:user])
-	  if resp
-		flash[:success] = t(:article_unlike_success_flash)
-	  elsif validate_authorized_access(resp[1])
-	    flash[:danger] = t(:article_unlike_error_flash)
-	  end
-	  redirect_to articles_path
 	end
 
 	private

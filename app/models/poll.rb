@@ -58,7 +58,7 @@ class Poll
         poll = Poll.rest_to_poll(rest_response.body) #Turn the response object to a Poll object
         return true, poll #Return success
       else
-        return false, "#{rest_response.code} #{rest_response.message}" #Return error
+        return false, "#{rest_response.code}", "#{rest_response.message}" #Return error
       end
     else
       Rails.logger.debug self.errors.full_messages
@@ -71,7 +71,7 @@ class Poll
   Function to delete a Poll
   Param 1: logged user object
   Return if successful: 1.execution result(true), 
-                        2.created poll object
+                        2.response from the server
   Return if unsuccessful: 1.execution result(false), 
                           2.response code from the server, or array of validation errors
                           3.response message from the server
@@ -85,7 +85,7 @@ class Poll
     if rest_response.code == "200" #Validate if the response from the server is 200, which means OK
       return true, rest_response #Return success
     else
-      return false, "#{rest_response.code} #{rest_response.message}" #Return error
+      return false, "#{rest_response.code}", "#{rest_response.message}" #Return error
     end
   end
 
@@ -121,7 +121,7 @@ class Poll
         poll = Poll.rest_to_poll(rest_response.body)
         return true, poll #Return success
       else
-        return false, "#{rest_response.code} #{rest_response.message}" #Return error
+        return false, "#{rest_response.code}", "#{rest_response.message}" #Return error
       end
     else
       Rails.logger.debug self.errors.full_messages
@@ -131,7 +131,7 @@ class Poll
 
 =begin
 --------------------------------------------------------------------------------------------------------------------
-  Function to retrieve a polls by its id
+  Function to retrieve a poll by its id
   Param 1: poll id
   Param 2: logged user object
   Return if successful: 1.execution result(true), 
@@ -151,21 +151,8 @@ class Poll
       poll = Poll.rest_to_poll(rest_response.body) #Turn the response object to a Poll object
       return true, poll #Return success
     else
-      return false, "#{rest_response.code} #{rest_response.message}" #Return error
+      return false, "#{rest_response.code}", "#{rest_response.message}" #Return error
     end
-
-=begin
-    if id =='1'
-      poll = Poll.new(id: 1, question: "Who will win the FIFA World Cup?", start_date:"31/05/2014", answers: ["Brasil","Germany","Ecuador"], duration: 360, owner_id:'42', creator_id:'42') 
-    elsif id == '2'
-      poll = Poll.new(id: 2, question: "Who will win Wimbledon?", start_date:"01/06/2014", answers: ["Novak Djokovik","Roger Federer","Rafael Nadal"], duration: 600, owner_id:'42', creator_id:'42')
-    elsif id == '3'
-      poll = Poll.new(id: 3, question: "Which was first, the hen or the egg?", start_date:"02/06/2014", answers: ["The hen","The egg","Neither"], duration: 480, owner_id:'42', creator_id:'42')
-    else
-      poll = nil
-    end
-    return true, poll 
-=end
   end
 
 =begin
@@ -191,26 +178,18 @@ class Poll
     rest_response = MwHttpRequest.http_get_request(reqUrl,user['email'],user['password']) #Make the GET request to the Middleware server
     Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
     if rest_response.code == '200' #Validate if the response from the server is 200, which means OK
-      raw_polls_list = JSON.parse(rest_response.body) #Get the polls info from the response and normalize it to JSON to handle it
+      raw_polls_list = JSON.parse(rest_response.body) #Get the polls info from the response and normalize it to an array to handle it
       total_polls = raw_polls_list['totalPolls'] #Retrieve the total polls number for pagination
       total_pages = raw_polls_list['totalPages'] #Retrieve the total number of pages for pagination
       pollsList = Array.new #Initialize an empty array for the polls
       for raw_poll in raw_polls_list['polls'] #For each poll received from the server
-        poll = Poll.rest_to_poll(raw_poll.to_json) #Turn a poll in json format to a poll object
+        poll = Poll.rest_to_poll(raw_poll.to_json) #Turn a poll to json format
         pollsList << poll #Add it to the polls array
       end
       return true, pollsList, total_polls, total_pages #Return success
     else
       return false, "#{rest_response.code}", "#{rest_response.message}" #Return error
     end
-
-=begin     
-    pollsList = [Poll.new(id: 1, question: "Who will win the FIFA World Cup?", date:"31/05/2014", answers: ["Brasil","Germany","Ecuador"], duration: 360, owner_id:'42', creator_id:'42'), 
-     Poll.new(id: 2, question: "Who will win Wimbledon?", date:"01/06/2014", answers: ["Novak Djokovik","Roger Federer","Rafael Nadal"], duration: 600, owner_id:'42', creator_id:'42'),
-     Poll.new(id: 3, question: "Which was first, the hen or the egg?", date:"02/06/2014", answers: ["The hen","The egg","Neither"], duration: 480, owner_id:'42', creator_id:'42')]
-    return true, pollsList, 3, 1
-=end
-  
   end
 
 =begin
@@ -222,7 +201,7 @@ class Poll
 =end
   private
   def self.rest_to_poll(rest_body)
-    raw_poll = JSON.parse(rest_body) #Turn the object to JSON to be able to manipulate it
+    raw_poll = JSON.parse(rest_body) #Turn the object to an array to be able to manipulate it
       poll = Poll.new(
         id: raw_poll["nodeId"], 
         question: raw_poll["question"], 

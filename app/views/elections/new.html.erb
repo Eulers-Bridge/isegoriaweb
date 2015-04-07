@@ -9,11 +9,11 @@
   </div>
   <div class="form-group">
     <%= f.label :introduction, capitalize_as_title(t (:introduction)) %>
-    <%= f.text_field :introduction, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:introduction)).capitalize %>
+    <%= f.text_area :introduction, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:introduction)).capitalize %>
   </div>
   <div class="form-group">
     <%= f.label :process, capitalize_as_title(t (:process)) %>
-    <%= f.text_field :process, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:process)).capitalize %>
+    <%= f.text_area :process, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:process)).capitalize %>
   </div>
   <div class="form-group">
     <label for="election_start_date"><%=capitalize_as_title(t(:start_date))%></label>

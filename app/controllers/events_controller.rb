@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   #Set the default layout for this controller, the views from this controller are available when the user is looged in
   layout 'application'
+  @@images_directory = "UniversityOfMelbourne/Events"
 
   def index
     @page_aux = params[:page]
@@ -23,9 +24,8 @@ class EventsController < ApplicationController
 
   def edit
 	  resp = Event.find(params[:id],session[:user])
-    resp = Event.find(params[:id],session[:user])
     if resp[0]
-    @event = resp[1]
+      @event = resp[1]
     elsif validate_authorized_access(resp[1])
       flash[:danger] = t(:event_get_error_flash)
     redirect_to events_path
@@ -73,6 +73,44 @@ class EventsController < ApplicationController
     end
   end
 
+  def upload_picture
+    resp = Event.find(params[:id],session[:user])
+    if resp[0]
+    @event = resp[1]
+    elsif validate_authorized_access(resp[1])
+      flash[:danger] = t(:event_get_error_flash)
+    redirect_to :back
+    end
+    resp2 = @event.upload_picture(event_params,session[:user])
+    if resp2[0]
+      flash[:success] = t(:picture_uploading_success_flash, event: @event.name)
+      redirect_to :back
+    elsif validate_authorized_access(resp[1])
+      if(resp[1].kind_of?(Array))
+          flash[:warning] = Util.format_validation_errors(resp[1])
+        end
+        flash[:danger] = t(:picture_uploading_error_flash)
+        redirect_to :back
+    end
+  end
+
+  def delete_picture
+    resp = Photo.find(params[:id],session[:user])
+      if resp[0]
+      photo = resp[1]
+      elsif validate_authorized_access(resp[1])
+        flash[:danger] = t(:photo_get_error_flash)
+        redirect_to :back
+      end
+      resp2 = photo.delete(session[:user])
+      if resp2[0]
+        flash[:success] = t(:picture_deletion_success_flash, photo: photo.title)
+      elsif validate_authorized_access(resp[1])
+        flash[:danger] = t(:picture_deletion_error_flash)
+      end
+      redirect_to :back
+  end
+
   def destroy
     resp = Event.find(params[:id],session[:user])
     if resp[0]
@@ -92,6 +130,6 @@ class EventsController < ApplicationController
 
   private
   def event_params
-    params.require(:event).permit(:name, :start_date, :start_time, :end_date, :end_time, :location, :description, :picture, :volunteers, :organizer, :organizer_email)
+    params.require(:event).permit(:name, :start_date, :start_time, :end_date, :end_time, :location, :description, :picture, :volunteers, :organizer, :organizer_email, :previous_picture)
   end
 end

@@ -61,7 +61,7 @@
     <!--Image closing tag required by the upload-preview-->
     <img />
   </div>
-  <div class="form-group">
+  <!--div class="form-group">
     <%= f.label t(:volunteers).capitalize%>
     <ul class="list-group" id="volunteers_list">
     </ul>
@@ -71,7 +71,7 @@
     <input type="textarea" class="form-control" id="txt_volunteer_description" placeholder="<%=t(:field_placeholder, field_name: t(:description)).capitalize%>"/>
     <input type="button" class="btn btn-xs btn-info" id="btn_add_volunteer" value="<%=t(:add).capitalize%>"/>
     <%= f.hidden_field :volunteers, id: "hdd_volunteers"%>
-  </div>
+  </div-->
   <%= f.submit capitalize_as_title(t(:create)), class: "btn btn-large btn-success" %>
   <% end %>
   <div hidden="true">

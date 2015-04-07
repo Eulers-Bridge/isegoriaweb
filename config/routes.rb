@@ -30,8 +30,10 @@ Rails.application.routes.draw do
   
   get 'error/general_error'
 
-  put 'articles/like/:id(.:format)', :to => 'articles#like', :as => :article_like
-  put 'articles/unlike/:id(.:format)', :to => 'articles#unlike', :as => :article_unlike
+  post 'articles/picture/:id(.:format)', :to => 'articles#upload_picture', :as => :article_upload_picture
+  delete 'articles/picture/:id(.:format)', :to => 'articles#delete_picture', :as => :article_delete_picture
+  post 'events/picture/:id(.:format)', :to => 'events#upload_picture', :as => :event_upload_picture
+  delete 'events/picture/:id(.:format)', :to => 'events#delete_picture', :as => :event_delete_picture
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -76,7 +76,7 @@ class Election
   Function to delete an Election
   Param 1: logged user object
   Return if successful: 1.execution result(true), 
-                        2.created election object
+                        2.response from the server
   Return if unsuccessful: 1.execution result(false), 
                           2.response code from the server, or array of validation errors
                           3.response message from the server
@@ -186,7 +186,7 @@ class Election
     rest_response = MwHttpRequest.http_get_request(reqUrl,user['email'],user['password']) #Make the GET request to the Middleware server
     Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
     if rest_response.code == '200' #Validate if the response from the server is 200, which means OK
-      raw_elections_list = JSON.parse(rest_response.body) #Get the elections info from the response and normalize it to JSON to handle it
+      raw_elections_list = JSON.parse(rest_response.body) #Get the elections info from the response and normalize it to an array to handle it
       #total_elections = raw_elections_list['totalElections'] #Retrieve the total elections number for pagination
       #total_pages = raw_elections_list['totalPages'] #Retrieve the total number of pages for pagination
       #electionsList = Array.new #Initialize an empty array for the elections
@@ -219,7 +219,7 @@ class Election
 =end
   private
   def self.rest_to_election(rest_body)
-    raw_election = JSON.parse(rest_body) #Turn the object to JSON to be able to manipulate it
+    raw_election = JSON.parse(rest_body) #Turn the object to an array to be able to manipulate it
       election = Election.new(
         id: raw_election["electionId"],
         title: raw_election["title"], 
