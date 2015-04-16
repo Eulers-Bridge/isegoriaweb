@@ -35,7 +35,7 @@ class Photo
   Function to create a new Photo
   Param 1: logged user object
   Return if successful: 1.execution result(true), 
-                        2.created election object
+                        2.created photo object
                         3.photo creation status
   Return if unsuccessful: 1.execution result(false), 
                           2.response code from the server, or array of validation errors
@@ -216,6 +216,44 @@ class Photo
   def self.all(user, page)
     Rails.logger.debug "Call to photo.all"
     ownerId = user['id'] #Retrieve the owner id from the logged user
+    page = page != nil ? page : 0  #If not page is sent as parameter, set it to the first page
+    reqUrl = "/api/photos/#{ownerId}?page=#{page}&pageSize=10" #Build the request url
+    
+    rest_response = MwHttpRequest.http_get_request(reqUrl,user['email'],user['password']) #Make the GET request to the Middleware server
+    Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
+    if rest_response.code == '200' #Validate if the response from the server is 200, which means OK
+      raw_photos_list = JSON.parse(rest_response.body) #Get the photos info from the response and normalize it to an array to handle it
+      total_photos = raw_photos_list['totalPhotos'] #Retrieve the total photos number for pagination
+      total_pages = raw_photos_list['totalPages'] #Retrieve the total number of pages for pagination
+      photos_list = Array.new #Initialize an empty array for the photos
+      for raw_photo in raw_photos_list['photos'] #For each photo received from the server
+        photo = Photo.rest_to_photo(raw_photo.to_json) #Turn a photo to json format 
+        photos_list << photo #Add it to the photos array
+      end
+      return true, photos_list, total_photos, total_pages #Return success
+    else
+      return false, "#{rest_response.code}", "#{rest_response.message}" #Return error
+    end
+  end
+
+=begin
+--------------------------------------------------------------------------------------------------------------------
+  Function to retrieve all the photos by its photo album id
+  Param 1: logged user object
+  Param 2: photo album id
+  Param 3: number of page requested(pagination)
+  Return if successful: 1.execution result(true), 
+                        2.array with the photo objects, 
+                        3.total number of photos, 
+                        4.total number of pages
+  Return if unsuccessful: 1.execution result(false), 
+                          2.response code from the server, 
+                          3.response message from the server
+--------------------------------------------------------------------------------------------------------------------
+=end
+  def self.all_by_album(user,album_id,page)
+    Rails.logger.debug "Call to photo.all_by_album"
+    ownerId = album_id #Retrieve the owner id from the logged user
     page = page != nil ? page : 0  #If not page is sent as parameter, set it to the first page
     reqUrl = "/api/photos/#{ownerId}?page=#{page}&pageSize=10" #Build the request url
     

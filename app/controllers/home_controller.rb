@@ -26,7 +26,7 @@ class HomeController < ApplicationController
       end
       @aux_string << "}"
       @js_institutions_catalog = @aux_string.gsub('},]','}]').gsub('],}',']}')
-      puts '------------------------' + @js_institutions_catalog
+      Rails.logger.debug '------------------------' + @js_institutions_catalog
     elsif validate_authorized_access(resp[1])
       flash[:danger] = t(:institutions_list_error_flash)
       redirect_to root

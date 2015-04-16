@@ -235,10 +235,10 @@ class Article
     Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
     if rest_response.code == '200' #Validate if the response from the server is 200, which means OK
       raw_articles_list = JSON.parse(rest_response.body) #Get the polls info from the response and normalize it to an array to handle it
-      total_articles = raw_articles_list['totalArticles'] #Retrieve the total articles number for pagination
+      total_articles = raw_articles_list['totalElements'] #Retrieve the total articles number for pagination
       total_pages = raw_articles_list['totalPages'] #Retrieve the total number of pages for pagination
       articles_list = Array.new #Initialize an empty array for the articles
-      for raw_article in raw_articles_list['articles'] #For each article received from the server
+      for raw_article in raw_articles_list['foundObjects'] #For each article received from the server
         article = Article.rest_to_article(raw_article.to_json) #Turn an article to json format
         articles_list << article #Add it to the articles array
       end

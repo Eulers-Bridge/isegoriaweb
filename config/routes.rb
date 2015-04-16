@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :photos, only: [:create, :update, :destroy, :new, :edit, :index]
   resources :articles, only: [:create, :update, :destroy, :new, :edit, :index]
   resources :polls, only: [:create, :update, :destroy, :new, :edit, :index]
-  resources :photo_albums, only: [:index]
+  resources :photo_albums, only: [:create, :update, :destroy, :new, :edit, :index]
 
   # You can have the root of your site routed with "root"
   root 'home#landing'
@@ -34,6 +34,8 @@ Rails.application.routes.draw do
   delete 'articles/picture/:id(.:format)', :to => 'articles#delete_picture', :as => :article_delete_picture
   post 'events/picture/:id(.:format)', :to => 'events#upload_picture', :as => :event_upload_picture
   delete 'events/picture/:id(.:format)', :to => 'events#delete_picture', :as => :event_delete_picture
+  post 'photo_albums/picture/:id(.:format)', :to => 'photo_albums#upload_picture', :as => :photo_album_upload_picture
+  delete 'photo_albums/picture/:id(.:format)', :to => 'photo_albums#delete_picture', :as => :photo_album_delete_picture
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

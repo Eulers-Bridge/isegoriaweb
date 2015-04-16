@@ -179,10 +179,10 @@ class Poll
     Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
     if rest_response.code == '200' #Validate if the response from the server is 200, which means OK
       raw_polls_list = JSON.parse(rest_response.body) #Get the polls info from the response and normalize it to an array to handle it
-      total_polls = raw_polls_list['totalPolls'] #Retrieve the total polls number for pagination
+      total_polls = raw_polls_list['totalElements'] #Retrieve the total polls number for pagination
       total_pages = raw_polls_list['totalPages'] #Retrieve the total number of pages for pagination
       pollsList = Array.new #Initialize an empty array for the polls
-      for raw_poll in raw_polls_list['polls'] #For each poll received from the server
+      for raw_poll in raw_polls_list['foundObjects'] #For each poll received from the server
         poll = Poll.rest_to_poll(raw_poll.to_json) #Turn a poll to json format
         pollsList << poll #Add it to the polls array
       end

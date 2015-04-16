@@ -1,11 +1,33 @@
-<%= link_to t(:create).capitalize, new_photo_album_path, :class => 'btn btn-success' %>
-<% if @previous_page >=0 %>
-<%= link_to t(:previous).capitalize, photo_albums_path(:page =>@previous_page), :class => 'btn btn-info' %> 
-<%end%>
-<%=@page+1%>
-<% if @next_page >=0 %>
-<%= link_to t(:next).capitalize, photo_albums_path(:page =>@next_page), :class => 'btn btn-info' %> 
-<%end%> 
-<% @photo_albums_list.each do |photo_album| %>
-jojojo
-<% end %>
+<div class="section_controls">
+  <%= link_to capitalize_as_title(t(:create_photo_album)), new_photo_album_path, :class => 'create_link' %>
+  <div class="pagination_controls">
+    <% if @previous_page >=0 %>
+      <%= link_to "<< ", photo_albums_path(:page =>@previous_page), :class => 'nav_control' %> 
+    <%end%>
+    <%=(@page+1)%>
+    <% if @next_page >=0 %>
+      <%= link_to " >>", photo_albums_path(:page =>@next_page), :class => 'nav_control' %> 
+    <%end%> 
+  </div>
+</div>
+
+<div id="photo_albums_list">
+  <% @photo_albums_list.each do |photo_album| %>
+  <div class="photo_album_item">
+    <div class="item_image">
+        <%= image_tag photo_album.thumbnail, class: "photo_thumbnail", alt: t(:picture) %>
+    </div>
+    <div class="item_controls">
+      <%= link_to t(:edit).capitalize, edit_photo_album_path(:id => photo_album.id), :class => 'edit_link' %> 
+      <%= link_to t(:delete).capitalize, photo_album_path(:id => photo_album.id), method: :delete, :class => 'delete_link' %>
+    </div>
+    <div>
+      <h3><%=photo_album.name%></h3>
+      <h4><%=photo_album.description%></h4>
+      <h4><%= t(:created).capitalize+" "+photo_album.created%></h4>
+    </div>
+  </div>
+  <!--hr-->
+  <% end %>
+</div>
+<%= javascript_include_tag "photo_albums_util" %>

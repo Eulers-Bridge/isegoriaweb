@@ -31,7 +31,7 @@
     <img />
   </div>
   <div class="form-group">
-    <%= f.label :file, capitalize_as_title(t (:picture)) %>
+    <%= f.label :file, capitalize_as_title(t (:new_picture)) %>
     <%= f.file_field :file, accept: "image/png,image/gif,image/jpeg" ,class: 'file_input', placeholder: t(:field_placeholder, field_name: t(:picture)).capitalize %>
   </div>
   <%= f.submit capitalize_as_title(t(:edit)), class: "btn btn-large btn-success" %>

@@ -255,10 +255,10 @@ include ActiveModel::Model
     Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
     if rest_response.code == '200' #Validate if the response from the server is 200, which means OK
       raw_events_list = JSON.parse(rest_response.body) #Get the event info from the response and normalize it to an array to handle it
-      total_events = raw_events_list['totalEvents'] #Retrieve the total events number for pagination
+      total_events = raw_events_list['totalElements'] #Retrieve the total events number for pagination
       total_pages = raw_events_list['totalPages'] #Retrieve the total number of pages for pagination
       events_list = Array.new #Initialize an empty array for the events
-      for raw_event in raw_events_list['events'] #For each event received from the server
+      for raw_event in raw_events_list['foundObjects'] #For each event received from the server
         events_list << event = Event.rest_to_event(raw_event.to_json) #Turn an event to json format and add it to the events array
       end
       return true, events_list, total_events, total_pages #Return success

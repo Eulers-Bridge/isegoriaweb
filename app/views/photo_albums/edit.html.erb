@@ -1,0 +1,61 @@
+<% provide(:title, t(:title_edit_photo_album)) %>
+<h1><%=capitalize_as_title(t(:title_edit_photo_album))%></h1>
+<div>
+<%= form_for(@photo_album, :url => photo_album_path ,:html => {:method => :put}) do |f| %>
+  <div class="form-group">
+    <%= f.label :name, capitalize_as_title(t (:name)) %>
+    <%= f.text_field :name, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:name)).capitalize %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, capitalize_as_title(t (:description)) %>
+    <%= f.text_area :description, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:description)).capitalize %>
+  </div>
+  <div class="form-group">
+    <%= f.label :location, capitalize_as_title(t (:location)) %>
+    <%= f.text_field :location, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:location)).capitalize %>
+  </div>
+  <div class="form-group">
+    <label for="hdd_previous_thumbnail"><%=capitalize_as_title(t(:thumbnail))%></label>
+      <%= image_tag @photo_album.thumbnail, class: "photo_thumbnail"%>
+      <input type="hidden" id="hdd_previous_picture" name="photo_album[previous_thumbnail]" value="<%=@photo_album.thumbnail%>">
+  </div>
+  <hr>
+  <div class="upload-preview1">
+    <label><%=capitalize_as_title(t(:thumbnail_preview))%></label>
+    <!--Image closing tag required by the upload-preview-->
+    <img />
+  </div>
+  <div class="form-group">
+    <%= f.label :thumbnail, capitalize_as_title(t (:new_thumbnail)) %>
+    <%= f.file_field :thumbnail, accept: "image/png,image/gif,image/jpeg" ,class: 'file_input', placeholder: t(:field_placeholder, field_name: t(:thumbnail)).capitalize %>
+  </div>
+  <%= f.submit capitalize_as_title(t(:edit)), class: "btn btn-large btn-success" %>
+  <% end %>
+  <br>
+  <%= form_for(@photo_album, :url => photo_album_upload_picture_path ,:html => {:method => :post}) do |f| %>
+    <hr>
+    <div class="form-group">
+      <label><%=capitalize_as_title(t(:pictures))%></label>
+      <% @photos.each do |picture| %>
+        <% Rails.logger.debug '----------------------'+picture.to_json %>
+        <%= image_tag picture.file, class: "photo_album_image"%>
+        <%= link_to t(:delete).capitalize, photo_album_delete_picture_path(:id => picture.id), method: :delete, :class => 'delete_link' %>
+      <%end%>
+    </div>
+    <hr>
+    <div class="form-group">
+      <%= f.label :picture, capitalize_as_title(t(:upload_new_picture))%>
+      <%= f.file_field :picture, accept: "image/png,image/gif,image/jpeg" ,class: 'file_input', placeholder: t(:field_placeholder, field_name: t(:picture)).capitalize %>
+    </div>
+    <div class="upload-preview2">
+      <label><%=capitalize_as_title(t(:picture_preview))%></label>
+      <!--Image closing tag required by the upload-preview-->
+      <img />
+    </div>
+
+    <%= f.submit capitalize_as_title(t(:upload)), class: "btn btn-large btn-success" %>
+  <% end %>
+</div>
+<%= javascript_include_tag "photo_albums_util" %>
+<script type="text/javascript">
+</script>
