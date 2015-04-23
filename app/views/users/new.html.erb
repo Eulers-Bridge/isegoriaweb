@@ -1,7 +1,7 @@
-<% provide(:title, t(:signup)) %>
-<h1><%=capitalize_as_title(t(:signup))%></h1>
-<div id="signup_form_container">
-<%= form_for(@user, :url => home_signup_user_path ,:html => {:method => :post}) do |f| %>
+<% provide(:title, t(:title_new_user)) %>
+<h1><%=capitalize_as_title(t(:title_new_user))%></h1>
+<div>
+<%= form_for(@user) do |f| %>
 <%= f.submit capitalize_as_title(t(:create)), class: "btn btn-large btn-success" %>
   <div class="form-group">
     <%= f.label :first_name, capitalize_as_title(t(:first_name)) %>
@@ -79,4 +79,4 @@
   var countries = <%=raw(@countries_js_string)%>;
   var select_one_text = "<%=t(:select_one).capitalize%>"; 
 </script>
-<%= javascript_include_tag "home_util" %>
+<%= javascript_include_tag "users_util" %>

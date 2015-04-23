@@ -1,5 +1,6 @@
-    $(document).ready(function() {
+  $(document).ready(function() {
         $('#slInstitutionCountry').change(function(event){
+            //console.log('Seleccionado: ' + $('#slInstitutionCountry option:selected').val());
             selected_country = $('#slInstitutionCountry option:selected').val();
             myFunction(selected_country);
         });

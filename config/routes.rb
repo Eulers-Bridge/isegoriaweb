@@ -1,14 +1,10 @@
 Rails.application.routes.draw do
-
-  get 'users/new', to: 'home#signup'
-  post 'users/change_access'
-
-  resources :users, only: [:index, :create]
-
+  
   match '/logout', to: 'sessions#destroy',     via: 'delete'
   match '/login', to: 'sessions#create',     via: 'post'
+
   resources :sessions, only: [:create, :destroy]
-  
+  resources :users, only: [:create, :update, :destroy, :new, :edit, :index]
   resources :elections, only: [:create, :update, :destroy, :new, :edit, :index]
   resources :events, only: [:create, :update, :destroy, :new, :edit, :index]
   resources :photos, only: [:create, :update, :destroy, :new, :edit, :index]
@@ -18,11 +14,10 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'home#landing'
+  #root 'home#index'
 
   get 'home', to: 'home#landing'
   get 'home/more_info'
-
-  get 'home/index'
   get 'home/signup'
   get 'home/unverified_email'
   get 'home/register_successfull'
@@ -30,6 +25,8 @@ Rails.application.routes.draw do
   
   get 'error/general_error'
 
+  post 'home/signup_user', :to => 'home#signup_user', :as => :home_signup_user
+  put 'user/resend_verification_email/:id(.:format)', :to => 'user#resend_verification_email', :as => :user_resend_verification_email
   post 'articles/picture/:id(.:format)', :to => 'articles#upload_picture', :as => :article_upload_picture
   delete 'articles/picture/:id(.:format)', :to => 'articles#delete_picture', :as => :article_delete_picture
   post 'events/picture/:id(.:format)', :to => 'events#upload_picture', :as => :event_upload_picture

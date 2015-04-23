@@ -234,7 +234,7 @@ class Article
     rest_response = MwHttpRequest.http_get_request(reqUrl,user['email'],user['password'])#Make the GET request to the Middleware server
     Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
     if rest_response.code == '200' #Validate if the response from the server is 200, which means OK
-      raw_articles_list = JSON.parse(rest_response.body) #Get the polls info from the response and normalize it to an array to handle it
+      raw_articles_list = JSON.parse(rest_response.body) #Get the articles info from the response and normalize it to an array to handle it
       total_articles = raw_articles_list['totalElements'] #Retrieve the total articles number for pagination
       total_pages = raw_articles_list['totalPages'] #Retrieve the total number of pages for pagination
       articles_list = Array.new #Initialize an empty array for the articles

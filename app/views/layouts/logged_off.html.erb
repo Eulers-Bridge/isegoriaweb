@@ -11,11 +11,9 @@
     <%= stylesheet_link_tag "header","footer", @stylesheet %>
 </head>
 <body>
-  <!--div id="background" style="background: url(<%= asset_path @background_image %>) no-repeat center center fixed"-->
   <div id="background">
     <div id="blur"></div>
   </div>
-  <%= render "partials/header_off" %>
   <%= render "partials/flash_messages" %>
   <div class="container" id="off_center_container">
     <%= yield %>

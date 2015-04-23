@@ -1,46 +1,157 @@
 class UsersController < ApplicationController
-  require 'json'
 
   #Set the default layout for this controller, the views from this controller are available when the user is looged in
   layout 'application'
 
-	def create
-	  @user=User.new(user_params)
-    resp = @user.save
-	  if resp[0]
-      @result = resp[1].body
-	  	flash[:success] = t(:user_creation_success_flash, user: @user.first_name)
-	    redirect_to home_unverified_email_path
-	  else
-      flash[:danger] = t(:user_creation_error_flash)
-		  redirect_to home_signup_path, layout: "logged_off"
-	  end
-	end
+=begin
+--------------------------------------------------------------------------------------------------------------------------------
+  Function to sign up a new User, created without being logged in
+--------------------------------------------------------------------------------------------------------------------------------
+=end
+  def signup
+    @user = User.new(user_params) #Create a new User object with the parameters set by the user in the create form
+    response = @user.save #Save the new User object
+    if response[0] #Validate if the response was successfull
+      flash[:success] = t(:user_creation_success_flash, user: @user.email) #Set the success message for the user
+      redirect_to home_unverified_email_path #Redirect the user to the verify email
+    else validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+      if(response[1].kind_of?(Array)) #If the response was unsucessful, validate if it was caused by an invalid photo album object sent to the model. If so the server would have returned an array with the errors
+        flash[:warning] = Util.format_validation_errors(response[1]) #Set the invalid object message for the user
+      end
+      flash[:danger] = t(:user_creation_error_flash) #Set the error message for the user
+      redirect to register_successfull_path, layout: "logged_off"
+    end
+  end
 
-	def index
-    	@users_list = User.all
-  	end
+=begin
+--------------------------------------------------------------------------------------------------------------------------------
+  Function to retrieve and list all the users from the model
+--------------------------------------------------------------------------------------------------------------------------------
+=end
+  def index
+    page_aux = params[:page] #Retrieve the params from the query string
+    @page = page_aux =~ /\A\d+\z/ ? page_aux.to_i : 0 #Validate if the page_aux param is turnable to an integer, otherwise set it to cero
+    response = User.all(session[:user],@page) #Retrieve all the users from the model
+    if response[0] #Validate if the response was successfull
+      @users_list = response[1] #Get the users list from the response
+      total_pages = response[3].to_i #Get the total numer of pages from the response
+      @previous_page = @page > 0 ? @page-1 : -1 #Calculate the previous page number, if we are at the first page, then it will set to minus one
+      @next_page = @page+1 < total_pages ? @page+1 : -1 #Calculate the next page number, if we are at the last page, then it will set to minus one
+    elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+      flash[:danger] = t(:user_list_error_flash) #Set the error message to the user
+      redirect_to error_general_error_path #Redirect the user to the generic error page
+    end
+  end
 
-  def change_access
-    case params[:action_type]
-      when 'revoke_access'
-    	  User.revoke_access (params[:id])
-  	    flash[:success] = t(:user_access_revoked_flash)
-  	    redirect_to users_path
-  	  when 'grant_access'
-  		  User.grant_access (params[:id])
-  		  flash[:success] = t(:user_access_granted_flash)
-  		  redirect_to users_path
-  	  else
-        logger.debug "Invalid user access option: " + params[:action_type].to_s
-  	    flash[:danger] = t(:saving_error_flash)
-  	    redirect_to users_path
-  	  end
-  	end
+=begin
+--------------------------------------------------------------------------------------------------------------------------------
+  Function to redirect the user to the new user page
+--------------------------------------------------------------------------------------------------------------------------------
+=end
+  def new
+    @user = User.new #Set a new user object to be filled with the create form
+    response = Country.general_info #Retrieve the countries and institutions catalog
+    if response[0] #Validate if the response was successfull
+      @countries_catalog = response[1] #Get the countries list from the response
+      @countries_js_string = response[2]
+    elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+      flash[:danger] = t(:country_list_error_flash) #Set the error message to the user
+      redirect_to error_general_error_path #Redirect the user to the generic error page
+    end
+  end
 
+=begin
+--------------------------------------------------------------------------------------------------------------------------------
+  Function to create a new User
+--------------------------------------------------------------------------------------------------------------------------------
+=end
+  def create
+    @user = User.new(user_params) #Create a new User object with the parameters set by the user in the create form
+    response = @user.save #Save the new User object
+    if response[0] #Validate if the response was successfull
+      flash[:success] = t(:user_creation_success_flash, user: @user.email) #Set the success message for the user
+      redirect_to users_path #Redirect the user to the user list page
+    elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+        if(response[1].kind_of?(Array)) #If the response was unsucessful, validate if it was caused by an invalid photo album object sent to the model. If so the server would have returned an array with the errors
+          flash[:warning] = Util.format_validation_errors(response[1]) #Set the invalid object message for the user
+        end
+        flash[:danger] = t(:user_creation_error_flash) #Set the error message for the user
+        @user = User.new #Reset the User object to an empty one
+        redirect_to new_user_path #Redirect the user to the User creation page
+    end
+  end
+
+=begin
+--------------------------------------------------------------------------------------------------------------------------------
+  Function to redirect the user to the edit user page
+--------------------------------------------------------------------------------------------------------------------------------
+=end
+  def edit
+  response = User.find(params[:email],session[:user]) #Retrieve the user to update
+    if response[0] #Validate if the response was successfull 
+    @user = response[1] #Set the user object to fill the edit form
+    elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+      flash[:danger] = t(:user_get_error_flash) #Set the error message for the user
+      redirect_to user_path #Redirect the user to edit user page
+    end
+  end
+
+=begin
+--------------------------------------------------------------------------------------------------------------------------------
+  Function to update a User
+--------------------------------------------------------------------------------------------------------------------------------
+=end
+  def update
+  response = User.find(params[:email],session[:user]) #Retrieve the original user object to update
+    if response[0] #Validate if the response was successfull 
+      @user = response[1] #Set the user object to be updated
+    elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+      flash[:danger] = t(:user_get_error_flash) #Set the error message for the user
+      redirect_to users_path #Redirect the user to the users list page
+    end
+    response2 = @user.update_attributes(user_params,session[:user]) #Update the user object
+    if response2[0] #Validate if the response was successfull
+      flash[:success] = t(:user_modification_success_flash, user: @user.email) #Set the success message for the user
+      redirect_to users_path #Redirect the user to the users list page
+    elsif validate_authorized_access(response2[1])#If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+      if(response2[1].kind_of?(Array))#If the response was unsucessful, validate if it was caused by an invalid User object sent to the model. If so the server would have returned an array with the errors
+        flash[:warning] = Util.format_validation_errors(response2[1]) #Set the invalid object message for the user
+      end
+        flash[:danger] = t(:user_modification_error_flash) #Set the error message for the user
+        redirect_to edit_user_path #Redirect the user to the User edition page
+    end
+  end
+
+=begin
+--------------------------------------------------------------------------------------------------------------------------------
+  Function to delete a User
+--------------------------------------------------------------------------------------------------------------------------------
+=end
+  def destroy
+    response = User.find(params[:email],session[:user]) #Retrieve the original user object to delete
+    if response[0] #Validate if the response was successfull 
+      @user = response[1] #Set the user object to be updated
+    elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+      flash[:danger] = t(:user_get_error_flash) #Set the error message for the user
+      redirect_to users_path #Redirect the user to the users list page
+    end
+    response2 = @user.delete(session[:user]) #Delete the user object
+    if response2[0] #Validate if the response was successfull
+      flash[:success] = t(:user_deletion_success_flash, user: @user.email) #Set the success message for the user
+    elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+        flash[:danger] = t(:user_deletion_error_flash) #Set the error message for the user
+    end
+    redirect_to users_path #Redirect the user to the users list page
+  end
+
+=begin
+--------------------------------------------------------------------------------------------------------------------------------
+  User Model parameters definition
+--------------------------------------------------------------------------------------------------------------------------------
+=end
   private
   def user_params
-    params.require(:user).permit(:id, :first_name, :last_name, :username, :email, :password, :password_confirmation, :account_type, :position, :ticket_name)
+    params.require(:user).permit(:first_name, :last_name, :gender, :nationality, :personality, :yob, :has_personality, :password, :password_confirmation, :contact_number, :locale, :tracking_off, :opt_out_data_collection, :email, :institution_id, :photo, :account_verified)
   end
 end
 

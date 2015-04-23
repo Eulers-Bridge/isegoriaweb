@@ -1,8 +1,8 @@
-<% provide(:title, t(:signup)) %>
-<h1><%=capitalize_as_title(t(:signup))%></h1>
-<div id="signup_form_container">
-<%= form_for(@user, :url => home_signup_user_path ,:html => {:method => :post}) do |f| %>
-<%= f.submit capitalize_as_title(t(:create)), class: "btn btn-large btn-success" %>
+<% provide(:title, t(:title_edit_user)) %>
+<h1><%=capitalize_as_title(t(:title_edit_user))%></h1>
+<div>
+<%= form_for(@user ,:url => user_path ,:html => {:method => :put}) do |f| %>
+<%= f.submit capitalize_as_title(t(:save_changes)), class: "btn btn-large btn-success" %>
   <div class="form-group">
     <%= f.label :first_name, capitalize_as_title(t(:first_name)) %>
     <%= f.text_field :first_name, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:first_name)).capitalize %>
@@ -70,7 +70,7 @@
   </div>
   <div class="form-group">
     <%= f.label :email, capitalize_as_title(t(:email))%>
-    <%= f.text_field :email, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:email)).capitalize%>
+    <%= f.text_field :email, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:email)).capitalize, readonly => true%>
   </div>
   <% end %>
   <div hidden="true">
@@ -79,4 +79,4 @@
   var countries = <%=raw(@countries_js_string)%>;
   var select_one_text = "<%=t(:select_one).capitalize%>"; 
 </script>
-<%= javascript_include_tag "home_util" %>
+<%= javascript_include_tag "users_util" %>

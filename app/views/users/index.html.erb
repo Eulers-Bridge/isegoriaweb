@@ -1,20 +1,34 @@
-<% provide(:title, t(:title_users_list).capitalize) %>
-<% @users_list.each do |user| %>
-<div class="panel panel-info">
-  <div class="panel-heading">
-    <h3 class="panel-title"><%=user.email%></h3>
-  </div>
-  <div class="panel-body">
-   <!--%= gravatar_for user %-->
-<p><%=t(:full_name).capitalize%>: <%=capitalize_as_title(user.full_name)%> </p>
-<p><%=t(:email).capitalize%>: <%=user.email%> </p>
-  </div>
-  <div class="panel-footer">
-  <% unless user.access_granted.is_a?(TrueClass) %>
-    <%= button_to capitalize_as_title(t(:grant_access)), users_change_access_path(:id => user.id, :action_type => "grant_access"), method: :post, :class => 'btn btn-success' %> 
-  <% else %>
-    <%= button_to capitalize_as_title(t(:revoke_access)), users_change_access_path(:id => user.id, :action_type => "revoke_access"), method: :post, :class => 'btn btn-danger' %>
-  <% end %>
-  </div>
+<div class="section_controls">
+<%= link_to capitalize_as_title(t(:create_user)), new_user_path, :class => 'create_link' %>
+<div class="pagination_controls">
+  <% if @previous_page >=0 %>
+  <%= link_to "<< ", users_path(:page =>@previous_page), :class => 'nav_control' %> 
+  <%end%>
+  <%=(@page+1)%>
+  <% if @next_page >=0 %>
+  <%= link_to " >>", users_path(:page =>@next_page), :class => 'nav_control' %> 
+  <%end%> 
 </div>
-<% end %>
+</div>
+<div id="users_list">
+  <% @users_list.each do |user| %>
+  <div class="user_item">
+    <div class="item_controls">
+      <%= link_to t(:edit).capitalize, edit_user_path(:id => user.id), :class => 'edit_link' %> 
+      <%= link_to t(:delete).capitalize, user_path(:id => user.id), method: :delete, :class => 'delete_link' %>
+    </div>
+    <div>
+      <h3><%=user.email%></h3>
+      <h4><%=t(:full_name).capitalize%>: <%=capitalize_as_title(user.full_name)%></h4>
+      <h4><%=t(:email).capitalize%>: <%=user.email%></h4>
+      <% if user.account_verified == true %>
+        <%=capitalize_as_title(t(:account_verified)) %> 
+      <% else %>
+        <%=capitalize_as_title(t(:account_unverified)) %> 
+      <%= button_to capitalize_as_title(t(:resend_verify_account_email)), user_resend_verification_email_path(:id => user.id, :action_type => "revoke_access"), method: :post, :class => 'btn btn-success' %>
+      <% end %>
+    </div>
+  </div>
+  <!--hr-->
+  <% end %>
+</div>
