@@ -25,7 +25,7 @@
         <%=capitalize_as_title(t(:account_verified)) %> 
       <% else %>
         <%=capitalize_as_title(t(:account_unverified)) %> 
-      <%= button_to capitalize_as_title(t(:resend_verify_account_email)), user_resend_verification_email_path(:id => user.id, :action_type => "revoke_access"), method: :post, :class => 'btn btn-success' %>
+      <%= button_to capitalize_as_title(t(:resend_verify_account_email)), user_resend_verification_email_path(:id => user.email, :action_type => "revoke_access"), method: :post, :class => 'btn btn-success' %>
       <% end %>
     </div>
   </div>
