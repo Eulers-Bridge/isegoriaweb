@@ -14,8 +14,8 @@
   <% @users_list.each do |user| %>
   <div class="user_item">
     <div class="item_controls">
-      <%= link_to t(:edit).capitalize, edit_user_path(:id => user.id), :class => 'edit_link' %> 
-      <%= link_to t(:delete).capitalize, user_path(:id => user.id), method: :delete, :class => 'delete_link' %>
+      <%= link_to t(:edit).capitalize, edit_user_path(:id => user.email), :class => 'edit_link' %> 
+      <%= link_to t(:delete).capitalize, user_path(:id => user.email), method: :delete, :class => 'delete_link' %>
     </div>
     <div>
       <h3><%=user.email%></h3>
