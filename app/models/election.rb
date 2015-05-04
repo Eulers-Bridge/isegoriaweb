@@ -187,21 +187,21 @@ class Election
     Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
     if rest_response.code == '200' #Validate if the response from the server is 200, which means OK
       raw_elections_list = JSON.parse(rest_response.body) #Get the elections info from the response and normalize it to an array to handle it
-      #total_elections = raw_elections_list['totalElections'] #Retrieve the total elections number for pagination
-      #total_pages = raw_elections_list['totalPages'] #Retrieve the total number of pages for pagination
-      #electionsList = Array.new #Initialize an empty array for the elections
-      #for raw_election in raw_elections_list['elections'] #For each election received from the server
-      #  election = Election.rest_to_election(raw_election.to_json) #Turn a elections in json format to a election object
-      #  electionsList << election #Add it to the elections array
-      #end
-      
-      total_elections = 1 #We only have one election
-      total_pages = 1 #Therefore we only have one page
+      total_elections = raw_elections_list['totalElements'] #Retrieve the total elections number for pagination
+      total_pages = raw_elections_list['totalPages'] #Retrieve the total number of pages for pagination
       electionsList = Array.new #Initialize an empty array for the elections
-      for raw_election in raw_elections_list #For each election received from the server
+      for raw_election in raw_elections_list['foundObjects'] #For each election received from the server
         election = Election.rest_to_election(raw_election.to_json) #Turn a elections in json format to a election object
         electionsList << election #Add it to the elections array
       end
+      
+      #total_elections = 1 #We only have one election
+      #total_pages = 1 #Therefore we only have one page
+      #electionsList = Array.new #Initialize an empty array for the elections
+      #for raw_election in raw_elections_list #For each election received from the server
+      #  election = Election.rest_to_election(raw_election.to_json) #Turn a elections in json format to a election object
+      #  electionsList << election #Add it to the elections array
+      #end
       
       return true, electionsList, total_elections, total_pages #Return success
     else

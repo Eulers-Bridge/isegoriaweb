@@ -9,7 +9,7 @@ class ElectionsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def index
-	page_aux = params[:page] #Retrieve the params from the query string
+	  page_aux = params[:page] #Retrieve the params from the query string
     @page = page_aux =~ /\A\d+\z/ ? page_aux.to_i : 0 #Validate if the page_aux param is turnable to an integer, otherwise set it to cero
     response = Election.all(session[:user],@page) #Retrieve all the elections from the model
     if response[0] #Validate if the response was successfull
@@ -29,7 +29,7 @@ class ElectionsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def new
-	@election = Election.new #Set a new election object to be filled with the create form
+	  @election = Election.new #Set a new election object to be filled with the create form
   end  
 
 =begin
@@ -103,7 +103,7 @@ class ElectionsController < ApplicationController
   def destroy
     response = Election.find(params[:id],session[:user]) #Retrieve the original election object to update
     if response[0] #Validate if the response was successfull 
-      @election = response[1] #Set the election object to be updated
+      @election = response[1] #Set the election object to be deleted
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:election_get_error_flash) #Set the error message for the user
       redirect_to elections_path #Redirect the user to the elections list page

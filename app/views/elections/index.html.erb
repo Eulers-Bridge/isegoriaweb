@@ -1,5 +1,5 @@
 <div class="section_controls">
-  <%= link_to t(:create).capitalize, new_election_path, :class => 'create_link' %> 
+  <%= link_to capitalize_as_title(t(:create_election)), new_election_path, :class => 'create_link' %> 
   <div class="pagination_controls">
     <% if @previous_page >=0 %>
       <%= link_to "<< ", elections_path(:page =>@previous_page), :class => 'nav_control' %> 
@@ -17,6 +17,7 @@
       <div class="item_controls">
         <%= link_to t(:edit).capitalize, edit_election_path(:id => election.id), :class => 'edit_link' %> 
         <%= link_to t(:delete).capitalize, election_path(:id => election.id), method: :delete, :class => 'delete_link' %>
+        <%= link_to t(:positions).capitalize, positions_path(:election_id => election.id), method: :get, :class => 'child_link' %>
       </div>
       <div>
         <h3><%=election.title%></h3>

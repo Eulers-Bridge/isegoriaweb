@@ -107,27 +107,4 @@ class Country
     end
   end
 
-  def self.all(user, page)
-    Rails.logger.debug "Call to article.all"
-    institutionId = user['institutionId'] #Retrieve the institution id from the logged user
-    page = page != nil ? page : 0 #If not page is sent as parameter, set it to the first page
-    reqUrl = "/api/newsArticles/#{institutionId}?page=#{page}&pageSize=10" #Build the request url
-
-    rest_response = MwHttpRequest.http_get_request(reqUrl,user['email'],user['password'])#Make the GET request to the Middleware server
-    Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
-    if rest_response.code == '200' #Validate if the response from the server is 200, which means OK
-      raw_articles_list = JSON.parse(rest_response.body) #Get the country info from the response and normalize it to an array to handle it
-      total_articles = raw_articles_list['totalElements'] #Retrieve the total articles number for pagination
-      total_pages = raw_articles_list['totalPages'] #Retrieve the total number of pages for pagination
-      articles_list = Array.new #Initialize an empty array for the articles
-      for raw_article in raw_articles_list['foundObjects'] #For each article received from the server
-        article = Article.rest_to_article(raw_article.to_json) #Turn an article to json format
-        articles_list << article #Add it to the articles array
-      end
-      return true, articles_list, total_articles, total_pages #Return success
-    else
-      return false, "#{rest_response.code}", "#{rest_response.message}" #Return error
-    end
-  end
-
 end

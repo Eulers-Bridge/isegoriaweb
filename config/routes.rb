@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :articles, only: [:create, :update, :destroy, :new, :edit, :index]
   resources :polls, only: [:create, :update, :destroy, :new, :edit, :index]
   resources :photo_albums, only: [:create, :update, :destroy, :new, :edit, :index]
+  resources :positions, only: [:create, :update, :destroy, :index]
 
   # You can have the root of your site routed with "root"
   root 'home#landing'
@@ -24,7 +25,7 @@ Rails.application.routes.draw do
   get 'home/landing'
   
   get 'error/general_error'
-
+  
   post 'home/signup_user', :to => 'home#signup_user', :as => :home_signup_user
   put 'user/resend_verification_email/:id(.:format)', :to => 'user#resend_verification_email', :as => :user_resend_verification_email
   post 'articles/picture/:id(.:format)', :to => 'articles#upload_picture', :as => :article_upload_picture
