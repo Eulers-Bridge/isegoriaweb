@@ -7,7 +7,6 @@ class Position
   validates :name, :presence => { :message => ApplicationHelper.validation_error(:name, :presence, nil) }
   validates :description, :presence => { :message => ApplicationHelper.validation_error(:description, :presence, nil)}
   validates :election_id, :presence => { :message => ApplicationHelper.validation_error(:election, :presence, nil) }
-  validates :id, :presence =>{ :message => ApplicationHelper.validation_error(:id, :presence, nil) }
 
 =begin
 --------------------------------------------------------------------------------------------------------------------
@@ -16,9 +15,9 @@ class Position
 =end
   def initialize (attributes = {})
     @id = attributes[:id]
-    @name = attributes[:question]
-    @description = attributes[:start_date]
-    @election_id = attributes[:answers]
+    @name = attributes[:name]
+    @description = attributes[:description]
+    @election_id = attributes[:election_id]
   end
 
 =begin
@@ -34,11 +33,11 @@ class Position
 =end
   def save(user)
     Rails.logger.debug "Call to position.save"
-    if self.valid? #Validate if the Poll object is valid
+    if self.valid? #Validate if the Position object is valid
       Rails.logger.debug "The position is valid!"
       #Create a raw position object
       position_req = { 'name'=>self.name,
-                'description'=> self.duration,
+                'description'=> self.description,
                 'electionId'=> self.election_id
                 }
       reqUrl = "/api/position/" #Set the request url
@@ -169,8 +168,8 @@ class Position
       total_pages = raw_positions_list['totalPages'] #Retrieve the total number of pages for pagination
       positionsList = Array.new #Initialize an empty array for the positions
       for raw_position in raw_positions_list['foundObjects'] #For each position received from the server
-        position = Positon.rest_to_position(raw_position.to_json) #Turn a position to json format
-        positionsList << positon #Add it to the positions array
+        position = Position.rest_to_position(raw_position.to_json) #Turn a position to json format
+        positionsList << position #Add it to the positions array
       end
       return true, positionsList, total_positions, total_pages #Return success
     else

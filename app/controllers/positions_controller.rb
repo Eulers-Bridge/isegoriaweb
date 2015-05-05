@@ -9,14 +9,15 @@ class PositionsController < ApplicationController
 =end
   def index
 	  page_aux = params[:page] #Retrieve the params from the query string
-	  election_id = params[:election_id] #Retrieve the params from the query string
+	  @election_id = params[:election_id] #Retrieve the params from the query string
     @page = page_aux =~ /\A\d+\z/ ? page_aux.to_i : 0 #Validate if the page_aux param is turnable to an integer, otherwise set it to cero
-    response = Position.all(session[:user],election_id,@page) #Retrieve all the positions from the model
+    response = Position.all(session[:user],@election_id,@page) #Retrieve all the positions from the model
     if response[0] #Validate if the response was successfull
       @positions_list = response[1] #Get the positions list from the response
       total_pages = response[3].to_i #Get the total numer of pages from the response
       @previous_page = @page > 0 ? @page-1 : -1 #Calculate the previous page number, if we are at the first page, then it will set to minus one
       @next_page = @page+1 < total_pages ? @page+1 : -1 #Calculate the next page number, if we are at the last page, then it will set to minus one
+      @position = Position.new #Set a new position object to be filled by the user    
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:position_list_error_flash) #Set the error message to the user
       redirect_to error_general_error_path #Redirect the user to the generic error page
@@ -30,6 +31,7 @@ class PositionsController < ApplicationController
 =end
   def create
     @position = Position.new(position_params) #Create a new Position object with the parameters set by the user in the create form
+    Rails.logger.debug @position.to_s
     response = @position.save(session[:user]) #Save the new Position object
     if response[0] #Validate if the response was successfull
       flash[:success] = t(:position_creation_success_flash, position: @position.name) #Set the success message for the user
