@@ -1,0 +1,40 @@
+<div class="section_controls">
+  <div class="pagination_controls">
+    <% if @previous_page >=0 %>
+      <%= link_to "<< ", positions_path(:page =>@previous_page), :class => 'nav_control' %> 
+    <%end%>
+    <%=(@page+1)%>
+    <% if @next_page >=0 %>
+      <%= link_to " >>", positions_path(:page =>@next_page), :class => 'nav_control' %> 
+    <%end%> 
+  </div>
+</div>
+<div>
+  <%= form_for(@position) do |f| %>
+  <%= f.submit capitalize_as_title(t(:create)), class: "btn btn-large btn-success" %>
+  <div class="form-group">
+    <%= f.label :name, capitalize_as_title(t (:name)) %>
+    <%= f.text_field :name, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:name)).capitalize %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, capitalize_as_title(t (:description)) %>
+    <%= f.text_area :description, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:description)).capitalize %>
+  </div>
+  <%= f.hidden_field :election_id, value: @election_id %>
+  <% end %>
+</div>
+<div id="positions_list">
+  <% @positions_list.each do |position| %>
+    <div class="position_item">
+      <div class="item_controls">
+        <%= link_to t(:delete).capitalize, position_path(:id => position.id), method: :delete, :class => 'delete_link' %>
+      </div>
+      <div>
+        <h3><%=position.name%></h3>
+        <h4><%= t(:description).capitalize+":"%></h4>
+        <h4><%= position.description. capitalize%></h4>
+      </div>
+    </div>
+  <% end %>
+</div>
+<%= javascript_include_tag "positions_util" %>
