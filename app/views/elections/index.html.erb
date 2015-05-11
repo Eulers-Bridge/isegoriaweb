@@ -18,6 +18,7 @@
         <%= link_to t(:edit).capitalize, edit_election_path(:id => election.id), :class => 'edit_link' %> 
         <%= link_to t(:delete).capitalize, election_path(:id => election.id), method: :delete, :class => 'delete_link' %>
         <%= link_to t(:positions).capitalize, positions_path(:election_id => election.id), method: :get, :class => 'child_link' %>
+        <%= link_to t(:tickets).capitalize, tickets_path(:election_id => election.id), method: :get, :class => 'child_link' %>
       </div>
       <div>
         <h3><%=election.title%></h3>
