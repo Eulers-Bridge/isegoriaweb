@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :photo_albums, only: [:create, :update, :destroy, :new, :edit, :index]
   resources :positions, only: [:create, :update, :destroy, :index]
   resources :tickets, only: [:create, :update, :destroy, :new, :edit, :index]
+  resources :candidates, only: [:create, :update, :destroy, :new, :edit, :index]
 
   # You can have the root of your site routed with "root"
   root 'home#landing'

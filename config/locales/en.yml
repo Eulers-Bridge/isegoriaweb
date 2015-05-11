@@ -53,6 +53,7 @@ en:
   app_name: "Isegoria"
   benefits: "benefits"
   cancel: "cancel"
+  candidates: 'candidates'
   candidate_creation_error_flash: "An error has ocurred, the candidate was not created"
   candidate_creation_success_flash: "Candidate successfully created"
   candidate_deletion_error_flash: "An error has ocurred, the candidate was not deleted"
