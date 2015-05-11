@@ -9,7 +9,6 @@ class Ticket
   validates :information, :presence => { :message => ApplicationHelper.validation_error(:information, :presence, nil)}
   validates :color, :presence => { :message => ApplicationHelper.validation_error(:color, :presence, nil)}
   validates :election_id, :presence => { :message => ApplicationHelper.validation_error(:election, :presence, nil) }
-  validates :id, :presence =>{ :message => ApplicationHelper.validation_error(:id, :presence, nil) }
 
 =begin
 --------------------------------------------------------------------------------------------------------------------
@@ -24,7 +23,7 @@ class Ticket
     @information = attributes[:information]
     @color = attributes [:color]
     @candidates = attributes [:candidates]
-    @election_id = attributes[:answers]
+    @election_id = attributes[:election_id]
     @number_of_supporters = attributes[:number_of_supporters]
   end
 
@@ -48,10 +47,10 @@ class Ticket
                 'logo'=> self.acronym,
                 'photos' => [],
                 'information'=> self.information,
-                'color' => self.color,
+                'colour' => self.color,
                 'candidateNames' => [],
                 'electionId'=> self.election_id,
-                'numberOfSupporters' =>self.numberOfSupporters
+                'numberOfSupporters' =>self.number_of_supporters
                 }
       reqUrl = "/api/ticket/" #Set the request url
       rest_response = MwHttpRequest.http_post_request(reqUrl,ticket_req,user['email'],user['password']) #Make the POST call to the server with the required parameters
@@ -112,13 +111,13 @@ class Ticket
                 'logo'=> attributes[:acronym],
                 'photos' => [],
                 'information'=> attributes[:information],
-                'color' => attributes[:color],
+                'colour' => attributes[:color],
                 'candidateNames' => [],
-                'electionId'=> attributes[:election_id],
-                'numberOfSupporters' =>self.numberOfSupporters
+                'electionId'=> self.election_id,
+                'numberOfSupporters' =>self.number_of_supporters
                 }    
       reqUrl = "/api/ticket/#{self.id}" #Set the request url
-      rest_response = MwHttpRequest.http_put_request(reqUrl,position_req,user['email'],user['password']) #Make the PUT call to the server with the required parameters
+      rest_response = MwHttpRequest.http_put_request(reqUrl,ticket_req,user['email'],user['password']) #Make the PUT call to the server with the required parameters
       Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
       if rest_response.code == "200" #Validate if the response from the server is 200, which means OK
         ticket = Ticket.rest_to_ticket(rest_response.body)
@@ -189,7 +188,7 @@ class Ticket
         ticket = Ticket.rest_to_ticket(raw_ticket.to_json) #Turn a ticket to json format
         ticketsList << ticket #Add it to the positions array
       end
-      return true, ticketsList, total_positions, total_pages #Return success
+      return true, ticketsList, total_tickets, total_pages #Return success
     else
       return false, "#{rest_response.code}", "#{rest_response.message}" #Return error
     end
@@ -203,7 +202,7 @@ class Ticket
 --------------------------------------------------------------------------------------------------------------------
 =end
   private
-  def self.rest_to_position(rest_body)
+  def self.rest_to_ticket(rest_body)
     raw_ticket = JSON.parse(rest_body) #Turn the object to an array to be able to manipulate it
       ticket = Ticket.new(
         id: raw_ticket["ticketId"], 
@@ -211,7 +210,7 @@ class Ticket
         acronym: raw_ticket["logo"],
         photos: raw_ticket["photos"],
         information: raw_ticket["information"],
-        color: raw_ticket["color"],
+        color: raw_ticket["colour"],
         candidates: raw_ticket["candidateNames"],
         election_id: raw_ticket["electionId"],
         number_of_supporters: raw_ticket["numberOfSupporters"])  

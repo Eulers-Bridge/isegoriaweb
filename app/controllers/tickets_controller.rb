@@ -10,16 +10,16 @@ class TicketsController < ApplicationController
 =end
   def index
     @page_aux = params[:page] #Retrieve the params from the query string
-    election_id = params[:election_id] #Retrieve the params from the query string
+    @election_id = params[:election_id] #Retrieve the params from the query string
     @page = @page_aux =~ /\A\d+\z/ ? @page_aux.to_i : 0 #Validate if the page_aux param can be parsed as an integer, otherwise set it to cero
-    response = Ticket.all(session[:user],election_id,@page) #Retrieve all the tickets from the model
+    response = Ticket.all(session[:user],@election_id,@page) #Retrieve all the tickets from the model
     if response[0] #Validate if the response was successfull
       @tickets_list = response[1] #Get the tickets list from the response
       @total_pages = response[3].to_i #Get the total numer of pages from the response
       @previous_page = @page > 0 ? @page-1 : -1 #Calculate the previous page number, if we are at the first page, then it will set to minus one
       @next_page = @page+1 < @total_pages ? @page+1 : -1 #Calculate the next page number, if we are at the last page, then it will set to minus one
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
-      flash[:danger] = t(:tickets_list_error_flash) #Set the error message to the user
+      flash[:danger] = t(:ticket_list_error_flash) #Set the error message to the user
       redirect_to error_general_error_path #Redirect the user to the generic error page
     end 
   end
@@ -30,8 +30,9 @@ class TicketsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def new
-  	election_id = params[:election_id] #Retrieve the params from the query string
+  	@election_id = params[:election_id] #Retrieve the params from the query string
     @ticket = Ticket.new #Set a new ticket object to be filled by the user form
+    @ticket.election_id = @election_id #Set the owner election id to the object before its created
   end
 
 =begin
@@ -44,7 +45,7 @@ class TicketsController < ApplicationController
     resp = @ticket.save(session[:user]) #Save the new Ticket object
     if resp[0] #Validate if the response was successfull
       flash[:success] = t(:ticket_creation_success_flash, ticket: @ticket.name) #Set the success message for the user
-      redirect_to tickets_path #Redirect the user to the tickets list page
+      redirect_to tickets_path(:election_id =>@ticket.election_id) #Redirect the user to the tickets list page
     elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
         if(resp[1].kind_of?(Array)) #If the response was unsucessful, validate if it was caused by an invalid Ticket object sent to the model. If so the server would have returned an array with the errors
           flash[:warning] = Util.format_validation_errors(resp[1]) #Set the invalid object message for the user
@@ -83,10 +84,10 @@ class TicketsController < ApplicationController
       flash[:danger] = t(:ticket_get_error_flash) #Set the error message for the user
     redirect_to tickets_path #Redirect the user to the tickets list page
     end
-    resp2 = @ticket.update_attributes(ticket_params,session[:user],nil) #Update the ticket object
+    resp2 = @ticket.update_attributes(ticket_params,session[:user]) #Update the ticket object
     if resp2[0] #Validate if the response was successfull
       flash[:success] = t(:ticket_modification_success_flash, ticket: @ticket.name) #Set the success message for the user
-      redirect_to tickets_path #Redirect the user to the tickets list page
+      redirect_to tickets_path(:election_id =>@ticket.election_id) #Redirect the user to the tickets list page
     elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       if(resp[1].kind_of?(Array)) #If the response was unsucessful, validate if it was caused by an invalid Ticket object sent to the model. If so the server would have returned an array with the errors
         flash[:warning] = Util.format_validation_errors(resp[1]) #Set the invalid object message for the user
@@ -107,7 +108,7 @@ class TicketsController < ApplicationController
     @ticket = resp[1] #Set the ticket object to be deleted
     elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:ticket_get_error_flash) #Set the error message for the user
-    redirect_to tickets_path #Redirect the user to the tickets list page
+    redirect_to tickets_path(:election_id =>@ticket.election_id) #Redirect the user to the tickets list page
     end
     resp2 = @ticket.delete(session[:user]) #Delete the ticket object
     if resp2[0] #Validate if the response was successfull
@@ -115,7 +116,7 @@ class TicketsController < ApplicationController
     elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
         flash[:danger] = t(:ticket_deletion_error_flash) #Set the error message for the user
       end
-      redirect_to tickets_path #Redirect the user to the tickets list page
+      redirect_to tickets_path(:election_id =>@ticket.election_id) #Redirect the user to the tickets list page
   end
 
 =begin

@@ -1,0 +1,31 @@
+<div class="section_controls">
+  <%= link_to capitalize_as_title(t(:create_ticket)), new_ticket_path(:election_id => @election_id), :class => 'create_link' %> 
+  <div class="pagination_controls">
+    <% if @previous_page >=0 %>
+      <%= link_to "<< ", tickets_path(:page =>@previous_page), :class => 'nav_control' %> 
+    <%end%>
+    <%=(@page+1)%>
+    <% if @next_page >=0 %>
+      <%= link_to " >>", tickets_path(:page =>@next_page), :class => 'nav_control' %> 
+    <%end%> 
+  </div>
+</div>
+
+<div id="tickets_list">
+  <% @tickets_list.each do |ticket| %>
+    <div class="ticket_item">
+      <div class="item_controls">
+        <%= link_to t(:edit).capitalize, edit_ticket_path(:id => ticket.id), :class => 'edit_link' %>
+        <%= link_to t(:delete).capitalize, ticket_path(:id => ticket.id), method: :delete, :class => 'delete_link' %>
+        <%= link_to t(:tickets).capitalize, candidates_path(:id => ticket.id,:election_id => ticket.election_id), method: :get, :class => 'child_link' %>
+      </div>
+      <div>
+        <h3><%=ticket.name%></h3>
+        <h4><%= t(:acronym).capitalize+" "+ticket.acronym%></h4>
+        <h4><%= t(:color).capitalize+" "+ticket.color.to_s%></h4>
+        <h4><%= t(:information).capitalize+" "+ticket.information%></h4>
+      </div>
+    </div>
+  <% end %>
+</div>
+<%= javascript_include_tag "tickets_util" %>
