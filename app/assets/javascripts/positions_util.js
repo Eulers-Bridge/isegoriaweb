@@ -1,0 +1,14 @@
+$(document).ready(function(){
+  $('.position_edit_control').unbind('click');
+  $('.cancel_edit_position_control').unbind('click');
+  $('.position_edit_control').click(function(e){
+    $(this).parent().parent().find('.edit_election_form').toggleClass('show');
+    $(this).hide();
+    e.preventDefault();
+    });
+  $('.cancel_edit_position_control').click(function(e){
+  	$(this).parent().parent().parent().find('.position_edit_control').show();
+    $(this).parent().parent().removeClass('show');
+    e.preventDefault();
+    });
+  });

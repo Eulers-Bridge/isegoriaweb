@@ -22,3 +22,11 @@
 	border-color: #AAAAAA;
 	border-radius: 6px;
 }
+
+.edit_election_form{
+	display: none;
+	//transition: top 1000ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
+}
+.edit_election_form.show{
+	display: block;
+}

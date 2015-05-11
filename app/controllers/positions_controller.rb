@@ -68,7 +68,7 @@ class PositionsController < ApplicationController
         flash[:warning] = Util.format_validation_errors(response2[1]) #Set the invalid object message for the user
       end
         flash[:danger] = t(:position_modification_error_flash) #Set the error message for the user
-        redirect_to redirect_to positions_path(:election_id =>@position.election_id) #Redirect the user to the positions list page
+        redirect_to positions_path(:election_id =>@position.election_id) #Redirect the user to the positions list page
     end
   end
 
