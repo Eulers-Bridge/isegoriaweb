@@ -2,11 +2,11 @@
   <%= link_to capitalize_as_title(t(:create_poll)), new_poll_path, :class => 'create_link' %> 
   <div class="pagination_controls">
     <% if @previous_page >=0 %>
-      <%= link_to "<< ", photos_path(:page =>@previous_page), :class => 'nav_control' %> 
+      <%= link_to "<< ", polls_path(:page =>@previous_page), :class => 'nav_control' %> 
     <%end%>
     <%=(@page+1)%>
     <% if @next_page >=0 %>
-      <%= link_to " >>", photos_path(:page =>@next_page), :class => 'nav_control' %> 
+      <%= link_to " >>", polls_path(:page =>@next_page), :class => 'nav_control' %> 
     <%end%> 
   </div>
 </div>
