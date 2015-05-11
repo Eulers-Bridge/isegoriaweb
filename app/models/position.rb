@@ -92,12 +92,14 @@ class Position
 =end
   def update_attributes(attributes = {}, user)
     Rails.logger.debug "Call to position.update_attributes"
+    self.name = attributes[:name] #Set the name value as if has not been set by rails because we have multiple update forms in the same page
+    self.description = attributes[:description]; #Set the description value as if has not been set by rails because we have multiple update forms in the same page
     if self.valid? #Validate if the Position object is valid
       Rails.logger.debug "The position is valid!"
       #Create a raw position object
       position_req = { 'name'=>attributes[:name],
                 'description'=>attributes[:description],
-                'election_id'=> self.election_id
+                'electionId'=> self.election_id
                 }     
       reqUrl = "/api/position/#{self.id}" #Set the request url
       rest_response = MwHttpRequest.http_put_request(reqUrl,position_req,user['email'],user['password']) #Make the PUT call to the server with the required parameters
