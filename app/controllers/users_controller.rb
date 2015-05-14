@@ -9,6 +9,9 @@ class UsersController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def signup
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
     @user = User.new(user_params) #Create a new User object with the parameters set by the user in the create form
     response = @user.save #Save the new User object
     if response[0] #Validate if the response was successfull
@@ -20,6 +23,8 @@ class UsersController < ApplicationController
       end
       flash[:danger] = t(:user_creation_error_flash) #Set the error message for the user
       redirect to register_successfull_path, layout: "logged_off"
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
   end
 
@@ -29,6 +34,9 @@ class UsersController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def index
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
     page_aux = params[:page] #Retrieve the params from the query string
     @page = page_aux =~ /\A\d+\z/ ? page_aux.to_i : 0 #Validate if the page_aux param is turnable to an integer, otherwise set it to cero
     response = User.all(session[:user],@page) #Retrieve all the users from the model
@@ -40,6 +48,8 @@ class UsersController < ApplicationController
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:user_list_error_flash) #Set the error message to the user
       redirect_to error_general_error_path #Redirect the user to the generic error page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
   end
 
@@ -49,6 +59,9 @@ class UsersController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def new
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
     @user = User.new #Set a new user object to be filled with the create form
     response = Country.general_info #Retrieve the countries and institutions catalog
     if response[0] #Validate if the response was successfull
@@ -57,6 +70,8 @@ class UsersController < ApplicationController
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:country_list_error_flash) #Set the error message to the user
       redirect_to error_general_error_path #Redirect the user to the generic error page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
   end
 
@@ -66,18 +81,23 @@ class UsersController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def create
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
     @user = User.new(user_params) #Create a new User object with the parameters set by the user in the create form
     response = @user.save #Save the new User object
     if response[0] #Validate if the response was successfull
       flash[:success] = t(:user_creation_success_flash, user: @user.email) #Set the success message for the user
       redirect_to users_path #Redirect the user to the user list page
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
-        if(response[1].kind_of?(Array)) #If the response was unsucessful, validate if it was caused by an invalid photo album object sent to the model. If so the server would have returned an array with the errors
-          flash[:warning] = Util.format_validation_errors(response[1]) #Set the invalid object message for the user
-        end
-        flash[:danger] = t(:user_creation_error_flash) #Set the error message for the user
-        @user = User.new #Reset the User object to an empty one
-        redirect_to new_user_path #Redirect the user to the User creation page
+      if(response[1].kind_of?(Array)) #If the response was unsucessful, validate if it was caused by an invalid photo album object sent to the model. If so the server would have returned an array with the errors
+        flash[:warning] = Util.format_validation_errors(response[1]) #Set the invalid object message for the user
+      end
+      flash[:danger] = t(:user_creation_error_flash) #Set the error message for the user
+      @user = User.new #Reset the User object to an empty one
+      redirect_to new_user_path #Redirect the user to the User creation page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
   end
 
@@ -87,12 +107,17 @@ class UsersController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def edit
-  response = User.find(params[:email],session[:user]) #Retrieve the user to update
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
+    response = User.find(params[:email],session[:user]) #Retrieve the user to update
     if response[0] #Validate if the response was successfull 
     @user = response[1] #Set the user object to fill the edit form
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:user_get_error_flash) #Set the error message for the user
       redirect_to user_path #Redirect the user to edit user page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
   end
 
@@ -102,12 +127,17 @@ class UsersController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def update
-  response = User.find(params[:email],session[:user]) #Retrieve the original user object to update
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
+    response = User.find(params[:email],session[:user]) #Retrieve the original user object to update
     if response[0] #Validate if the response was successfull 
       @user = response[1] #Set the user object to be updated
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:user_get_error_flash) #Set the error message for the user
       redirect_to users_path #Redirect the user to the users list page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
     response2 = @user.update_attributes(user_params,session[:user]) #Update the user object
     if response2[0] #Validate if the response was successfull
@@ -117,8 +147,10 @@ class UsersController < ApplicationController
       if(response2[1].kind_of?(Array))#If the response was unsucessful, validate if it was caused by an invalid User object sent to the model. If so the server would have returned an array with the errors
         flash[:warning] = Util.format_validation_errors(response2[1]) #Set the invalid object message for the user
       end
-        flash[:danger] = t(:user_modification_error_flash) #Set the error message for the user
-        redirect_to edit_user_path #Redirect the user to the User edition page
+      flash[:danger] = t(:user_modification_error_flash) #Set the error message for the user
+      redirect_to edit_user_path #Redirect the user to the User edition page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
   end
 
@@ -128,18 +160,25 @@ class UsersController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def destroy
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
     response = User.find(params[:email],session[:user]) #Retrieve the original user object to delete
     if response[0] #Validate if the response was successfull 
       @user = response[1] #Set the user object to be updated
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:user_get_error_flash) #Set the error message for the user
       redirect_to users_path #Redirect the user to the users list page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
     response2 = @user.delete(session[:user]) #Delete the user object
     if response2[0] #Validate if the response was successfull
       flash[:success] = t(:user_deletion_success_flash, user: @user.email) #Set the success message for the user
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
-        flash[:danger] = t(:user_deletion_error_flash) #Set the error message for the user
+      flash[:danger] = t(:user_deletion_error_flash) #Set the error message for the user
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
     redirect_to users_path #Redirect the user to the users list page
   end

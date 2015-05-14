@@ -19,6 +19,8 @@ protect_from_forgery with: :exception
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:country_list_error_flash) #Set the error message to the user
       redirect_to root #Redirect the user to the root page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
   end
 
@@ -33,23 +35,35 @@ protect_from_forgery with: :exception
     if response[0] #Validate if the response was successfull
       flash[:success] = t(:home_register_thanks, user: @user.email) #Set the success message for the user
       redirect_to home_register_successfull_path #Redirect the user to the verify email
-    else validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+    elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       if(response[1].kind_of?(Array)) #If the response was unsucessful, validate if it was caused by an invalid photo album object sent to the model. If so the server would have returned an array with the errors
         flash[:warning] = Util.format_validation_errors(response[1]) #Set the invalid object message for the user
       end
       flash[:danger] = t(:user_creation_error_flash) #Set the error message for the user
       redirect_to home_signup_path
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
   end
 
+=begin
+--------------------------------------------------------------------------------------------------------------------------------
+  Function to redirect the user to the landing page
+--------------------------------------------------------------------------------------------------------------------------------
+=end
   def landing
-    render :layout => false
-    @stylesheet = 'landing'
+    render :layout => false #Disable the default layout
+    @stylesheet = 'landing' #Set the stylesheet
   end
 
+=begin
+--------------------------------------------------------------------------------------------------------------------------------
+  Function to redirect the user to the more_info page
+--------------------------------------------------------------------------------------------------------------------------------
+=end
   def more_info
-    render :layout => false
-    @stylesheet = 'more_info'
+    render :layout => false #Disable the default layout
+    @stylesheet = 'more_info' #Set the stylesheet
   end
 
 =begin

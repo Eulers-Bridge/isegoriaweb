@@ -42,20 +42,3 @@ class SessionsController < ApplicationController
   	redirect_to root_path
   end
 end
-
-=begin
-{"givenName":"Greg",
- "familyName":"Newitt",
- "gender":"Male",
- "nationality":"Australian",
- "yearOfBirth":"1971",
- "password":"test123",
- "contactNumber":null,
- "accountVerified":true,
- "hasPersonality":false,
- "institutionId":26,
- "email":"greg.newitt@unimelb.edu.au",
- "photos":[],
- "trackingOff":true,"optOutDataCollection":true},
- "userId":42,}
-=end

@@ -9,7 +9,10 @@ class PhotoAlbumsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def index
-	page_aux = params[:page] #Retrieve the params from the query string
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
+	  page_aux = params[:page] #Retrieve the params from the query string
     @page = page_aux =~ /\A\d+\z/ ? page_aux.to_i : 0 #Validate if the page_aux param is turnable to an integer, otherwise set it to cero
     response = PhotoAlbum.all(session[:user],@page) #Retrieve all the photo albums from the model
     if response[0] #Validate if the response was successfull
@@ -20,6 +23,8 @@ class PhotoAlbumsController < ApplicationController
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:photo_album_list_error_flash) #Set the error message to the user
       redirect_to error_general_error_path #Redirect the user to the generic error page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
   end
 
@@ -29,7 +34,10 @@ class PhotoAlbumsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def new
-	@photo_album = PhotoAlbum.new #Set a new photo album object to be filled with the create form
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
+	  @photo_album = PhotoAlbum.new #Set a new photo album object to be filled with the create form
   end
 
 =begin
@@ -38,6 +46,9 @@ class PhotoAlbumsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def create
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
     @photo_album = PhotoAlbum.new(photo_album_params) #Create a new Photo Album object with the parameters set by the user in the create form
     @photo_album.owner_id = session[:user]['id'] #Set the logged user's id as owner
     @photo_album.creator_id = session[:user]['id'] #Set the logged user's id as creator
@@ -46,12 +57,14 @@ class PhotoAlbumsController < ApplicationController
       flash[:success] = t(:photo_album_creation_success_flash, photo_album: @photo_album.name) #Set the success message for the user
       redirect_to photo_albums_path #Redirect the user to the photo_album list page
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
-        if(response[1].kind_of?(Array)) #If the response was unsucessful, validate if it was caused by an invalid photo album object sent to the model. If so the server would have returned an array with the errors
-          flash[:warning] = Util.format_validation_errors(response[1]) #Set the invalid object message for the user
-        end
-        flash[:danger] = t(:photo_album_creation_error_flash) #Set the error message for the user
-        @photo_album = PhotoAlbum.new #Reset the Photo Album object to an empty one
-        redirect_to new_photo_album_path #Redirect the user to the Photo Album creation page
+      if(response[1].kind_of?(Array)) #If the response was unsucessful, validate if it was caused by an invalid photo album object sent to the model. If so the server would have returned an array with the errors
+        flash[:warning] = Util.format_validation_errors(response[1]) #Set the invalid object message for the user
+      end
+      flash[:danger] = t(:photo_album_creation_error_flash) #Set the error message for the user
+      @photo_album = PhotoAlbum.new #Reset the Photo Album object to an empty one
+      redirect_to new_photo_album_path #Redirect the user to the Photo Album creation page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
   end
 
@@ -61,18 +74,25 @@ class PhotoAlbumsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def destroy
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
     response = PhotoAlbum.find(params[:id],session[:user]) #Retrieve the original photo album object to update
     if response[0] #Validate if the response was successfull 
       @photo_album = response[1] #Set the photo album object to be updated
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:photo_album_get_error_flash) #Set the error message for the user
       redirect_to photo_albums_path #Redirect the user to the photo_albums list page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
     response2 = @photo_album.delete(session[:user]) #Delete the photo_album object
     if response2[0] #Validate if the response was successfull
       flash[:success] = t(:photo_album_deletion_success_flash, photo_album: @photo_album.name) #Set the success message for the user
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
         flash[:danger] = t(:photo_album_deletion_error_flash) #Set the error message for the user
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
     redirect_to photo_albums_path #Redirect the user to the photo_albums list page
   end
@@ -83,7 +103,10 @@ class PhotoAlbumsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def edit
-	response = PhotoAlbum.find(params[:id],session[:user]) #Retrieve the photo album to update
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
+	  response = PhotoAlbum.find(params[:id],session[:user]) #Retrieve the photo album to update
     if response[0] #Validate if the response was successfull 
       @photo_album = response[1] #Set the photo album object to fill the edit form
       @page_aux = params[:page] #Retrieve the page number from the url params
@@ -97,10 +120,14 @@ class PhotoAlbumsController < ApplicationController
       elsif validate_authorized_access(response2[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
         flash[:danger] = t(:photo_list_error_flash) #Set the error message for the user
         redirect_to photo_albums_path #Redirect the user to photo_albums index page
+      else 
+        return #If not force return to trigger the redirect of the check_session function
       end
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:photo_album_get_error_flash) #Set the error message for the user
       redirect_to photo_album_path #Redirect the user to edit photo_album page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
   end
 
@@ -110,12 +137,17 @@ class PhotoAlbumsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def update
-	response = PhotoAlbum.find(params[:id],session[:user]) #Retrieve the original photo album object to update
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
+	  response = PhotoAlbum.find(params[:id],session[:user]) #Retrieve the original photo album object to update
     if response[0] #Validate if the response was successfull 
       @photo_album = response[1] #Set the photo_album object to be updated
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:photo_album_get_error_flash) #Set the error message for the user
       redirect_to photo_albums_path #Redirect the user to the photo albums list page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
     response2 = @photo_album.update_attributes(photo_album_params,session[:user]) #Update the photo album object
     if response2[0] #Validate if the response was successfull
@@ -127,6 +159,8 @@ class PhotoAlbumsController < ApplicationController
       end
         flash[:danger] = t(:photo_album_modification_error_flash) #Set the error message for the user
         redirect_to edit_photo_album_path #Redirect the user to the Photo Album edition page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
   end
 
@@ -136,24 +170,31 @@ class PhotoAlbumsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def upload_picture
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
     resp = PhotoAlbum.find(params[:id],session[:user])
-	if resp[0]
-	  @photo_album = resp[1]
-	elsif validate_authorized_access(resp[1])
-	  flash[:danger] = t(:article_get_error_flash)
-	  redirect_to :back
-	end
-	resp2 = @photo_album.upload_picture(photo_album_params,session[:user])
-	if resp2[0]
-	  flash[:success] = t(:picture_uploading_success_flash, photo_album: @photo_album.name)
-	  redirect_to :back
-	elsif validate_authorized_access(resp[1])
-	  if(resp[1].kind_of?(Array))
+	  if resp[0]
+	    @photo_album = resp[1]
+	  elsif validate_authorized_access(resp[1])
+	    flash[:danger] = t(:article_get_error_flash)
+	    redirect_to :back
+    else 
+      return #If not force return to trigger the redirect of the check_session function
+	  end
+	  resp2 = @photo_album.upload_picture(photo_album_params,session[:user])
+	  if resp2[0]
+	    flash[:success] = t(:picture_uploading_success_flash, photo_album: @photo_album.name)
+	    redirect_to :back
+	  elsif validate_authorized_access(resp[1])
+	    if(resp[1].kind_of?(Array))
         flash[:warning] = Util.format_validation_errors(resp[1])
       end
       flash[:danger] = t(:picture_uploading_error_flash)
       redirect_to :back
-	end
+    else 
+      return #If not force return to trigger the redirect of the check_session function
+	  end
   end
 
 =begin
@@ -162,18 +203,25 @@ class PhotoAlbumsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def delete_picture
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
     resp = Photo.find(params[:id],session[:user])
     if resp[0]
       photo = resp[1]
     elsif validate_authorized_access(resp[1])
       flash[:danger] = t(:photo_get_error_flash)
       redirect_to :back
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
       resp2 = photo.delete(session[:user])
     if resp2[0]
       flash[:success] = t(:picture_deletion_success_flash, photo: photo.title)
     elsif validate_authorized_access(resp[1])
       flash[:danger] = t(:picture_deletion_error_flash)
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
     redirect_to :back
   end

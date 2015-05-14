@@ -9,6 +9,9 @@ class TicketsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def index
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
     @page_aux = params[:page] #Retrieve the params from the query string
     @election_id = params[:election_id] #Retrieve the params from the query string
     @page = @page_aux =~ /\A\d+\z/ ? @page_aux.to_i : 0 #Validate if the page_aux param can be parsed as an integer, otherwise set it to cero
@@ -21,6 +24,8 @@ class TicketsController < ApplicationController
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:ticket_list_error_flash) #Set the error message to the user
       redirect_to error_general_error_path #Redirect the user to the generic error page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end 
   end
 
@@ -30,6 +35,9 @@ class TicketsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def new
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
   	@election_id = params[:election_id] #Retrieve the params from the query string
     @ticket = Ticket.new #Set a new ticket object to be filled by the user form
     @ticket.election_id = @election_id #Set the owner election id to the object before its created
@@ -41,18 +49,23 @@ class TicketsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def create
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
     @ticket = Ticket.new(ticket_params) #Create a new ticket object with the parameters set by the user in the create form
     resp = @ticket.save(session[:user]) #Save the new Ticket object
     if resp[0] #Validate if the response was successfull
       flash[:success] = t(:ticket_creation_success_flash, ticket: @ticket.name) #Set the success message for the user
       redirect_to tickets_path(:election_id =>@ticket.election_id) #Redirect the user to the tickets list page
     elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
-        if(resp[1].kind_of?(Array)) #If the response was unsucessful, validate if it was caused by an invalid Ticket object sent to the model. If so the server would have returned an array with the errors
-          flash[:warning] = Util.format_validation_errors(resp[1]) #Set the invalid object message for the user
-        end
-        flash[:danger] = t(:ticket_creation_error_flash) #Set the error message for the user
-        @ticket = Ticket.new #Reset the Ticket object to an empty one
-        redirect_to new_ticket_path #Redirect the user to the Ticket creation page
+      if(resp[1].kind_of?(Array)) #If the response was unsucessful, validate if it was caused by an invalid Ticket object sent to the model. If so the server would have returned an array with the errors
+        flash[:warning] = Util.format_validation_errors(resp[1]) #Set the invalid object message for the user
+      end
+      flash[:danger] = t(:ticket_creation_error_flash) #Set the error message for the user
+      @ticket = Ticket.new #Reset the Ticket object to an empty one
+      redirect_to new_ticket_path #Redirect the user to the Ticket creation page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
   end
 
@@ -62,12 +75,17 @@ class TicketsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def edit
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
     resp = Ticket.find(params[:id],session[:user]) #Retrieve the ticket to update
     if resp[0] #Validate if the response was successfull
     @ticket = resp[1] #Set the ticket object to fill the edit form
     elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:ticket_get_error_flash) #Set the error message for the user
-    redirect_to ticket_path #Redirect the user to edit ticket page
+      redirect_to ticket_path #Redirect the user to edit ticket page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
   end
 
@@ -77,12 +95,17 @@ class TicketsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def update
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
     resp = Ticket.find(params[:id],session[:user]) #Retrieve the original ticket object to update
     if resp[0] #Validate if the response was successfull
     @ticket = resp[1] #Set the ticket object to be updated
     elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:ticket_get_error_flash) #Set the error message for the user
-    redirect_to tickets_path #Redirect the user to the tickets list page
+      redirect_to tickets_path #Redirect the user to the tickets list page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
     resp2 = @ticket.update_attributes(ticket_params,session[:user]) #Update the ticket object
     if resp2[0] #Validate if the response was successfull
@@ -92,8 +115,10 @@ class TicketsController < ApplicationController
       if(resp[1].kind_of?(Array)) #If the response was unsucessful, validate if it was caused by an invalid Ticket object sent to the model. If so the server would have returned an array with the errors
         flash[:warning] = Util.format_validation_errors(resp[1]) #Set the invalid object message for the user
       end
-        flash[:danger] = t(:ticket_modification_error_flash) #Set the error message for the user
-        redirect_to edit_ticket_path #Redirect the user to the Tickets edition page
+      flash[:danger] = t(:ticket_modification_error_flash) #Set the error message for the user
+      redirect_to edit_ticket_path #Redirect the user to the Tickets edition page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
   end
 
@@ -103,19 +128,26 @@ class TicketsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def destroy
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
     resp = Ticket.find(params[:id],session[:user]) #Retrieve the original ticket object to update
     if resp[0] #Validate if the response was successfull 
     @ticket = resp[1] #Set the ticket object to be deleted
     elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:ticket_get_error_flash) #Set the error message for the user
-    redirect_to tickets_path(:election_id =>@ticket.election_id) #Redirect the user to the tickets list page
+      redirect_to tickets_path(:election_id =>@ticket.election_id) #Redirect the user to the tickets list page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
     resp2 = @ticket.delete(session[:user]) #Delete the ticket object
     if resp2[0] #Validate if the response was successfull
       flash[:success] = t(:ticket_deletion_success_flash, ticket: @ticket.name) #Set the success message for the user
     elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
-        flash[:danger] = t(:ticket_deletion_error_flash) #Set the error message for the user
-      end
+      flash[:danger] = t(:ticket_deletion_error_flash) #Set the error message for the user
+    else 
+      return #If not force return to trigger the redirect of the check_session function
+    end
       redirect_to tickets_path(:election_id =>@ticket.election_id) #Redirect the user to the tickets list page
   end
 

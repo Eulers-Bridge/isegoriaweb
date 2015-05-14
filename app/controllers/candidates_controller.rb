@@ -9,6 +9,9 @@ class CandidatesController < ApplicationControllerclass
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def index
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
     @page_aux = params[:page] #Retrieve the params from the query string
     ticket_id = params[:ticket_id] #Retrieve the params from the query string
     @page = @page_aux =~ /\A\d+\z/ ? @page_aux.to_i : 0 #Validate if the page_aux param can be parsed as an integer, otherwise set it to cero
@@ -21,6 +24,8 @@ class CandidatesController < ApplicationControllerclass
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:candidates_list_error_flash) #Set the error message to the user
       redirect_to error_general_error_path #Redirect the user to the generic error page
+    else
+      return #If not force return to trigger the redirect of the check_session function
     end 
   end
 
@@ -30,6 +35,9 @@ class CandidatesController < ApplicationControllerclass
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def new
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
   	ticket_id = params[:ticket_id] #Retrieve the params from the query string
     @candidate = Candidate.new #Set a new candidate object to be filled by the user form
   end
@@ -40,6 +48,9 @@ class CandidatesController < ApplicationControllerclass
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def create
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
     @candidate = Candidate.new(candidate_params) #Create a new candidate object with the parameters set by the user in the create form
     resp = @candidate.save(session[:user]) #Save the new Candidate object
     if resp[0] #Validate if the response was successfull
@@ -52,6 +63,8 @@ class CandidatesController < ApplicationControllerclass
         flash[:danger] = t(:candidate_creation_error_flash) #Set the error message for the user
         @candidate = Candidate.new #Reset the Candidate object to an empty one
         redirect_to new_candidate_path #Redirect the user to the Candidate creation page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
   end
 
@@ -61,12 +74,17 @@ class CandidatesController < ApplicationControllerclass
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def edit
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
     resp = Candidate.find(params[:id],session[:user]) #Retrieve the candidate to update
     if resp[0] #Validate if the response was successfull
     @candidate = resp[1] #Set the candidate object to fill the edit form
     elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:candidate_get_error_flash) #Set the error message for the user
-    redirect_to candidate_path #Redirect the user to edit candidate page
+      redirect_to candidate_path #Redirect the user to edit candidate page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
   end
 
@@ -76,12 +94,17 @@ class CandidatesController < ApplicationControllerclass
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def update
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
     resp = Candidate.find(params[:id],session[:user]) #Retrieve the original candidate object to update
     if resp[0] #Validate if the response was successfull
     @candidate = resp[1] #Set the candidate object to be updated
     elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:candidate_get_error_flash) #Set the error message for the user
-    redirect_to candidates_path #Redirect the user to the candidates list page
+      redirect_to candidates_path #Redirect the user to the candidates list page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
     resp2 = @candidate.update_attributes(candidate_params,session[:user],nil) #Update the candidate object
     if resp2[0] #Validate if the response was successfull
@@ -91,8 +114,10 @@ class CandidatesController < ApplicationControllerclass
       if(resp[1].kind_of?(Array)) #If the response was unsucessful, validate if it was caused by an invalid Candidate object sent to the model. If so the server would have returned an array with the errors
         flash[:warning] = Util.format_validation_errors(resp[1]) #Set the invalid object message for the user
       end
-        flash[:danger] = t(:candidate_modification_error_flash) #Set the error message for the user
-        redirect_to edit_candidate_path #Redirect the user to the Candidate edition page
+      flash[:danger] = t(:candidate_modification_error_flash) #Set the error message for the user
+      redirect_to edit_candidate_path #Redirect the user to the Candidate edition page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
   end
 
@@ -102,20 +127,27 @@ class CandidatesController < ApplicationControllerclass
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def destroy
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
     resp = Candidate.find(params[:id],session[:user]) #Retrieve the original candidate object to update
     if resp[0] #Validate if the response was successfull 
     @candidate = resp[1] #Set the candidate object to be deleted
     elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:candidate_get_error_flash) #Set the error message for the user
-    redirect_to candidates_path #Redirect the user to the candidates list page
+      redirect_to candidates_path #Redirect the user to the candidates list page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
     resp2 = @candidate.delete(session[:user]) #Delete the candidate object
     if resp2[0] #Validate if the response was successfull
       flash[:success] = t(:candidate_deletion_success_flash, candidate: (@candidate.first_name + @candidate.last_name)) #Set the success message for the user
     elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
         flash[:danger] = t(:candidate_deletion_error_flash) #Set the error message for the user
-      end
-      redirect_to candidates_path #Redirect the user to the candidates list page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
+    end
+    redirect_to candidates_path #Redirect the user to the candidates list page
   end
 
 =begin

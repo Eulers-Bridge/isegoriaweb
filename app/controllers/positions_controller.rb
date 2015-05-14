@@ -8,6 +8,9 @@ class PositionsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def index
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
 	  page_aux = params[:page] #Retrieve the params from the query string
 	  @election_id = params[:election_id] #Retrieve the params from the query string
     @page = page_aux =~ /\A\d+\z/ ? page_aux.to_i : 0 #Validate if the page_aux param is turnable to an integer, otherwise set it to cero
@@ -21,6 +24,8 @@ class PositionsController < ApplicationController
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:position_list_error_flash) #Set the error message to the user
       redirect_to error_general_error_path #Redirect the user to the generic error page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
   end
 
@@ -30,6 +35,9 @@ class PositionsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def create
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
     @position = Position.new(position_params) #Create a new Position object with the parameters set by the user in the create form
     Rails.logger.debug @position.to_s
     response = @position.save(session[:user]) #Save the new Position object
@@ -37,12 +45,14 @@ class PositionsController < ApplicationController
       flash[:success] = t(:position_creation_success_flash, position: @position.name) #Set the success message for the user
       redirect_to positions_path(:election_id =>@position.election_id) #Redirect the user to the positions list page
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
-        if(response[1].kind_of?(Array)) #If the response was unsucessful, validate if it was caused by an invalid Position object sent to the model. If so the server would have returned an array with the errors
-          flash[:warning] = Util.format_validation_errors(response[1]) #Set the invalid object message for the user
-        end
-        flash[:danger] = t(:position_creation_error_flash) #Set the error message for the user
-        @position = Position.new #Reset the Position object to an empty one
-        redirect_to positions_path(:election_id =>@position.election_id) #Redirect the user to the positions list page
+      if(response[1].kind_of?(Array)) #If the response was unsucessful, validate if it was caused by an invalid Position object sent to the model. If so the server would have returned an array with the errors
+        flash[:warning] = Util.format_validation_errors(response[1]) #Set the invalid object message for the user
+      end
+      flash[:danger] = t(:position_creation_error_flash) #Set the error message for the user
+      @position = Position.new #Reset the Position object to an empty one
+      redirect_to positions_path(:election_id =>@position.election_id) #Redirect the user to the positions list page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
   end
 
@@ -52,12 +62,17 @@ class PositionsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def update
-	response = Position.find(params[:id],session[:user]) #Retrieve the original position object to update
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
+	  response = Position.find(params[:id],session[:user]) #Retrieve the original position object to update
     if response[0] #Validate if the response was successfull 
       @position = response[1] #Set the position object to be updated
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:poll_get_error_flash) #Set the error message for the user
       redirect_to positions_path(:election_id =>@position.election_id) #Redirect the user to the positions list page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
     response2 = @position.update_attributes(position_params,session[:user]) #Update the position object
     if response2[0] #Validate if the response was successfull
@@ -67,8 +82,10 @@ class PositionsController < ApplicationController
       if(response2[1].kind_of?(Array))#If the response was unsucessful, validate if it was caused by an invalid Poll object sent to the model. If so the server would have returned an array with the errors
         flash[:warning] = Util.format_validation_errors(response2[1]) #Set the invalid object message for the user
       end
-        flash[:danger] = t(:position_modification_error_flash) #Set the error message for the user
-        redirect_to positions_path(:election_id =>@position.election_id) #Redirect the user to the positions list page
+      flash[:danger] = t(:position_modification_error_flash) #Set the error message for the user
+      redirect_to positions_path(:election_id =>@position.election_id) #Redirect the user to the positions list page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
   end
 
@@ -78,18 +95,25 @@ class PositionsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def destroy
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
     response = Position.find(params[:id],session[:user]) #Retrieve the original position object to update
     if response[0] #Validate if the response was successfull 
       @position = response[1] #Set the position object to be updated
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:position_get_error_flash) #Set the error message for the user
       redirect_to positions_path(:election_id =>@position.election_id) #Redirect the user to the positions list page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
     response2 = @position.delete(session[:user]) #Delete the position object
     if response2[0] #Validate if the response was successfull
       flash[:success] = t(:position_deletion_success_flash, position: @position.name) #Set the success message for the user
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
-        flash[:danger] = t(:position_deletion_error_flash) #Set the error message for the user
+      flash[:danger] = t(:position_deletion_error_flash) #Set the error message for the user
+    else 
+      return #If not force return to trigger the redirect of the check_session function
     end
     redirect_to positions_path(:election_id =>@position.election_id) #Redirect the user to the positions list page
   end
