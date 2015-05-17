@@ -168,7 +168,8 @@ include ActiveModel::Model
               'organizer'=>attributes["organizer"],
               'organizerEmail'=>attributes["organizer_email"],
               'institutionId'=>user['institutionId'],
-              'modified'=>Util.date_to_epoch(Time.now.strftime(I18n.t(:date_format_ruby)))
+              'modified'=>Util.date_to_epoch(Time.now.strftime(I18n.t(:date_format_ruby))),
+              'created'=>Util.date_to_epoch(self.created)
       }      
       reqUrl = "/api/event/#{self.id}" #Set the request url
       rest_response = MwHttpRequest.http_put_request(reqUrl,event_req,user['email'],user['password']) #Make the PUT request to the server with the required parameters
