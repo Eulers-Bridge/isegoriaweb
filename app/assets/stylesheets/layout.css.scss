@@ -1,26 +1,41 @@
 #logged_body {
         padding-top: 60px !important;
         padding-bottom: 40px !important;
-        font-family: 'MuseoSansRounded500Regular' !important;
+        font-family: 'SourceSansPro' !important;
         font-size: 150%;
 }
 #isegoria_menu_sidebar {
     background-color: #f5f5f5 !important;
-}
-@media (min-width: 768px) {
-#isegoria_menu_sidebar {
-    background-color: #f5f5f5 !important;
-    border-right: 1px solid #eee !important;
-    bottom: 0 !important;
-    display: block !important;
-    left: 0 !important;
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
-    padding: 20px !important;
-    position: fixed !important;
-    top: 51px !important;
     z-index: 99 !important;
-  }
+    @media only screen and (min-width: 1024px){
+      border-right: 1px solid #eee !important;
+      bottom: 0 !important;
+      display: block !important;
+      left: 0 !important;
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+      padding: 20px !important;
+      position: fixed !important;
+      top: 51px !important;
+      z-index: 99 !important;
+    }
+    @media only screen and (min-width: 768px) and (max-width : 1023px){
+        border-right: 1px solid #eee !important;
+        bottom: 0 !important;
+        display: block !important;
+        left: 0 !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        padding: 20px !important;
+        position: fixed !important;
+        top: 51px !important;
+
+    }
+    @media only screen and (min-width: 480px) and (max-width : 767px){
+    }
+    @media only screen and (max-width : 480px){
+    }
+}
 #collapse_button {
     background-color: #222222 !important;
     border: 1px solid !important;
@@ -35,31 +50,37 @@
     float: right;
     color: #008844 !important;
     font-size: 175% !important;
-    font-family: 'MuseoSansRounded300Regular' !important;
 }
 .pagination_controls .nav_control{
     color: #008844 !important;
-    font-family: 'MuseoSansRounded300Regular' !important;
 }
 .pagination_controls .nav_control:hover{
     opacity: 0.70 !important;
     text-decoration: none;
 }
-
 .isegoria_navbar_link{
+    text-decoration: none;
     padding: 10px !important;
-    color: #007744 !important;
-    font-weight: bold;
-}
-
-.isegoria_navbar_link{
-    padding: 10px !important;
-    color: #008844 !important;
+    color: #FFFFFF !important;
     font-weight: bold;
 }
 .isegoria_navbar_link:hover{
   text-decoration: none;
-  color: #00BB77 !important;
+  opacity: 0.50;
+}
+.isegoria_navbar_title{
+    text-decoration: none;
+    padding: 10px !important;
+    color: #FFFFFF !important;
+    font-weight: bold !important;
+    position: absolute !important;
+    width: 100% !important;
+    left: 0 !important;
+    text-align: center !important;
+    margin: auto !important;
+    margin-left: 50px;
+    margin-right: 50px;
+    z-index: -1;
 }
 .isegoria_sidemenu_l1 li{
     color: #008844 !important;
@@ -86,7 +107,6 @@
 .create_link{
     color: #008844 !important;
     font-size: 175%;
-    font-family: 'MuseoSansRounded300Regular' !important;
 }
 .create_link:hover{
     opacity: 0.70 !important;
@@ -127,7 +147,4 @@
 .child_link:hover{
     opacity: 0.5 !important;
     text-decoration: none;
-}
-
-
 }

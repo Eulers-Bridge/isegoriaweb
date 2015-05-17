@@ -9,6 +9,7 @@ class EventsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def index
+    $title=t(:title_events) #Set the title variable
     if !check_session #Validate if the user session is active
       return #If not force return to trigger the redirect of the check_session function
     end
@@ -34,6 +35,7 @@ class EventsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def new
+    $title=t(:title_new_event)  #Set the title variable
     if !check_session #Validate if the user session is active
       return #If not force return to trigger the redirect of the check_session function
     end
@@ -46,6 +48,7 @@ class EventsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def edit
+    $title=t(:title_edit_event)  #Set the title variable
     if !check_session #Validate if the user session is active
       return #If not force return to trigger the redirect of the check_session function
     end

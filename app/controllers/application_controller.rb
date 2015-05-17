@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
   #before_actions will make a method run before actions are evaluated
   before_action :set_no_cache
   before_action :set_locale
+
+  $title=''  #Initialize the title variable
  
   #Function that sets the locale parameter that will determine which language and internacionalization features will be applied
   #Default locale is 'en' for English

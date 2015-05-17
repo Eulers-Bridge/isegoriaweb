@@ -7,29 +7,44 @@ module Util
 	
 	#Funcion that converts epoch milliseconds to a regular Time
 	def self.epoch_to_date(epoch_milliseconds)
+    if !epoch_milliseconds.present?
+      return nil
+    end
 	  Time.at(epoch_milliseconds/1000).strftime(I18n.t(:date_format_ruby))
 	end
 
   #Funcion that converts epoch milliseconds to a regular DateTime
   def self.epoch_to_datetime(epoch_milliseconds)
+    if !epoch_milliseconds.present?
+      return nil
+    end
     Time.at(epoch_milliseconds/1000).strftime(I18n.t(:date_format_ruby)+" "+I18n.t(:time_format_ruby))
   end
 
   #Function that gets just the time part of an epoch date
   def self.epoch_get_time(epoch_milliseconds)
+    if !epoch_milliseconds.present?
+      return nil
+    end
     Time.at(epoch_milliseconds/1000).strftime(I18n.t(:time_format_ruby))
   end
 
 	#Fuction that converts a regular Date to epoch in milliseconds
 	def self.date_to_epoch(date)
+    if !date.present?
+      return nil
+    end
 	 @date = Time.strptime(date, I18n.t(:date_format_ruby))
 	 return @date.to_i*1000
 	end
 
   #Function that converts a regular DateTime to epoch in milliseconds
   def self.datetime_to_epoch(datetime)
-   @datetime = Time.strptime(datetime, I18n.t(:date_format_ruby)+" "+I18n.t(:time_format_ruby))
-   return @datetime.to_i*1000
+    if !datetime.present?
+      return nil
+    end
+    @datetime = Time.strptime(datetime, I18n.t(:date_format_ruby)+" "+I18n.t(:time_format_ruby))
+    return @datetime.to_i*1000
   end
 
   #Function that converst an Array to CSV(Comma Separated Values) String

@@ -6,13 +6,17 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <%= link_to image_tag("navigation/Home.png", alt:t(:app_name) + t(:home)) + " " + t(:home) , articles_path, :class => "visible-xs visible-sm isegoria_navbar_link navbar-left" %>
-    <%= link_to image_tag("navigation/Home.png", alt:t(:app_name) + t(:home)) + " " + t(:home) , articles_path, :class => "hidden-xs hidden-sm isegoria_navbar_link navbar-left" %>
+    <%= link_to image_tag("navigation/Home.png", alt:t(:app_name) + t(:home)), articles_path, :class => " isegoria_navbar_link navbar-left" %>
+    <%= link_to image_tag("navigation/Back.png", alt:t(:app_name) + t(:back)) + t(:back).capitalize , :back, :class => "isegoria_navbar_link navbar-left" %>
   </div>
   <div class="navbar-collapse collapse" id="top_navbar">
-  <%= link_to image_tag("navigation/Log Off.png", alt:t(:logout)) + " " + t(:logout).capitalize, logout_path, method: :delete, :class => "visible-xs visible-sm isegoria_navbar_link" %>
-  <%= link_to image_tag("navigation/Log Off.png", alt:t(:logout)) + " " + t(:logout).capitalize, logout_path, method: :delete, :class => "hidden-xs hidden-sm navbar-right isegoria_navbar_link" %>
-  <%= link_to t(:notifications).capitalize, '#', :class => "navbar-right isegoria_navbar_link" %>
-  <%= link_to t(:activity).capitalize, '#', :class => "navbar-right isegoria_navbar_link" %>
+  <!--%= link_to image_tag("navigation/Log Off.png", alt:t(:logout)) + " " + t(:logout).capitalize, logout_path, method: :delete, :class => "visible-xs visible-sm isegoria_navbar_link" %-->
+  <!--%= link_to image_tag("navigation/Log Off.png", alt:t(:logout)) + " " + t(:logout).capitalize, logout_path, method: :delete, :class => "hidden-xs hidden-sm navbar-right isegoria_navbar_link" %-->
+    <%= link_to image_tag("navigation/Log Off.png", alt:t(:logout)), logout_path, method: :delete, :class => "navbar-right isegoria_navbar_link" %>
+    <%= link_to image_tag("navigation/Notifications.png", alt:t(:notifications)), '#', :class => "navbar-right isegoria_navbar_link" %>
+    <%= link_to image_tag("navigation/Activity.png", alt:t(:activity)), '#', :class => "navbar-right isegoria_navbar_link" %>
+    <span class="isegoria_navbar_title navbar-left">
+      <%=capitalize_as_title($title)%>
+    </span>
   </div><!--/.navbar-collapse -->
 </div>
