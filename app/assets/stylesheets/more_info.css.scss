@@ -54,10 +54,10 @@
 	text-align: center;
 }
 .profile_picture{
-	background-repeat: no-repeat;
+	background-repeat: no-repeat !important;
     background-position: 50%;
-    //border-radius: 50%;
-    background-size: contain !important;
+    border-radius: 50%;
+    background-size: cover !important;
     margin-left: auto !important;
 	margin-right: auto !important;
 	margin-bottom: 10px !important;
@@ -110,13 +110,13 @@
 	background: url(landing/profile_pictures/AG_Medium.png)
 }
 #anthonyQ_prof{
-	background: url(landing/profile_pictures/JK_Medium.png)
+	background: url(landing/profile_pictures/AQ.jpg)
 }
 #davidR_prof{
 	background: url(landing/profile_pictures/DR_Medium.png)
 }
 #gregN_prof{
-	background: url(landing/profile_pictures/JK_Medium.png)
+	background: url(landing/profile_pictures/GN.jpg)
 }
 #yikaiG_prof{
 	background: url(landing/profile_pictures/YG_Medium.png)

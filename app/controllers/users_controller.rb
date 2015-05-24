@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     if response[0] #Validate if the response was successfull
       flash[:success] = t(:user_creation_success_flash, user: @user.email) #Set the success message for the user
       redirect_to home_unverified_email_path #Redirect the user to the verify email
-    else validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+    elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       if(response[1].kind_of?(Array)) #If the response was unsucessful, validate if it was caused by an invalid photo album object sent to the model. If so the server would have returned an array with the errors
         flash[:warning] = Util.format_validation_errors(response[1]) #Set the invalid object message for the user
       end

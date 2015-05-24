@@ -10,6 +10,7 @@ class ArticlesController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def index
+    @menu='articles'
     $title=t(:title_articles)  #Set the title variable
     if !check_session #Validate if the user session is active
 	    return #If not force return to trigger the redirect of the check_session function
@@ -36,6 +37,7 @@ class ArticlesController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def new
+    @menu='articles'
     $title=t(:title_new_article)  #Set the title variable
     if !check_session #Validate if the user session is active
 	    return #If not force return to trigger the redirect of the check_session function
@@ -49,6 +51,7 @@ class ArticlesController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def edit
+    @menu='articles'
     $title=t(:title_edit_article)  #Set the title variable
     if !check_session #Validate if the user session is active
   	  return #If not force return to trigger the redirect of the check_session function
@@ -178,6 +181,7 @@ def delete_picture
   resp2 = photo.delete(session[:user]) #Delete the photo object
   if resp2[0] #Validate if the response was successfull
     flash[:success] = t(:picture_deletion_success_flash, photo: photo.title) #Set the success message for the user
+    redirect_to :back #Redirect the user to the previous page
   elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
     flash[:danger] = t(:picture_deletion_error_flash) #Set the error message for the user
     redirect_to :back #Redirect the user to the previous page

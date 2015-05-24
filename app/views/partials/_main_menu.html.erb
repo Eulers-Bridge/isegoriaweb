@@ -9,20 +9,42 @@
     <span class="visible-xs navbar-brand"><%=capitalize_as_title(t(:main_menu))%></span>
   </div>
   <div class="navbar-collapse collapse sidebar-navbar-collapse" id="main_menu">
-    <ul class="nav nav-sidebar isegoria_sidemenu_l1">
-    <li><%= t(:welcome).capitalize + ', ' + session[:user]['givenName']%></li>
-      <ul class="nav nav-sidebar isegoria_sidemenu_l2">
-      <li><%= link_to t(:news).capitalize, articles_path%></li>
-      <li><%= link_to t(:events).capitalize, events_path %></li>
-      <li><%= link_to t(:photos).capitalize, photos_path %></li>
-      <li><%= link_to t(:photo_albums).capitalize, photo_albums_path %></li>
-      <li><%= link_to t(:polls).capitalize, polls_path %></li>
-      <li><%= link_to t(:elections).capitalize, elections_path %></li>
-      <li><%= link_to t(:users).capitalize, users_path %></li>
-      </ul>
-    <li><%= t(:messages).capitalize%></li>
-    <li><%= t(:settings).capitalize%></li>
-    </ul>
+    <% case @menu %>
+      <% when 'articles' %>
+        <ul class="nav nav-sidebar isegoria_sidemenu_l1">
+          <li><%= t(:articles).capitalize%> <%= link_to image_tag("home/Plus.png", alt:t(:create_article)), new_article_path, :class=>'menu_create'%></li>
+          <ul class="nav nav-sidebar isegoria_sidemenu_l2">
+            <li><%= link_to t(:news).capitalize, articles_path%></li>
+            <li><%= link_to t(:events).capitalize, events_path %></li>
+            <li><%= link_to t(:photos).capitalize, photos_path %></li>
+            <li><%= link_to t(:photo_albums).capitalize, photo_albums_path %></li>
+            <li><%= link_to t(:polls).capitalize, polls_path %></li>
+            <li><%= link_to t(:elections).capitalize, elections_path %></li>
+            <li><%= link_to t(:users).capitalize, users_path %></li>
+          </ul>
+          <li><%= t(:messages).capitalize%></li>
+          <li><%= t(:settings).capitalize%></li>
+        </ul>
+      <% else %>
+        <div class="welcome_menu_item">
+          <%= t(:welcome).capitalize + ', ' + session[:user]['givenName']%>
+          <hr>
+        </div>
+        <ul class="nav nav-sidebar isegoria_sidemenu_l1">
+          <li><%= t(:home).capitalize%></li>
+          <ul class="nav nav-sidebar isegoria_sidemenu_l2">
+            <li><%= link_to t(:news).capitalize, articles_path%></li>
+            <li><%= link_to t(:events).capitalize, events_path %></li>
+            <li><%= link_to t(:photos).capitalize, photos_path %></li>
+            <li><%= link_to t(:photo_albums).capitalize, photo_albums_path %></li>
+            <li><%= link_to t(:polls).capitalize, polls_path %></li>
+            <li><%= link_to t(:elections).capitalize, elections_path %></li>
+            <li><%= link_to t(:users).capitalize, users_path %></li>
+          </ul>
+          <li><%= t(:messages).capitalize%></li>
+          <li><%= t(:settings).capitalize%></li>
+        </ul>
+    <% end %>
   </div>
 </div>
 

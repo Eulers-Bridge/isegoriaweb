@@ -118,8 +118,8 @@ class Election
                 'startVoting'=> Util.date_to_epoch(attributes[:start_voting_date]), #Turn the start_voting_date to epoch
                 'endVoting'=> Util.date_to_epoch(attributes[:end_voting_date]), #Turn the end_voting_date to epoch
                 'institutionId'=> self.institution_id,
-                'introduction'=> self.introduction,
-                'process'=> self.process
+                'introduction'=> attributes[:introduction],
+                'process'=> attributes[:process]
                 }     
       reqUrl = "/api/election/#{self.id}" #Set the request url
       rest_response = MwHttpRequest.http_put_request(reqUrl,election_req,user['email'],user['password']) #Make the PUT call to the server with the required parameters

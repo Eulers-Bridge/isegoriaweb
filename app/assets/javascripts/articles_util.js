@@ -12,4 +12,14 @@
        };
        reader.readAsDataURL(file);
     });
+    $('.delete_question_control').unbind('click');
+    $('.cancel_delete_control').unbind('click');
+    $('.delete_question_control').click(function(e){
+      $(this).parent().parent().find('.delete_confirmation_form').toggleClass('show');
+      e.preventDefault();
+      });
+    $('.cancel_delete_control').click(function(e){
+      $(this).parent().removeClass('show');
+      e.preventDefault();
+    });
   });
