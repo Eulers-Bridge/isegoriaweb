@@ -1,5 +1,4 @@
 <div class="section_controls">
-  <%= link_to capitalize_as_title(t(:create_photo_album)), new_photo_album_path, :class => 'create_link' %>
   <div class="pagination_controls">
     <% if @previous_page >=0 %>
       <%= link_to "<< ", photo_albums_path(:page =>@previous_page), :class => 'nav_control' %> 

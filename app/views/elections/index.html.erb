@@ -1,5 +1,4 @@
 <div class="section_controls">
-  <%= link_to capitalize_as_title(t(:create_election)), new_election_path, :class => 'create_link' %> 
   <div class="pagination_controls">
     <% if @previous_page >=0 %>
       <%= link_to "<< ", elections_path(:page =>@previous_page), :class => 'nav_control' %> 

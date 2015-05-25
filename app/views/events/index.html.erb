@@ -1,5 +1,4 @@
 <div class="section_controls">
-  <%= link_to t(:create_event).capitalize, new_event_path, :class => 'create_link' %>
 <div class="pagination_controls">
   <% if @previous_page >=0 %>
   <%= link_to "<< ", events_path(:page =>@previous_page), :class => 'nav_control' %> 
