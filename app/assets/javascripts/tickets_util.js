@@ -1,0 +1,9 @@
+$(document).ready(function(){
+  $('.color_cell_button').unbind('click');
+  $('.color_cell_button').click(function(e){
+  	color=$(this).val();
+    $('#color_field').val(color);
+    $('#selected_color_addon').attr('style','background-color:'+color+';');
+    e.preventDefault();
+    });
+  });

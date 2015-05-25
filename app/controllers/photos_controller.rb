@@ -9,6 +9,8 @@ class PhotosController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def index
+    @menu='photos' #Set the menu variable
+    $title=t(:title_photos)  #Set the title variable
     if !check_session #Validate if the user session is active
       return #If not force return to trigger the redirect of the check_session function
     end
@@ -34,10 +36,34 @@ class PhotosController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def new
+    @menu='photos' #Set the menu variable
+    $title=t(:title_new_photo)  #Set the title variable
     if !check_session #Validate if the user session is active
       return #If not force return to trigger the redirect of the check_session function
     end
     @photo = Photo.new #Set a new photo object to be filled by the user form
+  end
+
+=begin
+--------------------------------------------------------------------------------------------------------------------------------
+  Function to redirect the user to the edit photo page
+--------------------------------------------------------------------------------------------------------------------------------
+=end
+  def edit
+    @menu='photos' #Set the menu variable
+    $title=t(:title_edit_photo)  #Set the title variable
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
+    resp = Photo.find(params[:id],session[:user]) #Retrieve the photo to update
+    if resp[0] #Validate if the response was successfull
+    @photo = resp[1] #Set the photo object to fill the edit form
+    elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+      flash[:danger] = t(:photo_get_error_flash) #Set the error message for the user
+      redirect_to photo_path #Redirect the user to edit photo page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
+    end
   end
 
 =begin
@@ -62,26 +88,6 @@ class PhotosController < ApplicationController
       flash[:danger] = t(:photo_creation_error_flash) #Set the error message for the user
       @photo = Photo.new #Reset the Photo object to an empty one
       redirect_to new_photo_path #Redirect the user to the Photo creation page
-    else 
-      return #If not force return to trigger the redirect of the check_session function
-    end
-  end
-
-=begin
---------------------------------------------------------------------------------------------------------------------------------
-  Function to redirect the user to the edit photo page
---------------------------------------------------------------------------------------------------------------------------------
-=end
-  def edit
-    if !check_session #Validate if the user session is active
-      return #If not force return to trigger the redirect of the check_session function
-    end
-    resp = Photo.find(params[:id],session[:user]) #Retrieve the photo to update
-    if resp[0] #Validate if the response was successfull
-    @photo = resp[1] #Set the photo object to fill the edit form
-    elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
-      flash[:danger] = t(:photo_get_error_flash) #Set the error message for the user
-      redirect_to photo_path #Redirect the user to edit photo page
     else 
       return #If not force return to trigger the redirect of the check_session function
     end

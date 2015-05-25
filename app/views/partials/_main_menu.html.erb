@@ -25,6 +25,148 @@
           <li><%= t(:messages).capitalize%></li>
           <li><%= t(:settings).capitalize%></li>
         </ul>
+      <% when 'events' %>
+        <ul class="nav nav-sidebar isegoria_sidemenu_l1">
+          <li><%= t(:events).capitalize%> <%= link_to image_tag("home/Plus.png", alt:t(:create_event)), new_event_path, :class=>'menu_create'%></li>
+          <ul class="nav nav-sidebar isegoria_sidemenu_l2">
+            <li><%= link_to t(:news).capitalize, articles_path%></li>
+            <li><%= link_to t(:events).capitalize, events_path %></li>
+            <li><%= link_to t(:photos).capitalize, photos_path %></li>
+            <li><%= link_to t(:photo_albums).capitalize, photo_albums_path %></li>
+            <li><%= link_to t(:polls).capitalize, polls_path %></li>
+            <li><%= link_to t(:elections).capitalize, elections_path %></li>
+            <li><%= link_to t(:users).capitalize, users_path %></li>
+          </ul>
+          <li><%= t(:messages).capitalize%></li>
+          <li><%= t(:settings).capitalize%></li>
+        </ul>
+      <% when 'photos' %>
+        <ul class="nav nav-sidebar isegoria_sidemenu_l1">
+          <li><%= t(:photos).capitalize%> <%= link_to image_tag("home/Plus.png", alt:t(:create_photo)), new_photo_path, :class=>'menu_create'%></li>
+          <ul class="nav nav-sidebar isegoria_sidemenu_l2">
+            <li><%= link_to t(:news).capitalize, articles_path%></li>
+            <li><%= link_to t(:events).capitalize, events_path %></li>
+            <li><%= link_to t(:photos).capitalize, photos_path %></li>
+            <li><%= link_to t(:photo_albums).capitalize, photo_albums_path %></li>
+            <li><%= link_to t(:polls).capitalize, polls_path %></li>
+            <li><%= link_to t(:elections).capitalize, elections_path %></li>
+            <li><%= link_to t(:users).capitalize, users_path %></li>
+          </ul>
+          <li><%= t(:messages).capitalize%></li>
+          <li><%= t(:settings).capitalize%></li>
+        </ul>
+      <% when 'photo_albums' %>
+        <ul class="nav nav-sidebar isegoria_sidemenu_l1">
+          <li><%= t(:photo_albums).capitalize%> <%= link_to image_tag("home/Plus.png", alt:t(:create_photo_album)), new_photo_album_path, :class=>'menu_create'%></li>
+          <ul class="nav nav-sidebar isegoria_sidemenu_l2">
+            <li><%= link_to t(:news).capitalize, articles_path%></li>
+            <li><%= link_to t(:events).capitalize, events_path %></li>
+            <li><%= link_to t(:photos).capitalize, photos_path %></li>
+            <li><%= link_to t(:photo_albums).capitalize, photo_albums_path %></li>
+            <li><%= link_to t(:polls).capitalize, polls_path %></li>
+            <li><%= link_to t(:elections).capitalize, elections_path %></li>
+            <li><%= link_to t(:users).capitalize, users_path %></li>
+          </ul>
+          <li><%= t(:messages).capitalize%></li>
+          <li><%= t(:settings).capitalize%></li>
+        </ul>
+      <% when 'polls' %>
+        <ul class="nav nav-sidebar isegoria_sidemenu_l1">
+          <li><%= t(:polls).capitalize%> <%= link_to image_tag("home/Plus.png", alt:t(:create_poll)), new_poll_path, :class=>'menu_create'%></li>
+          <ul class="nav nav-sidebar isegoria_sidemenu_l2">
+            <li><%= link_to t(:news).capitalize, articles_path%></li>
+            <li><%= link_to t(:events).capitalize, events_path %></li>
+            <li><%= link_to t(:photos).capitalize, photos_path %></li>
+            <li><%= link_to t(:photo_albums).capitalize, photo_albums_path %></li>
+            <li><%= link_to t(:polls).capitalize, polls_path %></li>
+            <li><%= link_to t(:elections).capitalize, elections_path %></li>
+            <li><%= link_to t(:users).capitalize, users_path %></li>
+          </ul>
+          <li><%= t(:messages).capitalize%></li>
+          <li><%= t(:settings).capitalize%></li>
+        </ul>
+      <% when 'elections' %>
+        <ul class="nav nav-sidebar isegoria_sidemenu_l1">
+          <li><%= t(:elections).capitalize%> <%= link_to image_tag("home/Plus.png", alt:t(:create_election)), new_election_path, :class=>'menu_create'%></li>
+          <ul class="nav nav-sidebar isegoria_sidemenu_l2">
+            <li><%= link_to t(:news).capitalize, articles_path%></li>
+            <li><%= link_to t(:events).capitalize, events_path %></li>
+            <li><%= link_to t(:photos).capitalize, photos_path %></li>
+            <li><%= link_to t(:photo_albums).capitalize, photo_albums_path %></li>
+            <li><%= link_to t(:polls).capitalize, polls_path %></li>
+            <li><%= link_to t(:elections).capitalize, elections_path %></li>
+            <li><%= link_to t(:users).capitalize, users_path %></li>
+          </ul>
+          <li><%= t(:messages).capitalize%></li>
+          <li><%= t(:settings).capitalize%></li>
+        </ul>
+      <% when 'election' %>
+        <ul class="nav nav-sidebar isegoria_sidemenu_l1">
+          <li><%= t(:election).capitalize%></li>
+          <ul class="nav nav-sidebar isegoria_sidemenu_l2">
+            <li><%= capitalize_as_title(@election.title)%></li>
+            <li><%= link_to t(:election_details).capitalize, edit_election_path(:id => @election.id)%></li>
+            <li><%= link_to t(:positions).capitalize, positions_path(:election_id => @election.id)%></li>
+            <li><%= link_to t(:tickets).capitalize, tickets_path(:election_id => @election.id) %></li>
+            <li><%= link_to t(:add_ticket).capitalize, new_ticket_path(:election_id => @election.id) %></li>
+          </ul>
+          <li><%= t(:home).capitalize%></li>
+          <ul class="nav nav-sidebar isegoria_sidemenu_l2">
+            <li><%= link_to t(:news).capitalize, articles_path%></li>
+            <li><%= link_to t(:events).capitalize, events_path %></li>
+            <li><%= link_to t(:photos).capitalize, photos_path %></li>
+            <li><%= link_to t(:photo_albums).capitalize, photo_albums_path %></li>
+            <li><%= link_to t(:polls).capitalize, polls_path %></li>
+            <li><%= link_to t(:elections).capitalize, elections_path %></li>
+            <li><%= link_to t(:users).capitalize, users_path %></li>
+          </ul>
+          <li><%= t(:messages).capitalize%></li>
+          <li><%= t(:settings).capitalize%></li>
+        </ul>
+      <% when 'positions' %>
+        <ul class="nav nav-sidebar isegoria_sidemenu_l1">
+          <li><%= t(:election).capitalize%></li>
+          <ul class="nav nav-sidebar isegoria_sidemenu_l2">
+            <li><%= link_to t(:election_details).capitalize, edit_election_path(:id => @election_id)%></li>
+            <li><%= link_to t(:positions).capitalize, positions_path(:election_id => @election_id)%></li>
+            <li><%= link_to t(:tickets).capitalize, tickets_path(:election_id => @election_id) %></li>
+            <li><%= link_to t(:add_ticket).capitalize, new_ticket_path(:election_id => @election_id) %></li>
+          </ul>
+          <li><%= t(:home).capitalize%></li>
+          <ul class="nav nav-sidebar isegoria_sidemenu_l2">
+            <li><%= link_to t(:news).capitalize, articles_path%></li>
+            <li><%= link_to t(:events).capitalize, events_path %></li>
+            <li><%= link_to t(:photos).capitalize, photos_path %></li>
+            <li><%= link_to t(:photo_albums).capitalize, photo_albums_path %></li>
+            <li><%= link_to t(:polls).capitalize, polls_path %></li>
+            <li><%= link_to t(:elections).capitalize, elections_path %></li>
+            <li><%= link_to t(:users).capitalize, users_path %></li>
+          </ul>
+          <li><%= t(:messages).capitalize%></li>
+          <li><%= t(:settings).capitalize%></li>
+        </ul>
+      <% when 'tickets' %>
+        <ul class="nav nav-sidebar isegoria_sidemenu_l1">
+          <li><%= t(:election).capitalize%></li>
+          <ul class="nav nav-sidebar isegoria_sidemenu_l2">
+            <li><%= link_to t(:election_details).capitalize, edit_election_path(:id => @election_id)%></li>
+            <li><%= link_to t(:positions).capitalize, positions_path(:election_id => @election_id)%></li>
+            <li><%= link_to t(:tickets).capitalize, tickets_path(:election_id => @election_id) %></li>
+            <li><%= link_to t(:add_ticket).capitalize, new_ticket_path(:election_id => @election_id) %></li>
+          </ul>
+          <li><%= t(:home).capitalize%></li>
+          <ul class="nav nav-sidebar isegoria_sidemenu_l2">
+            <li><%= link_to t(:news).capitalize, articles_path%></li>
+            <li><%= link_to t(:events).capitalize, events_path %></li>
+            <li><%= link_to t(:photos).capitalize, photos_path %></li>
+            <li><%= link_to t(:photo_albums).capitalize, photo_albums_path %></li>
+            <li><%= link_to t(:polls).capitalize, polls_path %></li>
+            <li><%= link_to t(:elections).capitalize, elections_path %></li>
+            <li><%= link_to t(:users).capitalize, users_path %></li>
+          </ul>
+          <li><%= t(:messages).capitalize%></li>
+          <li><%= t(:settings).capitalize%></li>
+        </ul>
       <% else %>
         <div class="welcome_menu_item">
           <%= t(:welcome).capitalize + ', ' + session[:user]['givenName']%>

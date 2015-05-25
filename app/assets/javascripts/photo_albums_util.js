@@ -24,4 +24,8 @@ $(document).ready(function(){
        };
        reader.readAsDataURL(file);
     });
+  $('.one-click').click(function(event){
+    event.preventDefault();
+  $(this).hide();
+    });
   });

@@ -12,14 +12,18 @@
   </div>
   <div id="form_main">
     <div class="form-group">
+      <label class="form-field-label"><%=capitalize_as_title(t(:date))%></label>
+      <hr class="form-field-hr">
       <div class="input-group date" id="dpk_date" >
-        <input type="text" class="form-control" placeholder="<%=t(:field_placeholder, field_name: t(:date)).capitalize%>" name="article[date]" value="<%=@article.date%>" readonly>
+        <input type="text" class="form-control date_field" placeholder="<%=t(:field_placeholder, field_name: t(:date)).capitalize%>" name="article[date]" value="<%=@article.date%>" readonly>
         <span class="input-group-addon">
           <i class="glyphicon glyphicon-th"></i>
         </span>
       </div>
     </div>
     <div class="form-group">
+      <label class="form-field-label"><%=capitalize_as_title(t(:content))%></label>
+      <hr class="form-field-hr">
       <%= f.text_area :content, class: "text_area form-control", placeholder: t(:field_placeholder, field_name: t(:content)).capitalize %>
     </div>
     <% end %>
@@ -27,25 +31,25 @@
   </div>
   <div id="upload_pic_form">
     <%= form_for(@article, :url => article_upload_picture_path ,:html => {:method => :post}) do |f| %>
-     <hr>
       <div class="form-group">
-        <label class= "form-field-label"><%=capitalize_as_title(t(:picture))%></label>
+        <label class="form-field-label"><%=capitalize_as_title(t(:picture))%></label>
+        <hr class="form-field-hr">
         <% @article.picture.each do |picture| %>
           <%= image_tag picture["url"], class: "article_image"%>
           <%= link_to t(:delete).capitalize, article_delete_picture_path(:id => picture["nodeId"]), method: :delete, :class => 'delete_link' %>
         <%end%>
       </div>
       <input type="hidden" id="hdd_previous_picture" name="article[previous_picture]" value="<%=@article.picture.blank? ? nil : @article.picture[0].to_json%>">
-    <hr>
       <div class="form-group">
-        <%= f.label :picture, capitalize_as_title(t(:upload_new_picture))+ " ("+t(:replace_picture_message)+")" , class: "form-field-label" %>
+        <label class="form-field-label"><%=capitalize_as_title(t(:upload_new_picture))%></label>
+        <hr class="form-field-hr">
         <div class="file_input_wrapper">
-          <%= f.file_field :picture, accept: "image/png,image/gif,image/jpeg" ,class: 'file_input', placeholder: t(:field_placeholder, field_name: t(:picture)).capitalize, class: 'file_input_control' %>
+          <%= f.file_field :picture, accept: "image/png,image/gif,image/jpeg" ,class: 'file_input_control', placeholder: t(:field_placeholder, field_name: t(:picture)).capitalize %>
           <input class="btn btn-form file_input_button" type="button" value="<%=capitalize_as_title(t(:browse)) %>" name="commit">
         </div>
       </div>
       <div class="upload-preview">
-        <label class="form-field-label"><%=capitalize_as_title(t(:picture_preview))%></label>
+        <!--label class="form-field-label"><%=capitalize_as_title(t(:picture_preview))%></label-->
         <!--Image closing tag required by the upload-preview-->
         <img />
       </div>

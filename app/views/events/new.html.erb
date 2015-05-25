@@ -1,63 +1,78 @@
 <% provide(:title, t(:title_new_event)) %>
-<h1><%=capitalize_as_title(t(:title_new_event))%></h1>
 <div>
-<%= form_for(@event) do |f| %>
-  <div class="form-group">
-    <%= f.label :name, capitalize_as_title(t (:name)) %>
-    <%= f.text_field :name, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:name)).capitalize %>
+<%= form_for @event do |f|%>
+  <div id="form_header_background"></div>
+  <div id="form_header">
+    <div id="form_header_top">
+      <%= link_to image_tag("home/Camera.png", alt:t(:choose_cover_back)) + capitalize_as_title(t(:choose_cover_back)) , '#', :class => "btn btn_choose_cover" %>
+      <%= f.submit capitalize_as_title(t(:save_and_finish)), class: "btn btn-form btn_form_header" %>
+    </div>
+    <hr>
+    <%= f.text_field :name, class: "form-control text_field title_text_field", placeholder: t(:field_placeholder, field_name: t(:name)).capitalize %>
   </div>
+  <div id="form_main">
   <div class="form-group">
-    <%= f.label :location, capitalize_as_title(t (:location)) %>
-    <%= f.text_field :location, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:location)).capitalize %>
+    <label class="form-field-label"><%=capitalize_as_title(t(:location))%></label>
+    <hr class="form-field-hr">
+    <%= f.text_field :location, class: "form-control text_field", placeholder: t(:field_placeholder, field_name: t(:location)).capitalize %>
   </div>
  <div class="form-group">
-    <label for="event_start_date"><%=capitalize_as_title(t(:start_date))%></label>
+   <label class="form-field-label"><%=capitalize_as_title(t(:start_date))%></label>
+   <hr class="form-field-hr">
     <div class="input-group date" id="dpk_start_date" >
-      <input type="text" readonly="true" class="form-control" placeholder="Enter date" name="event[start_date]">
-      <span class="input-group-addon">
-        <i class="glyphicon glyphicon-th"></i>
+      <span class="input-group-addon input-addon-left">
+        <i class="glyphicon glyphicon-calendar"></i>
       </span>
+      <input type="text" readonly="true" class="form-control date_field" placeholder="Enter date" name="event[start_date]">
     </div>
   </div>
   <div class="form-group">
-    <label for="event_start_time"><%=capitalize_as_title(t(:start_time))%></label>
     <div class="input-group bootstrap-timepicker">
-      <input id="tpk_start_date" type="text" class="input-small" readonly="true" name="event[start_time]">
+      <span class="input-group-addon input-addon-left"><i class="glyphicon glyphicon-time"></i></span>
+      <input id="tpk_start_date" type="text" class="form-control time_picker" readonly="true" name="event[start_time]">
     </div>
   </div>
   <div class="form-group">
-    <label for="event_end_date"><%=capitalize_as_title(t(:end_date))%></label>
+    <label class="form-field-label"><%=capitalize_as_title(t(:end_date))%></label>
+    <hr class="form-field-hr">
     <div class="input-group date" id="dpk_end_date" >
-      <input type="text" readonly="true" class="form-control" placeholder="Enter date" name="event[end_date]">
-      <span class="input-group-addon">
-        <i class="glyphicon glyphicon-th"></i>
+      <span class="input-group-addon input-addon-left">
+        <i class="glyphicon glyphicon-calendar"></i>
       </span>
+      <input type="text" readonly="true" class="form-control date_field" placeholder="Enter date" name="event[end_date]">
     </div>
   </div>
   <div class="form-group">
-    <label for="event_end_time"><%=capitalize_as_title(t(:end_time))%></label>
     <div class="input-group bootstrap-timepicker">
-      <input id="tpk_end_date" type="text" class="input-small" readonly="true" name="event[end_time]">
+    <span class="input-group-addon input-addon-left"><i class="glyphicon glyphicon-time"></i></span>
+      <input id="tpk_end_date" type="text" class="form-control time_picker" readonly="true" name="event[end_time]">
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :description, capitalize_as_title(t (:description)) %>
-    <%= f.text_area :description, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:description)).capitalize %>
+    <label class="form-field-label"><%=capitalize_as_title(t(:description))%></label>
+    <hr class="form-field-hr">
+    <%= f.text_area :description, class: "form-control text_field text_area", placeholder: t(:field_placeholder, field_name: t(:description)).capitalize %>
   </div>
   <div class="form-group">
-    <%= f.label :organizer, capitalize_as_title(t (:organizer)) %>
-    <%= f.text_field :organizer, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:organizer)).capitalize %>
+    <label class="form-field-label"><%=capitalize_as_title(t(:organizer))%></label>
+    <hr class="form-field-hr">
+    <%= f.text_field :organizer, class: "form-control text_field", placeholder: t(:field_placeholder, field_name: t(:organizer)).capitalize %>
   </div>
   <div class="form-group">
-    <%= f.label :organizer_email, capitalize_as_title(t (:organizer_email)) %>
-    <%= f.text_field :organizer_email, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:organizer_email)).capitalize %>
+  <label class="form-field-label"><%=capitalize_as_title(t(:organizer_email))%></label>
+  <hr class="form-field-hr">
+    <%= f.text_field :organizer_email, class: "form-control text_field", placeholder: t(:field_placeholder, field_name: t(:organizer_email)).capitalize %>
   </div>
   <div class="form-group">
-    <%= f.label :picture, capitalize_as_title(t (:picture)) %>
-    <%= f.file_field :picture, accept: "image/png,image/gif,image/jpeg" ,class: 'file_input', placeholder: t(:field_placeholder, field_name: t(:picture)).capitalize %>
+      <%= f.label :picture, capitalize_as_title(t (:picture)), class: "form-field-label" %> 
+      <hr class="form-field-hr">
+    <div class="file_input_wrapper">
+      <%= f.file_field :picture, accept: "image/png,image/gif,image/jpeg" , placeholder: t(:field_placeholder, field_name: t(:picture)).capitalize, class: 'file_input_control' %>
+      <input class="btn btn-form file_input_button" type="button" value="<%=capitalize_as_title(t(:browse)) %>" name="commit">
+    </div>
   </div>
   <div class="upload-preview">
-    <label><%=capitalize_as_title(t(:picture_preview))%></label>
+    <!--label><%=capitalize_as_title(t(:picture_preview))%></label-->
     <!--Image closing tag required by the upload-preview-->
     <img />
   </div>
@@ -72,7 +87,7 @@
     <input type="button" class="btn btn-xs btn-info" id="btn_add_volunteer" value="<%=t(:add).capitalize%>"/>
     <%= f.hidden_field :volunteers, id: "hdd_volunteers"%>
   </div-->
-  <%= f.submit capitalize_as_title(t(:create)), class: "btn btn-large btn-success" %>
+  </div>
   <% end %>
   <div hidden="true">
     <div class="list-group-item" id="volunteers_list_item">

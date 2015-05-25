@@ -23,10 +23,14 @@
 	border-radius: 6px;
 }
 
-.edit_election_form{
+.edit_position_form{
 	display: none;
 	//transition: top 1000ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
 }
-.edit_election_form.show{
+.edit_position_form.show{
 	display: block;
+}
+
+.add_position{
+	float: right;
 }

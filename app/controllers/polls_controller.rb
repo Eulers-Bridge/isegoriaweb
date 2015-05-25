@@ -9,6 +9,8 @@ class PollsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def index
+    @menu='polls' #Set the menu variable
+    $title=t(:title_polls)  #Set the title variable
     if !check_session #Validate if the user session is active
       return #If not force return to trigger the redirect of the check_session function
     end
@@ -34,10 +36,34 @@ class PollsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def new
+    @menu='polls' #Set the menu variable
+    $title=t(:title_new_poll)  #Set the title variable
     if !check_session #Validate if the user session is active
       return #If not force return to trigger the redirect of the check_session function
     end
 	  @poll = Poll.new #Set a new poll object to be filled with the create form
+  end
+
+=begin
+--------------------------------------------------------------------------------------------------------------------------------
+  Function to redirect the user to the edit poll page
+--------------------------------------------------------------------------------------------------------------------------------
+=end
+  def edit
+    @menu='polls' #Set the menu variable
+    $title=t(:title_edit_poll)  #Set the title variable
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
+    response = Poll.find(params[:id],session[:user]) #Retrieve the poll to update
+    if response[0] #Validate if the response was successfull 
+    @poll = response[1] #Set the poll object to fill the edit form
+    elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+      flash[:danger] = t(:poll_get_error_flash) #Set the error message for the user
+      redirect_to poll_path #Redirect the user to edit poll page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
+    end
   end
 
 =begin
@@ -63,26 +89,6 @@ class PollsController < ApplicationController
         flash[:danger] = t(:poll_creation_error_flash) #Set the error message for the user
         @poll = Poll.new #Reset the Poll object to an empty one
         redirect_to new_poll_path #Redirect the user to the Poll creation page
-    else 
-      return #If not force return to trigger the redirect of the check_session function
-    end
-  end
-
-=begin
---------------------------------------------------------------------------------------------------------------------------------
-  Function to redirect the user to the edit poll page
---------------------------------------------------------------------------------------------------------------------------------
-=end
-  def edit
-    if !check_session #Validate if the user session is active
-      return #If not force return to trigger the redirect of the check_session function
-    end
-	  response = Poll.find(params[:id],session[:user]) #Retrieve the poll to update
-    if response[0] #Validate if the response was successfull 
-    @poll = response[1] #Set the poll object to fill the edit form
-    elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
-      flash[:danger] = t(:poll_get_error_flash) #Set the error message for the user
-      redirect_to poll_path #Redirect the user to edit poll page
     else 
       return #If not force return to trigger the redirect of the check_session function
     end

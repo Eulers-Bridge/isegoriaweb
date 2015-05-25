@@ -9,6 +9,8 @@ class PhotoAlbumsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def index
+    @menu='photo_albums' #Set the menu variable
+    $title=t(:title_photo_albums)  #Set the title variable
     if !check_session #Validate if the user session is active
       return #If not force return to trigger the redirect of the check_session function
     end
@@ -34,10 +36,48 @@ class PhotoAlbumsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def new
+    @menu='photo_albums' #Set the menu variable
+    $title=t(:title_new_photo_album)  #Set the title variable
     if !check_session #Validate if the user session is active
       return #If not force return to trigger the redirect of the check_session function
     end
 	  @photo_album = PhotoAlbum.new #Set a new photo album object to be filled with the create form
+  end
+
+=begin
+--------------------------------------------------------------------------------------------------------------------------------
+  Function to redirect the user to the edit photo album page
+--------------------------------------------------------------------------------------------------------------------------------
+=end
+  def edit
+    @menu='photo_albums' #Set the menu variable
+    $title=t(:title_edit_photo_album)  #Set the title variable
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
+    response = PhotoAlbum.find(params[:id],session[:user]) #Retrieve the photo album to update
+    if response[0] #Validate if the response was successfull 
+      @photo_album = response[1] #Set the photo album object to fill the edit form
+      @page_aux = params[:page] #Retrieve the page number from the url params
+      @page = @page_aux =~ /\A\d+\z/ ? @page_aux.to_i : 0 #If none is retrieved, set it to the first page, cero
+      response2 = Photo.all_by_album(session[:user],params[:id],@page) #Get the photos uploaded to the photo album
+      if response2[0] #Validate if the response was successfull 
+        @photos = response2[1] #Set the photos array
+        @total_pages = response2[3].to_i #Get the total pages of photos
+        @previous_page = @page > 0 ? @page-1 : -1 #Set the previous page index
+        @next_page = @page+1 < @total_pages ? @page+1 : -1 #Set the next page index
+      elsif validate_authorized_access(response2[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+        flash[:danger] = t(:photo_list_error_flash) #Set the error message for the user
+        redirect_to photo_albums_path #Redirect the user to photo_albums index page
+      else 
+        return #If not force return to trigger the redirect of the check_session function
+      end
+    elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+      flash[:danger] = t(:photo_album_get_error_flash) #Set the error message for the user
+      redirect_to photo_album_path #Redirect the user to edit photo_album page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
+    end
   end
 
 =begin
@@ -95,40 +135,6 @@ class PhotoAlbumsController < ApplicationController
       return #If not force return to trigger the redirect of the check_session function
     end
     redirect_to photo_albums_path #Redirect the user to the photo_albums list page
-  end
-
-=begin
---------------------------------------------------------------------------------------------------------------------------------
-  Function to redirect the user to the edit photo album page
---------------------------------------------------------------------------------------------------------------------------------
-=end
-  def edit
-    if !check_session #Validate if the user session is active
-      return #If not force return to trigger the redirect of the check_session function
-    end
-	  response = PhotoAlbum.find(params[:id],session[:user]) #Retrieve the photo album to update
-    if response[0] #Validate if the response was successfull 
-      @photo_album = response[1] #Set the photo album object to fill the edit form
-      @page_aux = params[:page] #Retrieve the page number from the url params
-      @page = @page_aux =~ /\A\d+\z/ ? @page_aux.to_i : 0 #If none is retrieved, set it to the first page, cero
-      response2 = Photo.all_by_album(session[:user],params[:id],@page) #Get the photos uploaded to the photo album
-      if response2[0] #Validate if the response was successfull 
-        @photos = response2[1] #Set the photos array
-        @total_pages = response2[3].to_i #Get the total pages of photos
-        @previous_page = @page > 0 ? @page-1 : -1 #Set the previous page index
-        @next_page = @page+1 < @total_pages ? @page+1 : -1 #Set the next page index
-      elsif validate_authorized_access(response2[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
-        flash[:danger] = t(:photo_list_error_flash) #Set the error message for the user
-        redirect_to photo_albums_path #Redirect the user to photo_albums index page
-      else 
-        return #If not force return to trigger the redirect of the check_session function
-      end
-    elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
-      flash[:danger] = t(:photo_album_get_error_flash) #Set the error message for the user
-      redirect_to photo_album_path #Redirect the user to edit photo_album page
-    else 
-      return #If not force return to trigger the redirect of the check_session function
-    end
   end
 
 =begin

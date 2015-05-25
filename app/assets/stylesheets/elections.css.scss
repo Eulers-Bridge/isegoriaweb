@@ -12,3 +12,36 @@
 	border-color: #AAAAAA;
 	border-radius: 6px;
 }
+.election_form{
+	padding-top: 30px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-bottom: 20px;
+}
+.save_election{
+	float: right;
+}
+.election_title_field{
+	font-size: 200% !important;
+	font-weight: bold;
+    height: 70px !important;
+    font-family: 'SourceSansProLight' !important;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.election_title_field_edit{
+	font-size: 200% !important;
+	font-weight: bold;
+    height: 70px !important;
+    font-family: 'SourceSansProLight' !important;
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+
+.election_date_label{
+	margin-top: -20px !important;
+	font-family: 'SourceSansProLight' !important;
+	color: #888888;
+	padding-left: 15px;
+}

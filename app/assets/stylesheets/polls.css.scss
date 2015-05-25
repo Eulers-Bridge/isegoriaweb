@@ -12,3 +12,26 @@
 	border-color: #AAAAAA;
 	border-radius: 6px;
 }
+.poll_form{
+	margin: 50px;
+	border-style: solid;
+	border-color: #888888;
+	border-radius: 5px;
+	border-width: 1px;
+	padding-top: 30px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-bottom: 20px;
+}
+.save_poll{
+	float: right;
+}
+.poll_question_field{
+	font-size: 200% !important;
+    height: 150px !important;
+    font-family: 'SourceSansProLight' !important;
+    text-align: center;
+}
+#btn_add_option{
+	margin-top: 5px;
+}

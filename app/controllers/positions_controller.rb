@@ -8,6 +8,8 @@ class PositionsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def index
+    @menu='positions' #Set the menu variable
+    $title=t(:title_positions)  #Set the title variable
     if !check_session #Validate if the user session is active
       return #If not force return to trigger the redirect of the check_session function
     end

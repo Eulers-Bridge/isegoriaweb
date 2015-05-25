@@ -10,7 +10,7 @@ class ArticlesController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def index
-    @menu='articles'
+    @menu='articles' #Set the menu variable
     $title=t(:title_articles)  #Set the title variable
     if !check_session #Validate if the user session is active
 	    return #If not force return to trigger the redirect of the check_session function
@@ -37,7 +37,7 @@ class ArticlesController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def new
-    @menu='articles'
+    @menu='articles' #Set the menu variable
     $title=t(:title_new_article)  #Set the title variable
     if !check_session #Validate if the user session is active
 	    return #If not force return to trigger the redirect of the check_session function
@@ -51,7 +51,7 @@ class ArticlesController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def edit
-    @menu='articles'
+    @menu='articles' #Set the menu variable
     $title=t(:title_edit_article)  #Set the title variable
     if !check_session #Validate if the user session is active
   	  return #If not force return to trigger the redirect of the check_session function

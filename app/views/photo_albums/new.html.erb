@@ -1,28 +1,38 @@
 <% provide(:title, t(:title_new_photo_album)) %>
-<h1><%=capitalize_as_title(t(:title_new_photo_album))%></h1>
 <div>
-<%= form_for(@photo_album) do |f| %>
-<%= f.submit capitalize_as_title(t(:create)), class: "btn btn-large btn-success" %>
+<%= form_for(@photo_album) do |f| %><div id="form_header_background"></div>
+  <div id="form_header">
+    <div id="form_header_top">
+    <%= link_to image_tag("home/Camera.png", alt:t(:choose_cover_back)) + capitalize_as_title(t(:choose_cover_back)) , '#', :class => "btn btn_choose_cover" %>
+    <%= f.submit capitalize_as_title(t(:save_and_finish)), class: "btn btn-form btn_form_header" %>
+    </div>
+    <hr>
+    <%= f.text_field :name, class: "form-control text_field title_text_field", placeholder: t(:field_placeholder, field_name: t(:name)).capitalize %>
+  </div>
+  <div id="form_main">
   <div class="form-group">
-    <%= f.label :name, capitalize_as_title(t (:name)) %>
-    <%= f.text_field :name, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:name)).capitalize %>
+    <label class="form-field-label"><%=capitalize_as_title(t(:description))%></label>
+    <hr class="form-field-hr">
+    <%= f.text_area :description, class: "form-control text_area", placeholder: t(:field_placeholder, field_name: t(:description)).capitalize %>
   </div>
   <div class="form-group">
-    <%= f.label :description, capitalize_as_title(t (:description)) %>
-    <%= f.text_area :description, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:description)).capitalize %>
+    <label class="form-field-label"><%=capitalize_as_title(t(:location))%></label>
+    <hr class="form-field-hr">
+    <%= f.text_field :location, class: "form-control text_field", placeholder: t(:field_placeholder, field_name: t(:location)).capitalize %>
   </div>
   <div class="form-group">
-    <%= f.label :location, capitalize_as_title(t (:location)) %>
-    <%= f.text_field :location, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:location)).capitalize %>
+    <label class="form-field-label"><%=capitalize_as_title(t(:thumbnail))%></label>
+    <hr class="form-field-hr">
+    <div class="file_input_wrapper">
+      <%= f.file_field :thumbnail, accept: "image/png,image/gif,image/jpeg" , placeholder: t(:field_placeholder, field_name: t(:thumbnail)).capitalize, class: 'file_input_control' %>
+      <input class="btn btn-form file_input_button" type="button" value="<%=capitalize_as_title(t(:browse)) %>" name="commit">
+    </div>
   </div>
-  <div class="form-group">
-    <%= f.label :thumbnail, capitalize_as_title(t (:thumbnail)) %>
-    <%= f.file_field :thumbnail, accept: "image/png,image/gif,image/jpeg" ,class: 'file_input', placeholder: t(:field_placeholder, field_name: t(:thumbnail)).capitalize %>
-  </div>
-  <div class="upload-preview">
-    <label><%=capitalize_as_title(t(:thumbnail_preview))%></label>
+  <div class="upload-preview1">
+    <!--label><%=capitalize_as_title(t(:thumbnail_preview))%></label-->
     <!--Image closing tag required by the upload-preview-->
     <img />
+  </div>
   </div>
   <% end %>
 </div>

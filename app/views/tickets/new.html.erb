@@ -1,25 +1,38 @@
 <% provide(:title, t(:title_new_ticket)) %>
-<h1><%=capitalize_as_title(t(:title_new_ticket))%></h1>
 <div>
 <%= form_for(@ticket) do |f| %>
-  <%= f.submit capitalize_as_title(t(:create)), class: "btn btn-large btn-success" %>
+  <div id="form_header_background"></div>
+  <div id="form_header">
+    <div id="form_header_top">
+    <%= link_to image_tag("home/Camera.png", alt:t(:choose_cover_back)) + capitalize_as_title(t(:choose_cover_back)) , '#', :class => "btn btn_choose_cover" %>
+    <%= f.submit capitalize_as_title(t(:save_and_finish)), class: "btn btn-form btn_form_header" %>
+    </div>
+    <hr>
+    <%= f.text_field :name, class: "form-control text_field ticket_name_text_field", placeholder: t(:field_placeholder, field_name: t(:name)).capitalize %>
+    <label class="ticket_name_message"><%= t(:ticket_name_message)%></label>
+  </div>
+<div id="form_main">
   <div class="form-group">
-    <%= f.label :name, capitalize_as_title(t (:name)) %>
-    <%= f.text_field :name, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:name)).capitalize %>
+    <label class="form-field-label"><%=capitalize_as_title(t(:acronym))%></label>
+    <hr class="form-field-hr">
+    <%= f.text_field :acronym, class: "form-control text_field", placeholder: t(:field_placeholder, field_name: t(:acronym)).capitalize %>
   </div>
   <div class="form-group">
-    <%= f.label :acronym, capitalize_as_title(t (:acronym)) %>
-    <%= f.text_field :acronym, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:acronym)).capitalize %>
-  </div>
-  <div class="form-group">
-    <%= f.label :information, capitalize_as_title(t (:information)) %>
-    <%= f.text_area :information, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:information)).capitalize %>
+    <label class="form-field-label"><%=capitalize_as_title(t(:information))%></label>
+    <hr class="form-field-hr">
+    <%= f.text_area :information, class: "form-control text_field", placeholder: t(:field_placeholder, field_name: t(:information)).capitalize %>
   </div>
     <div class="form-group">
-    <%= f.label :color, capitalize_as_title(t (:color)) %>
-    <%= f.text_field :color, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:color)).capitalize %>
+    <label class="form-field-label"><%=capitalize_as_title(t(:color))%></label>
+    <hr class="form-field-hr">
+    <div class="input-group">
+      <span id="selected_color_addon" class="input-group-addon input-addon-left"></span>
+      <%= f.text_field :color, id: "color_field" ,readonly: "true", class: "form-control text_field", placeholder: t(:field_placeholder, field_name: t(:color)).capitalize %>
+    </div>
   </div>
   <%= f.hidden_field :election_id %>
   <% end %>
+<%= render "partials/color_picker" %>
+</div>
 </div>
 <%= javascript_include_tag "tickets_util" %>

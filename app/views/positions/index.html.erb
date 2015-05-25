@@ -11,19 +11,25 @@
 </div>
 <div>
   <%= form_for(@position) do |f| %>
-    <%= f.submit capitalize_as_title(t(:create)), class: "btn btn-large btn-success" %>
+    <%= f.submit capitalize_as_title(t(:add_position)), class: "btn btn-form add_position" %>
+    <br>
+    <br>
     <div class="form-group">
-      <%= f.label :name, capitalize_as_title(t (:name)) %>
-      <%= f.text_field :name, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:name)).capitalize %>
+      <label class="form-field-label"><%=capitalize_as_title(t(:name))%></label>
+      <hr class="form-field-hr">
+      <%= f.text_field :name, class: "form-control text_field", placeholder: t(:field_placeholder, field_name: t(:name)).capitalize %>
     </div>
     <div class="form-group">
-      <%= f.label :description, capitalize_as_title(t (:description)) %>
-      <%= f.text_area :description, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:description)).capitalize%>
+      <label class="form-field-label"><%=capitalize_as_title(t(:description))%></label>
+      <hr class="form-field-hr">
+      <%= f.text_area :description, class: "form-control text_area", placeholder: t(:field_placeholder, field_name: t(:description)).capitalize%>
     </div>
     <%= f.hidden_field :election_id, value: @election_id %>
   <% end %>
 </div>
 <div id="positions_list">
+  <label class="form-field-label"><%=capitalize_as_title(t(:existing_positions))%></label>
+  <hr class="form-field-hr">
   <% @positions_list.each do |position_item| %>
     <div class="position_item">
       <div class="item_controls">
@@ -34,17 +40,19 @@
         <h3><%=position_item.name%></h3>
         <h4><%= t(:description).capitalize+": " + position_item.description.capitalize%></h4>
       </div>
-      <div class="edit_election_form">
+      <div class="edit_position_form">
         <%= form_for(@position, :url => position_path(:id => position_item.id) ,:html => {:method => :put}) do |f| %>
           <div class="form-group">
-            <%= f.label :name, capitalize_as_title(t (:name)) %>
-            <%= f.text_field :name, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:name)).capitalize, value: position_item.name%>
+            <label class="form-field-label"><%=capitalize_as_title(t(:name))%></label>
+            <hr class="form-field-hr">
+            <%= f.text_field :name, class: "form-control text_field", placeholder: t(:field_placeholder, field_name: t(:name)).capitalize, value: position_item.name%>
           </div>
           <div class="form-group">
-            <%= f.label :description, capitalize_as_title(t (:description)) %>
-            <%= f.text_area :description, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:description)).capitalize, value: position_item.description%>
+            <label class="form-field-label"><%=capitalize_as_title(t(:description))%></label>
+            <hr class="form-field-hr">
+            <%= f.text_area :description, class: "form-control text_area", placeholder: t(:field_placeholder, field_name: t(:description)).capitalize, value: position_item.description%>
           </div>
-          <%= f.submit capitalize_as_title(t(:save_changes)), class: "btn btn-large btn-info" %>
+          <%= f.submit capitalize_as_title(t(:save_changes)), class: "btn btn-form" %>
           <input type="button" value="<%= t(:cancel).capitalize%>" class="btn btn-large btn-danger cancel_edit_position_control">
         <% end %>
       </div>

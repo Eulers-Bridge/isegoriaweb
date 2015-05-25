@@ -2,7 +2,7 @@ $(document).ready(function(){
   $('.position_edit_control').unbind('click');
   $('.cancel_edit_position_control').unbind('click');
   $('.position_edit_control').click(function(e){
-    $(this).parent().parent().find('.edit_election_form').toggleClass('show');
+    $(this).parent().parent().find('.edit_position_form').toggleClass('show');
     $(this).hide();
     e.preventDefault();
     });

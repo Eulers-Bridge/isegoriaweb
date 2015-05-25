@@ -1,40 +1,51 @@
 <% provide(:title, t(:title_edit_photo)) %>
-<h1><%=capitalize_as_title(t(:title_edit_photo))%></h1>
 <div>
 <%= form_for(@photo, :url => photo_path ,:html => {:method => :put}) do |f| %>
+  <div id="form_header_background"></div>
+  <div id="form_header">
+    <div id="form_header_top">
+    <%= link_to image_tag("home/Camera.png", alt:t(:choose_cover_back)) + capitalize_as_title(t(:choose_cover_back)) , '#', :class => "btn btn_choose_cover" %>
+    <%= f.submit capitalize_as_title(t(:save_and_finish)), class: "btn btn-form btn_form_header" %>
+    </div>
+    <hr>
+    <%= f.text_field :title, class: "form-control text_field title_text_field", placeholder: t(:field_placeholder, field_name: t(:title)).capitalize %>
+  </div>
+  <div id="form_main">
   <div class="form-group">
-    <%= f.label :title, capitalize_as_title(t (:title)) %>
-    <%= f.text_field :title, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:title)).capitalize %>
+    <label class="form-field-label"><%=capitalize_as_title(t(:description))%></label>
+    <hr class="form-field-hr">
+    <%= f.text_field :description, class: "form-control text_field", placeholder: t(:field_placeholder, field_name: t(:description)).capitalize %>
   </div>
   <div class="form-group">
-    <%= f.label :description, capitalize_as_title(t (:description)) %>
-    <%= f.text_field :description, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:description)).capitalize %>
-  </div>
-  <div class="form-group">
-    <label for="photo_date"><%=capitalize_as_title(t(:date))%></label>
+    <label class="form-field-label"><%=capitalize_as_title(t(:date))%></label>
+    <hr class="form-field-hr">
     <div class="input-group date" id="dpk_date" >
-      <input type="text" readonly="true" class="form-control" placeholder="<%=t(:field_placeholder, field_name: t(:date)).capitalize%>" name="photo[date]" value="<%=@photo.date%>">
-      <span class="input-group-addon">
-        <i class="glyphicon glyphicon-th"></i>
+      <span class="input-group-addon input-addon-left">
+        <i class="glyphicon glyphicon-calendar"></i>
       </span>
+      <input type="text" readonly="true" class="form-control date_field" placeholder="<%=t(:field_placeholder, field_name: t(:date)).capitalize%>" name="photo[date]" value="<%=@photo.date%>">
     </div>
   </div>
   <div class="form-group">
-    <label for="hdd_previous_picture"><%=capitalize_as_title(t(:previous_picture))%></label>
-      <%= image_tag @photo.file, class: "photo_image"%>
-      <input type="hidden" id="hdd_previous_picture" name="photo[previous_picture]" value="<%=@photo.file%>">
+    <%= f.label :picture, capitalize_as_title(t (:picture)), class: "form-field-label" %> 
+    <hr class="form-field-hr">
+    <%= image_tag @photo.file, class: "photo_image"%>
+    <input type="hidden" id="hdd_previous_picture" name="photo[previous_picture]" value="<%=@photo.file%>">
   </div>
-  <hr>
-  <div class="upload-preview">
-    <label><%=capitalize_as_title(t(:picture_preview))%></label>
+  <div class="form-group">
+    <label class="form-field-label"><%=capitalize_as_title(t(:upload_new_picture))+" ("+t(:replace_picture_message)+")"%></label>
+    <hr class="form-field-hr">
+    <div class="file_input_wrapper">
+      <%= f.file_field :file, accept: "image/png,image/gif,image/jpeg" ,class: 'file_input_control', placeholder: t(:field_placeholder, field_name: t(:picture)).capitalize %>
+      <input class="btn btn-form file_input_button" type="button" value="<%=capitalize_as_title(t(:browse)) %>" name="commit">
+    </div>
+  </div>
+    <div class="upload-preview">
+    <!--label><%=capitalize_as_title(t(:picture_preview))%></label-->
     <!--Image closing tag required by the upload-preview-->
     <img />
   </div>
-  <div class="form-group">
-    <%= f.label :file, capitalize_as_title(t (:new_picture)) %>
-    <%= f.file_field :file, accept: "image/png,image/gif,image/jpeg" ,class: 'file_input', placeholder: t(:field_placeholder, field_name: t(:picture)).capitalize %>
   </div>
-  <%= f.submit capitalize_as_title(t(:edit)), class: "btn btn-large btn-success" %>
   <% end %>
 </div>
 <%= javascript_include_tag "photos_util" %>

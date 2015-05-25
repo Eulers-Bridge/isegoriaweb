@@ -1,54 +1,62 @@
 <% provide(:title, t(:title_edit_election)) %>
-<h1><%=capitalize_as_title(t(:title_edit_election))%></h1>
-<div>
+<div class="election_form">
   <%= form_for(@election, :url => election_path ,:html => {:method => :put}) do |f| %>
-  <%= f.submit capitalize_as_title(t(:save_changes)), class: "btn btn-large btn-success" %>
+  <%= f.submit capitalize_as_title(t(:save_changes)), class: "btn btn-form save_election" %>
+    <br>
+    <br>
     <div class="form-group">
-      <%= f.label :title, capitalize_as_title(t (:title)) %>
-      <%= f.text_field :title, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:title)).capitalize %>
+      <%= f.text_field :title, class: "form-control election_title_field_edit", placeholder: t(:field_placeholder, field_name: t(:title)).capitalize %>
+      <label class="election_date_label"><%= @election.start_date %></label>
+      <hr class="form-field-hr">
     </div>
     <div class="form-group">
-      <%= f.label :introduction, capitalize_as_title(t (:introduction)) %>
-      <%= f.text_area :introduction, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:introduction)).capitalize %>
+      <label class="form-field-label"><%=capitalize_as_title(t(:introduction))%></label>
+      <hr class="form-field-hr">
+      <%= f.text_area :introduction, class: "form-control text_area", placeholder: t(:field_placeholder, field_name: t(:introduction)).capitalize %>
     </div>
     <div class="form-group">
-      <%= f.label :process, capitalize_as_title(t (:process)) %>
-      <%= f.text_area :process, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:process)).capitalize %>
+      <label class="form-field-label"><%=capitalize_as_title(t(:process))%></label>
+    <hr class="form-field-hr">
+      <%= f.text_area :process, class: "form-control text_area", placeholder: t(:field_placeholder, field_name: t(:process)).capitalize %>
     </div>
     <div class="form-group">
-      <label for="election_start_date"><%=capitalize_as_title(t(:start_date))%></label>
-      <div class="input-group date" id="dpk_start_date" >
-        <input type="text" readonly="true" class="form-control" placeholder="<%=t(:field_placeholder, field_name: t(:start_date)).capitalize%>" name="election[start_date]" value="<%=@election.start_date%>">
-        <span class="input-group-addon">
-          <i class="glyphicon glyphicon-th"></i>
-        </span>
+      <label class="form-field-label"><%=capitalize_as_title(t(:start_date))%></label>
+    <hr class="form-field-hr">
+    <div class="input-group date" id="dpk_start_date" >
+      <span class="input-group-addon input-addon-left">
+        <i class="glyphicon glyphicon-calendar"></i>
+      </span>
+        <input type="text" readonly="true" class="form-control date_field" placeholder="<%=t(:field_placeholder, field_name: t(:start_date)).capitalize%>" name="election[start_date]" value="<%=@election.start_date%>">
       </div>
     </div>
     <div class="form-group">
-      <label for="election_end_date"><%=capitalize_as_title(t(:end_date))%></label>
+      <label class="form-field-label"><%=capitalize_as_title(t(:end_date))%></label>
+      <hr class="form-field-hr">
       <div class="input-group date" id="dpk_end_date" >
-        <input type="text" readonly="true" class="form-control" placeholder="<%=t(:field_placeholder, field_name: t(:end_date)).capitalize%>" name="election[end_date]" value="<%=@election.end_date%>">
-        <span class="input-group-addon">
-          <i class="glyphicon glyphicon-th"></i>
-        </span>
+        <span class="input-group-addon input-addon-left">
+          <i class="glyphicon glyphicon-calendar"></i>
+        </span>      
+        <input type="text" readonly="true" class="form-control date_field" placeholder="<%=t(:field_placeholder, field_name: t(:end_date)).capitalize%>" name="election[end_date]" value="<%=@election.end_date%>">
       </div>
     </div>
     <div class="form-group">
-      <label for="election_start_voting_date"><%=capitalize_as_title(t(:start_voting_date))%></label>
-      <div class="input-group date" id="dpk_start_voting_date" >
-        <input type="text" readonly="true" class="form-control" placeholder="<%=t(:field_placeholder, field_name: t(:start_voting_date)).capitalize%>" name="election[start_voting_date]" value="<%=@election.start_voting_date%>">
-        <span class="input-group-addon">
-          <i class="glyphicon glyphicon-th"></i>
-        </span>
+      <label class="form-field-label"><%=capitalize_as_title(t(:start_voting_date))%></label>
+      <hr class="form-field-hr">
+      <div class="input-group date" id="dpk_end_date" >
+        <span class="input-group-addon input-addon-left">
+          <i class="glyphicon glyphicon-calendar"></i>
+        </span>      
+        <input type="text" readonly="true" class="form-control date_field" placeholder="<%=t(:field_placeholder, field_name: t(:start_voting_date)).capitalize%>" name="election[start_voting_date]" value="<%=@election.start_voting_date%>">
       </div>
     </div>
     <div class="form-group">
-      <label for="election_end_voting_date"><%=capitalize_as_title(t(:end_voting_date))%></label>
-      <div class="input-group date" id="dpk_end_voting_date" >
-        <input type="text" readonly="true" class="form-control" placeholder="<%=t(:field_placeholder, field_name: t(:end_voting_date)).capitalize%>" name="election[end_voting_date]" value="<%=@election.end_voting_date%>">
-        <span class="input-group-addon">
-          <i class="glyphicon glyphicon-th"></i>
-        </span>
+      <label class="form-field-label"><%=capitalize_as_title(t(:end_voting_date))%></label>
+      <hr class="form-field-hr">
+      <div class="input-group date" id="dpk_end_date" >
+        <span class="input-group-addon input-addon-left">
+          <i class="glyphicon glyphicon-calendar"></i>
+        </span>      
+        <input type="text" readonly="true" class="form-control date_field" placeholder="<%=t(:field_placeholder, field_name: t(:end_voting_date)).capitalize%>" name="election[end_voting_date]" value="<%=@election.end_voting_date%>">
       </div>
     </div>
   <% end %>

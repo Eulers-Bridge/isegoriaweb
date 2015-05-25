@@ -9,6 +9,8 @@ class ElectionsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def index
+    @menu='elections' #Set the menu variable
+    $title=t(:title_elections)  #Set the title variable
     if !check_session #Validate if the user session is active
       return #If not force return to trigger the redirect of the check_session function
     end
@@ -34,11 +36,35 @@ class ElectionsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def new
+    @menu='elections' #Set the menu variable
+    $title=t(:title_new_election)  #Set the title variable
     if !check_session #Validate if the user session is active
       return #If not force return to trigger the redirect of the check_session function
     end
 	  @election = Election.new #Set a new election object to be filled with the create form
   end  
+
+=begin
+--------------------------------------------------------------------------------------------------------------------------------
+  Function to redirect the user to the edit election page
+--------------------------------------------------------------------------------------------------------------------------------
+=end
+  def edit
+    @menu='election' #Set the menu variable
+    $title=t(:title_edit_election)  #Set the title variable
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
+    response = Election.find(params[:id],session[:user]) #Retrieve the election to update
+    if response[0] #Validate if the response was successfull 
+      @election = response[1] #Set the election object to fill the edit form
+    elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+      flash[:danger] = t(:election_get_error_flash) #Set the error message for the user
+      redirect_to election_path #Redirect the user to edit election page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
+    end
+  end
 
 =begin
 --------------------------------------------------------------------------------------------------------------------------------
@@ -62,26 +88,6 @@ class ElectionsController < ApplicationController
         flash[:danger] = t(:election_creation_error_flash) #Set the error message for the user
         @election = Election.new #Reset the Election object to an empty one
         redirect_to new_election_path #Redirect the user to the Election creation page
-    else 
-      return #If not force return to trigger the redirect of the check_session function
-    end
-  end
-
-=begin
---------------------------------------------------------------------------------------------------------------------------------
-  Function to redirect the user to the edit election page
---------------------------------------------------------------------------------------------------------------------------------
-=end
-  def edit
-    if !check_session #Validate if the user session is active
-      return #If not force return to trigger the redirect of the check_session function
-    end
-	  response = Election.find(params[:id],session[:user]) #Retrieve the election to update
-    if response[0] #Validate if the response was successfull 
-      @election = response[1] #Set the election object to fill the edit form
-    elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
-      flash[:danger] = t(:election_get_error_flash) #Set the error message for the user
-      redirect_to election_path #Redirect the user to edit election page
     else 
       return #If not force return to trigger the redirect of the check_session function
     end

@@ -154,6 +154,7 @@
  {
     position: relative;
     margin-top: 50px;
+    margin-bottom: 50px;
     width: 100%;
     padding-right: 50px;
     padding-left: 50px;
@@ -162,19 +163,42 @@
  #upload_pic_form
  {
     position: relative;
+    margin-bottom: 50px;
+    width: 100%;
+    padding-right: 50px;
+    padding-left: 50px;
  }
 
 .text_field{
     background: transparent !important;
  }
- .text_area{
+.text_area{
     background: transparent !important;
     height: 150px !important;
  }
+.date_field{
+  background: transparent !important;
+ }
+.time_picker{
+    background: transparent !important;
+    width: 100px !important;
+}
 .title_text_field{
     font-size: 200% !important;
     height: 50px !important;
     font-family: 'SourceSansProLight' !important;
+ }
+ .input-addon-left{
+    border-top-left-radius: 4px !important;
+    border-bottom-left-radius: 4px !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+ }
+ .input-addon-right{
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    border-top-right-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
  }
 .section_controls{
     padding-top: 30px;
@@ -251,7 +275,8 @@
     border-width: 0.5px;
     border-color: #BBBBBB;
     text-transform: none;
-    font-weight: normal;
+    font-weight: bold;
+    font-family: 'SourceSansProLight' !important;
 }
 .isegoria_sidemenu_l2 li:hover{
     margin-left: 0px !important;
@@ -308,4 +333,23 @@
 .child_link:hover{
     opacity: 0.5 !important;
     text-decoration: none;
+}
+//COLOR PICKER CLASSES
+.color_cell{
+  padding: 5px;
+}
+
+.color_cell_button:hover{
+  border-color: #3A80D2;
+  cursor: pointer;
+}
+
+.color_cell_button{
+  border-style: solid;
+  border-color: #FFFFFF;
+  width: 30px;
+  height: 30px;
+  border-width: 3px;
+  border-radius: 4px;
+  opacity: .85;
 }

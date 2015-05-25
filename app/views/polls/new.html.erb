@@ -1,32 +1,40 @@
 <% provide(:title, t(:title_new_poll)) %>
-<h1><%=capitalize_as_title(t(:title_new_poll))%></h1>
-<div>
+<div class="poll_form">
 <%= form_for(@poll) do |f| %>
-<%= f.submit capitalize_as_title(t(:create)), class: "btn btn-large btn-success" %>
+<%= f.submit capitalize_as_title(t(:save_and_finish)), class: "btn btn-form save_poll" %>
+  <br>
+  <br>
   <div class="form-group">
-    <%= f.label :question, capitalize_as_title(t (:question)) %>
-    <%= f.text_area :question, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:question)).capitalize %>
+    <%= f.text_area :question, class: "form-control poll_question_field", placeholder: t(:field_placeholder, field_name: t(:question)).capitalize %>
   </div>
   <div class="form-group">
-    <%= f.label t(:answers).capitalize%>
+    <label class="form-field-label"><%=capitalize_as_title(t(:answers))%></label>
+    <hr class="form-field-hr">
     <ul class="list-group" id="options_list">
     </ul>
-    <input type="text" class="form-control" id="txt_option" placeholder="<%=t(:field_placeholder, field_name: t(:answer)).capitalize%>"/>
-    <input type="button" class="btn btn-xs btn-info" id="btn_add_option" value="<%=t(:add).capitalize%>"/>
+    <input type="text" class="form-control text_field" id="txt_option" placeholder="<%=t(:field_placeholder, field_name: t(:answer)).capitalize%>"/>
+    <input type="button" class="btn btn-xs btn-form" id="btn_add_option" value="<%=t(:add).capitalize%>"/>
     <%= f.hidden_field :answers, id: "hdd_options"%>
   </div>
   <div class="form-group">
-    <label for="poll_start_date"><%=capitalize_as_title(t(:start_date))%></label>
+    <label class="form-field-label"><%=capitalize_as_title(t(:start_date))%></label>
+    <hr class="form-field-hr">
     <div class="input-group date" id="dpk_poll_date" >
-      <input type="text" readonly="true" class="form-control" placeholder="<%=t(:field_placeholder, field_name: t(:start_date)).capitalize%>" name="poll[start_date]">
-      <span class="input-group-addon">
-        <i class="glyphicon glyphicon-th"></i>
-      </span>
+    <span class="input-group-addon input-addon-left">
+      <i class="glyphicon glyphicon-calendar"></i>
+    </span>
+      <input type="text" readonly="true" class="form-control date_field" placeholder="<%=t(:field_placeholder, field_name: t(:start_date)).capitalize%>" name="poll[start_date]">
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :duration, capitalize_as_title(t (:duration))+" ("+t(:minutes)+")" %>
-    <%= f.text_field :duration, class: "form-control", placeholder: t(:field_placeholder, field_name: t(:duration)).capitalize%>
+    <label class="form-field-label"><%=capitalize_as_title(t(:duration))+" ("+t(:minutes)+")" %></label>
+    <hr class="form-field-hr">
+    <div class="input-group">
+      <%= f.text_field :duration, class: "form-control text_field", placeholder: t(:field_placeholder, field_name: t(:duration)).capitalize%>
+      <span class="input-group-addon">
+        <%=t(:minutes)%>
+      </span>
+    </div>
   </div>
   <% end %>
   <div hidden="true">

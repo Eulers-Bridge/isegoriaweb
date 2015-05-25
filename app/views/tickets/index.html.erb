@@ -15,14 +15,14 @@
   <% @tickets_list.each do |ticket| %>
     <div class="ticket_item">
       <div class="item_controls">
-        <%= link_to t(:edit).capitalize, edit_ticket_path(:id => ticket.id), :class => 'edit_link' %>
+        <%= link_to t(:edit).capitalize, edit_ticket_path(:id => ticket.id, :election_id => @election_id), :class => 'edit_link' %>
         <%= link_to t(:delete).capitalize, ticket_path(:id => ticket.id), method: :delete, :class => 'delete_link' %>
         <%= link_to t(:candidates).capitalize, candidates_path(:id => ticket.id,:election_id => ticket.election_id), method: :get, :class => 'child_link' %>
       </div>
       <div>
         <h3><%=ticket.name%></h3>
         <h4><%= t(:acronym).capitalize+" "+ticket.acronym%></h4>
-        <h4><%= t(:color).capitalize+" "+ticket.color.to_s%></h4>
+        <h4><%= t(:color).capitalize+" "%> <span class="glyphicon glyphicon glyphicon-stop" style="color:<%=ticket.color.to_s%>;"></span><%=ticket.color.to_s%> </h4>
         <h4><%= t(:information).capitalize+" "+ticket.information%></h4>
       </div>
     </div>

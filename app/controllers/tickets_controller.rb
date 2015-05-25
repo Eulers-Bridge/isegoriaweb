@@ -9,6 +9,8 @@ class TicketsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def index
+    @menu='tickets' #Set the menu variable
+    $title=t(:title_tickets)  #Set the title variable
     if !check_session #Validate if the user session is active
       return #If not force return to trigger the redirect of the check_session function
     end
@@ -35,6 +37,8 @@ class TicketsController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def new
+    @menu='tickets' #Set the menu variable
+    $title=t(:title_new_ticket)  #Set the title variable
     if !check_session #Validate if the user session is active
       return #If not force return to trigger the redirect of the check_session function
     end
@@ -43,6 +47,28 @@ class TicketsController < ApplicationController
     @ticket.election_id = @election_id #Set the owner election id to the object before its created
   end
 
+=begin
+--------------------------------------------------------------------------------------------------------------------------------
+  Function to redirect the user to the edit ticket page
+--------------------------------------------------------------------------------------------------------------------------------
+=end
+  def edit
+    @menu='tickets' #Set the menu variable
+    $title=t(:title_edit_ticket)  #Set the title variable
+    if !check_session #Validate if the user session is active
+      return #If not force return to trigger the redirect of the check_session function
+    end
+    @election_id = params[:election_id] #Retrieve the params from the query string
+    resp = Ticket.find(params[:id],session[:user]) #Retrieve the ticket to update
+    if resp[0] #Validate if the response was successfull
+    @ticket = resp[1] #Set the ticket object to fill the edit form
+    elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+      flash[:danger] = t(:ticket_get_error_flash) #Set the error message for the user
+      redirect_to ticket_path #Redirect the user to edit ticket page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
+    end
+  end
 =begin
 --------------------------------------------------------------------------------------------------------------------------------
   Function to create a new Ticket
@@ -64,26 +90,6 @@ class TicketsController < ApplicationController
       flash[:danger] = t(:ticket_creation_error_flash) #Set the error message for the user
       @ticket = Ticket.new #Reset the Ticket object to an empty one
       redirect_to new_ticket_path #Redirect the user to the Ticket creation page
-    else 
-      return #If not force return to trigger the redirect of the check_session function
-    end
-  end
-
-=begin
---------------------------------------------------------------------------------------------------------------------------------
-  Function to redirect the user to the edit ticket page
---------------------------------------------------------------------------------------------------------------------------------
-=end
-  def edit
-    if !check_session #Validate if the user session is active
-      return #If not force return to trigger the redirect of the check_session function
-    end
-    resp = Ticket.find(params[:id],session[:user]) #Retrieve the ticket to update
-    if resp[0] #Validate if the response was successfull
-    @ticket = resp[1] #Set the ticket object to fill the edit form
-    elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
-      flash[:danger] = t(:ticket_get_error_flash) #Set the error message for the user
-      redirect_to ticket_path #Redirect the user to edit ticket page
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
