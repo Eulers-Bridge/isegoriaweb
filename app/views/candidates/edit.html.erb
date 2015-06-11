@@ -1,0 +1,53 @@
+<% provide(:title, t(:title_new_candidate)) %>
+<div>
+<%= form_for(@candidate) do |f| %>
+  <div id="form_header_background"></div>
+  <div id="form_header">
+    <div id="form_header_top">
+    <%= link_to image_tag("home/Camera.png", alt:t(:choose_cover_back)) + capitalize_as_title(t(:choose_cover_back)) , '#', :class => "btn btn_choose_cover" %>
+    <%= f.submit capitalize_as_title(t(:save_and_finish)), class: "btn btn-form btn_form_header" %>
+    </div>
+    <hr>
+    <%= f.text_field :user_id, class: "form-control text_field ticket_name_text_field", placeholder: t(:field_placeholder, field_name: t(:user)).capitalize %>
+  </div>
+<div id="form_main">
+  <div class="form-group">
+    <label class="form-field-label"><%=capitalize_as_title(t(:information))%></label>
+    <hr class="form-field-hr">
+    <%= f.text_field :information, class: "form-control text_field", placeholder: t(:field_placeholder, field_name: t(:information)).capitalize %>
+  </div>
+  <div class="form-group">
+    <label class="form-field-label"><%=capitalize_as_title(t(:policy_statement))%></label>
+    <hr class="form-field-hr">
+    <%= f.text_area :policy_statement, class: "form-control text_field", placeholder: t(:field_placeholder, field_name: t(:policy_statement)).capitalize %>
+  </div>
+  <input type="hidden" id="hdd_position_id" name="candidate[position_id]"/>
+  <div class="form-group">
+    <label class="form-field-label"><%=capitalize_as_title(t(:running_for))%></label>
+    <hr class="form-field-hr">
+      <select class="form-control drop_down_control" id="slPositions">
+      <option value="0"><%=t(:select_one).capitalize%></option>
+      <% @positions_list.each do |position| %>
+          <option value="<%=position.id%>"><%=position.name%></option>
+      <%end%>
+    </select>
+  </div>
+  <input type="hidden" id="hdd_ticket_id" name="candidate[ticket_id]" value="<%= @ticket_id%>"/>
+  <input type="hidden" id="hdd_election_id" name="candidate[election_id]" value="<%= @election_id%>"/>
+  <div class="form-group">
+      <%= f.label :picture, capitalize_as_title(t (:picture)), class: "form-field-label" %> 
+      <hr class="form-field-hr">
+    <div class="file_input_wrapper">
+      <%= f.file_field :photos, accept: "image/png,image/gif,image/jpeg" , placeholder: t(:field_placeholder, field_name: t(:picture)).capitalize, class: 'file_input_control' %>
+      <input class="btn btn-form file_input_button" type="button" value="<%=capitalize_as_title(t(:browse)) %>" name="commit">
+    </div>
+  </div>
+  <div class="upload-preview">
+    <!--label><%=capitalize_as_title(t(:picture_preview))%></label-->
+    <!--Image closing tag required by the upload-preview-->
+    <img />
+  </div>
+  <% end %>
+</div>
+</div>
+<%= javascript_include_tag "candidates_util" %>

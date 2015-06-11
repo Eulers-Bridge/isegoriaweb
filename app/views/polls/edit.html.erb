@@ -37,8 +37,8 @@
     <label class="form-field-label"><%=capitalize_as_title(t(:duration))+" ("+t(:minutes)+")" %></label>
     <hr class="form-field-hr">
     <div class="input-group">
-      <%= f.text_field :duration, class: "form-control text_field", placeholder: t(:field_placeholder, field_name: t(:duration)).capitalize%>
-      <span class="input-group-addon">
+      <%= f.text_field :duration, class: "form-control minutes_field", placeholder: t(:field_placeholder, field_name: t(:duration)).capitalize%>
+      <span class="input-group-addon input-addon-right">
         <%=t(:minutes)%>
       </span>
     </div>

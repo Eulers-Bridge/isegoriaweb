@@ -15,10 +15,10 @@
       <label class="form-field-label"><%=capitalize_as_title(t(:date))%></label>
       <hr class="form-field-hr">
       <div class="input-group date" id="dpk_date" >
-        <input type="text" class="form-control date_field" placeholder="<%=t(:field_placeholder, field_name: t(:date)).capitalize%>" name="article[date]" value="<%=@article.date%>" readonly>
-        <span class="input-group-addon">
-          <i class="glyphicon glyphicon-th"></i>
+        <span class="input-group-addon input-addon-left">
+          <i class="glyphicon glyphicon-calendar"></i>
         </span>
+        <input type="text" class="form-control date_field" placeholder="<%=t(:field_placeholder, field_name: t(:date)).capitalize%>" name="article[date]" value="<%=@article.date%>" readonly>
       </div>
     </div>
     <div class="form-group">

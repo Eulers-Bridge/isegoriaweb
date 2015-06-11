@@ -3,13 +3,14 @@ class Candidate
 
   attr_accessor :information, :policy_statement, :photos, :first_name, :last_name, :user_id, :position_id, :ticket_id
   attr_reader :id
+  @@images_directory = "UniversityOfMelbourne/Candidates"
+
 
   validates :information, :presence => { :message => ApplicationHelper.validation_error(:information, :presence, nil) }
   validates :policy_statement, :presence => { :message => ApplicationHelper.validation_error(:policy_statement, :presence, nil)}
   validates :user_id, :presence => { :message => ApplicationHelper.validation_error(:user, :presence, nil)}
   validates :position_id, :presence => { :message => ApplicationHelper.validation_error(:position, :presence, nil)}
   validates :ticket_id, :presence => { :message => ApplicationHelper.validation_error(:ticket, :presence, nil) }
-  validates :id, :presence =>{ :message => ApplicationHelper.validation_error(:id, :presence, nil) }
 
 =begin
 --------------------------------------------------------------------------------------------------------------------
@@ -43,6 +44,7 @@ class Candidate
     Rails.logger.debug "Call to candidate.save"
     if self.valid? #Validate if the Candidate object is valid
       Rails.logger.debug "The candidate is valid!"
+      picture = self.photos #Retrieve the photos object
       #Create a raw candidate object
       candidate_req = { 'information'=>self.information,
                 'policyStatement'=> self.policy_statement,
@@ -51,11 +53,28 @@ class Candidate
                 'positionId' => self.position_id,
                 'ticketId' => self.ticket_id
                 }
+      Rails.logger.debug '--------------'+ self.ticket_id
+      blah
       reqUrl = "/api/candidate/" #Set the request url
       rest_response = MwHttpRequest.http_post_request(reqUrl,candidate_req,user['email'],user['password']) #Make the POST call to the server with the required parameters
       Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
       if rest_response.code == "200" || rest_response.code == "201" || rest_response.code == "202" #Validate if the response from the server is satisfactory
         candidate = Candidate.rest_to_candidate(rest_response.body) #Turn the response object to a Candidate object
+        if !picture.blank?#Validate if the user supplied a picture
+          #Create Photo node for new candidate
+          #Currently the wep app supports only one picture creation
+          Rails.logger.debug 'Create Photo node for new candidate: ' + candidate.id.to_s
+          photo = Photo.new(
+            title:candidate.first_name+' '+candidate.last_name,
+            description:candidate.information, 
+            file:picture, 
+            owner_id:candidate.id, 
+            date:Time.now.strftime(I18n.t(:date_format_ruby)))#Turn the created_date to epoch
+          resp = photo.save(user,@@images_directory)#A new folder will be created for the candidate in the images server
+          if !resp[0]
+            return true, candidate, false #Return the notification that there was an error creating the picture node
+          end
+        end
         return true, candidate #Return success
       else
         return false, "#{rest_response.code}", "#{rest_response.message}" #Return error
@@ -172,8 +191,7 @@ class Candidate
   def self.all(user, ticket_id, page)
     Rails.logger.debug "Call to candidates.all"
     page = page != nil ? page : 0 #If not page is sent as parameter, set it to the first page
-    reqUrl = "/api/candidates/#{ticket_id}?page=#{page}&pageSize=10" #Build the request url
-   
+    reqUrl = "/api/ticket/#{ticket_id}/candidates/?page=#{page}&pageSize=10" #Build the request url
     rest_response = MwHttpRequest.http_get_request(reqUrl,user['email'],user['password']) #Make the GET request to the Middleware server
     Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
     if rest_response.code == '200' #Validate if the response from the server is 200, which means OK
@@ -185,7 +203,7 @@ class Candidate
         candidate = Candidate.rest_to_candidate(raw_candidate.to_json) #Turn a candidate to json format
         candidatesList << candidate #Add it to the candidates array
       end
-      return true, candidatesList, total_positions, total_pages #Return success
+      return true, candidatesList, total_candidates, total_pages #Return success
     else
       return false, "#{rest_response.code}", "#{rest_response.message}" #Return error
     end

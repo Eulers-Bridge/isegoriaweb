@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
 
   #Function that evaluate and handle a 401 Unauthorized access and 403 Forbidden from the server
   def validate_authorized_access (response_code)
-    if response_code == "401 Unauthorized" or response_code == "403 Forbidden"
+    if response_code == "401" or response_code == "403"
       #if the session is valid, then is real unauthorized access
       if check_session
         flash[:danger] = t(:unauthorized_access).capitalize

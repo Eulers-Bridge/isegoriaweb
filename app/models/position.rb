@@ -181,6 +181,43 @@ class Position
 
 =begin
 --------------------------------------------------------------------------------------------------------------------
+  Function to retrieve all the positions by its election id with no pagination
+  Param 1: logged user object
+  Param 2: id of the election that owns the positions
+  Param 3: number of page requested(pagination)
+  Return if successful: 1.execution result(true), 
+                        2.array with the positions objects, 
+                        3.total number of positions, 
+                        4.total number of pages
+  Return if unsuccessful: 1.execution result(false), 
+                          2.response code from the server, 
+                          3.response message from the server
+--------------------------------------------------------------------------------------------------------------------
+=end
+  def self.all_no_page(user, election_id)
+    Rails.logger.debug "Call to positions.all"
+    page = page != nil ? page : 0 #If not page is sent as parameter, set it to the first page
+    reqUrl = "/api/positions/#{election_id}" #Build the request url
+   
+    rest_response = MwHttpRequest.http_get_request(reqUrl,user['email'],user['password']) #Make the GET request to the Middleware server
+    Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
+    if rest_response.code == '200' #Validate if the response from the server is 200, which means OK
+      raw_positions_list = JSON.parse(rest_response.body) #Get the positions info from the response and normalize it to an array to handle it
+      total_positions = raw_positions_list['totalElements'] #Retrieve the total positions number for pagination
+      total_pages = raw_positions_list['totalPages'] #Retrieve the total number of pages for pagination
+      positionsList = Array.new #Initialize an empty array for the positions
+      for raw_position in raw_positions_list['foundObjects'] #For each position received from the server
+        position = Position.rest_to_position(raw_position.to_json) #Turn a position to json format
+        positionsList << position #Add it to the positions array
+      end
+      return true, positionsList, total_positions, total_pages #Return success
+    else
+      return false, "#{rest_response.code}", "#{rest_response.message}" #Return error
+    end
+  end
+
+=begin
+--------------------------------------------------------------------------------------------------------------------
   Function to transform the raw object received from the middleware to a Position object
   Param 1: Raw object
   Return 1: Transformed Position object

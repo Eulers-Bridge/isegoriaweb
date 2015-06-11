@@ -25,9 +25,9 @@
       <label class="form-field-label"><%=capitalize_as_title(t(:color))%></label>
       <hr class="form-field-hr">
       <div class="input-group">
-        <span id="selected_color_addon" class="input-group-addon input-addon-left" style="background-color:<%=@ticket.color%>;"></span>
+        <span id="selected_color_addon" class="input-group-addon input-addon-color" style="background-color:<%=@ticket.color%>;"></span>
         <%= f.text_field :color, id: "color_field" ,readonly: "true", class: "form-control text_field", placeholder: t(:field_placeholder, field_name: t(:color)).capitalize %>
-        </div>
+      </div>
     </div>
   <% end %>
     <%= render "partials/color_picker" %>

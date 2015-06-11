@@ -16,7 +16,7 @@
       <div class="item_controls">
         <%= link_to t(:edit).capitalize, edit_ticket_path(:id => ticket.id, :election_id => @election_id), :class => 'edit_link' %>
         <%= link_to t(:delete).capitalize, ticket_path(:id => ticket.id), method: :delete, :class => 'delete_link' %>
-        <%= link_to t(:candidates).capitalize, candidates_path(:id => ticket.id,:election_id => ticket.election_id), method: :get, :class => 'child_link' %>
+        <%= link_to t(:candidates).capitalize, candidates_path(:ticket_id => ticket.id,:election_id => ticket.election_id), method: :get, :class => 'child_link' %>
       </div>
       <div>
         <h3><%=ticket.name%></h3>

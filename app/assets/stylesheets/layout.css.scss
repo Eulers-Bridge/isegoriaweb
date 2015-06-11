@@ -121,7 +121,9 @@
     margin-top: 2px !important;
     margin-bottom: 15px !important;
   }
-
+  .creator_span_text{
+    color: #666666 !important;
+  }
   .btn_form_header{
     color: #FFFFFF !important;
     border-color: #FFFFFF !important;
@@ -168,7 +170,19 @@
     padding-right: 50px;
     padding-left: 50px;
  }
-
+.date_field{
+  background: transparent !important;
+  color: #3A80D2 !important;
+  border-color: #3A80D2 !important;
+  width: 200px !important;
+  border-width: 1.5px !important;
+}
+.minutes_field{
+  background: transparent !important;
+  color: #3A80D2 !important;
+  border-color: #3A80D2 !important;
+  border-width: 1.5px !important;
+}
 .text_field{
     background: transparent !important;
  }
@@ -176,12 +190,11 @@
     background: transparent !important;
     height: 150px !important;
  }
-.date_field{
-  background: transparent !important;
- }
 .time_picker{
-    background: transparent !important;
-    width: 100px !important;
+  background: transparent !important;
+  width: 100px !important;
+  color: #3A80D2 !important;
+  border-color: #3A80D2 !important;
 }
 .title_text_field{
     font-size: 200% !important;
@@ -193,25 +206,50 @@
     border-bottom-left-radius: 4px !important;
     border-top-right-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
+    color: #FFFFFF !important;
+    border-color: #3A80D2 !important;
+    background-color: #3A80D2 !important;
  }
  .input-addon-right{
     border-top-left-radius: 0px !important;
     border-bottom-left-radius: 0px !important;
     border-top-right-radius: 4px !important;
     border-bottom-right-radius: 4px !important;
+    color: #FFFFFF !important;
+    border-color: #3A80D2 !important;
+    background-color: #3A80D2 !important;
+ }
+.input-addon-color{
+    border-top-left-radius: 4px !important;
+    border-bottom-left-radius: 4px !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
  }
 .section_controls{
     padding-top: 30px;
     padding-bottom: 20px;
 }
+
+.drop_down_control{
+  background-color: transparent !important;
+  //width: 100px !important;
+  color: #3A80D2 !important;
+  border-color: #3A80D2 !important;
+  border-radius: 4px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url(navigation/arrow_down.png) no-repeat right !important;
+  background-size: 25px 25px !important;
+}
 .pagination_controls{
     text-align: right;
     float: right;
-    color: #008844 !important;
+    color: #3A80D2 !important;
     font-size: 175% !important;
 }
 .pagination_controls .nav_control{
-    color: #008844 !important;
+    color: #3A80D2 !important;
 }
 .pagination_controls .nav_control:hover{
     opacity: 0.70 !important;

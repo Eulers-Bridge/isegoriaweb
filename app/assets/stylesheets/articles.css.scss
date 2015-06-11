@@ -8,18 +8,20 @@
 }
 
 .article_image_thumbnail{
-  width: 100px;
-  height: 75px;
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
 }
 
 .article_item{
-	margin-top: 30px;
-	margin-bottom: 30px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 	margin-right: 100px;
 	margin-left: 100px;
 	padding: 10px;
-	border-style: solid;
-	border-width: 0.15px;
-	border-color: #AAAAAA;
-	border-radius: 6px;
+	border-style: none;
+	//border-radius: 6px;
+	border-bottom-width: 0.15px;
+	border-bottom-style: solid;
+	border-bottom-color: #AAAAAA;
 }

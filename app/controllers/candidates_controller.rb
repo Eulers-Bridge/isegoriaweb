@@ -1,4 +1,4 @@
-class CandidatesController < ApplicationControllerclass
+class CandidatesController < ApplicationController
 
   #Set the default layout for this controller, the views from this controller are available when the user is looged in
   layout 'application'
@@ -9,21 +9,34 @@ class CandidatesController < ApplicationControllerclass
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def index
+    @menu='candidates' #Set the menu variable
+    $title=t(:title_candidates)  #Set the title variable
     if !check_session #Validate if the user session is active
       return #If not force return to trigger the redirect of the check_session function
     end
     @page_aux = params[:page] #Retrieve the params from the query string
-    ticket_id = params[:ticket_id] #Retrieve the params from the query string
+    @ticket_id = params[:ticket_id] #Retrieve the params from the query string
+    @election_id = params[:election_id] #Retrieve the params from the query string
     @page = @page_aux =~ /\A\d+\z/ ? @page_aux.to_i : 0 #Validate if the page_aux param can be parsed as an integer, otherwise set it to cero
-    response = Candidate.all(session[:user],ticket_id,@page) #Retrieve all the candidates from the model
+    response_positions = Position.all_no_page(session[:user],@election_id) #Retrieve all the positions from the model to match the candidate position
+    if response_positions[0] #Validate if the response was successfull
+      @positions_list = response_positions[1] #Get the positions list from the response   
+    elsif validate_authorized_access(response_positions[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+      flash[:danger] = t(:position_list_error_flash) #Set the error message to the user
+      redirect_to error_general_error_path #Redirect the user to the generic error page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
+    end
+    response = Candidate.all(session[:user],@ticket_id,@page) #Retrieve all the candidates from the model
     if response[0] #Validate if the response was successfull
       @candidates_list = response[1] #Get the candidates list from the response
       @total_pages = response[3].to_i #Get the total numer of pages from the response
       @previous_page = @page > 0 ? @page-1 : -1 #Calculate the previous page number, if we are at the first page, then it will set to minus one
       @next_page = @page+1 < @total_pages ? @page+1 : -1 #Calculate the next page number, if we are at the last page, then it will set to minus one
     elsif validate_authorized_access(response[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
-      flash[:danger] = t(:candidates_list_error_flash) #Set the error message to the user
-      redirect_to error_general_error_path #Redirect the user to the generic error page
+      flash[:danger] = t(:candidate_list_error_flash) #Set the error message to the user
+      #redirect_to error_general_error_path #Redirect the user to the generic error page
+      @candidates_list = []
     else
       return #If not force return to trigger the redirect of the check_session function
     end 
@@ -35,11 +48,23 @@ class CandidatesController < ApplicationControllerclass
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def new
+    @menu='candidates' #Set the menu variable
+    $title=t(:title_new_candidate)  #Set the title variable
     if !check_session #Validate if the user session is active
       return #If not force return to trigger the redirect of the check_session function
     end
-  	ticket_id = params[:ticket_id] #Retrieve the params from the query string
+  	@ticket_id = params[:ticket_id] #Retrieve the params from the query string
+    @election_id = params[:election_id] #Retrieve the params from the query string
     @candidate = Candidate.new #Set a new candidate object to be filled by the user form
+    response_positions = Position.all_no_page(session[:user],@election_id) #Retrieve all the positions from the model to match the candidate position
+    if response_positions[0] #Validate if the response was successfull
+      @positions_list = response_positions[1] #Get the positions list from the response   
+    elsif validate_authorized_access(response_positions[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+      flash[:danger] = t(:position_list_error_flash) #Set the error message to the user
+      redirect_to error_general_error_path #Redirect the user to the generic error page
+    else 
+      return #If not force return to trigger the redirect of the check_session function
+    end
   end
 
 =begin
@@ -52,6 +77,8 @@ class CandidatesController < ApplicationControllerclass
       return #If not force return to trigger the redirect of the check_session function
     end
     @candidate = Candidate.new(candidate_params) #Create a new candidate object with the parameters set by the user in the create form
+    @election_id = candidate_params[:election_id] #Retrieve the election id from the form
+    @ticket_id = candidate_params[:ticket_id] #Retrieve the ticket id from the form 
     resp = @candidate.save(session[:user]) #Save the new Candidate object
     if resp[0] #Validate if the response was successfull
       flash[:success] = t(:candidate_creation_success_flash, candidate: (@candidate.first_name + @candidate.last_name)) #Set the success message for the user
@@ -62,7 +89,7 @@ class CandidatesController < ApplicationControllerclass
         end
         flash[:danger] = t(:candidate_creation_error_flash) #Set the error message for the user
         @candidate = Candidate.new #Reset the Candidate object to an empty one
-        redirect_to new_candidate_path #Redirect the user to the Candidate creation page
+        redirect_to new_candidate_path :election_id => @election_id, :ticket_id => @ticket_id #Redirect the user to the Candidate creation page
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
@@ -157,6 +184,6 @@ class CandidatesController < ApplicationControllerclass
 =end
   private
     def candidate_params
-      params.require(:candidate).permit(:information, :policy_statement, :photos, :first_name, :last_name, :user_id, :position_id, :ticket_id)
+      params.require(:candidate).permit(:information, :policy_statement, :photos, :first_name, :last_name, :user_id, :position_id, :ticket_id, :election_id)
     end
 end
