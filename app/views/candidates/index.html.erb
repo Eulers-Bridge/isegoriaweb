@@ -12,24 +12,27 @@
 <div id="candidates_list">
   <% @candidates_list.each do |candidate| %>
   <div class="candidate_item">
+    <div class="item_image">
+        <%= image_tag candidate.photos.blank? ? GENERIC_CANDIDATE_IMAGE : candidate.photos[0]["url"], class: "candidate_image_thumbnail", alt: t(:no_picture).capitalize %>
+    </div>
     <div class="item_controls">
-      <%= link_to t(:edit).capitalize, edit_candidate_path(:id => candidate.id), :class => 'edit_link' %>
+      <%= link_to t(:edit).capitalize, edit_candidate_path(:id => candidate.id, :election_id => @election_id, :ticket_id => candidate.ticket_id), :class => 'edit_link' %>
       <a class="delete_link delete_question_control"><%= t(:delete).capitalize%></a>
     </div>
     <div class="delete_confirmation_form">
       <%= t(:are_you_sure).capitalize %>
       <br>
-      <%= link_to t(:answer_yes).capitalize, candidate_path(:id => candidate.id), method: :delete, :class => 'delete_link' %>
+      <%= link_to t(:answer_yes).capitalize, candidate_path(:id => candidate.id, :election_id => @election_id, :ticket_id => candidate.ticket_id), method: :delete, :class => 'delete_link' %>
       <a class="delete_link cancel_delete_control"><%= t(:answer_no).capitalize%></a>
     </div>
     <div>
     <h3><%=capitalize_as_title(candidate.first_name) + ' ' + capitalize_as_title(candidate.last_name)%></h3>
     <% @positions_list.each do |position| %><!--Iterate through the positions to retrieve the position name for the candidate-->
       <%if candidate.position_id == position.id%>
-        <h4><%= t(:running_for).capitalize+" "+position.name%></h4>
+        <h4><span class="creator_span_text"><%= t(:running_for).capitalize+" "+position.name%></span></h4>
       <% end %>
     <% end %>
-    <h4><%= t(:information).capitalize+" "+candidate.information%></h4>
+    <h4><%=candidate.information%></h4>
     </div>
   </div>
   <!--hr-->

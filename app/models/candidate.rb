@@ -1,7 +1,7 @@
 class Candidate
   include ActiveModel::Model
 
-  attr_accessor :information, :policy_statement, :photos, :first_name, :last_name, :user_id, :position_id, :ticket_id
+  attr_accessor :information, :policy_statement, :photos, :first_name, :last_name, :user_id, :position_id, :ticket_id, :previous_picture
   attr_reader :id
   @@images_directory = "UniversityOfMelbourne/Candidates"
 
@@ -53,8 +53,6 @@ class Candidate
                 'positionId' => self.position_id,
                 'ticketId' => self.ticket_id
                 }
-      Rails.logger.debug '--------------'+ self.ticket_id
-      blah
       reqUrl = "/api/candidate/" #Set the request url
       rest_response = MwHttpRequest.http_post_request(reqUrl,candidate_req,user['email'],user['password']) #Make the POST call to the server with the required parameters
       Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
@@ -87,6 +85,62 @@ class Candidate
 
 =begin
 --------------------------------------------------------------------------------------------------------------------
+  Function to add a ticket to a candidate
+  Param 1: logged user object
+  Return if successful: 1.execution result(true)
+  Return if unsuccessful: 1.execution result(false), 
+                          2.response code from the server
+                          3.response message from the server
+--------------------------------------------------------------------------------------------------------------------
+=end
+  def add_ticket(user, candidate_id,ticket_id)
+    if candidate_id.blank?
+      return false, "0", "Error candidate.add_ticket: Invalid candidate_id"
+    end
+    if ticket_id.blank?
+      return false, "0", "Error candidate.add_ticket: Invalid ticket_id"
+    end
+    Rails.logger.debug "Call to candidate.add_ticket"
+    reqUrl = "/api/candidate/#{candidate_id}/ticket/#{ticket_id}" #Set the request url
+    rest_response = MwHttpRequest.http_put_request_simple(reqUrl,user['email'],user['password']) #Make the POST call to the server with the required parameters
+    Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
+    if rest_response.code == "200" || rest_response.code == "201" || rest_response.code == "202" #Validate if the response from the server is satisfactory
+      return true, rest_response
+    else
+      return false, "#{rest_response.code}", "#{rest_response.message}" #Return error
+    end
+  end
+
+=begin
+--------------------------------------------------------------------------------------------------------------------
+  Function to remove a ticket from a candidate
+  Param 1: logged user object
+  Return if successful: 1.execution result(true)
+  Return if unsuccessful: 1.execution result(false), 
+                          2.response code from the server
+                          3.response message from the server
+--------------------------------------------------------------------------------------------------------------------
+=end
+  def remove_ticket(user, candidate_id,ticket_id)
+    if candidate_id.blank?
+      return false, "0", "Error candidate.remove_ticket: Invalid candidate_id"
+    end
+    if ticket_id.blank?
+      return false, "0", "Error candidate.remove_ticket: Invalid ticket_id"
+    end
+    Rails.logger.debug "Call to candidate.remove_ticket"
+    reqUrl = "/api/candidate/#{candidate_id}/ticket/#{ticket_id}" #Set the request url
+    rest_response = MwHttpRequest.http_put_request_simple(reqUrl,user['email'],user['password']) #Make the POST call to the server with the required parameters
+    Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
+    if rest_response.code == "200" || rest_response.code == "201" || rest_response.code == "202" #Validate if the response from the server is satisfactory
+      return true, rest_response
+    else
+      return false, "#{rest_response.code}", "#{rest_response.message}" #Return error
+    end
+  end
+
+=begin
+--------------------------------------------------------------------------------------------------------------------
   Function to delete a Candidate
   Param 1: logged user object
   Return if successful: 1.execution result(true), 
@@ -98,6 +152,22 @@ class Candidate
 =end
   def delete(user)
     Rails.logger.debug "Call to candidate.delete"
+    
+    photo_deletion = true #Initialize the photo deletion flag to true
+    if self.photos.any? #Check if there are any photos related to the candidate
+      for picture_obj in self.photos #Delete all photo nodes owned by the candidate
+        photo = Photo.new(id:picture_obj["nodeId"])#Create the node object to delete
+        photo.file = picture_obj['url']#Set the photo file url
+        resp_photo = photo.delete(user)#Delete the photo node
+        if !resp_photo[0] #An error has ocurred when deleting photos
+          photo_deletion = false #Set the photo deletion flag to false
+        end
+      end
+    end
+   
+    if !photo_deletion #Validate if there were error when deleting photos
+      return false, resp[1], resp[2] #Return error
+    end
     reqUrl = "/api/candidate/#{self.id}" #Set the request url
     rest_response = MwHttpRequest.http_delete_request(reqUrl,user['email'],user['password']) #Make the DELETE request to the server with the required parameters
     Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
@@ -124,6 +194,15 @@ class Candidate
     Rails.logger.debug "Call to candidate.update_attributes"
     if self.valid? #Validate if the Candidate object is valid
       Rails.logger.debug "The candidate is valid!"
+      picture = attributes[:photos]#Set the photo file object
+      if !picture.blank? #Validate if a file was supplied by the user
+          file_s3_path = Util.upload_image(@@images_directory,picture) #Upload the new image
+        if !attributes[:previous_picture].blank? #Validate if there was a previous image file tied to the photo node
+          Util.delete_image(attributes[:previous_picture]) #Delete the previous image file
+        end
+      else
+        file_s3_path = self.photos #If none was provided, keep the original file
+      end
       #Create a raw candidate object
       candidate_req = { 'information'=>attributes[:information],
                 'policyStatement'=> attributes[:policy_statement],
@@ -133,7 +212,7 @@ class Candidate
                 'ticketId' => attributes[:ticket_id]
                 }   
       reqUrl = "/api/candidate/#{self.id}" #Set the request url
-      rest_response = MwHttpRequest.http_put_request(reqUrl,position_req,user['email'],user['password']) #Make the PUT call to the server with the required parameters
+      rest_response = MwHttpRequest.http_put_request(reqUrl,candidate_req,user['email'],user['password']) #Make the PUT call to the server with the required parameters
       Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
       if rest_response.code == "200" #Validate if the response from the server is 200, which means OK
         candidate = Candidate.rest_to_candidate(rest_response.body)

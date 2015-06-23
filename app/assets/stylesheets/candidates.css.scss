@@ -4,3 +4,27 @@
 #slPositions{
 	width: 300px;
 }
+
+.candidate_image{
+  width: 300px;
+  height: 200px;
+}
+
+.candidate_image_thumbnail{
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+}
+
+.candidate_item{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-right: 100px;
+	margin-left: 100px;
+	padding: 10px;
+	border-style: none;
+	//border-radius: 6px;
+	border-bottom-width: 0.15px;
+	border-bottom-style: solid;
+	border-bottom-color: #AAAAAA;
+}

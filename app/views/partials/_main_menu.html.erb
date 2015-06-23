@@ -175,7 +175,7 @@
             <li><%= link_to t(:positions).capitalize, positions_path(:election_id => @election_id)%></li>
             <li><%= link_to t(:tickets).capitalize, tickets_path(:election_id => @election_id) %></li>
             <li><%= link_to t(:add_ticket).capitalize, new_ticket_path(:election_id => @election_id) %></li>
-            <li><%= link_to t(:candidates).capitalize, candidates_path(:ticket_id => @ticket) %></li>
+            <li><%= link_to t(:candidates).capitalize, candidates_path(:election_id => @election_id,:ticket_id => @ticket_id) %></li>
             <li><%= link_to t(:add_candidate).capitalize, new_candidate_path(:election_id => @election_id,:ticket_id => @ticket_id) %></li>
           </ul>
           <li><%= t(:home).capitalize%></li>

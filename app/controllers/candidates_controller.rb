@@ -81,8 +81,16 @@ class CandidatesController < ApplicationController
     @ticket_id = candidate_params[:ticket_id] #Retrieve the ticket id from the form 
     resp = @candidate.save(session[:user]) #Save the new Candidate object
     if resp[0] #Validate if the response was successfull
-      flash[:success] = t(:candidate_creation_success_flash, candidate: (@candidate.first_name + @candidate.last_name)) #Set the success message for the user
-      redirect_to candidates_path #Redirect the user to the candidates list page
+      candidate_id = resp[1].id
+      resp2 = @candidate.add_ticket(session[:user],candidate_id.to_s,@ticket_id) #Add the candidate to its ticket
+      if resp2[0]
+        flash[:success] = t(:candidate_creation_success_flash, candidate: (resp[1].first_name + resp[1].last_name)) #Set the success message for the user
+        redirect_to candidates_path :election_id => @election_id, :ticket_id => @ticket_id #Redirect the user to the candidates list page
+      elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+        flash[:danger] = t(:candidate_creation_error_flash) #Set the error message for the user
+        @candidate = Candidate.new #Reset the Candidate object to an empty one
+        redirect_to new_candidate_path :election_id => @election_id, :ticket_id => @ticket_id #Redirect the user to the Candidate creation page
+      end
     elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
         if(resp[1].kind_of?(Array)) #If the response was unsucessful, validate if it was caused by an invalid Candidate object sent to the model. If so the server would have returned an array with the errors
           flash[:warning] = Util.format_validation_errors(resp[1]) #Set the invalid object message for the user
@@ -101,15 +109,26 @@ class CandidatesController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def edit
+    @menu='candidates' #Set the menu variable
+    $title=t(:title_edit_candidate)  #Set the title variable
     if !check_session #Validate if the user session is active
       return #If not force return to trigger the redirect of the check_session function
     end
+    @ticket_id = params[:ticket_id] #Retrieve the params from the query string
+    @election_id = params[:election_id] #Retrieve the params from the query string
     resp = Candidate.find(params[:id],session[:user]) #Retrieve the candidate to update
     if resp[0] #Validate if the response was successfull
-    @candidate = resp[1] #Set the candidate object to fill the edit form
+      @candidate = resp[1] #Set the candidate object to fill the edit form
+      response_positions = Position.all_no_page(session[:user],@election_id) #Retrieve all the positions from the model to match the candidate position
+      if response_positions[0] #Validate if the response was successfull
+        @positions_list = response_positions[1] #Get the positions list from the response
+        elsif validate_authorized_access(response_positions[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+        flash[:danger] = t(:position_list_error_flash) #Set the error message to the user
+        redirect_to error_general_error_path #Redirect the user to the generic error page
+      end
     elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:candidate_get_error_flash) #Set the error message for the user
-      redirect_to candidate_path #Redirect the user to edit candidate page
+      redirect_to candidate_path :election_id => @election_id, :ticket_id => @ticket_id #Redirect the user to edit candidate page
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
@@ -125,24 +144,26 @@ class CandidatesController < ApplicationController
       return #If not force return to trigger the redirect of the check_session function
     end
     resp = Candidate.find(params[:id],session[:user]) #Retrieve the original candidate object to update
+    @election_id = candidate_params[:election_id] #Retrieve the election id from the form
+    @ticket_id = candidate_params[:ticket_id] #Retrieve the ticket id from the form 
     if resp[0] #Validate if the response was successfull
     @candidate = resp[1] #Set the candidate object to be updated
     elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:candidate_get_error_flash) #Set the error message for the user
-      redirect_to candidates_path #Redirect the user to the candidates list page
+      redirect_to candidates_path :election_id => @election_id, :ticket_id => @ticket_id  #Redirect the user to the candidates list page
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
-    resp2 = @candidate.update_attributes(candidate_params,session[:user],nil) #Update the candidate object
+    resp2 = @candidate.update_attributes(candidate_params,session[:user]) #Update the candidate object
     if resp2[0] #Validate if the response was successfull
-      flash[:success] = t(:candidate_modification_success_flash, candidate: (@candidate.first_name + @candidate.last_name)) #Set the success message for the user
-      redirect_to candidates_path #Redirect the user to the candidates list page
+      flash[:success] = t(:candidate_modification_success_flash, candidate: (resp2[1].first_name + resp2[1].last_name)) #Set the success message for the user
+      redirect_to candidates_path :election_id => @election_id, :ticket_id => @ticket_id  #Redirect the user to the candidates list page
     elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       if(resp[1].kind_of?(Array)) #If the response was unsucessful, validate if it was caused by an invalid Candidate object sent to the model. If so the server would have returned an array with the errors
         flash[:warning] = Util.format_validation_errors(resp[1]) #Set the invalid object message for the user
       end
       flash[:danger] = t(:candidate_modification_error_flash) #Set the error message for the user
-      redirect_to edit_candidate_path #Redirect the user to the Candidate edition page
+      redirect_to edit_candidate_path :election_id => @election_id, :ticket_id => @ticket_id  #Redirect the user to the Candidate edition page
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
@@ -157,12 +178,14 @@ class CandidatesController < ApplicationController
     if !check_session #Validate if the user session is active
       return #If not force return to trigger the redirect of the check_session function
     end
+    @election_id = params[:election_id] #Retrieve the election id from the form
+    @ticket_id = params[:ticket_id] #Retrieve the ticket id from the form 
     resp = Candidate.find(params[:id],session[:user]) #Retrieve the original candidate object to update
     if resp[0] #Validate if the response was successfull 
     @candidate = resp[1] #Set the candidate object to be deleted
     elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
       flash[:danger] = t(:candidate_get_error_flash) #Set the error message for the user
-      redirect_to candidates_path #Redirect the user to the candidates list page
+      redirect_to candidates_path :election_id => @election_id, :ticket_id => @ticket_id  #Redirect the user to the candidates list page
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
@@ -174,7 +197,7 @@ class CandidatesController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
-    redirect_to candidates_path #Redirect the user to the candidates list page
+    redirect_to candidates_path :election_id => @election_id, :ticket_id => @ticket_id  #Redirect the user to the candidates list page
   end
 
 =begin
@@ -184,6 +207,6 @@ class CandidatesController < ApplicationController
 =end
   private
     def candidate_params
-      params.require(:candidate).permit(:information, :policy_statement, :photos, :first_name, :last_name, :user_id, :position_id, :ticket_id, :election_id)
+      params.require(:candidate).permit(:information, :policy_statement, :photos, :first_name, :last_name, :user_id, :position_id, :ticket_id, :election_id, :previous_picture)
     end
 end

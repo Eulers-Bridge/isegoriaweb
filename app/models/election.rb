@@ -63,7 +63,7 @@ class Election
         election = Election.rest_to_election(rest_response.body) #Turn the response object to a Election object
         return true, election #Return success
       else
-        return false, "#{rest_response.code} #{rest_response.message}" #Return error
+        return false, "#{rest_response.code}", "#{rest_response.message}" #Return error
       end
     else
       Rails.logger.debug self.errors.full_messages
@@ -128,7 +128,7 @@ class Election
         election = Election.rest_to_election(rest_response.body)
         return true, election #Return success
       else
-        return false, "#{rest_response.code} #{rest_response.message}" #Return error
+        return false, "#{rest_response.code}", "#{rest_response.message}" #Return error
       end
     else
       Rails.logger.debug self.errors.full_messages
@@ -158,7 +158,7 @@ class Election
       election = Election.rest_to_election(rest_response.body) #Turn the response object to an Election object
       return true, election #Return success
     else
-      return false, "#{rest_response.code} #{rest_response.message}" #Return error
+      return false, "#{rest_response.code}", "#{rest_response.message}" #Return error
     end
 
   end
