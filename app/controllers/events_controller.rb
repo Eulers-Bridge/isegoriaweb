@@ -28,6 +28,8 @@ class EventsController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -42,6 +44,8 @@ class EventsController < ApplicationController
       return #If not force return to trigger the redirect of the check_session function
     end
 	  @event = Event.new #Set a new event object to be filled by the user form
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -64,6 +68,8 @@ class EventsController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -94,6 +100,8 @@ class EventsController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -127,6 +135,8 @@ class EventsController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -160,6 +170,8 @@ class EventsController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -189,6 +201,8 @@ class EventsController < ApplicationController
       else 
         return #If not force return to trigger the redirect of the check_session function
       end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -218,6 +232,8 @@ class EventsController < ApplicationController
       return #If not force return to trigger the redirect of the check_session function
     end
       redirect_to events_path #Redirect the user to the events list page
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin

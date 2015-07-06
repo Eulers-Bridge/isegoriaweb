@@ -52,9 +52,6 @@ hr{
 	color: #AFAFAF !important;
 }
 
-video{
-}
-
 //SECTION 1
 #landing_container_section_1{
 	background: url(landing/Background.png) no-repeat center center;
@@ -83,11 +80,10 @@ video{
 #section_1_header{
 	height: 65px;
 }
-#section_1 video{
+#section_1 #landing_video{
 	width: 275px; 
 	height: 145px;
 }
-
 
 /*#section_1_header .landing_logo{
 	float: left;

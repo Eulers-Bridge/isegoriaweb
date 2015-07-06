@@ -28,7 +28,9 @@ class ArticlesController < ApplicationController
 	    redirect_to error_general_error_path #Redirect the user to the generic error page
 	  else
       return #If not force return to trigger the redirect of the check_session function
-    end	
+    end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)	
   end
 
 =begin
@@ -43,6 +45,8 @@ class ArticlesController < ApplicationController
 	    return #If not force return to trigger the redirect of the check_session function
 	  end
 	  @article = Article.new #Set a new article object to be filled by the user form
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -65,6 +69,8 @@ class ArticlesController < ApplicationController
 	  else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -96,6 +102,8 @@ class ArticlesController < ApplicationController
 	  else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -129,6 +137,8 @@ def update
   else 
     return #If not force return to trigger the redirect of the check_session function
   end
+  rescue #Error Handilng code
+    general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
 end
 
 =begin
@@ -160,6 +170,8 @@ def upload_picture
   else 
     return #If not force return to trigger the redirect of the check_session function
   end
+  rescue #Error Handilng code
+    general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
 end
 
 =begin
@@ -188,6 +200,8 @@ def delete_picture
   else 
     return #If not force return to trigger the redirect of the check_session function
   end
+  rescue #Error Handilng code
+    general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
 end
 
 =begin
@@ -197,26 +211,28 @@ end
 =end
   def destroy
     if !check_session #Validate if the user session is active
-	  return #If not force return to trigger the redirect of the check_session function
-	end
-	resp = Article.find(params[:id],session[:user]) #Retrieve the original article object to update
-	if resp[0] #Validate if the response was successfull
-	  @article = resp[1] #Set the article object to be deleted
-	elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
-	  flash[:danger] = t(:article_get_error_flash) #Set the error message for the user
-	  redirect_to articles_path #Redirect the user to the articles list page
-	else 
-      return #If not force return to trigger the redirect of the check_session function
-    end
-	resp2 = @article.delete(session[:user]) #Delete the article object
-	if resp2[0] #Validate if the response was successfull
-	  flash[:success] = t(:article_deletion_success_flash, article: @article.title) #Set the success message for the user
-	elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
-      flash[:danger] = t(:article_deletion_error_flash) #Set the error message for the user
-    else 
-      return #If not force return to trigger the redirect of the check_session function
-    end
-    redirect_to articles_path #Redirect the user to the articles list page
+	    return #If not force return to trigger the redirect of the check_session function
+  	end
+  	resp = Article.find(params[:id],session[:user]) #Retrieve the original article object to update
+  	if resp[0] #Validate if the response was successfull
+  	  @article = resp[1] #Set the article object to be deleted
+  	elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+  	  flash[:danger] = t(:article_get_error_flash) #Set the error message for the user
+  	  redirect_to articles_path #Redirect the user to the articles list page
+  	else 
+        return #If not force return to trigger the redirect of the check_session function
+      end
+  	resp2 = @article.delete(session[:user]) #Delete the article object
+  	if resp2[0] #Validate if the response was successfull
+  	  flash[:success] = t(:article_deletion_success_flash, article: @article.title) #Set the success message for the user
+  	elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
+        flash[:danger] = t(:article_deletion_error_flash) #Set the error message for the user
+      else 
+        return #If not force return to trigger the redirect of the check_session function
+      end
+      redirect_to articles_path #Redirect the user to the articles list page
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin

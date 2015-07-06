@@ -28,6 +28,8 @@ class PhotoAlbumsController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -42,6 +44,8 @@ class PhotoAlbumsController < ApplicationController
       return #If not force return to trigger the redirect of the check_session function
     end
 	  @photo_album = PhotoAlbum.new #Set a new photo album object to be filled with the create form
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -78,6 +82,8 @@ class PhotoAlbumsController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -106,6 +112,8 @@ class PhotoAlbumsController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -135,6 +143,8 @@ class PhotoAlbumsController < ApplicationController
       return #If not force return to trigger the redirect of the check_session function
     end
     redirect_to photo_albums_path #Redirect the user to the photo_albums list page
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -168,6 +178,8 @@ class PhotoAlbumsController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -201,6 +213,8 @@ class PhotoAlbumsController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
 	  end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -230,6 +244,8 @@ class PhotoAlbumsController < ApplicationController
       return #If not force return to trigger the redirect of the check_session function
     end
     redirect_to :back
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin

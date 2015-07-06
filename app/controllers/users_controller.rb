@@ -26,6 +26,8 @@ class UsersController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -51,6 +53,8 @@ class UsersController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -73,6 +77,8 @@ class UsersController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -99,6 +105,8 @@ class UsersController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -119,6 +127,8 @@ class UsersController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -152,6 +162,8 @@ class UsersController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -181,6 +193,8 @@ class UsersController < ApplicationController
       return #If not force return to trigger the redirect of the check_session function
     end
     redirect_to users_path #Redirect the user to the users list page
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin

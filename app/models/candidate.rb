@@ -1,7 +1,7 @@
 class Candidate
   include ActiveModel::Model
 
-  attr_accessor :information, :policy_statement, :photos, :first_name, :last_name, :user_id, :position_id, :ticket_id, :previous_picture
+  attr_accessor :information, :policy_statement, :photos, :first_name, :last_name, :user_id, :position_id, :ticket_id
   attr_reader :id
   @@images_directory = "UniversityOfMelbourne/Candidates"
 
@@ -194,15 +194,6 @@ class Candidate
     Rails.logger.debug "Call to candidate.update_attributes"
     if self.valid? #Validate if the Candidate object is valid
       Rails.logger.debug "The candidate is valid!"
-      picture = attributes[:photos]#Set the photo file object
-      if !picture.blank? #Validate if a file was supplied by the user
-          file_s3_path = Util.upload_image(@@images_directory,picture) #Upload the new image
-        if !attributes[:previous_picture].blank? #Validate if there was a previous image file tied to the photo node
-          Util.delete_image(attributes[:previous_picture]) #Delete the previous image file
-        end
-      else
-        file_s3_path = self.photos #If none was provided, keep the original file
-      end
       #Create a raw candidate object
       candidate_req = { 'information'=>attributes[:information],
                 'policyStatement'=> attributes[:policy_statement],
@@ -216,6 +207,37 @@ class Candidate
       Rails.logger.debug "Response from server: #{rest_response.code} #{rest_response.message}: #{rest_response.body}"
       if rest_response.code == "200" #Validate if the response from the server is 200, which means OK
         candidate = Candidate.rest_to_candidate(rest_response.body)
+        picture = attributes[:photos]#Set the photo file object
+        if !picture.blank?#Validate if the user supplied a picture
+          #Create Photo node for new candidate
+          #Currently the wep app supports only one picture creation
+          Rails.logger.debug 'Create Photo node for candidate: ' + candidate.id.to_s
+          photo = Photo.new(
+            title:candidate.first_name+' '+candidate.last_name,
+            description:candidate.information, 
+            file:picture, 
+            owner_id:candidate.id, 
+            date:Time.now.strftime(I18n.t(:date_format_ruby)))#Turn the created_date to epoch
+          resp = photo.save(user,@@images_directory)#A new folder will be created for the candidate in the images server
+          if resp[0]
+            photo_deletion = true #Initialize the photo deletion flag to true
+            if candidate.photos.any? #Check if there are any photos related to the candidate
+              for picture_obj in self.photos #Delete all photo nodes owned by the candidate
+                photo = Photo.new(id:picture_obj["nodeId"])#Create the node object to delete
+                photo.file = picture_obj['url']#Set the photo file url
+                resp_photo = photo.delete(user)#Delete the photo node
+                if !resp_photo[0] #An error has ocurred when deleting photos
+                  photo_deletion = false #Set the photo deletion flag to false
+                end
+              end
+            end
+            if !photo_deletion #Validate if there were error when deleting photos
+              return false, resp[1], resp[2] #Return error
+            end
+          else
+            return true, candidate, false #Return the notification that there was an error creating the picture node
+          end
+        end
         return true, candidate #Return success
       else
         return false, "#{rest_response.code}", "#{rest_response.message}" #Return error

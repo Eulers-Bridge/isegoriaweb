@@ -28,6 +28,8 @@ class ElectionsController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -42,6 +44,8 @@ class ElectionsController < ApplicationController
       return #If not force return to trigger the redirect of the check_session function
     end
 	  @election = Election.new #Set a new election object to be filled with the create form
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end  
 
 =begin
@@ -64,6 +68,8 @@ class ElectionsController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -91,6 +97,8 @@ class ElectionsController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -124,6 +132,8 @@ class ElectionsController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -153,6 +163,8 @@ class ElectionsController < ApplicationController
       return #If not force return to trigger the redirect of the check_session function
     end
     redirect_to elections_path #Redirect the user to the elections list page
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin

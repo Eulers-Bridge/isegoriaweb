@@ -27,7 +27,9 @@ class PhotosController < ApplicationController
       redirect_to error_general_error_path #Redirect the user to the generic error page
     else 
       return #If not force return to trigger the redirect of the check_session function
-    end 
+    end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -42,6 +44,8 @@ class PhotosController < ApplicationController
       return #If not force return to trigger the redirect of the check_session function
     end
     @photo = Photo.new #Set a new photo object to be filled by the user form
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -64,6 +68,8 @@ class PhotosController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -91,6 +97,8 @@ class PhotosController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -124,6 +132,8 @@ class PhotosController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -153,6 +163,8 @@ class PhotosController < ApplicationController
       return #If not force return to trigger the redirect of the check_session function
     end
       redirect_to photos_path #Redirect the user to the photos list page
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin

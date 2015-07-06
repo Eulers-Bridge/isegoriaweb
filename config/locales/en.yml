@@ -147,6 +147,7 @@ en:
   full_name: "full name"
   gender: "gender"
   grant_access: "grant access"
+  general_error: "Oh my Isegoria! An unknown error has ocurred."
   hello_world: "hello world"
   home: "home"
   home_headline: "headline"

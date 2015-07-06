@@ -9,6 +9,7 @@ class CandidatesController < ApplicationController
 --------------------------------------------------------------------------------------------------------------------------------
 =end
   def index
+    
     @menu='candidates' #Set the menu variable
     $title=t(:title_candidates)  #Set the title variable
     if !check_session #Validate if the user session is active
@@ -39,8 +40,11 @@ class CandidatesController < ApplicationController
       @candidates_list = []
     else
       return #If not force return to trigger the redirect of the check_session function
-    end 
+    end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
+  
 
 =begin
 --------------------------------------------------------------------------------------------------------------------------------
@@ -65,6 +69,8 @@ class CandidatesController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -101,6 +107,8 @@ class CandidatesController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -132,6 +140,8 @@ class CandidatesController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -167,6 +177,8 @@ class CandidatesController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -198,6 +210,8 @@ class CandidatesController < ApplicationController
       return #If not force return to trigger the redirect of the check_session function
     end
     redirect_to candidates_path :election_id => @election_id, :ticket_id => @ticket_id  #Redirect the user to the candidates list page
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -207,6 +221,6 @@ class CandidatesController < ApplicationController
 =end
   private
     def candidate_params
-      params.require(:candidate).permit(:information, :policy_statement, :photos, :first_name, :last_name, :user_id, :position_id, :ticket_id, :election_id, :previous_picture)
+      params.require(:candidate).permit(:information, :policy_statement, :photos, :first_name, :last_name, :user_id, :position_id, :ticket_id, :election_id)
     end
 end
