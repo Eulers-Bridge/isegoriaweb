@@ -1,6 +1,6 @@
 # README #
 
-**The version of ruby we have been using is ruby 2.1.1p76 (2014-02-24 revision 45161)**
+**The version of ruby we have been using is ruby 2.1.1p76 (2014-02-24 revision 45161). RAILS 4.1.0**
 
 This README would normally document whatever steps are necessary to get your application up and running.
 
