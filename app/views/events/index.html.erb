@@ -16,8 +16,8 @@
         <%= image_tag event.picture.blank? ? '' : event.picture[0]["url"], class: "event_image_thumbnail", alt: t(:picture) %>
     </div>
     <div class="item_controls">
-      <%= link_to t(:edit).capitalize, edit_event_path(:id => event.id), :class => 'edit_link' %> 
-      <%= link_to t(:delete).capitalize, event_path(:id => event.id), method: :delete, :class => 'delete_link' %>
+      <%= link_to t(:edit).upcase, edit_event_path(:id => event.id), :class => 'edit_link' %> 
+      <%= link_to t(:delete).upcase, event_path(:id => event.id), method: :delete, :class => 'delete_link' %>
     </div>
     <div>
     <h3><%=event.name%></h3>
