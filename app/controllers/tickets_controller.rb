@@ -28,7 +28,9 @@ class TicketsController < ApplicationController
       redirect_to error_general_error_path #Redirect the user to the generic error page
     else 
       return #If not force return to trigger the redirect of the check_session function
-    end 
+    end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -45,6 +47,8 @@ class TicketsController < ApplicationController
   	@election_id = params[:election_id] #Retrieve the params from the query string
     @ticket = Ticket.new #Set a new ticket object to be filled by the user form
     @ticket.election_id = @election_id #Set the owner election id to the object before its created
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -68,7 +72,10 @@ class TicketsController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
+
 =begin
 --------------------------------------------------------------------------------------------------------------------------------
   Function to create a new Ticket
@@ -93,6 +100,8 @@ class TicketsController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -126,6 +135,8 @@ class TicketsController < ApplicationController
     else 
       return #If not force return to trigger the redirect of the check_session function
     end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin
@@ -155,6 +166,8 @@ class TicketsController < ApplicationController
       return #If not force return to trigger the redirect of the check_session function
     end
       redirect_to tickets_path(:election_id =>@ticket.election_id) #Redirect the user to the tickets list page
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
 =begin

@@ -32,7 +32,9 @@ class SessionsController < ApplicationController
       logger.debug params[:session][:username] + " Not authenticated: " + resp[1] 
       flash[:danger] = t(:invalid_login_flash).capitalize
       redirect_to root_path
-    end 
+    end
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 
   def destroy
@@ -40,5 +42,7 @@ class SessionsController < ApplicationController
     session.destroy
   	logger.debug username + " session destroyed"
   	redirect_to root_path
+    rescue #Error Handilng code
+      general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
 end

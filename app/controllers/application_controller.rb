@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   #helper_method will make any method available across the entire application
   helper_method :check_session
   helper_method :validate_authorized_access
+  helper_method :general_error_redirection
 
   #before_actions will make a method run before actions are evaluated
   before_action :set_no_cache
@@ -66,4 +67,12 @@ class ApplicationController < ActionController::Base
       return true
     end
   end
+
+  #Function to handle general errors
+  def general_error_redirection(caller,error)
+    flash[:danger] = t(:general_error) #Set the error message to the user
+    Rails.logger.debug "*[ERROR] @ #{caller}=> #{error}." #Log the error
+    redirect_to error_general_error_path #Redirect the user to the generic error page
+  end
+
 end
