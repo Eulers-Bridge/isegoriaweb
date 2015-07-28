@@ -58,7 +58,7 @@ hr{
 	background-size: cover;
 }
 #landing_container_section_1 #section_1{
-	height: 660px;
+	height: 760px;
 	color: #FFFFFF;
 	@media only screen and (min-width: 1024px){
 		padding-right: 40px;
@@ -81,8 +81,10 @@ hr{
 	height: 65px;
 }
 #section_1 #landing_video{
-	width: 275px; 
-	height: 145px;
+	//width: 275px; 
+	//height: 145px;
+	width: 560px;
+	height: 315px;
 }
 
 /*#section_1_header .landing_logo{
@@ -695,7 +697,7 @@ font-family: 'SourceSansPro';
 	background-color: #FFFFFF;
 	height: 60px;
 	border-bottom: 1px solid #DDDDDD;
-	top: 600px;
+	top: 760px;
 	z-index: 2;
 	position:absolute;
 	@media only screen and (max-width : 767px){
