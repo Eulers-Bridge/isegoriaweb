@@ -151,7 +151,8 @@
 	  <div id="section_6" class="landing-section">
 	    <p><h1><%=t(:landing_title_6_appraisals)%></h1></p>
 	    <p><h4><%=t(:landing_text_6_appraisals)%></h4></p>
-      <button class="btn landing-link-border" id="btn_more_info"><%=capitalize_as_title(t(:more_info))%></button>
+      <button class="btn landing-link-border" id="btn_more_info"><%= link_to capitalize_as_title(t(:more_info)),
+          home_more_info_path, :id =>"btn_more_info" %></button>
 	  </div>
   </div>
   <%= render "partials/landing_footer" %>
