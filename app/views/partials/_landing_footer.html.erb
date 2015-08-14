@@ -1,6 +1,17 @@
 <div id= "landing_container_footer" class="landing_container">
   <div id="landing_footer" class="landing-section">
     <%= image_tag "landing/Logo_Stylized_20.png"%>
+    
+      
+    <div id="landing_footer_icons">
+      <a class="btn" href="https://www.facebook.com/isegoria.community">
+        <%=image_tag("landing/Facebook.png", alt:t(:app_name))%></a>
+      <a class="btn" href="https://twitter.com/EulersBridge">
+        <%=image_tag("landing/Twitter.png", alt:t(:app_name))%></a>
+      <a class="btn" href="https://www.youtube.com/channel/UCLneRR6lG5GBHZbAtWLSLgA">
+        <%=image_tag("landing/Youtube.png", alt:t(:app_name))%></a>
+    </div>
+    
     <div id="landing_footer_links_bar">
       <%= link_to capitalize_as_title(t(:home)),home_path,:class => "btn"%>
       <%= link_to capitalize_as_title(t(:about_us)),home_more_info_path,:class => "btn"%>

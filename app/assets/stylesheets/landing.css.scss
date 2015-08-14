@@ -643,8 +643,17 @@ font-family: 'SourceSansPro';
 		padding-left: 10px;	
 	}
 }
+#landing_footer_icons{
+	padding-top: 35px;
+	padding-bottom: 15px;
+}
+#landing_footer_icons .btn:hover{
+	color: #DDDDDD;
+	opacity: 0.50;
+}
+
 #landing_footer_links_bar{
-	padding-top: 45px;
+	padding-top: 5px;
 	padding-bottom: 15px;
 }
 #landing_footer_links_bar .btn{
