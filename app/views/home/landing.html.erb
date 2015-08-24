@@ -18,15 +18,11 @@
 		    <!--%= image_tag "landing/Isegoria_logo.png", class: "landing_logo" %-->
         <div id="header_app_name"><%=t(:isegoria).capitalize%></div>
 		    <button class="btn landing-link-border" id="admin_login"><%=capitalize_as_title(t(:admin_login))%></button>
-        <%= link_to capitalize_as_title(t(:more_info)), 
-        home_more_info_path,
-        :id =>"more_info_header", 
-        :class => "btn landing-link-border"%>
       </div>
       <hr>
       <div id="section_1_content">
         <h1><%=t(:landing_modal)%></h1>
-	    <h4><%=t(:landing_message)%> <a><%=t(:see_the_video).capitalize%></a></h4>
+	    <h4><%=t(:landing_message)%> </h4>
 	     <!--video controls>
            <source src="Shadows.mp4" type="video/mp4">
            <%=t(:video_unsupported).capitalize%>
@@ -155,7 +151,8 @@
 	  <div id="section_6" class="landing-section">
 	    <p><h1><%=t(:landing_title_6_appraisals)%></h1></p>
 	    <p><h4><%=t(:landing_text_6_appraisals)%></h4></p>
-      <button class="btn landing-link-border" id="btn_more_info"><%=capitalize_as_title(t(:more_info))%></button>
+      <button class="btn landing-link-border" id="btn_more_info"><%= link_to capitalize_as_title(t(:more_info)),
+          home_more_info_path, :id =>"btn_more_info" %></button>
 	  </div>
   </div>
   <%= render "partials/landing_footer" %>

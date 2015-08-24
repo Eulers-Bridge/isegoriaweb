@@ -18,10 +18,6 @@
       <div id="section_1_header">
         <div id="header_app_name"><%=t(:isegoria).capitalize%></div>
 		    <button class="btn landing-link-border" id="admin_login"><%=capitalize_as_title(t(:admin_login))%></button>
-        <%= link_to capitalize_as_title(t(:more_info)), 
-        home_more_info_path,
-        :id =>"more_info_header", 
-        :class => "btn landing-link-border" %>
       </div>
       <hr>
       <div id="section_1_content">
@@ -108,9 +104,6 @@
       <div id="landing_now_hiring">
         <h4><%=(t(:currently_hiring_adv))%></h4>
       </div>
-      <a name="media_enquiries_anchor"></a>
-      <h1><%=capitalize_as_title(t(:media_enquiries))%></h1>
-      <h4><%=t(:media_enquiries_message).capitalize%></h4>
       <hr>
       <div class="more_info_section_link">
         <button class="btn"><span class="glyphicon glyphicon-download"></span><%=t(:download_presskit).upcase%></button>
@@ -119,12 +112,6 @@
       <a name="pricing_anchor"></a>
       <h1><%=capitalize_as_title(t(:pricing))%></h1>
       <h4><%=t(:pricing_message).capitalize%></h4>
-      <a name="security_anchor"></a>
-      <h1><%=capitalize_as_title(t(:security))%></h1>
-      <h4><%=t(:security_message).capitalize%></h4>
-      <a name="privacy_policy_anchor"></a>
-      <h1><%=capitalize_as_title(t(:privacy_policy))%></h1>
-      <h4><%=t(:privacy_policy_message).capitalize%></h4>
       <a name="terms_of_service_anchor"></a>
       <h1><%=capitalize_as_title(t(:terms_of_service))%></h1>
       <h4><%=t(:terms_of_service_message).capitalize%></h4>
