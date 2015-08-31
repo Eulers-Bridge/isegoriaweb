@@ -22,7 +22,8 @@ class SessionsController < ApplicationController
         @user['photos']=nil
         session[:user] = @user
         session[:username] = @user['email']
-        session[:password] = @user['password']
+        #session[:password] = @user['password'] #Get the user password from the server response
+        session[:password] = resp[2] #Get the user password from the user input
         session[:authenticated] = true
         session[:locale] = I18n.locale
         logger.debug session[:username] + " Authenticated: " + session[:authenticated].to_s

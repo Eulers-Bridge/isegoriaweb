@@ -67,7 +67,7 @@ class User
     @rest_response = MwHttpRequest.http_get_request(reqUrl,self.email, self.password)
     Rails.logger.debug "Response from server: #{@rest_response.code} #{@rest_response.message}: #{@rest_response.body}"
     if @rest_response.code == "200"
-      return true, @rest_response.body
+      return true, @rest_response.body, self.password
     else
       return false, "#{@rest_response.code}", "#{@rest_response.message}"
     end
