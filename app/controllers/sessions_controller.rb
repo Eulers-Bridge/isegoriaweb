@@ -20,6 +20,7 @@ class SessionsController < ApplicationController
         #transfer any data to the new session
         reset_session
         @user['photos']=nil
+        @user['password']=resp[2]#Get the user password from the user input
         session[:user] = @user
         session[:username] = @user['email']
         #session[:password] = @user['password'] #Get the user password from the server response
