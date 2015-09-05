@@ -83,12 +83,15 @@ hr{
 	z-index: 2;
 }
 #isegoria_video{
+	 margin: 0;
+  padding: 0;
 	//width: 275px; 
 	//height: 145px;
 	//width: 560px;
 	//height: 315px;
+	opacity:0.0;
 	position: fixed;
-  top: 50%;
+  top: 45%;
   left: 50%;
   z-index: -1;
   min-width: 100%;
