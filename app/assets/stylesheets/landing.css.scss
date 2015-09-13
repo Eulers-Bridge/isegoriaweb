@@ -90,6 +90,7 @@ hr{
 	//width: 560px;
 	//height: 315px;
 	opacity:0.0;
+	background-color:#313E4D;
 	position: fixed;
   top: 45%;
   left: 50%;
@@ -104,11 +105,13 @@ hr{
 }
 
 #video_play_button {
-   opacity:0.7;
+   opacity:0.9;
    text-decoration: none;
+   padding-top:100px;
+   padding-bottom:100px;
    }
 #video_play_button:hover {
-   opacity:0.9;
+   opacity:0.7;
    }
 
 
@@ -333,101 +336,14 @@ font-family: 'SourceSansPro';
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
+
 //SECTION 3
 #landing_container_section_3{
-   background-color: #FFFFFF;
-   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-}
-#landing_container_section_3 #section_3{
-	padding-top: 60px;
-	padding-bottom: 50px;
-	@media only screen and (min-width: 1024px){
-		padding-right: 50px;
-		padding-left: 50px;
-	}
-	@media only screen and (min-width: 768px) and (max-width : 1023px){
-		padding-right: 40px;
-		padding-left: 40px;
-	}
-	@media only screen and (min-width: 480px) and (max-width : 767px){
-		padding-right: 20px;
-		padding-left: 20px;
-	}
-	@media only screen and (max-width : 480px){
-		padding-right: 5px;
-		padding-left: 5px;	
-	}
-}
-#section_3_top{
-	padding-top: 15px;
-	padding-bottom: 60px !important;
-	border-bottom: 1px solid #DDDDDD;
-	@media only screen and (min-width: 1024px){
-		padding-left: 370px;
-	}
-	@media only screen and (min-width: 768px) and (max-width : 1023px){
-		padding-left: 260px;
-	}
-}
-#section_3 h1{
-	font-size: 180%;
-	font-weight: bold;
-	@media only screen and (min-width: 768px){
-		text-align: right;
-	}
-	@media only screen and (max-width: 767px){
-		text-align: center;
-	}
-}
-#section_3 h3{
-	color: #687A8A;
-	font-size: 150%;
-	@media only screen and (min-width: 768px){
-		text-align: right;
-	}
-	@media only screen and (max-width: 767px){
-		text-align: center;
-	}
-}
-#section_3_top h5{
-	margin-top: 5px;
-	margin-bottom: 5px;
-	font-size: 110%;
-	color: #687A8A;
-}
-#section_3_top_features{
-	padding-top: 70px !important;
-	@media only screen and (min-width: 1024px){
-		padding-left: 90px;
-	}
-	@media only screen and (min-width: 768px) and (max-width : 1023px){
-		padding-left: 65px;
-	}
-}
-#section_3_top_features .row{
-	@media only screen and (max-width: 767px){
-		margin-top: 10px;
-	}
-}
-#section_3_phone_picture{
-	float: left;
-}
-#section_3_bottom{
-	padding-top: 55px;
-	@media only screen and (min-width: 1024px){
-		padding-left: 370px;
-	}
-	@media only screen and (min-width: 768px) and (max-width : 1023px){
-		padding-left: 260px;
-	}
-}
-
-//SECTION 4
-#landing_container_section_4{
+	background: url(landing/Background.png) no-repeat center center;
 	background-color: #000000;
 	border-bottom: 1px solid #DDDDDD;
 }
-#landing_container_section_4 #section_4{
+#landing_container_section_3 #section_3{
 	padding-top: 70px;
 	padding-bottom: 60px;
 	color: #FFFFFF;
@@ -448,39 +364,39 @@ font-family: 'SourceSansPro';
 		padding-left: 5px;	
 	}
 }
-#section_4_info {
+#section_3_info {
 	
 }
-#section_4 h1{
+#section_3 h1{
   	font-size: 180%;
   	font-weight: bold;
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
-#section_4 h4{
-    font-size: 150%;
+#section_3 h4{
+    font-size: 140%;
     margin-top: 20px;
 	margin-bottom: 15px;
-	color: #707070;
+	color: #FFFFFF;
 	line-height: 150%;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
-#section_4 h5{
+#section_3 h5{
 	margin-top: 5px;
 	margin-bottom: 5px;
 	color: #FFFFFF;
 }
-#section_4 .section_4_icon_title div
+#section_3 .section_3_icon_title div
 {
 	padding-left: 0px;
 	padding-right: 0px;
 }
 
-#section_4_features{
+#section_3_features{
 	padding-top: 15px !important;
 	padding-bottom: 15px !important;
 	font-family: 'SourceSansPro';
 }
-#section_4_features .row{
+#section_3_features .row{
 	padding-top: 10px !important;
 	padding-bottom: 10px !important;
 	@media only screen and (min-width: 1024px){
@@ -493,7 +409,7 @@ font-family: 'SourceSansPro';
 		padding-right: 10px;
 	}
 }
-#section_4_features .col-xs-3{
+#section_3_features .col-xs-3{
 	@media only screen and (min-width: 480px) and (max-width : 767px){
 		width: 20%;
 	}
@@ -504,7 +420,7 @@ font-family: 'SourceSansPro';
 }
 #landing_container_section_5 #section_5{
 	padding-top: 95px;
-	padding-bottom: 200px;
+	padding-bottom: 70px;
 	text-align: center;
 	color: #707070;
 	@media only screen and (min-width: 1024px){
@@ -555,7 +471,7 @@ font-family: 'SourceSansPro';
 }
 #landing_container_section_6 #section_6{
 	padding-top: 95px;
-	padding-bottom: 200px;
+	padding-bottom: 95px;
 	text-align: center;
 	color: #FFFFFF;
 	@media only screen and (min-width: 1024px){
@@ -576,8 +492,18 @@ font-family: 'SourceSansPro';
 	}
 }
 
+#section_6 h4{
+	font-size: 120%;
+	font-weight: bold;
+	text-align:left;
+	padding-top:10px;
+	padding-bottom:10px;
+}
 #landing_container_section_6 #section_6_icon{
-	padding-top : 18px;
+	padding-top : 10px;
+	padding-bottom : 10px;
+	width: 40px;
+  height: 60px;
 	
 }
 
@@ -673,7 +599,6 @@ font-family: 'SourceSansPro';
 // SECTION 8
 
 #landing_container_section_8{
-	border-bottom: 1px solid #DDDDDD;
 	background-color: #4A90E2;
 }
 #landing_container_section_8 #section_8{
@@ -715,13 +640,25 @@ font-family: 'SourceSansPro';
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
+#section_8 #btn_more_info{
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	background: #FFFFFF;
+	font-size: 110%;
+	font-weight: bold;
+}
+#section_8 #btn_more_info:hover{
+	opacity: 0.70;
+	text-decoration: none;
+}
+
 
 //FOOTER
 #landing_container_footer{
-	background-color: #000000;
+	background-color: #313E4D;
+	//height: 100%;
 }
 #landing_footer{
-	height: 300px;
+	height: 100%;
 	padding-top: 60px;
 	padding-bottom: 30px;
 	text-align: center;
