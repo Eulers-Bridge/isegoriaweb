@@ -15,9 +15,9 @@
     <div id="landing_footer_links_bar">
       <%= link_to capitalize_as_title(t(:home)),home_path,:class => "btn"%>
       <%= link_to capitalize_as_title(t(:about_us)),home_more_info_path,:class => "btn"%>
-      <%= link_to capitalize_as_title(t(:pricing)),home_more_info_path(:anchor => "pricing_anchor"),:class => "btn"%>
-      <%= link_to capitalize_as_title(t(:terms_of_service)),home_more_info_path(:anchor => "terms_of_service_anchor"),:class => "btn"%>
-      <%= link_to capitalize_as_title(t(:contact_us)),home_more_info_path(:anchor => "contact_us_anchor"),:class => "btn"%>
+      <%= link_to capitalize_as_title(t(:pricing)),home_details_path(:anchor => "pricing_anchor"),:class => "btn"%>
+      <%= link_to capitalize_as_title(t(:terms_of_service)),home_details_path(:anchor => "terms_of_service_anchor"),:class => "btn"%>
+      <%= link_to capitalize_as_title(t(:contact_us)),home_details_path(:anchor => "contact_us_anchor"),:class => "btn"%>
     </div>
     <hr>
     <h5 class="copyright"><%=t(:copyright_text)%></h5>
