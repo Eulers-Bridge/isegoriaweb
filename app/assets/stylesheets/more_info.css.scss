@@ -5,7 +5,34 @@
 
 //SECTION 1
 #more_info_container_section_1{
-	background-color: #000000;
+	//width: 100% !important;
+	background-color: #FFFFFF;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+#more_info_container_section_1 #admin_login{
+	float: right;
+	background: #4A90E2;
+	font-size: 120%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	color: #FFFFFF;
+	border-radius: 5px;
+	border-style: solid;
+	border-color: #FFFFFF;
+	border-width: 2px;
+	margin-top: 9px;
+	margin-right: -1px;
+	font-family: 'SourceSansPro';
+    transition:all 300ms ease;
+}
+
+#more_info_container_section_1  #header_app_name{
+	color : #4A90E2 ;
+	padding-top: 20px;
+	font-weight: bold;
+	font-size: 160%;
+	float: left;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 #more_info_container_section_1 hr{
 	 border-color: #707070 !important;
@@ -30,7 +57,8 @@
 	}
 }
 #more_info_container_section_1 #section_1_content h1{
-	margin-bottom: 100px !important;
+	//margin-bottom: 100px !important;
+	color:#606060;
 }
 #more_info_container_section_1 #section_1_content h3{
 	font-weight: bold;
@@ -38,11 +66,16 @@
 	font-family: 'SourceSansPro';
 }
 #more_info_container_section_1 #section_1_content h4{
-	margin-left: 10px !important;
-	margin-right: 10px !important;
-	font-size: 130%;
-	color: #707070;
-	font-family: 'SourceSansPro';
+	margin-top: 30px;
+	margin-bottom: 30px;
+	font-size: 140%;
+	color: #687A8A;
+	line-height: 150%;
+	margin-right:10px;
+	margin-left:10px;
+}
+#about_us_map{
+	max-width : 100%;
 }
 #about_us_profiles{
 	padding-top: 50px;
@@ -88,10 +121,7 @@
 	font-weight: bold;
 	font-family: 'SourceSansPro';
 }
-.blue_modal
-{
-	color: #0080FF;
-}
+
 
 //PROFILE PICTURES
 #jamesK_prof{
@@ -122,43 +152,7 @@
 	background: url(landing/profile_pictures/YG_Medium.png)
 }
 
-//SECTION 2
-#more_info_container_section_2{
-	background-color: #FFFFFF;
-}
-#more_info_container_section_2 #section_2{
-	color: #000000;
-	padding-bottom: 70px;
-	@media only screen and (min-width: 1024px){
-		padding-right: 40px;
-		padding-left: 40px;
-	}
-	@media only screen and (min-width: 768px) and (max-width : 1023px){
-		padding-right: 30px;
-		padding-left: 30px;
-	}
-	@media only screen and (min-width: 480px) and (max-width : 767px){
-		padding-right: 15px;
-		padding-left: 15px;
-	}
-	@media only screen and (max-width : 480px){
-		padding-right: 5px;
-		padding-left: 5px;
-	}
-}
-#more_info_container_section_2 hr{
-	 border-color: #dddddd !important;
-}
-#more_info_container_section_2 h1{
-	margin-top: 80px !important;
-	margin-bottom: 30px !important;
-	font-size: 200%;
-	font-weight: bold;
-}
-#more_info_container_section_2 h4{
-	margin-bottom: 30px;
-	font-size: 130%;
-}
+
 #landing_container_now_hiring{
 	background-color: #FFFFFF;
 	height: 60px;
@@ -167,16 +161,7 @@
 		height: 75px;
 	}
 }
-#landing_now_hiring{
-	background-color: #FFFFFF;
-	height: 60px;
-	border-bottom: 1px solid #DDDDDD;
-	width: 100%;
-	text-align: center;
-	@media only screen and (max-width : 767px){
-		height: 75px;
-	}
-}
+
 #landing_now_hiring h4{
 	font-weight: bold;
 	font-family: 'SourceSansPro';
@@ -228,4 +213,52 @@
     margin-right: 15px;
 }
 
+
+//details page section2
+.details-section {
+	text-align: left;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+
+	@media only screen and (min-width: 1024px){
+		padding-right: 60px;
+		padding-left: 50px;	
+	}
+	@media only screen and (min-width: 768px) and (max-width : 1023px){
+		padding-right: 50px;
+		padding-left: 40px;	
+	}
+	@media only screen and (min-width: 480px) and (max-width : 767px){
+		padding-right: 20px;
+		padding-left: 15px;	
+	}
+	@media only screen and (max-width : 480px){
+		padding-right: 10px;
+		padding-left: 5px;	
+	}
+}
+#details_section_2 h1, #details_section_3 h1, #details_section_4 h1{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	font-size: 180%;
+	font-weight: bold;
+	color:#7C7F88;
+}
+
+#details_section_2 h3, #details_section_3 h3, #details_section_4 h3{
+	margin-top: 30px;
+	margin-bottom: 30px;
+	font-size: 140%;
+	color: #687A8A;
+	line-height: 150%;
+}
+
+#details_section_3_icon{
+	padding-top : 5px;
+	padding-bottom : 5px;
+	margin-right : 10px;
+	width: 20px;
+  height: 30px;
+}
 //End Login Pop Up

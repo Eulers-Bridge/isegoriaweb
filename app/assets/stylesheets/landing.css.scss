@@ -58,6 +58,7 @@ hr{
 	background-size: cover;
 }
 #landing_container_section_1 #section_1{
+	z-index: 2;
 	height: 760px;
 	color: #FFFFFF;
 	@media only screen and (min-width: 1024px){
@@ -79,13 +80,40 @@ hr{
 }
 #section_1_header{
 	height: 65px;
+	z-index: 2;
 }
-#section_1 #landing_video{
+#isegoria_video{
+	 margin: 0;
+  padding: 0;
 	//width: 275px; 
 	//height: 145px;
-	width: 560px;
-	height: 315px;
+	//width: 560px;
+	//height: 315px;
+	opacity:0.0;
+	background-color:#313E4D;
+	position: fixed;
+  top: 45%;
+  left: 50%;
+  z-index: -1;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
+
+#video_play_button {
+   opacity:0.9;
+   text-decoration: none;
+   padding-top:100px;
+   padding-bottom:100px;
+   }
+#video_play_button:hover {
+   opacity:0.7;
+   }
+
 
 /*#section_1_header .landing_logo{
 	float: left;
@@ -97,6 +125,7 @@ hr{
 	font-weight: bold;
 	font-size: 160%;
 	float: left;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
 #section_1_header button:hover{
@@ -138,6 +167,7 @@ hr{
   top: 0;
 }
 #section_1_content{
+	z-index: 2;
 	padding-top: 40px;
 	padding-bottom: 55px;
 	margin-left: auto;
@@ -266,8 +296,10 @@ font-family: 'SourceSansPro';
 #landing_container_section_2{
 	border-bottom: 1px solid #DDDDDD;
 	background-color: #FFFFFF;
+	margin-top:45px;
 }
 #landing_container_section_2 #section_2{
+	text-align: center;
 	padding-top: 80px;
 	padding-bottom: 70px;
 	@media only screen and (min-width: 1024px){
@@ -292,148 +324,26 @@ font-family: 'SourceSansPro';
 	margin-bottom: 0px;
 	font-size: 180%;
 	font-weight: bold;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
 #section_2_top h3{
 	margin-top: 30px;
-	margin-bottom: 70px;
+	margin-bottom: 30px;
 	font-size: 140%;
-}
-#section_2_bottom .features-col{
-	text-align: center;
-	@media only screen and (min-width: 1024px){
-		padding-left: 20px;
-		padding-right: 20px;
-	}
-	@media only screen and (min-width: 768px) and (max-width : 1023px){
-		padding-left: 15px;
-		padding-right: 15px;
-	}
-	@media only screen and (min-width: 480px) and (max-width : 767px){
-		padding-right: 10px;
-		padding-left: 10px;	
-	}
-	@media only screen and (max-width : 480px){
-		padding-right: 6px;
-		padding-left: 6px;	
-	}
+	color: #687A8A;
+	line-height: 150%;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
-#section_2_bottom .features-col.middle-feature:after {
-            content: '';
-            display: block;
-            position: absolute;
-            height: 50%;
-            width: 100%;
-            top: 25%;
-            left: 5px;
-            border-left: 2px solid #DDDDDD;
-            border-right: 2px solid #DDDDDD;
-        }
-#section_2_bottom h3{
-	font-size: 150%;
-	font-weight: bold;
-	font-family: 'SourceSansPro';
-}
-#section_2_bottom h5{
-	font-size: 115%;
-	font-family: 'SourceSansPro';
-}
 
 //SECTION 3
 #landing_container_section_3{
-   background-color: #FFFFFF;
-}
-#landing_container_section_3 #section_3{
-	padding-top: 60px;
-	padding-bottom: 50px;
-	@media only screen and (min-width: 1024px){
-		padding-right: 50px;
-		padding-left: 50px;
-	}
-	@media only screen and (min-width: 768px) and (max-width : 1023px){
-		padding-right: 40px;
-		padding-left: 40px;
-	}
-	@media only screen and (min-width: 480px) and (max-width : 767px){
-		padding-right: 20px;
-		padding-left: 20px;
-	}
-	@media only screen and (max-width : 480px){
-		padding-right: 5px;
-		padding-left: 5px;	
-	}
-}
-#section_3_top{
-	
-	padding-top: 15px;
-	padding-bottom: 60px !important;
-	border-bottom: 1px solid #DDDDDD;
-	@media only screen and (min-width: 1024px){
-		padding-left: 370px;
-	}
-	@media only screen and (min-width: 768px) and (max-width : 1023px){
-		padding-left: 260px;
-	}
-}
-#section_3 h1{
-	font-size: 180%;
-	font-weight: bold;
-	@media only screen and (min-width: 768px){
-		text-align: right;
-	}
-	@media only screen and (max-width: 767px){
-		text-align: center;
-	}
-}
-#section_3 h3{
-	font-size: 150%;
-	@media only screen and (min-width: 768px){
-		text-align: right;
-	}
-	@media only screen and (max-width: 767px){
-		text-align: center;
-	}
-}
-#section_3_top h5{
-	margin-top: 5px;
-	margin-bottom: 5px;
-	font-size: 110%;
-	font-family: 'SourceSansPro';
-}
-#section_3_top_features{
-	padding-top: 70px !important;
-	@media only screen and (min-width: 1024px){
-		padding-left: 90px;
-	}
-	@media only screen and (min-width: 768px) and (max-width : 1023px){
-		padding-left: 65px;
-	}
-}
-#section_3_top_features .row{
-	@media only screen and (max-width: 767px){
-		margin-top: 10px;
-	}
-}
-#section_3_phone_picture{
-	float: left;
-}
-#section_3_bottom{
-	padding-top: 55px;
-	@media only screen and (min-width: 1024px){
-		padding-left: 370px;
-	}
-	@media only screen and (min-width: 768px) and (max-width : 1023px){
-		padding-left: 260px;
-	}
-}
-
-//SECTION 4
-#landing_container_section_4{
+	background: url(landing/Background.png) no-repeat center center;
 	background-color: #000000;
 	border-bottom: 1px solid #DDDDDD;
 }
-#landing_container_section_4 #section_4{
+#landing_container_section_3 #section_3{
 	padding-top: 70px;
 	padding-bottom: 60px;
 	color: #FFFFFF;
@@ -454,48 +364,39 @@ font-family: 'SourceSansPro';
 		padding-left: 5px;	
 	}
 }
-#section_4_info {
-	@media only screen and (min-width: 1024px){
-		padding-right: 350px;
-	}
-	@media only screen and (min-width: 768px) and (max-width : 1023px){
-		padding-right: 260px;
-	}
+#section_3_info {
+	
 }
-#section_4 h1{
+#section_3 h1{
   	font-size: 180%;
   	font-weight: bold;
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
-#section_4 h4{
-    font-size: 150%;
+#section_3 h4{
+    font-size: 140%;
     margin-top: 20px;
 	margin-bottom: 15px;
-	color: #707070;
-	font-family: 'SourceSansPro';
+	color: #FFFFFF;
+	line-height: 150%;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
-#section_4 h5{
+#section_3 h5{
 	margin-top: 5px;
 	margin-bottom: 5px;
 	color: #FFFFFF;
 }
-#section_4 .section_4_icon_title div
+#section_3 .section_3_icon_title div
 {
 	padding-left: 0px;
 	padding-right: 0px;
 }
-#section_4 .section_4_icon_title h1
-{
-	margin-left: 10px;
-	@media only screen and (min-width: 480px) and (max-width : 767px){
-		margin-left: 0px;
-	}
-}
-#section_4_features{
+
+#section_3_features{
 	padding-top: 15px !important;
 	padding-bottom: 15px !important;
 	font-family: 'SourceSansPro';
 }
-#section_4_features .row{
+#section_3_features .row{
 	padding-top: 10px !important;
 	padding-bottom: 10px !important;
 	@media only screen and (min-width: 1024px){
@@ -508,18 +409,18 @@ font-family: 'SourceSansPro';
 		padding-right: 10px;
 	}
 }
-#section_4_features .col-xs-3{
+#section_3_features .col-xs-3{
 	@media only screen and (min-width: 480px) and (max-width : 767px){
 		width: 20%;
 	}
 }
 
 #landing_container_section_5{
-	background-color: #000000;
+	background-color: #FFFFFF;
 }
 #landing_container_section_5 #section_5{
 	padding-top: 95px;
-	padding-bottom: 200px;
+	padding-bottom: 70px;
 	text-align: center;
 	color: #707070;
 	@media only screen and (min-width: 1024px){
@@ -541,14 +442,18 @@ font-family: 'SourceSansPro';
 }
 #section_5 h1{
 	margin-top: 0px;
-	color: #FFFFFF;
+	margin-bottom: 0px;
 	font-size: 180%;
-  	font-weight: bold;
+	font-weight: bold;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 #section_5 h4{
-	margin-top: 20px;
-	font-size: 150%;
-	font-family: 'SourceSansPro';
+	margin-top: 30px;
+	margin-bottom: 30px;
+	font-size: 120%;
+	color: #687A8A;
+	line-height: 150%;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 #section_5 .row{
 	padding-top: 20px;
@@ -560,11 +465,53 @@ font-family: 'SourceSansPro';
 	left: 716px;
 }
 
-//SECTION 6
+//SECTION 6 (new)  icon List
 #landing_container_section_6{
-	background-color: #FFFFFF;
+	background-color: #313E4D;
 }
 #landing_container_section_6 #section_6{
+	padding-top: 95px;
+	padding-bottom: 95px;
+	text-align: center;
+	color: #FFFFFF;
+	@media only screen and (min-width: 1024px){
+		padding-right: 40px;
+		padding-left: 40px;
+	}
+	@media only screen and (min-width: 768px) and (max-width : 1023px){
+		padding-right: 30px;
+		padding-left: 30px;
+	}
+	@media only screen and (min-width: 480px) and (max-width : 767px){
+		padding-right: 10px;
+		padding-left: 10px;
+	}
+	@media only screen and (max-width : 480px){
+		padding-right: 5px;
+		padding-left: 5px;	
+	}
+}
+
+#section_6 h4{
+	font-size: 120%;
+	font-weight: bold;
+	text-align:left;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+#landing_container_section_6 #section_6_icon{
+	padding-top : 10px;
+	padding-bottom : 10px;
+	width: 40px;
+  height: 60px;
+	
+}
+
+//SECTION 7
+#landing_container_section_7{
+	background-color: #FFFFFF;
+}
+#landing_container_section7 #section_7{
 	padding-top: 85px;
 	padding-bottom: 50px;
 	text-align: center;
@@ -585,15 +532,48 @@ font-family: 'SourceSansPro';
 		padding-left: 10px;	
 	}
 }
-#section_6 h1{
+#section_7 #section_7_phone_img{
+	max-width:70%;
+	padding-top:20px;
+	padding-bottom:20px;
+	
+	
+}
+#section_7 h1{
 	font-size: 180%;
-  	font-weight: bold;
+  font-weight: bold;
+  text-align:right;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
-#section_6 h4{
-	margin-top: 20px;
-	font-size: 150%;
+#section_7 h3{
+	margin-top: 30px;
+	margin-bottom: 30px;
+	font-size: 140%;
+	color: #687A8A;
+	line-height: 150%;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	text-align:right;
 }
-#section_6 #btn_more_info{
+#section_7 h2{
+	margin-top: 30px;
+	margin-bottom: 30px;
+	line-height: 150%;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	text-align:right;
+	font-weight: bold;
+	font-size: 140%;
+	color: #252525;
+}
+#section_7 h4{
+	margin-top: 30px;
+	margin-bottom: 30px;
+	font-size: 120%;
+	color: #687A8A;
+	line-height: 150%;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	text-align:right;
+}
+#section_7 #btn_more_info{
 	background: #9898A0;
 	font-size: 110%;
 	font-weight: bold;
@@ -612,16 +592,73 @@ font-family: 'SourceSansPro';
 	}
 }
 
-#section_6 #btn_more_info:hover{
+#section_7 #btn_more_info:hover{
 	opacity: 0.70;
 }
 
+// SECTION 8
+
+#landing_container_section_8{
+	background-color: #4A90E2;
+}
+#landing_container_section_8 #section_8{
+	text-align: center;
+	color:#FFFFFF;
+	padding-top: 80px;
+	padding-bottom: 70px;
+	@media only screen and (min-width: 1024px){
+		padding-right: 60px;
+		padding-left: 50px;	
+	}
+	@media only screen and (min-width: 768px) and (max-width : 1023px){
+		padding-right: 50px;
+		padding-left: 40px;	
+	}
+	@media only screen and (min-width: 480px) and (max-width : 767px){
+		padding-right: 20px;
+		padding-left: 15px;	
+	}
+	@media only screen and (max-width : 480px){
+		padding-right: 10px;
+		padding-left: 5px;	
+	}
+}
+
+#section_8_top h1{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	font-size: 180%;
+	font-weight: bold;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+#section_8_top h3{
+	margin-top: 30px;
+	margin-bottom: 30px;
+	font-size: 140%;
+	line-height: 150%;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+#section_8 #btn_more_info{
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	background: #FFFFFF;
+	font-size: 110%;
+	font-weight: bold;
+}
+#section_8 #btn_more_info:hover{
+	opacity: 0.70;
+	text-decoration: none;
+}
+
+
 //FOOTER
 #landing_container_footer{
-	background-color: #000000;
+	background-color: #313E4D;
+	//height: 100%;
 }
 #landing_footer{
-	height: 300px;
+	height: 100%;
 	padding-top: 60px;
 	padding-bottom: 30px;
 	text-align: center;
@@ -722,7 +759,7 @@ font-family: 'SourceSansPro';
 		height: 70px;
 	}
 }
-#landing_menu_bar button{
+#landing_menu_bar  .btn{
 	background: transparent;
 	font-family: 'SourceSansPro';
 	font-weight: bold;
@@ -732,12 +769,13 @@ font-family: 'SourceSansPro';
 	margin-right: 15px;
 	margin-left: 15px;
 	transition:all 100ms ease;
-	@media only screen and (max-width : 767px){
+	color: #252525;
+	@media only screen and (masx-width : 767px){
 		margin-right: 15px;
 		margin-left: 15px;
 	}
 }
-#landing_menu_bar button:hover{
+#landing_menu_bar .btn:hover{
 	color: #3A80D2;
 }
 

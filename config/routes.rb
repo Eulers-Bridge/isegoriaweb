@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get 'home', to: 'home#landing'
   get 'home/more_info'
   get 'home/signup'
+  get 'home/details'
   get 'home/unverified_email'
   get 'home/register_successfull'
   get 'home/landing'
