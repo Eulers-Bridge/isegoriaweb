@@ -12,7 +12,7 @@
   <title>Isegoria Web</title>
 </head>
 <body id="landing_body">
-  <div id= "landing_container_section_1" class="landing_container">
+  <div id= "landing_container_section_1" class="landing_container video_close_section1">
     <div id="section_1" class="landing-section">
       <div id="section_1_header">
 		    <!--%= image_tag "landing/Isegoria_logo.png", class: "landing_logo" %-->
@@ -22,34 +22,37 @@
       <hr>
       <div id="section_1_content">
         <h1 id="landing_modal"><%=t(:landing_modal)%></h1>
-	    <h4 id="landing_message"><%=t(:landing_message)%> </h4>
-	     <!--video controls>
-           <source src="Shadows.mp4" type="video/mp4">
-           <%=t(:video_unsupported).capitalize%>
+	       <h4 id="landing_message"><%=t(:landing_message)%> </h4>
+	       <!--video controls>
+        <source src="Shadows.mp4" type="video/mp4">
+        <%=t(:video_unsupported).capitalize%>
         </video-->
-        <iframe id="isegoria_video" src="https://www.youtube.com/embed/qrZDbD4VDCU?enablejsapi=1&version=3rel=0&showinfo=0&controls=1" frameborder="0" showinfo="0"
-                    controls="0" allowfullscreen> </iframe>
+        <iframe id="isegoria_video" src="https://www.youtube.com/embed/qrZDbD4VDCU?enablejsapi=1&version=3rel=0&showinfo=0" frameborder="0" showinfo="0"
+                     allowfullscreen> </iframe>
         <%= image_tag "landing/Play Button@2x.png", id:"video_play_button"%>
-         <div id="section_1_apps_bar">
-           <div class="row">
-		     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-			   <%= image_tag "landing/iOS.png"%>
-			 </div>
-		     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 version-col">
-			   <p class="mob-app-name"><%=t(:landing_download)%> iOS</p>
-			   <p class="mob-app-version"><%=t(:landing_ios_version).upcase%></p>
-			 </div>
-       <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-			   <%= image_tag "landing/Android.png"%>
-			 </div>
-			 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 version-col">
-			   <p class="mob-app-name"><%=t(:landing_download)%> Android</p>
-			   <p class="mob-app-version"><%=t(:landing_android_version).upcase%></p>
-			 </div>
-		   </div>
-         </div>
+        <div id="section_1_apps_bar">
+          <div class="row">
+      		     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      			      <%= image_tag "landing/iOS.png"%>
+      			    </div>
+      		     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 version-col">
+      			      <p class="mob-app-name"><%=t(:landing_download)%> iOS</p>
+      			      <p class="mob-app-version"><%=t(:landing_ios_version).upcase%></p>
+      			    </div>
+             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      			      <%= image_tag "landing/Android.png"%>
+      			    </div>
+      			    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 version-col">
+      			      <p class="mob-app-name"><%=t(:landing_download)%> Android</p>
+      			      <p class="mob-app-version"><%=t(:landing_android_version).upcase%></p>
+      			    </div>
+		        </div>
+        </div>
       </div>
-	</div>
+      <div class="row">
+        <div class="col-xs-offset-5"><%= image_tag "landing/stop_vid.ico", id:"video_stop_button"%></div>
+      </div>
+	   </div>
   </div>
   
    <!--   section for what is isegoria -->
@@ -209,6 +212,7 @@
 <script>
 
 $(document).ready(function(){
+ $('#video_stop_button').hide();
 	$(this).scroll(function(){
 		var ua= navigator.userAgent;
     //Effect tested and only working in Firefox so far
@@ -233,17 +237,42 @@ $(document).ready(function(){
     $('#login_form').removeClass('show');
     e.preventDefault();
     });
+    var timerVariable;
     //script for video playing in the background
     $('#video_play_button').click(function(e){
       $('#landing_modal').hide();
       $('#landing_message').hide();
       $('#video_play_button').hide();
       $('#section_1_apps_bar').hide();
-      $('#landing_container_section_1').css("background", "none");
+      $('#video_stop_button').show();
+      $('#landing_container_section_1').removeClass('video_close_section1');
+      $('#landing_container_section_1').addClass('video_open_section1');
+      //$('#landing_container_section_1').css("background", "none");
       $('#isegoria_video').css("opacity", "0.9");
       $("#isegoria_video")[0].src += "&autoplay=1";
-      
+      //run the timer to close video after video length
+      timerVariable = window.setTimeout(function(){videoStopFunction()},73500);
     });
+    
+     //script for video stoping
+    $('#video_stop_button').click(function(e){
+      videoStopFunction();
+    });
+    
+    function videoStopFunction() {
+      clearTimeout(timerVariable);
+      $('#landing_modal').show();
+      $('#landing_message').show();
+      $('#video_play_button').show();
+      $('#section_1_apps_bar').show();
+      $('#video_stop_button').hide();
+      //$('#landing_container_section_1').css('background','red');
+      $('#landing_container_section_1').removeClass('video_open_section1');
+      $('#landing_container_section_1').addClass('video_close_section1');
+      $('#isegoria_video').css("opacity", "0.0");
+      $("#isegoria_video")[0].src = "https://www.youtube.com/embed/qrZDbD4VDCU?enablejsapi=1&version=3rel=0&showinfo=0";
+    }
+    
   });
 
 </script>
