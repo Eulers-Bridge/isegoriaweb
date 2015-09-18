@@ -53,8 +53,16 @@ hr{
 }
 
 //SECTION 1
+.video_close_section1{
+	background: url(landing/Background.png) no-repeat center center  ;
+	background-size: cover;
+}
+
+.video_open_section1{
+	background:none ;
+}
+
 #landing_container_section_1{
-	background: url(landing/Background.png) no-repeat center center;
 	background-size: cover;
 }
 #landing_container_section_1 #section_1{
@@ -113,7 +121,15 @@ hr{
 #video_play_button:hover {
    opacity:0.7;
    }
-
+#video_stop_button{
+	position:absolute;
+	bottom:0;
+	opacity:0.9;
+	max-width:90px;
+}
+#video_stop_button:hover {
+   opacity:0.7;
+}
 
 /*#section_1_header .landing_logo{
 	float: left;
@@ -296,7 +312,7 @@ font-family: 'SourceSansPro';
 #landing_container_section_2{
 	border-bottom: 1px solid #DDDDDD;
 	background-color: #FFFFFF;
-	margin-top:45px;
+	//margin-top:45px;
 }
 #landing_container_section_2 #section_2{
 	text-align: center;
