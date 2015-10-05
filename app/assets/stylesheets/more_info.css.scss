@@ -151,7 +151,16 @@
 #yikaiG_prof{
 	background: url(landing/profile_pictures/YG_Medium.png)
 }
-
+#ishanB_prof{
+	background: url(landing/profile_pictures/IS_Medium.png)
+}
+#ishanB_prof:hover , #yikaiG_prof:hover , #gregN_prof:hover,
+#davidR_prof:hover , #anthonyQ_prof:hover , #alanG_prof:hover,
+#miguelW_prof:hover , #charlieE_prof:hover , #drewS_prof:hover{
+	 	opacity:0.7; 
+    cursor:pointer;
+    background-image: url(landing/linkedin_128.png);
+}
 
 #landing_container_now_hiring{
 	background-color: #FFFFFF;
