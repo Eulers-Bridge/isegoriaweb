@@ -16,7 +16,10 @@
     <div id="section_1" class="landing-section">
       <div id="section_1_header">
 		    <!--%= image_tag "landing/Isegoria_logo.png", class: "landing_logo" %-->
-        <div id="header_app_name"><%=t(:isegoria).capitalize%></div>
+        <div id="header_app_name">
+         <%= image_tag "landing/logo_white.png",  class:"isegoria_logo"%>
+         <%=t(:isegoria).capitalize%>
+         </div>
 		    <button class="btn landing-link-border" id="admin_login"><%=capitalize_as_title(t(:admin_login))%></button>
       </div>
       <hr>
@@ -32,19 +35,11 @@
         <%= image_tag "landing/Play Button@2x.png", id:"video_play_button"%>
         <div id="section_1_apps_bar">
           <div class="row">
-      		     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-      			      <%= image_tag "landing/iOS.png"%>
+      		     <div class="col-xs-6 col-md-6">
+      			      <%= image_tag "landing/iOS_Badge.png"%>
       			    </div>
-      		     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 version-col">
-      			      <p class="mob-app-name"><%=t(:landing_download)%> iOS</p>
-      			      <p class="mob-app-version"><%=t(:landing_ios_version).upcase%></p>
-      			    </div>
-             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-      			      <%= image_tag "landing/Android.png"%>
-      			    </div>
-      			    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 version-col">
-      			      <p class="mob-app-name"><%=t(:landing_download)%> Android</p>
-      			      <p class="mob-app-version"><%=t(:landing_android_version).upcase%></p>
+             <div class="col-xs-6 col-md-6">
+      			      <%= image_tag "landing/Android_Badge.png"%>
       			    </div>
 		        </div>
         </div>
@@ -167,7 +162,7 @@
       <h1 id="section_2_title"><%=t(:landing_title_6_appraisals)%></h1>
 	    <h3><%=t(:landing_text_6_appraisals)%></h3>
     </div>
-    <button class="btn landing-link-border" id="btn_more_info"><%= link_to capitalize_as_title(t(:more_info)), home_more_info_path, :id =>"btn_more_info" %></button>
+    <button class="btn landing-link-border" id="btn_more_info"><a href="mailto:miguel.wood@eulersbridge.com?Subject=Request%20a%20demo" target="_top"><%=capitalize_as_title(t(:request_a_demo))%></a></button>
     </div>
   </div>
   
