@@ -16,7 +16,7 @@
       <%= link_to capitalize_as_title(t(:about_us)),home_more_info_path,:class => "btn"%>
       <%= link_to capitalize_as_title(t(:pricing)),home_details_path(:anchor => "pricing_anchor"),:class => "btn"%>
       <%= link_to capitalize_as_title(t(:terms_of_service)),home_details_path(:anchor => "terms_of_service_anchor"),:class => "btn"%>
-      <%= link_to capitalize_as_title(t(:contact_us)),home_details_path(:anchor => "contact_us_anchor"),:class => "btn"%>
+      <a href="mailto:contact@eulersbridge.com?Subject=contacting%20eulers%20bridge" class="btn" target="_top"><%=capitalize_as_title(t(:contact_us))%></a>
     </div>
     <hr>
     <h5 class="copyright"><%=t(:copyright_text)%></h5>
