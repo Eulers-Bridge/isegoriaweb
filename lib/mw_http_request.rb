@@ -4,7 +4,7 @@ module MwHttpRequest
     require 'json'
     require 'net/http'
     Rails.logger.debug 'Call to the http POST request module'
-    uri = URI.parse('http://eulersbridge.com:8080/dbInterface' + reqUrl)
+    uri = URI.parse('http://eulersbridge:8080/dbInterface' + reqUrl)
 
     http = Net::HTTP.new(uri.host, uri.port)
     #http.use_ssl = true
@@ -24,7 +24,7 @@ module MwHttpRequest
     require 'json'
     require 'net/http'
     Rails.logger.debug 'Call to the http POST request module'
-    uri = URI.parse('http://eulersbridge.com:8080/dbInterface' + reqUrl)
+    uri = URI.parse('http://eulersbridge:8080/dbInterface' + reqUrl)
 
     http = Net::HTTP.new(uri.host, uri.port)
     #http.use_ssl = true
@@ -44,7 +44,7 @@ module MwHttpRequest
   def self.http_get_request (reqUrl, username, password)
     require 'net/http'
     Rails.logger.debug 'Call to the http GET request module'
-    uri = URI.parse('http://eulersbridge.com:8080/dbInterface' + reqUrl)
+    uri = URI.parse('http://eulersbridge:8080/dbInterface' + reqUrl)
 
     http = Net::HTTP.new(uri.host, uri.port)
     #http.use_ssl = true
@@ -63,7 +63,7 @@ module MwHttpRequest
   def self.http_get_request_unauth (reqUrl)
     require 'net/http'
     Rails.logger.debug 'Call to the http GET request module'
-    uri = URI.parse('http://eulersbridge.com:8080/dbInterface' + reqUrl)
+    uri = URI.parse('http://eulersbridge:8080/dbInterface' + reqUrl)
 
     http = Net::HTTP.new(uri.host, uri.port)
     #http.use_ssl = true
@@ -81,7 +81,7 @@ module MwHttpRequest
   def self.http_put_request_simple (reqUrl, username, password)
     require 'net/http'
     Rails.logger.debug 'Call to the http PUT request module'
-    uri = URI.parse('http://eulersbridge.com:8080/dbInterface' + reqUrl)
+    uri = URI.parse('http://eulersbridge:8080/dbInterface' + reqUrl)
     Rails.logger.debug uri
     
     http = Net::HTTP.new(uri.host, uri.port)
@@ -101,7 +101,7 @@ module MwHttpRequest
     require 'json'
     require 'net/http'
     Rails.logger.debug 'Call to the http PUT request module'
-    uri = URI.parse('http://eulersbridge.com:8080/dbInterface' + reqUrl)
+    uri = URI.parse('http://eulersbridge:8080/dbInterface' + reqUrl)
 
     http = Net::HTTP.new(uri.host, uri.port)
     #http.use_ssl = true
@@ -121,7 +121,7 @@ module MwHttpRequest
   def self.http_delete_request (reqUrl, username, password)
     require 'net/http'
     Rails.logger.debug 'Call to the http DELETE request module'
-    uri = URI.parse('http://eulersbridge.com:8080/dbInterface' + reqUrl)
+    uri = URI.parse('http://eulersbridge:8080/dbInterface' + reqUrl)
 
     http = Net::HTTP.new(uri.host, uri.port)
     #http.use_ssl = true
