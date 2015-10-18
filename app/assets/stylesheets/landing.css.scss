@@ -52,9 +52,21 @@ hr{
 	color: #AFAFAF !important;
 }
 
+.isegoria_logo{
+		padding-right:10px;
+}
+
 //SECTION 1
+.video_close_section1{
+	background: url(landing/Blurred_Background.png) no-repeat center center  ;
+	background-size: cover;
+}
+
+.video_open_section1{
+	background:none ;
+}
+
 #landing_container_section_1{
-	background: url(landing/Background.png) no-repeat center center;
 	background-size: cover;
 }
 #landing_container_section_1 #section_1{
@@ -113,7 +125,15 @@ hr{
 #video_play_button:hover {
    opacity:0.7;
    }
-
+#video_stop_button{
+	position:absolute;
+	bottom:0;
+	opacity:0.9;
+	max-width:90px;
+}
+#video_stop_button:hover {
+   opacity:0.7;
+}
 
 /*#section_1_header .landing_logo{
 	float: left;
@@ -292,11 +312,18 @@ color: #FFFFFF;
 font-family: 'SourceSansPro';
 }
 
+#section_1_content #iosStoreWhite{
+	text-align:right;
+}
+#section_1_content #androidStoreWhite{
+	text-align:left;
+}
+
 //SECTION 2
 #landing_container_section_2{
 	border-bottom: 1px solid #DDDDDD;
 	background-color: #FFFFFF;
-	margin-top:45px;
+	//margin-top:45px;
 }
 #landing_container_section_2 #section_2{
 	text-align: center;
@@ -596,6 +623,11 @@ font-family: 'SourceSansPro';
 	opacity: 0.70;
 }
 
+#section_7 .appStores{
+	text-align:right;
+	padding-bottom:35px;
+}
+
 // SECTION 8
 
 #landing_container_section_8{
@@ -649,6 +681,10 @@ font-family: 'SourceSansPro';
 #section_8 #btn_more_info:hover{
 	opacity: 0.70;
 	text-decoration: none;
+}
+#section_8 #audaImage{
+	width: 100%;
+	padding-bottom:35px;
 }
 
 
