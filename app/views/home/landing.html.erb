@@ -17,9 +17,10 @@
       <div id="section_1_header">
 		    <!--%= image_tag "landing/Isegoria_logo.png", class: "landing_logo" %-->
         <div id="header_app_name">
-         <%= image_tag "landing/logo_white.png",  class:"isegoria_logo"%>
-         <%=t(:isegoria).capitalize%>
-         </div>
+          <%= image_tag "landing/logo_white.png",  class:"isegoria_logo"%>
+          <%=t(:isegoria).capitalize%>
+          <%= image_tag "landing/Beta_Red.png",  class:"isegoria_logo"%>
+        </div>
 		    <button class="btn landing-link-border" id="admin_login"><%=capitalize_as_title(t(:admin_login))%></button>
       </div>
       <hr>
@@ -35,11 +36,11 @@
         <%= image_tag "landing/Play Button@2x.png", id:"video_play_button"%>
         <div id="section_1_apps_bar">
           <div class="row">
-      		     <div class="col-xs-6 col-md-6">
-      			      <%= image_tag "landing/iOS_Badge.png"%>
+      		     <div class="col-xs-6 col-md-6" id="iosStoreWhite">
+      			      <%= image_tag "landing/iOS_Badge_White.png"%>
       			    </div>
-             <div class="col-xs-6 col-md-6">
-      			      <%= image_tag "landing/Android_Badge.png"%>
+             <div class="col-xs-6 col-md-6" id="androidStoreWhite">
+      			      <%= image_tag "landing/Android_Badge_White.png"%>
       			    </div>
 		        </div>
         </div>
@@ -149,6 +150,14 @@
          <h4><%=t(:landing_text_7_beautiful)%></h4>
          <h2><%=t(:landing_subtitle_7_download)%></h1>
          <h4><%=t(:landing_text_7_download)%></h4>
+         <div class="row">
+      		     <div class="hidden-xs col-md-6 appStores">
+      			      <%= image_tag "landing/iOS_Badge.png"%>
+      			    </div>
+             <div class="hidden-xs col-md-6 appStores">
+      			      <%= image_tag "landing/Android_Badge.png"%>
+      			    </div>
+		        </div>
          
       </div>
     </div>
@@ -159,10 +168,9 @@
   <div id= "landing_container_section_8" class="landing_container">
     <div id="section_8" class="landing-section row">
      <div id="section_8_top">
-      <h1 id="section_2_title"><%=t(:landing_title_6_appraisals)%></h1>
-	    <h3><%=t(:landing_text_6_appraisals)%></h3>
+      <%= image_tag "landing/auDA_nobg.png", id:"audaImage" %>
     </div>
-    <button class="btn landing-link-border" id="btn_more_info"><a href="mailto:miguel.wood@eulersbridge.com?Subject=Request%20a%20demo" target="_top"><%=capitalize_as_title(t(:request_a_demo))%></a></button>
+    <button class="btn landing-link-border" id="btn_more_info"><a href="mailto:sales@eulersbridge.com?Subject=Request%20a%20demo" target="_top"><%=capitalize_as_title(t(:request_a_demo))%></a></button>
     </div>
   </div>
   
