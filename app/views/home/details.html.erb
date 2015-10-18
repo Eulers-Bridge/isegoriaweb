@@ -41,7 +41,7 @@
       </div>  
       <hr>
       <div class="more_info_section_link">
-          <button class="btn"><span> <%= image_tag "home/Tick.png",  id:"details_section_3_icon"%></span><%=t(:read_terms_and_conditions).upcase%></button>
+          <button class="btn" onclick="showFullTerms()"><span> <%= image_tag "home/Tick.png",  id:"details_section_3_icon"%></span><%=t(:read_terms_and_conditions).upcase%></button>
       </div>
       <hr>
 	  </div>
@@ -87,6 +87,12 @@ $(document).ready(function(){
     e.preventDefault();
     });
   });
+  
+ function showFullTerms() {
+      var myWindow = window.open("", "termsAndConditions", "width=650, height=400");
+      myWindow.document.write("<p><%=t(:terms_of_use_full_1_html)%></p><p><%=t(:terms_of_security_1_html)%></p><p><%=t(:terms_of_privacy_1_html)%></p>");
+    }  
+  
 
 </script>  
 </html>
