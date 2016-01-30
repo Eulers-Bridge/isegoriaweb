@@ -37,6 +37,8 @@ gem 'aws-sdk', '< 2'
 gem 'execjs'
 gem 'therubyracer', :platform => :ruby
 
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
@@ -51,6 +53,6 @@ gem 'spring',        group: :development
 # gem 'capistrano-rails', group: :development
 
 # Use debugger
-gem 'debugger', group: [:development, :test]
+#gem 'debugger', group: [:development, :test]
 
 gem 'thin'
