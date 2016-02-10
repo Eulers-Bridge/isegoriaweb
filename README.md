@@ -22,6 +22,14 @@ Install `rbenv` and required packages:
 - `gem install bundler`
 - `bundle install`
 
+Add dev server aliases to your `/etc/hosts` file:
+
+```
+54.206.36.220 graphdb                                                          
+54.79.70.241 buildserver                                                       
+54.79.70.241 eulersbridge
+```
+
 Run the server:
 
 - `rails server`
