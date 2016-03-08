@@ -54,6 +54,17 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
+  #Function that will evaluate the session status of a user
+  def logged_in?
+    if session[:username].blank? or
+       session[:authenticated].blank? or
+       !session[:authenticated]
+      return false
+    end
+
+    return true
+  end
+
   #Function that evaluate and handle a 401 Unauthorized access and 403 Forbidden from the server
   def validate_authorized_access (response_code)
     if response_code == "401" or response_code == "403"
