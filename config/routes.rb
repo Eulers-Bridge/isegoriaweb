@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  get 'dashboard', to: 'dashboard#index'
+  get 'dashboard/index'
+  get 'dashboard/new', to: 'dashboard#new'
+
   match '/logout', to: 'sessions#destroy',     via: 'delete'
   match '/login', to: 'sessions#create',     via: 'post'
 

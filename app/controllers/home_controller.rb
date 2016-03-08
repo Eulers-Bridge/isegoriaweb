@@ -57,7 +57,7 @@ protect_from_forgery with: :exception
 =end
   def landing
     if logged_in?
-      redirect_to url_for(:controller => :articles, :action => :index)
+      redirect_to url_for(:controller => :dashboard, :action => :index)
     else
       @stylesheet = 'landing' #Set the stylesheet
       return render :layout => false #Disable the default layout
