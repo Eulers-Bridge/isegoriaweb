@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
         session[:authenticated] = true
         session[:locale] = I18n.locale
         logger.debug session[:username] + " Authenticated: " + session[:authenticated].to_s
-        redirect_to articles_path
+        redirect_to dashboard_path
       end
     else
       logger.debug params[:session][:username] + " Not authenticated: " + resp[1] 
