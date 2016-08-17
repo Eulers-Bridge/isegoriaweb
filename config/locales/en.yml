@@ -372,6 +372,7 @@ en:
   title: "title"
   title_articles: "news articles"
   title_candidates: "candidates"
+  title_dashboard: "dashboard"
   title_edit_article: "news article information"
   title_edit_candidate: "candidate information"
   title_edit_election: "election information"

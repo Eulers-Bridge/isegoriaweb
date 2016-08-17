@@ -1,6 +1,6 @@
 # README #
 
-**The version of ruby we have been using is ruby 2.1.1p76 (2014-02-24 revision 45161). RAILS 4.1.0**
+**Currently on Ruby 2.1.8, Rails 4.1.0**
 
 ### Getting started ###
 
@@ -17,8 +17,8 @@ Clone from git:
 Install `rbenv` and required packages:
 
 - `cd ~/isegoriaweb`
-- `rbenv install 2.1.1`
-- `rbenv local 2.1.1`
+- `rbenv install 2.1.8`
+- `rbenv local 2.1.8`
 - `gem install bundler`
 - `bundle install`
 
