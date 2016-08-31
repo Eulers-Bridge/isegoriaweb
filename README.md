@@ -4,6 +4,21 @@
 
 ### Getting started ###
 
+## Docker (Recommended) ##
+Install:
+
+- [Docker for Mac/Windows](https://www.docker.com/products/docker)
+
+Clone from git:
+
+- `git clone https://bitbucket.org/eulersbridge/isegoriaweb.git ~/`
+
+Run:
+
+- `cd ~/isegoriaweb`
+- `docker-compose up --build`
+
+## Local ##
 Install:
 
 - [rbenv](https://github.com/rbenv/rbenv)
