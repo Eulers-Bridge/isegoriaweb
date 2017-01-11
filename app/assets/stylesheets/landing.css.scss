@@ -76,24 +76,8 @@ hr{
 }
 #landing_container_section_1 #section_1{
 	z-index: 2;
-	height: 760px;
+	height: 400px;
 	color: #FFFFFF;
-	@media only screen and (min-width: 1024px){
-		padding-right: 40px;
-		padding-left: 40px;
-	}
-	@media only screen and (min-width: 768px) and (max-width : 1023px){
-		padding-right: 30px;
-		padding-left: 30px;
-	}
-	@media only screen and (min-width: 480px) and (max-width : 767px){
-		padding-right: 15px;
-		padding-left: 15px;
-	}
-	@media only screen and (max-width : 480px){
-		padding-right: 5px;
-		padding-left: 5px;
-	}
 }
 #section_1_header{
 	height: 65px;
@@ -166,6 +150,8 @@ hr{
 	margin-right: 10px;
 }
 
+
+
 #admin_login {
 	float: right;
 	background: transparent;
@@ -191,49 +177,17 @@ hr{
 	padding-top: 40px;
 	padding-bottom: 55px;
 	margin-left: auto;
-    margin-right: auto;
-    text-align: center;
+  margin-right: auto;
 }
 #section_1_content h1{
-	text-align: center;
 	font-size: 360%;
+	font-weight: bold;
 	margin-bottom: 20px;
-	@media only screen and (min-width: 1024px){
-		margin-left: 60px;
-		margin-right: 60px;
-	}
-	@media only screen and (min-width: 768px) and (max-width : 1023px){
-		margin-left: 40px;
-		margin-right: 40px;
-	}
-	@media only screen and (min-width: 480px) and (max-width : 767px){
-		margin-left: 20px;
-		margin-right: 20px;
-	}
-	@media only screen and (max-width : 480px){
-		margin-left: 10px;
-		margin-right: 10px;
-	}
 }
 #section_1_content h4{
 	font-size: 150%;
-    @media only screen and (min-width: 1024px){
-    	margin-left: 150px;
-		margin-right: 150px;
-    }
-    @media only screen and (min-width: 768px) and (max-width : 1023px){
-    	margin-left: 120px;
-		margin-right: 120px;
-    }
-    @media only screen and (min-width: 480px) and (max-width : 767px){
-    	margin-left: 60px;
-		margin-right: 60px;
-    }
-    @media only screen and (max-width : 480px){
-    	margin-left: 20px;
-		margin-right: 20px;
-    }
 }
+
 #section_1_content h4 a{
     color: #FFFFFF;
     text-decoration: underline;
@@ -246,70 +200,6 @@ hr{
 #section_1_content video{
 	margin-top: 30px;
 	margin-bottom: 30px;
-}
-#section_1_apps_bar{
-	margin-left: auto;
-    margin-right: auto;
-    color: #303030;
-    @media only screen and (min-width: 1024px){
-    	padding-left: 190px;
-		padding-right: 190px;
-    }
-    @media only screen and (min-width: 768px) and (max-width : 1023px){
-    	padding-left: 150px;
-		padding-right: 150px;
-    }
-    @media only screen and (min-width: 480px) and (max-width : 767px){
-    	padding-left: 30px;
-		padding-right: 30px;
-    }
-    @media only screen and (max-width : 480px){
-    	padding-left: 2px;
-		padding-right: 2px;
-    }
-}
-#section_1_apps_bar .col-xs-2
-{
-	@media only screen and (max-width : 480px){
-    	padding-left: 0px;
-		padding-right: 0px;
-		margin-left: 0px;
-		margin-right: 0px;
-    }
-}
-#section_1_apps_bar .col-xs-4
-{
-	@media only screen and (max-width : 480px){
-    	padding-left: 0px;
-		padding-right: 0px;
-		margin-left: 0px;
-		margin-right: 0px;
-    }
-}
-#section_1_apps_bar .version-col
-{
-	padding-left: 0px !important;
-	padding-right: 0px !important;
-}
-#section_1_apps_bar p{
-	text-align: left !important;
-	width: 100%;
-}
-#section_1_apps_bar .mob-app-name{
-padding-top: 5px !important;
-margin: 0 0 0px !important;
-font-size: 120%;
-line-height: 98%;
-font-weight: bold;
-color: #FFFFFF;
-font-family: 'SourceSansPro';
-}
-#section_1_apps_bar .mob-app-version{
-padding-top: 0px !important;
-margin-top: 5px !important;
-font-size: 95%;
-color: #FFFFFF;
-font-family: 'SourceSansPro';
 }
 
 #section_1_content #iosStoreWhite{
@@ -865,3 +755,19 @@ top: 0px;
   border-radius: 30px !important;
 }
 //End Login Pop Up
+
+
+/*
+ *
+ * New design
+ *
+ */
+.btn {
+	background: transparent;
+	border-radius: 5px;
+	border: 2px solid #fff;
+	color: #fff;
+	margin: 10px 10px 0 0;
+}
+
+
