@@ -1,25 +1,26 @@
 <div id= "landing_container_footer" class="landing_container">
-  <div id="landing_footer" class="landing-section">
-    
-      
-    <div id="landing_footer_icons">
-      <a class="btn" href="https://www.facebook.com/isegoria.community">
-        <%=image_tag("landing/Facebook.png", alt:t(:app_name))%></a>
-      <a class="btn" href="https://twitter.com/EulersBridge">
-        <%=image_tag("landing/Twitter.png", alt:t(:app_name))%></a>
-      <a class="btn" href="https://www.youtube.com/channel/UCLneRR6lG5GBHZbAtWLSLgA">
-        <%=image_tag("landing/Youtube.png", alt:t(:app_name))%></a>
-    </div>
-    
+  <div id="landing_footer" class="landing-section row">    
     <div id="landing_footer_links_bar">
-      <%= link_to capitalize_as_title(t(:home)),home_path,:class => "btn"%>
-      <%= link_to capitalize_as_title(t(:about_us)),home_more_info_path,:class => "btn"%>
-      <%= link_to capitalize_as_title(t(:pricing)),home_details_path(:anchor => "pricing_anchor"),:class => "btn"%>
-      <%= link_to capitalize_as_title(t(:terms_of_service)),home_details_path(:anchor => "terms_of_service_anchor"),:class => "btn"%>
-      <a href="mailto:contact@eulersbridge.com?Subject=contacting%20eulers%20bridge" class="btn" target="_top"><%=capitalize_as_title(t(:contact_us))%></a>
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+        <%= link_to capitalize_as_title(t(:home)),home_path,:class => "btn"%>
+        <%= link_to capitalize_as_title(t(:about_us)),home_more_info_path,:class => "btn"%>
+        <%= link_to capitalize_as_title(t(:pricing)),home_details_path(:anchor => "pricing_anchor"),:class => "btn"%>
+        <%= link_to capitalize_as_title(t(:terms_of_service)),home_details_path(:anchor => "terms_of_service_anchor"),:class => "btn"%>
+        <a href="mailto:contact@eulersbridge.com?Subject=contacting%20eulers%20bridge" class="btn" target="_top"><%=capitalize_as_title(t(:contact_us))%></a>
+      </div>
+
+      <div id="landing_footer_icons" class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <a class="btn" href="https://www.facebook.com/isegoria.community">
+          <%=image_tag("landing/Facebook.png", alt:t(:app_name))%></a>
+        <a class="btn" href="https://twitter.com/EulersBridge">
+          <%=image_tag("landing/Twitter.png", alt:t(:app_name))%></a>
+        <a class="btn" href="https://www.youtube.com/channel/UCLneRR6lG5GBHZbAtWLSLgA">
+          <%=image_tag("landing/Youtube.png", alt:t(:app_name))%></a>
+      </div>
+
+      <div class="clearfix"></div>
     </div>
     <hr>
     <h5 class="copyright"><%=t(:copyright_text)%></h5>
-    <h5 class="copyright_message"><%=t(:copyright_message_1)%></h5>
   </div>
 </div>

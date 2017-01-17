@@ -84,7 +84,7 @@ en:
   # copyright_message_1: "Apple, the Apple logo, iPad, and iPod touch are trademarks of Apple Inc., registered in U.S. and other countries."
   copyright_message_1: "All rights reserved"
   # copyright_message_2: "App Store is a service mark of Apple Inc."
-  copyright_text: "©Euler's Bridge 2016"
+  copyright_text: "©Euler's Bridge 2017"
   country_list_error_flash : "An error has ocurred, the counties list could not be loaded"
   create: "create"
   created: "created"

@@ -21,6 +21,23 @@
 	-webkit-transform: translateZ(0px); /* Won't work with the flip effect! */
 }
 
+#request_demo, #watch_video {
+  border: 2px solid #fff;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 8px 16px;
+}
+#request_demo:hover, #watch_video:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+  color: #fff;
+}
+
+#section_2_title {
+  
+}
+
 #centering {
 	background-color: none;
 	width: 600px;

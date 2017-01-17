@@ -216,30 +216,12 @@ hr{
 	//margin-top:45px;
 }
 #landing_container_section_2 #section_2{
-	text-align: center;
-	padding-top: 80px;
-	padding-bottom: 70px;
-	@media only screen and (min-width: 1024px){
-		padding-right: 60px;
-		padding-left: 50px;	
-	}
-	@media only screen and (min-width: 768px) and (max-width : 1023px){
-		padding-right: 50px;
-		padding-left: 40px;	
-	}
-	@media only screen and (min-width: 480px) and (max-width : 767px){
-		padding-right: 20px;
-		padding-left: 15px;	
-	}
-	@media only screen and (max-width : 480px){
-		padding-right: 10px;
-		padding-left: 5px;	
-	}
+	padding: 20px 0 0 0;
 }
 #section_2_top h2{
 	margin-top: 0px;
 	margin-bottom: 0px;
-	font-size: 180%;
+	font-size: 240%;
 	font-weight: bold;
 	font-family: "SourceSansProLight","HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
@@ -256,29 +238,27 @@ hr{
 
 //SECTION 3
 #landing_container_section_3{
-	background: url(landing/Background.png) no-repeat center center;
-	background-color: #000000;
+	background-color: #fff;
 	border-bottom: 1px solid #DDDDDD;
 
 	#section_3 {
 		padding-top: 70px;
 		padding-bottom: 60px;
-		color: #FFFFFF;
-		@media only screen and (min-width: 1024px){
-			padding-right: 50px;
-			padding-left: 40px;
-		}
-		@media only screen and (min-width: 768px) and (max-width : 1023px){
-			padding-right: 40px;
-			padding-left: 30px;
-		}
-		@media only screen and (min-width: 480px) and (max-width : 767px){
-			padding-right: 20px;
-			padding-left: 10px;
-		}
-		@media only screen and (max-width : 480px){
-			padding-right: 10px;
-			padding-left: 5px;	
+		color: #000;
+
+		&.row {
+			div {
+				padding-bottom: 20px;
+				text-align: center;
+
+				h2, img {
+					margin: 12px auto;
+				}
+
+				p {
+					text-align: left;
+				}
+			}
 		}
 
 		h2 {
@@ -334,28 +314,28 @@ hr{
 }
 
 #landing_container_section_5{
-	background-color: #FFFFFF;
-}
-#landing_container_section_5 #section_5{
-	padding-top: 95px;
-	padding-bottom: 70px;
-	text-align: center;
-	color: #707070;
-	@media only screen and (min-width: 1024px){
-		padding-right: 40px;
-		padding-left: 40px;
-	}
-	@media only screen and (min-width: 768px) and (max-width : 1023px){
-		padding-right: 30px;
-		padding-left: 30px;
-	}
-	@media only screen and (min-width: 480px) and (max-width : 767px){
-		padding-right: 10px;
-		padding-left: 10px;
-	}
-	@media only screen and (max-width : 480px){
-		padding-right: 5px;
-		padding-left: 5px;	
+	background-color: #fff;
+	border-bottom: 1px solid #DDDDDD;
+
+	#section_5 {
+		padding-top: 70px;
+		padding-bottom: 60px;
+		color: #000;
+
+		&.row {
+			div {
+				padding-bottom: 20px;
+				text-align: center;
+
+				h2, img {
+					margin: 12px auto;
+				}
+
+				p {
+					text-align: left;
+				}
+			}
+		}
 	}
 }
 #section_5 h2{
@@ -385,28 +365,29 @@ hr{
 
 //SECTION 6 (new)  icon List
 #landing_container_section_6{
-	background-color: #313E4D;
-}
-#landing_container_section_6 #section_6{
-	padding-top: 95px;
-	padding-bottom: 95px;
-	text-align: center;
-	color: #FFFFFF;
-	@media only screen and (min-width: 1024px){
-		padding-right: 40px;
-		padding-left: 40px;
-	}
-	@media only screen and (min-width: 768px) and (max-width : 1023px){
-		padding-right: 30px;
-		padding-left: 30px;
-	}
-	@media only screen and (min-width: 480px) and (max-width : 767px){
-		padding-right: 10px;
-		padding-left: 10px;
-	}
-	@media only screen and (max-width : 480px){
-		padding-right: 5px;
-		padding-left: 5px;	
+	background-color: #489bfc;
+	color: #fff;
+	font-size: 180%;
+
+	#section_6 {
+		color: #fff;
+		padding: 60px 0;
+
+		&.row {
+			div {
+				padding-bottom: 20px;
+			}
+		}
+
+		ul {
+			font-size: 80%;
+			margin-top: 20px;
+			vertical-align: middle;
+
+			li {
+				margin-bottom: 8px;
+			}
+		}
 	}
 }
 
@@ -425,168 +406,9 @@ hr{
 	
 }
 
-//SECTION 7
-#landing_container_section_7{
-	background-color: #FFFFFF;
-}
-#landing_container_section7 #section_7{
-	padding-top: 85px;
-	padding-bottom: 50px;
-	text-align: center;
-	@media only screen and (min-width: 1024px){
-		padding-right: 50px;
-		padding-left: 50px;
-	}
-	@media only screen and (min-width: 768px) and (max-width : 1023px){
-		padding-right: 40px;
-		padding-left: 40px;
-	}
-	@media only screen and (min-width: 480px) and (max-width : 767px){
-		padding-right: 15px;
-		padding-left: 15px;
-	}
-	@media only screen and (max-width : 480px){
-		padding-right: 10px;
-		padding-left: 10px;	
-	}
-}
-#section_7 #section_7_phone_img{
-	max-width:70%;
-	padding-top:20px;
-	padding-bottom:20px;
-	
-	
-}
-#section_7 h2{
-	font-size: 180%;
-  font-weight: bold;
-  text-align:right;
-	font-family: "SourceSansProLight","HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-}
-#section_7 h3{
-	margin-top: 30px;
-	margin-bottom: 30px;
-	font-size: 140%;
-	color: #687A8A;
-	line-height: 150%;
-	font-family: "SourceSansProLight","HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-	text-align:right;
-}
-#section_7 h2{
-	margin-top: 30px;
-	margin-bottom: 30px;
-	line-height: 150%;
-	font-family: "SourceSansProLight","HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-	text-align:right;
-	font-weight: bold;
-	font-size: 140%;
-	color: #252525;
-}
-#section_7 h4{
-	margin-top: 30px;
-	margin-bottom: 30px;
-	font-size: 120%;
-	color: #687A8A;
-	line-height: 150%;
-	font-family: "SourceSansProLight","HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-	text-align:right;
-}
-#section_7 #btn_more_info{
-	background: #9898A0;
-	font-size: 110%;
-	font-weight: bold;
-	color: #FFFFFF;
-	border-radius: 5px;
-	margin-top: 110px;
-	font-family: 'SourceSansPro';
-	transition:all 300ms ease;
-	@media only screen and (min-width: 768px){
-		padding-right: 40px;
-		padding-left: 40px;
-	}
-	@media only screen and (max-width : 767px){
-		padding-right: 30px;
-		padding-left: 30px;
-	}
-}
-
-#section_7 #btn_more_info:hover{
-	opacity: 0.70;
-}
-
-#section_7 .appStores{
-	text-align:right;
-	padding-bottom:35px;
-}
-
-// SECTION 8
-
-#landing_container_section_8{
-	background-color: #4A90E2;
-}
-#landing_container_section_8 #section_8{
-	text-align: center;
-	color:#FFFFFF;
-	padding-top: 80px;
-	padding-bottom: 70px;
-	@media only screen and (min-width: 1024px){
-		padding-right: 60px;
-		padding-left: 50px;	
-	}
-	@media only screen and (min-width: 768px) and (max-width : 1023px){
-		padding-right: 50px;
-		padding-left: 40px;	
-	}
-	@media only screen and (min-width: 480px) and (max-width : 767px){
-		padding-right: 20px;
-		padding-left: 15px;	
-	}
-	@media only screen and (max-width : 480px){
-		padding-right: 10px;
-		padding-left: 5px;	
-	}
-}
-
-#section_8_top {
-	max-width: 320px;
-	margin: 0 auto;
-}
-
-#section_8_top h2{
-	margin-top: 0px;
-	margin-bottom: 0px;
-	font-size: 180%;
-	font-weight: bold;
-	font-family: "SourceSansProLight","HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-}
-
-#section_8_top h3{
-	margin-top: 30px;
-	margin-bottom: 30px;
-	font-size: 140%;
-	line-height: 150%;
-	font-family: "SourceSansProLight","HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-}
-
-#section_8 #btn_more_info{
-	font-family: "SourceSansProLight","HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-	background: #FFFFFF;
-	font-size: 110%;
-	font-weight: bold;
-}
-#section_8 #btn_more_info:hover{
-	opacity: 0.70;
-	text-decoration: none;
-}
-#section_8 #audaImage{
-	width: 100%;
-	padding-bottom:35px;
-}
-
-
 //FOOTER
 #landing_container_footer{
-	background-color: #313E4D;
+	background-color: #252525;
 	//height: 100%;
 }
 #landing_footer{
@@ -612,10 +434,11 @@ hr{
 		padding-left: 10px;	
 	}
 }
-#landing_footer_icons{
-	padding-top: 35px;
-	padding-bottom: 15px;
+
+#landing_footer_icons .btn {
+	padding: 4px 8px 0 0;
 }
+
 #landing_footer_icons .btn:hover{
 	color: #DDDDDD;
 	opacity: 0.50;
@@ -639,9 +462,9 @@ hr{
 }
 #landing_footer .copyright{
 	font-family: 'SourceSansPro';
-	font-weight: bold;
+	font-weight: normal;
 	margin-bottom: 4px;
-	margin-top: 20px;
+	margin-top: 40px;
 	@media only screen and (max-width : 767px){
 		font-size: 110%;
 	}
