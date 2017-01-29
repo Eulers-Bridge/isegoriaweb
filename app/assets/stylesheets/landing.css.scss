@@ -6,6 +6,7 @@
 	width: 100%;
 	font-family: 'SourceSansProLight';
 	color: #FFFFFF;
+	font-size: 16px;
 
 	h2, h3, h4, h5 {
 		font-family: "SourceSansPro", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -24,22 +25,24 @@
 .landing-section{
 	margin-left: auto !important;
 	margin-right: auto !important;
-  	color: #303030;
-  	@media only screen and (min-width: 1024px){
-		width: 1024px !important;
-	}
-	@media only screen and (min-width: 768px) and (max-width : 1023px){
-		width: 768px !important;
-		font-size: 80%;
-	}
-	@media only screen and (min-width: 480px) and (max-width : 767px){
-		width: 480px !important;
-		font-size: 70%;
-	}
-	@media only screen and (max-width : 480px){
-		width: 320px !important;
-		font-size: 60%;
-	}
+  color: #303030;
+  margin: 0 auto;
+  max-width: 80%;
+ 	// @media only screen and (min-width: 1024px){
+	// 	width: 1024px !important;
+	// }
+	// @media only screen and (min-width: 768px) and (max-width : 1023px){
+	// 	width: 768px !important;
+	// 	font-size: 80%;
+	// }
+	// @media only screen and (min-width: 480px) and (max-width : 767px){
+	// 	width: 480px !important;
+	// 	font-size: 70%;
+	// }
+	// @media only screen and (max-width : 480px){
+	// 	width: 320px !important;
+	// 	font-size: 60%;
+	// }
 }
 
 .landing-section .row{
@@ -180,7 +183,7 @@ hr{
   margin-right: auto;
 }
 #section_1_content h1{
-	font-size: 360%;
+	font-size: 300%;
 	font-weight: bold;
 	margin-bottom: 20px;
 }
@@ -413,26 +416,36 @@ hr{
 }
 #landing_footer{
 	height: 100%;
-	padding-top: 60px;
-	padding-bottom: 30px;
+	padding: 30px;
 	text-align: center;
 	color: #FFFFFF;
-	@media only screen and (min-width: 1024px){
-		padding-right: 80px;
-		padding-left: 80px;
+	width: 80%;
+
+	@media only screen and (max-width: 767px) {
+		#landing_footer_links {
+			margin-bottom: 32px;
+
+			.btn {
+				display: block;
+			}
+		}
 	}
-	@media only screen and (min-width: 768px) and (max-width : 1023px){
-		padding-right: 60px;
-		padding-left: 60px;
-	}
-	@media only screen and (min-width: 480px) and (max-width : 767px){
-		padding-right: 20px;
-		padding-left: 20px;
-	}
-	@media only screen and (max-width : 480px){
-		padding-right: 10px;
-		padding-left: 10px;	
-	}
+	// @media only screen and (min-width: 1024px){
+	// 	padding-right: 80px;
+	// 	padding-left: 80px;
+	// }
+	// @media only screen and (min-width: 768px) and (max-width : 1023px){
+	// 	padding-right: 60px;
+	// 	padding-left: 60px;
+	// }
+	// @media only screen and (min-width: 480px) and (max-width : 767px){
+	// 	padding-right: 20px;
+	// 	padding-left: 20px;
+	// }
+	// @media only screen and (max-width : 480px){
+	// 	padding-right: 10px;
+	// 	padding-left: 10px;	
+	// }
 }
 
 #landing_footer_icons .btn {
