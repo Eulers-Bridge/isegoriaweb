@@ -87,6 +87,7 @@
 	font-size: 100%;
 	// font-weight: bold;
 	font-family: 'SourceSansPro';
+	text-transform: uppercase;
 }
 
 //COUNTRY FLAGS NEXT TO PROFILE PICTURES
@@ -102,7 +103,7 @@
 	background: url(landing/profile_pictures/DS_Large.png)
 }
 #charlieE_prof{
-	background: url(landing/profile_pictures/CE_Large.png)
+	background: url(landing/profile_pictures/CE_Large.jpg)
 }
 #miguelW_prof{
 	background: url(landing/profile_pictures/MW_Large.png)
@@ -131,7 +132,7 @@
 #ishanB_prof:hover , #yikaiG_prof:hover , #gregN_prof:hover,
 #davidR_prof:hover , #anthonyQ_prof:hover , #alanG_prof:hover,
 #miguelW_prof:hover , #charlieE_prof:hover , #drewS_prof:hover{
-	 	opacity:0.7; 
+	 	opacity:0.7;
     cursor:pointer;
     background-image: url(landing/linkedin_128.png);
 }
@@ -190,19 +191,19 @@
 
 	@media only screen and (min-width: 1024px){
 		padding-right: 60px;
-		padding-left: 50px;	
+		padding-left: 50px;
 	}
 	@media only screen and (min-width: 768px) and (max-width : 1023px){
 		padding-right: 50px;
-		padding-left: 40px;	
+		padding-left: 40px;
 	}
 	@media only screen and (min-width: 480px) and (max-width : 767px){
 		padding-right: 20px;
-		padding-left: 15px;	
+		padding-left: 15px;
 	}
 	@media only screen and (max-width : 480px){
 		padding-right: 10px;
-		padding-left: 5px;	
+		padding-left: 5px;
 	}
 }
 #details_section_2 h1, #details_section_3 h1, #details_section_4 h1{
