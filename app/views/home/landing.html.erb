@@ -46,16 +46,16 @@
       </div>
 	   </div>
   </div>
-   
+
   <div id= "landing_container_section_2" class="landing_container">
 	<div id="section_2" class="landing-section">
 	  <div id="section_2_top">
       <h2 id="section_2_title">What is Isegoria?</h2>
 	    <h3>Isegoria is a brand new social platform which helps you connect, discover, and shape your community role within a revolutionary mobile-first experience.</h3>
-    </div>  
+    </div>
 	</div>
   </div>
-  
+
    <div id= "landing_container_section_3" class="landing_container">
 	  <div id="section_3" class="landing-section row">
   	  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -115,14 +115,14 @@
       <div class="clearfix"></div>
     </div>
   </div>
-    
+
   <!--   section for icons -->
   <div id= "landing_container_section_6" class="landing_container">
 	  <div id="section_6" class="landing-section row">
       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
         <h2 id="landing_modal">Sound interesting?</h2>
         <p>Download the app today for both iOS and Android. Alternatively, give us a buzz and we'll demonstrate the benefits of Isegoria tailored to your organisation.</p>
-      
+
         <div id="section_6_apps_bar">
           <div class="row">
             <button class="btn landing-link-border" id="request_demo">Request a demo</button>
@@ -143,7 +143,7 @@
       <div class="clearfix"></div>
     </div>
   </div>
-   
+
   <%= render "partials/landing_footer" %>
 
   <div class="landing_container">
@@ -169,8 +169,16 @@
     <% end %>
   </div>
   <%= render "partials/flash_messages" %>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-91233938-1', 'auto');
+    ga('send', 'pageview');
+  </script>  
 </body>
-  
+
 
 <script>
 
@@ -200,12 +208,12 @@ $(document).ready(function(){
       //run the timer to close video after video length
       timerVariable = window.setTimeout(function(){videoStopFunction()},73500);
     });
-    
+
      //script for video stoping
     $('#video_stop_button').click(function(e){
       videoStopFunction();
     });
-    
+
     function videoStopFunction() {
       clearTimeout(timerVariable);
       $('#landing_modal').show();
@@ -219,7 +227,7 @@ $(document).ready(function(){
       $('#isegoria_video').css("opacity", "0.0");
       $("#isegoria_video")[0].src = "https://www.youtube.com/embed/qrZDbD4VDCU?enablejsapi=1&version=3rel=0&showinfo=0";
     }
-    
+
   });
 
 </script>
