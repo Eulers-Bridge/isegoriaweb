@@ -387,7 +387,29 @@ hr{
 	padding-bottom : 10px;
 	width: 40px;
   height: 60px;
+}
 
+#landing_container_section_7 {
+	background: #fff;
+	padding: 40px 0;
+	text-align: center;
+
+	h4 {
+		font-size: 200%;
+	}
+
+	p {
+		margin: 20px auto;
+		max-width: 520px;
+	}
+
+	input.email {
+		width: 240px;
+	}
+
+	input {
+		display: inline-block;
+	}
 }
 
 //FOOTER
