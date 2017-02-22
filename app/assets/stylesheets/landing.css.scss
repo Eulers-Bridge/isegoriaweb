@@ -27,22 +27,7 @@
 	margin-right: auto !important;
   color: #303030;
   margin: 0 auto;
-  max-width: 80%;
- 	// @media only screen and (min-width: 1024px){
-	// 	width: 1024px !important;
-	// }
-	// @media only screen and (min-width: 768px) and (max-width : 1023px){
-	// 	width: 768px !important;
-	// 	font-size: 80%;
-	// }
-	// @media only screen and (min-width: 480px) and (max-width : 767px){
-	// 	width: 480px !important;
-	// 	font-size: 70%;
-	// }
-	// @media only screen and (max-width : 480px){
-	// 	width: 320px !important;
-	// 	font-size: 60%;
-	// }
+  max-width: 960px;
 }
 
 .landing-section .row{
@@ -89,7 +74,7 @@ hr{
 #isegoria_video{
 	 margin: 0;
   padding: 0;
-	//width: 275px; 
+	//width: 275px;
 	//height: 145px;
 	//width: 560px;
 	//height: 315px;
@@ -402,7 +387,7 @@ hr{
 	padding-bottom : 10px;
 	width: 40px;
   height: 60px;
-	
+
 }
 
 //FOOTER
@@ -440,7 +425,7 @@ hr{
 	// }
 	// @media only screen and (max-width : 480px){
 	// 	padding-right: 10px;
-	// 	padding-left: 10px;	
+	// 	padding-left: 10px;
 	// }
 }
 
@@ -498,7 +483,7 @@ hr{
 	@media only screen and (max-width : 480px){
 		padding-right: 10px;
 		padding-left: 10px;
-		font-size: 110%;	
+		font-size: 110%;
 	}
 }
 
@@ -544,7 +529,7 @@ hr{
 }
 
 //LOGIN FORM
-@-moz-document url-prefix() { 
+@-moz-document url-prefix() {
   #login_form {
      display: block !important;
   }
@@ -601,5 +586,3 @@ top: 0px;
 	color: #fff;
 	margin: 10px 10px 0 0;
 }
-
-
