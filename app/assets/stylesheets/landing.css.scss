@@ -8,7 +8,7 @@
 	color: #FFFFFF;
 	font-size: 16px;
 
-	h2, h3, h4, h5 {
+	h1, h2, h3, h4, h5 {
 		font-family: "SourceSansPro", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	}
 }
@@ -167,9 +167,13 @@ hr{
 	margin-left: auto;
   margin-right: auto;
 }
+#section_1_apps_bar {
+	margin-top: 35px;
+}
 #section_1_content h1{
+	font-family: "SourceSansPro-Light";
 	font-size: 300%;
-	font-weight: bold;
+	font-weight: 600;
 	margin-bottom: 20px;
 }
 #section_1_content h4{
@@ -211,6 +215,7 @@ hr{
 	margin-bottom: 0px;
 	font-size: 240%;
 	font-family: "SourceSansProLight","HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-weight: 600;
 }
 
 #section_2_top h3{
@@ -404,6 +409,7 @@ hr{
 	}
 
 	input.email {
+		padding-left: 10px;
 		width: 240px;
 	}
 

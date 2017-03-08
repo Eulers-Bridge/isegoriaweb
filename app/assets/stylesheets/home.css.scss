@@ -4,7 +4,7 @@
 
 #background {
 	background-color: #313E4D;
-	background: url(landing/Background.png) no-repeat center center fixed; 
+	background: url(landing/Background.png) no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -27,7 +27,7 @@
   color: #fff;
   font-size: 16px;
   font-weight: bold;
-  padding: 8px 16px;
+  padding: 12px 16px;
 }
 #request_demo:hover, #watch_video:hover {
   background-color: #fff;
@@ -35,7 +35,7 @@
 }
 
 #section_2_title {
-  
+
 }
 
 #centering {
@@ -58,7 +58,7 @@
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	
+
 	margin-left: -650px;
 	margin-top: -300px;
 
@@ -84,18 +84,18 @@
 }
 
 #card {
-    background-color: white;	
+    background-color: white;
 	-webkit-box-shadow: inset 0px 1px 1px white, 0px 3px 8px rgba(0,0,0,0.5);
 	-moz-box-shadow: inset 0px 1px 1px white, 0px 3px 8px rgba(0,0,0,0.5);
 	-o-box-shadow: inset 0px 1px 1px white, 0px 3px 8px rgba(0,0,0,0.5);
 	-ms-box-shadow: inset 0px 1px 1px white, 0px 3px 8px rgba(0,0,0,0.5);
 	box-shadow: inset 0px 1px 1px white, 0px 3px 8px rgba(0,0,0,0.5);
-	
+
 	width: 100%;
 	height: 100%;
-	
+
 	border-radius: 8px;
-	
+
 	-webkit-animation: pop 0.5s 0.5s;
 	-webkit-animation-fill-mode: backwards;
 	-webkit-transform: default;
@@ -122,8 +122,8 @@
 #text p {
 	margin: auto;
 	font-size: 16px; text-align: center; font-family: "Museo Sans Rounded", Helvetica, Arial, sans-serif; font-weight: normal; color: #313E4D;
-	padding-left: 20px;	
-	padding-right: 20px;	
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 #logo {
@@ -140,7 +140,7 @@
 	from {
 		background-position: 5% 5%
 	}
-	to { 
+	to {
 		background-position: 1300% 0%
 	}
 }
@@ -156,23 +156,23 @@
         opacity: 1;
 
     }
-    
+
     50% {
         -webkit-transform: rotateX(4deg) translateY(0px) perspective(400px);
         opacity: 1;
 
     }
-    
+
     70% {
         -webkit-transform: rotateX(-2deg) translateY(0px) perspective(400px);
         opacity: 1;
 
     }
-    
+
     to {
         -webkit-transform: rotateX(0deg) translateY(0px) perspective(400px);
         opacity: 1;
-    }   
+    }
 }
 
 @-webkit-keyframes turnover {
@@ -181,27 +181,27 @@
         opacity: 0;
     }
 
-        
+
     to {
         -webkit-transform: rotateX(0deg) rotateY(180deg) perspective(800px);
         opacity: 1;
-    }    
+    }
 }
 
 
-@-webkit-keyframes pop{ 
+@-webkit-keyframes pop{
 	from {
-		-webkit-transform:scale(.1); 
+		-webkit-transform:scale(.1);
 		opacity:0
-	} 
-	
+	}
+
 	60% {
-		-webkit-transform:scale(1.1); 
+		-webkit-transform:scale(1.1);
 		opacity:1
-	} 
-	
+	}
+
 	to {
-		-webkit-transform:scale(1) 
+		-webkit-transform:scale(1)
 	}
 }
 
@@ -210,7 +210,7 @@
         -webkit-transform: translate(-1000px, 0px) scale(0.75) rotateY(-180deg);
         opacity: 0;
     }
-    
+
     to {
         -webkit-transform: translate(0px, 0px) scale(1) rotateY(-0deg);
         opacity: 1;
@@ -222,7 +222,7 @@
 	from {
 		opacity: 0;
 	}
-	to { 
+	to {
 		opacity: 1;
 	}
 }
