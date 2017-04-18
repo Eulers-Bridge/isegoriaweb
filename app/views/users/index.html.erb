@@ -22,19 +22,5 @@
 </div>
 
 <div class="section_controls">
-<% if @total_pages %>
-  <div class="pagination_controls">
-    <% if @previous_page >=0 %>
-      <%= link_to "<< ", users_path(:page =>@previous_page), :class => 'nav_control' %>
-    <%end%>
-
-    <span class="page_number">
-      Page <%=(@page+1)%> of <%=@total_pages%>
-    </span>
-
-    <% if @next_page >=0 %>
-      <%= link_to " >>", users_path(:page =>@next_page), :class => 'nav_control' %>
-    <%end%>
-  </div>
-<% end %>
+  <%= render "partials/admin_list_pagination" %>
 </div>

@@ -1,20 +1,8 @@
-<div class="section_controls">
-  <div class="pagination_controls">
-    <% if @previous_page >=0 %>
-      <%= link_to "<< ", elections_path(:page =>@previous_page), :class => 'nav_control' %> 
-    <%end%>
-    <%=(@page+1)%>
-    <% if @next_page >=0 %>
-      <%= link_to " >>", elections_path(:page =>@next_page), :class => 'nav_control' %> 
-    <%end%> 
-  </div>
-</div>
-
 <div id="elections_list">
   <% @elections_list.each do |election| %>
     <div class="election_item">
       <div class="item_controls">
-        <%= link_to t(:edit).capitalize, edit_election_path(:id => election.id), :class => 'edit_link' %> 
+        <%= link_to t(:edit).capitalize, edit_election_path(:id => election.id), :class => 'edit_link' %>
         <%= link_to t(:delete).capitalize, election_path(:id => election.id), method: :delete, :class => 'delete_link' %>
         <%= link_to t(:positions).capitalize, positions_path(:election_id => election.id), method: :get, :class => 'child_link' %>
         <%= link_to t(:tickets).capitalize, tickets_path(:election_id => election.id), method: :get, :class => 'child_link' %>
@@ -30,4 +18,9 @@
     </div>
   <% end %>
 </div>
+
+<div class="section_controls">
+  <%= render "partials/admin_list_pagination" %>
+</div>
+
 <%= javascript_include_tag "elections_util" %>
