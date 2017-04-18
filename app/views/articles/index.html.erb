@@ -1,35 +1,46 @@
-<div class="section_controls">
-<div class="pagination_controls">
-  <% if @previous_page >=0 %>
-  <%= link_to "<< ", articles_path(:page =>@previous_page), :class => 'nav_control' %> 
-  <%end%>
-  <%=(@page+1)%>
-  <% if @next_page >=0 %>
-  <%= link_to " >>", articles_path(:page =>@next_page), :class => 'nav_control' %> 
-  <%end%> 
-</div>
-</div>
 <div id="articles_list">
   <% @articles_list.each do |article| %>
   <div class="article_item">
     <div class="item_image">
         <%= image_tag article.picture.blank? ? GENERIC_ARTICLE_IMAGE : article.picture[0]["url"], class: "article_image_thumbnail", alt: t(:picture) %>
     </div>
-    <div class="item_controls">
-      <%= link_to t(:edit).upcase, edit_article_path(:id => article.id), :class => 'edit_link' %>
-      <a class="delete_link delete_question_control"><%= t(:delete).upcase%></a>
+
+    <div class="item_content">
+      <div class="item_controls">
+        <%= link_to t(:edit).capitalize, edit_article_path(:id => article.id), :class => 'edit_link' %>
+        <a class="delete_link delete_question_control"><%= t(:delete).capitalize%></a>
+      </div>
+      <div class="delete_confirmation_form">
+        <%= t(:are_you_sure).capitalize %>
+        <br>
+        <%= link_to t(:answer_yes).capitalize, article_path(:id => article.id), method: :delete, :class => 'delete_link' %>
+        <a class="delete_link cancel_delete_control"><%= t(:answer_no).capitalize%></a>
+      </div>
+      <div>
+        <h3><%=article.title%></h3>
+        <h4>
+            <span class="creator_span_text"><%=article.creator_email%></span><br />
+            <%=article.date%>
+        </h4>
+      </div>
     </div>
-    <div class="delete_confirmation_form">
-      <%= t(:are_you_sure).capitalize %>
-      <br>
-      <%= link_to t(:answer_yes).capitalize, article_path(:id => article.id), method: :delete, :class => 'delete_link' %>
-      <a class="delete_link cancel_delete_control"><%= t(:answer_no).capitalize%></a>
-    </div>
-    <div>
-    <h3><%=article.title%></h3>
-    <h4><%= t(:created_by).capitalize+' '%><span class="creator_span_text"><%=article.creator_email%></span><%=' ' + t(:the)+ ' ' + article.date%></h4>
-    </div>
+
+    <div class="clearfix"></div>
   </div>
   <!--hr-->
   <% end %>
+</div>
+
+<div class="section_controls">
+  <div class="pagination_controls">
+    <% if @previous_page >=0 %>
+      <%= link_to "<<", articles_path(:page =>@previous_page), :class => 'nav_control' %>
+    <%end%>
+
+    <span class="page_number">Page <%=(@page+1)%> of <%=@total_pages%></span>
+
+    <% if @next_page >=0 %>
+      <%= link_to ">>", articles_path(:page =>@next_page), :class => 'nav_control' %>
+    <%end%>
+  </div>
 </div>

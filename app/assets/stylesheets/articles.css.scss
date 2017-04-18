@@ -10,7 +10,6 @@
 .article_image_thumbnail{
   width: 70px;
   height: 70px;
-  border-radius: 35px;
 }
 
 .article_item{
@@ -19,9 +18,10 @@
 	margin-right: 100px;
 	margin-left: 100px;
 	padding: 10px;
-	border-style: none;
-	//border-radius: 6px;
-	border-bottom-width: 0.15px;
-	border-bottom-style: solid;
-	border-bottom-color: #AAAAAA;
+  position: relative;
+	border-bottom: solid #eee 1px;
+
+  &:last-child {
+    border-bottom: none;
+  }
 }

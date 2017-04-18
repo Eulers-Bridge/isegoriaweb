@@ -1,20 +1,8 @@
-<div class="section_controls">
-<%= link_to capitalize_as_title(t(:create_user)), new_user_path, :class => 'create_link' %>
-<div class="pagination_controls">
-  <% if @previous_page >=0 %>
-  <%= link_to "<< ", users_path(:page =>@previous_page), :class => 'nav_control' %> 
-  <%end%>
-  <%=(@page+1)%>
-  <% if @next_page >=0 %>
-  <%= link_to " >>", users_path(:page =>@next_page), :class => 'nav_control' %> 
-  <%end%> 
-</div>
-</div>
 <div id="users_list">
   <% @users_list.each do |user| %>
   <div class="user_item">
     <div class="item_controls">
-      <%= link_to t(:edit).capitalize, edit_user_path(:id => user.email), :class => 'edit_link' %> 
+      <%= link_to t(:edit).capitalize, edit_user_path(:id => user.email), :class => 'edit_link' %>
       <%= link_to t(:delete).capitalize, user_path(:id => user.email), method: :delete, :class => 'delete_link' %>
     </div>
     <div>
@@ -22,13 +10,31 @@
       <h4><%=t(:full_name).capitalize%>: <%=capitalize_as_title(user.full_name)%></h4>
       <h4><%=t(:email).capitalize%>: <%=user.email%></h4>
       <% if user.account_verified == true %>
-        <%=capitalize_as_title(t(:account_verified)) %> 
+        <%=capitalize_as_title(t(:account_verified)) %>
       <% else %>
-        <%=capitalize_as_title(t(:account_unverified)) %> 
+        <%=capitalize_as_title(t(:account_unverified)) %>
       <%= button_to capitalize_as_title(t(:resend_verify_account_email)), user_resend_verification_email_path(:id => user.email, :action_type => "revoke_access"), method: :post, :class => 'btn btn-success' %>
       <% end %>
     </div>
   </div>
   <!--hr-->
   <% end %>
+</div>
+
+<div class="section_controls">
+<% if @total_pages %>
+  <div class="pagination_controls">
+    <% if @previous_page >=0 %>
+      <%= link_to "<< ", users_path(:page =>@previous_page), :class => 'nav_control' %>
+    <%end%>
+
+    <span class="page_number">
+      Page <%=(@page+1)%> of <%=@total_pages%>
+    </span>
+
+    <% if @next_page >=0 %>
+      <%= link_to " >>", users_path(:page =>@next_page), :class => 'nav_control' %>
+    <%end%>
+  </div>
+<% end %>
 </div>

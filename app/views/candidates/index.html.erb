@@ -1,15 +1,21 @@
 <div class="section_controls">
+<% if @total_pages %>
 <div class="pagination_controls">
-  <%#if @previous_page >=0 %>
-  <%#= link_to "<< ", candidates_path(:page =>@previous_page), :class => 'nav_control' %> 
-  <%#end%>
-  <%#=(@page+1)%>
-  <%# if @next_page >=0 %>
-  <%#= link_to " >>", candidates_path(:page =>@next_page), :class => 'nav_control' %> 
-  <%#end%> 
+  <%if @previous_page >=0 %>
+    <%= link_to "<< ", candidates_path(:page =>@previous_page), :class => 'nav_control' %>
+  <%end%>
+
+  <%=(@page+1)%>
+
+  <% if @next_page >=0 %>
+    <%= link_to " >>", candidates_path(:page =>@next_page), :class => 'nav_control' %>
+  <%end%>
 </div>
+<% end %>
 </div>
+
 <div id="candidates_list">
+<% if @candidates_list %>
   <% @candidates_list.each do |candidate| %>
   <div class="candidate_item">
     <div class="item_image">
@@ -37,4 +43,5 @@
   </div>
   <!--hr-->
   <% end %>
+<% end %>
 </div>

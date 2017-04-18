@@ -31,17 +31,13 @@
         <source src="Shadows.mp4" type="video/mp4">
         <%=t(:video_unsupported).capitalize%>
         </video-->
-        <iframe id="isegoria_video" src="https://www.youtube.com/embed/qrZDbD4VDCU?enablejsapi=1&version=3rel=0&showinfo=0" frameborder="0" showinfo="0"
+<!--         <iframe id="isegoria_video" src="https://www.youtube.com/embed/qrZDbD4VDCU?enablejsapi=1&version=3rel=0&showinfo=0" frameborder="0" showinfo="0"
                      allowfullscreen> </iframe>
-        <%= image_tag "landing/Play Button@2x.png", id:"video_play_button"%>
+        <%= image_tag "landing/Play Button@2x.png", id:"video_play_button"%> -->
         <div id="section_1_apps_bar">
           <div class="row">
-      		     <div class="col-xs-6 col-md-6" id="iosStoreWhite">
-      			      <%= image_tag "landing/iOS_Badge_White.png"%>
-      			    </div>
-             <div class="col-xs-6 col-md-6" id="androidStoreWhite">
-      			      <%= image_tag "landing/Android_Badge_White.png"%>
-      			    </div>
+            <button class="btn landing-link-border" id="request_demo">Request a demo</button>
+            <button class="btn landing-link-border" id="watch_video">Watch Intro Video</button>
 		        </div>
         </div>
       </div>
@@ -50,142 +46,120 @@
       </div>
 	   </div>
   </div>
-  
-   <!--   section for what is isegoria -->
-   
+
   <div id= "landing_container_section_2" class="landing_container">
 	<div id="section_2" class="landing-section">
 	  <div id="section_2_top">
-      <h2 id="section_2_title"><%=t(:landing_title_2_what_is_isegoria)%></h2>
-	    <h3><%=t(:landing_text_2_what_is_isegoria)%></h3>
-    </div>  
+      <h2 id="section_2_title">What is Isegoria?</h2>
+	    <h3>Isegoria is a brand new social platform which helps you connect, discover, and shape your community role within a revolutionary mobile-first experience.</h3>
+    </div>
 	</div>
   </div>
-  
-  <!--   section for quantified interaction -->
-  
+
    <div id= "landing_container_section_3" class="landing_container">
-	  <div id="section_3" class="landing-section">
-      <div id="section_3_info">
-      <div class="row section_3_icon_title">
-    	  <div class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
-    	    <h2><%=t(:landing_title_4_interactions)%></h2>
-    	  </div>
-      </div>	    
-	    <h4><%=t(:landing_text_4_feature_1)%></h4>
-	    <h4><%=t(:landing_text_4_feature_2)%></h4>
+	  <div id="section_3" class="landing-section row">
+  	  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <%= image_tag "landing/icons/Build Network Effects@2x.png", { :width=>"100", :height=>"100", :alt=>"Network effects" } %>
+  	    <h2>Build network effects</h2>
+        <p>Your open network is the #1 predictor of career success, and drives both innovation and fundraising. Harness it now.</p>
+  	  </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <%= image_tag "landing/icons/Community Driven@2x.png", { :width=>"100", :height=>"100", :alt=>"Community driven" } %>
+        <h2>Community driven</h2>
+        <p>At Isegoria we're all for both people and relationships. Promote social interaction tailored to individual and group interests.</p>
       </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <%= image_tag "landing/icons/Social Learning@2x.png", { :width=>"100", :height=>"100", :alt=>"Social learning" } %>
+        <h2>Social learning</h2>
+        <p>By exploring and promoting true positive change between individuals and groups, Isegoria will reward your efforts.</p>
+      </div>
+
+      <div class="clearfix"></div>
 	  </div>
   </div>
-  
-  
-  <!--   section for powerful analytics -->
 
   <div id= "landing_container_section_5" class="landing_container">
     <div id="section_5" class="landing-section row">
-      <div class="col-xs-10 col-sm-10 col-md-10 col-lg-6">
-        <h2><%=t(:landing_title_5_analytics)%></h2>
-        <h4><%=t(:landing_text_5_analytics)%></h4>
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <%= image_tag "landing/icons/Design@2x.png", { :width=>"60", :height=>"60", :alt=>"Design" } %>
+        <h2>Design</h2>
+        <p>We've built a beautiful user interface for both administrators and users. Everything looks crisp and modern as mobile apps should.</p>
       </div>
-       <div class="col-xs-10 col-sm-10 col-md-10 col-lg-6">
-         <h2><%=t(:landing_title_5_investment)%></h2>
-         <h4><%=t(:landing_text_5_investment)%></h4>
+
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <%= image_tag "landing/icons/Security@2x.png", { :width=>"60", :height=>"60", :alt=>"Security" } %>
+        <h2>Security</h2>
+        <p>Isegoria uses the most security-sensitive data centre and network architecture available, thanks to Amazon Web Services.</p>
       </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <%= image_tag "landing/icons/Integration@2x.png", { :width=>"60", :height=>"60", :alt=>"Integration" } %>
+        <h2>Integration</h2>
+        <p>Integration with your existing platform is a coffee break away. So you can focus on your community, rather than tech support.</p>
+      </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <%= image_tag "landing/icons/Scalability@2x.png", { :width=>"60", :height=>"60", :alt=>"Scalability" } %>
+        <h2>Scalability</h2>
+        <p>Whether you're a small group of volunteers or part of a world-leading institution, our service is scalable to any need.</p>
+      </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <%= image_tag "landing/icons/Complexity@2x.png", { :width=>"60", :height=>"60", :alt=>"Complexity" } %>
+        <h2>Complexity</h2>
+        <p>Our graph database eats complex queries for breakfast. Break free of siloed data stores and view your network through a whole new lens.</p>
+      </div>
+
+      <div class="clearfix"></div>
     </div>
   </div>
-  
-   <!--   section for icons -->
-   <div id= "landing_container_section_6" class="landing_container">
+
+  <!--   section for icons -->
+  <div id= "landing_container_section_6" class="landing_container">
 	  <div id="section_6" class="landing-section row">
-       <div class="col-xs-10 col-sm-10 col-md-6 col-lg-6">
-         <div class = "row">
-           <div class="col-xs-2"> <%= image_tag "landing/feature_icons/Security.png",  id:"section_6_icon"%></div>
-           <div class="col-xs-10"><h4><%=t(:rock_solid_list_icon)%></h4></div>
-         </div>
-          <div class = "row">
-           <div class="col-xs-2"> <%= image_tag "landing/feature_icons/PriceAlternate.png",  id:"section_6_icon"%></div>
-           <div class="col-xs-10"><h4><%=t(:cost_effective_list_icon)%></h4></div>
-         </div>
-          <div class = "row">
-           <div class="col-xs-2"> <%= image_tag "landing/feature_icons/Integration.png",  id:"section_6_icon"%></div>
-           <div class="col-xs-10"><h4><%=t(:minimal_list_icon)%></h4></div>
-         </div>
-          <div class = "row">
-           <div class="col-xs-2"> <%= image_tag "landing/feature_icons/Analytics.png",  id:"section_6_icon"%></div>
-           <div class="col-xs-10"><h4><%=t(:beauty_list_icon)%></h4></div>
-         </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <h2 id="landing_modal">Sound interesting?</h2>
+        <p>Download the app today for both iOS and Android. Alternatively, give us a buzz and we'll demonstrate the benefits of Isegoria tailored to your organisation.</p>
+
+        <div id="section_6_apps_bar">
+          <div class="row">
+            <button class="btn landing-link-border" id="request_demo">Request a demo</button>
+            <button class="btn landing-link-border" id="watch_video">Download Media Kit</button>
+            </div>
+        </div>
       </div>
-       <div class="col-xs-10 col-sm-10 col-md-6 col-lg-6">
-         <div class = "row">
-           <div class="col-xs-2"> <%= image_tag "landing/feature_icons/Scalability.png",  id:"section_6_icon"%></div>
-           <div class="col-xs-10"><h4><%=t(:ultra_list_icon)%></h4></div>
-         </div>
-          <div class = "row">
-           <div class="col-xs-2"> <%= image_tag "landing/feature_icons/Cloud.png",  id:"section_6_icon"%></div>
-           <div class="col-xs-10"><h4><%=t(:data_list_icon)%></h4></div>
-         </div>
-          <div class = "row">
-           <div class="col-xs-2"> <%= image_tag "landing/feature_icons/Agility.png",  id:"section_6_icon"%></div>
-           <div class="col-xs-10"><h4><%=t(:lightning_list_icon)%></h4></div>
-         </div>
-          <div class = "row">
-           <div class="col-xs-2"> <%= image_tag "landing/feature_icons/Network.png",  id:"section_6_icon"%></div>
-           <div class="col-xs-10"><h4><%=t(:easy_list_icon)%></h4></div>
-         </div>
-	  </div>
+
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <ul>
+          <li>Build trust and experience faster sharing and greater productivity</li>
+          <li>Develop and shape diverse leadership across your network</li>
+          <li>Get insight on emergent macro patterns from your community network structure and dynamic interactions</li>
+          <li>Make better and faster investment decisions that respond to your community needs</li>
+        </ul>
+      </div>
+
+      <div class="clearfix"></div>
+    </div>
   </div>
-   
-   <!--   section for vibrant inclusive  experiences-->
-   
-  <div id= "landing_container_section_7" class="landing_container">
+
+  <div id="landing_container_section_7" class="landing_container">
     <div id="section_7" class="landing-section row">
-      <div class="hidden-xs col-md-6 col-lg-6">
-        <%= image_tag "landing/phoneScreenshot1.png",  id:"section_7_phone_img"%>
-      </div>
-       <div class="col-xs-10 col-sm-10 col-md-6 col-lg-6">
-         <h2><%=t(:landing_title_7_features)%></h2>
-         <h3><%=t(:landing_text_7_features)%></h4>
-         <hr>
-         <h2><%=t(:landing_subtitle_7_beautiful)%></h2>
-         <h4><%=t(:landing_text_7_beautiful)%></h4>
-         <h2><%=t(:landing_subtitle_7_download)%></h2>
-         <h4><%=t(:landing_text_7_download)%></h4>
-         <div class="row">
-      		     <div class="hidden-xs col-md-6 appStores">
-      			      <%= image_tag "landing/iOS_Badge.png"%>
-      			    </div>
-             <div class="hidden-xs col-md-6 appStores">
-      			      <%= image_tag "landing/Android_Badge.png"%>
-      			    </div>
-		        </div>
-         
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h4>Sign up for launch updates!</h4>
+        <p>Whether you're a student or a faculty member interested in bringing Isegoria to your institution, sign up here to find out when we're releasing; as well as any important updates related to our grand launch.</p>
+        <form action="//eulersbridge.us14.list-manage.com/subscribe/post?u=1a8308a6b9e7bab17571028d1&amp;id=2830217c18" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+        	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Email Address" required>
+          <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1a8308a6b9e7bab17571028d1_2830217c18" tabindex="-1" value=""></div>
+          <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+        </form>
       </div>
     </div>
   </div>
-  
-   <!--   section for powerful analytics-->
-   
-  <div id= "landing_container_section_8" class="landing_container">
-    <div id="section_8" class="landing-section row">
-     <div id="section_8_top">
-      <%= image_tag "landing/auDA_nobg.png", id:"audaImage" %>
-    </div>
-    <button class="btn landing-link-border" id="btn_more_info"><a href="mailto:sales@eulersbridge.com?Subject=Request%20a%20demo" target="_top"><%=capitalize_as_title(t(:request_a_demo))%></a></button>
-    </div>
-  </div>
-  
-  
- 
- 
+
   <%= render "partials/landing_footer" %>
-  <div id= "landing_container_menu_bar" class="landing_container">
-	<div id="landing_menu_bar" class="landing-section">
-	  <a href="#section_2_title" class = "btn"><%=capitalize_as_title(t(:landing_title_2_what_is_isegoria))%></a>
-	  <a href="#section_3_info" class = "btn"><%=capitalize_as_title(t(:landing_title_4_interactions))%></a>
-	  <a href="#section_3_top" class = "btn"><%=capitalize_as_title(t(:landing_title_7_features))%></a>
-	  <a href="#section_7" class = "btn"><%=capitalize_as_title(t(:appraisals))%></a>
-	</div>
-  </div>
+
   <div class="landing_container">
     <!--div class="landing-section">
       <%= image_tag "landing/iPhone_1.png", id:"section_3_phone_picture"%>
@@ -209,29 +183,21 @@
     <% end %>
   </div>
   <%= render "partials/flash_messages" %>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-91233938-1', 'auto');
+    ga('send', 'pageview');
+  </script>
 </body>
-  
+
 
 <script>
 
 $(document).ready(function(){
  $('#video_stop_button').hide();
-	$(this).scroll(function(){
-		var ua= navigator.userAgent;
-    //Effect tested and only working in Firefox so far
-		if(ua.toLowerCase().indexOf('firefox') > -1)
-		{
-			var pos =  $(this).scrollTop();
-			if( pos <= 700 ) 
-			{
-        		$('#landing_container_menu_bar').css({position:'absolute', top: '700px'});  
-    		}
-    		else 
-    		{
-        		$('#landing_container_menu_bar').css({position:'fixed', top: '0px'});
-    		}
-		}
-	});
  $('#admin_login').click(function(e){
     $('#login_form').toggleClass('show');
     e.preventDefault();
@@ -256,12 +222,12 @@ $(document).ready(function(){
       //run the timer to close video after video length
       timerVariable = window.setTimeout(function(){videoStopFunction()},73500);
     });
-    
+
      //script for video stoping
     $('#video_stop_button').click(function(e){
       videoStopFunction();
     });
-    
+
     function videoStopFunction() {
       clearTimeout(timerVariable);
       $('#landing_modal').show();
@@ -275,7 +241,7 @@ $(document).ready(function(){
       $('#isegoria_video').css("opacity", "0.0");
       $("#isegoria_video")[0].src = "https://www.youtube.com/embed/qrZDbD4VDCU?enablejsapi=1&version=3rel=0&showinfo=0";
     }
-    
+
   });
 
 </script>

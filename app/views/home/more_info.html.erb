@@ -9,107 +9,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-  <title>Isegoria Web</title>
+  <title>Isegoria</title>
 </head>
 <body >
   <div id= "more_info_container_section_1" class="landing_container">
     <div id="section_1" class="landing-section">
       <div id="section_1_header">
         <div id="header_app_name">
-          <%= image_tag "landing/Blue_Logo.png",  class:"isegoria_logo"%>
+          <%= image_tag "landing/logo_white.png",  class:"isegoria_logo"%>
           <%=t(:isegoria).capitalize%>
-          <%= image_tag "landing/Beta_Blue.png",  class:"isegoria_logo"%>
+          <%= image_tag "landing/Beta_Red.png",  class:"isegoria_logo"%>
         </div>
 		    <button class="btn landing-link-border" id="admin_login"><%=capitalize_as_title(t(:admin_login))%></button>
       </div>
       <hr>
       <div id="section_1_content">
-        <h1><%=t(:more_into_modal_1)%></span></h1>
-        <h4><%=t(:about_us_message_2)%></h4>
-        <h4><%=t(:about_us_message_3)%></h4>
-        <%= image_tag "landing/about_us_map.png" , id:"about_us_map"%>
+        <h1>Hi, we're Euler's Bridge.</h1>
+        <h4>We're a small software development team based in Melbourne, Australia; focused on introducing brilliant ideas to reality.</h4>
       </div>
-      </div>
-      <hr>
+    </div>
+  </div>
+
+  <div id= "more_info_container_section_2" class="landing_container">
+    <div id="section_2" class="landing-section">
       <div id="about_us_profiles">
         <div class='row'>
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
             <div id="miguelW_prof" class="profile_picture" onclick="location.href='https://au.linkedin.com/in/migster'">
             </div>
             <span class="profile_name"><%=t(:profile_miguel_wood) %> <%= image_tag "landing/country_flags/Australia.png", class:"country_flags"%></span>
-            <br>
             <span class="profile_role"><%=t(:profile_miguel_wood_role).upcase %></span>
           </div>
-         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <div id="gregN_prof" class="profile_picture" onclick="location.href='https://au.linkedin.com/pub/greg-newitt/0/8b8/a10'">
-            </div>
-            <span class="profile_name"><%=t(:profile_greg_newitt) %> <%= image_tag "landing/country_flags/Australia.png", class:"country_flags"%></span>
-            <br>
-            <span class="profile_role"><%=t(:profile_greg_newitt_role).upcase %></span>
-          </div>
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
             <div id="alanG_prof" class="profile_picture" onclick="location.href='https://www.linkedin.com/profile/view?id=ADEAAAUOSocBOYCBaWtWcQ-P84QyfI0FJkMmF70&authType=OUT_OF_NETWORK&authToken=ARGE&locale=en_US&srchid=549273661443663319178&srchindex=1&srchtotal=2&trk=vsrp_people_res_name&trkInfo=VSRPsearchId%3A549273661443663319178%2CVSRPtargetId%3A84822663%2CVSRPcmpt%3Aprimary%2CVSRPnm%3Afalse%2CauthType%3AOUT_OF_NETWORK'">
             </div>
             <span class="profile_name"><%=t(:profile_alan_gao) %> <%= image_tag "landing/country_flags/China.png", class:"country_flags"%></span>
-            <br>
             <span class="profile_role"><%=t(:profile_alan_gao_role) %></span>
           </div>
+
+         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <div id="jayL_prof" class="profile_picture" onclick="location.href='https://www.linkedin.com/in/lynchjay'">
+            </div>
+            <span class="profile_name"><%=t(:profile_jay_lynch) %> <%= image_tag "landing/country_flags/Australia.png", class:"country_flags"%></span>
+            <span class="profile_role"><%=t(:profile_jay_lynch_role).upcase %></span>
+          </div>
         </div>
+
+
+
+
+
         <div class='row'>
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <div id="drewS_prof" class="profile_picture" >
-            </div>
-            <span class="profile_name"><%=t(:profile_drew_smith) %> <%= image_tag "landing/country_flags/UK.png", class:"country_flags"%></span>
-            <br>
-            <span class="profile_role"><%=t(:profile_drew_smith_role).upcase %></span>
-          </div>
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <div id="davidR_prof" class="profile_picture" onclick="location.href='https://www.linkedin.com/profile/view?id=191846633&trk=send_invitation_success_message_name&goback=%2Enpv_ADEAAAtvWOkB8Km6GvoXNlS8te2t2VC0eS7yAHk_*1_*1_NAME*4SEARCH_iaIk_*1_es*4ES_*1_*1_*1_549273661443663477533_1_1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_vsrp*4people*4res*4name_*1_*1'">
-            </div>
-            <span class="profile_name"><%=t(:profile_david_rivera) %> <%= image_tag "landing/country_flags/Equador.png", class:"country_flags"%></span>
-            <br>
-            <span class="profile_role"><%=t(:profile_david_rivera_role).upcase %></span>
-          </div>
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <div id="anthonyQ_prof" class="profile_picture" >
-            </div>
-            <span class="profile_name"><%=t(:profile_anthony_quattrone) %> <%= image_tag "landing/country_flags/Australia.png", class:"country_flags"%></span>
-            <br>
-            <span class="profile_role"><%=t(:profile_anthony_quattrone_role).upcase %></span>
-          </div>
-        </div>
-        <div class='row'>  
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <div id="charlieE_prof" class="profile_picture" >
-            </div>
-            <span class="profile_name"><%=t(:profile_charlie_eastaugh) %> <%= image_tag "landing/country_flags/UK.png", class:"country_flags"%></span>
-            <br>
-            <span class="profile_role"><%=t(:profile_charlie_eastaugh_role).upcase %></span>
-          </div>
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
             <div id="yikaiG_prof" class="profile_picture" onclick="location.href='https://www.linkedin.com/profile/view?id=201472060&trk=send_invitation_success_message_name&goback=%2Enpv_ADEAAAwCODwBaMj3*5rvjPV0AOsZjDIlQ6T5WRGk_*1_*1_NAME*4SEARCH_ucrW_*1_en*4US_*1_*1_*1_549273661443663604666_1_2_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_vsrp*4people*4res*4name_*1_*1'">
             </div>
             <span class="profile_name"><%=t(:profile_yikai_gong) %> <%= image_tag "landing/country_flags/China.png", class:"country_flags"%></span>
-            <br>
             <span class="profile_role"><%=t(:profile_yikai_gong_role).upcase %></span>
           </div>
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <div id="ishanB_prof" class="profile_picture"onclick="location.href='https://au.linkedin.com/pub/ishan-bakshi/16/48a/806'">
+
+          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <div id="drewS_prof" class="profile_picture" >
             </div>
-            <span class="profile_name"><%=t(:profile_ishan_bakshi) %> <%= image_tag "landing/country_flags/India.png", class:"country_flags"%></span>
-            <br>
-            <span class="profile_role"><%=t(:profile_ishan_bakshi_role).upcase %></span>
+            <span class="profile_name"><%=t(:profile_drew_smith) %> <%= image_tag "landing/country_flags/UK.png", class:"country_flags"%></span>
+            <span class="profile_role"><%=t(:profile_drew_smith_role).upcase %></span>
+          </div>
+          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <div id="charlieE_prof" class="profile_picture" >
+            </div>
+            <span class="profile_name"><%=t(:profile_charlie_eastaugh) %> <%= image_tag "landing/country_flags/UK.png", class:"country_flags"%></span>
+            <span class="profile_role"><%=t(:profile_charlie_eastaugh_role).upcase %></span>
           </div>
         </div>
-      </div>
-    </div>
-	</div>
-  <div id= "more_info_container_section_2" class="landing_container">
-    <div id="section_2" class="landing-section">
-     
-      
+
+        <div class="row">
+         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <div id="gregN_prof" class="profile_picture" onclick="location.href='https://au.linkedin.com/pub/greg-newitt/0/8b8/a10'">
+            </div>
+            <span class="profile_name"><%=t(:profile_greg_newitt) %> <%= image_tag "landing/country_flags/Australia.png", class:"country_flags"%></span>
+            <span class="profile_role"><%=t(:profile_greg_newitt_role).upcase %></span>
+          </div>  
+
+          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <div id="davidR_prof" class="profile_picture" onclick="location.href='https://www.linkedin.com/profile/view?id=191846633&trk=send_invitation_success_message_name&goback=%2Enpv_ADEAAAtvWOkB8Km6GvoXNlS8te2t2VC0eS7yAHk_*1_*1_NAME*4SEARCH_iaIk_*1_es*4ES_*1_*1_*1_549273661443663477533_1_1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_vsrp*4people*4res*4name_*1_*1'">
+            </div>
+            <span class="profile_name"><%=t(:profile_david_rivera) %> <%= image_tag "landing/country_flags/Equador.png", class:"country_flags"%></span>
+            <span class="profile_role"><%=t(:profile_david_rivera_role).upcase %></span>
+          </div>
+
+          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <div id="anthonyQ_prof" class="profile_picture" >
+            </div>
+            <span class="profile_name"><%=t(:profile_anthony_quattrone) %> <%= image_tag "landing/country_flags/Australia.png", class:"country_flags"%></span>
+            <span class="profile_role"><%=t(:profile_anthony_quattrone_role).upcase %></span>
+          </div>
+
+        </div>
+      </div>        
     </div>
   </div>
+
   <%= render "partials/landing_footer" %>
   <div id="login_form">
     <%= form_for(:session, url: sessions_path, :html =>{class: "navbar-form navbar-right"}) do |f| %>
