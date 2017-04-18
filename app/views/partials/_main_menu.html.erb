@@ -10,14 +10,28 @@
   </div>
   <div class="navbar-collapse collapse sidebar-navbar-collapse" id="main_menu">
     <ul class="nav nav-sidebar isegoria_sidemenu_l1">
-      <li><%= t(:home).capitalize%></li>
+      <li>
+        <%= t(:news_feed).capitalize%>
+        <ul class="nav nav-sidebar isegoria_sidemenu_l2">
+          <!-- <li><%= link_to t(:news_feed).capitalize, events_path%></li> -->
+          <li><%= link_to t(:articles).capitalize, articles_path%></li>
+          <li><%= link_to t(:photos).capitalize, photos_path%></li>
+          <li><%= link_to t(:events).capitalize, events_path%></li>
+        </ul>
+      </li>
+
+      <li><%= t(:election).capitalize%></li>
       <ul class="nav nav-sidebar isegoria_sidemenu_l2">
-        <li><%= link_to t(:news_feed).capitalize, events_path%></li>
-        <li><%= link_to t(:polling).capitalize, polls_path%></li>
+        <li><%= link_to t(:positions).capitalize, positions_path%></li>
+        <li><%= link_to t(:tickets).capitalize, tickets_path%></li>
+        <li><%= link_to t(:candidates).capitalize, candidates_path%></li>
+      </ul>
+
+      <li><%= t(:admin_tools).capitalize%></li>
+      <ul class="nav nav-sidebar isegoria_sidemenu_l2">
+        <li><%= link_to t(:polls).capitalize, polls_path%></li>
         <li><%= link_to t(:users).capitalize, users_path%></li>
       </ul>
-      <li><%= t(:election).capitalize%></li>
-      <li><%= t(:admin_tools).capitalize%></li>
     </ul>
   </div>
 </div>

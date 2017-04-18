@@ -20,14 +20,14 @@ $navbar-default-color: $light-orange;
 //Use bootsrap-sass gem
 @import "bootstrap";
 
-html, body { 
-	height: 100%; 
-	width: 100%; 
+html, body {
+	height: 100%;
+	width: 100%;
 	margin: 0;
 	font-family: 'MuseoSansRounded100Regular';
-	-webkit-font-smoothing: antialiased; 
-	-moz-font-smoothing: antialiased; 
-	font-smoothing: antialiased; 
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+	font-smoothing: antialiased;
 	-webkit-perspective: 1000px;
 }
 
@@ -40,7 +40,7 @@ html, body {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	
+
 	margin-left: -650px;
 	margin-top: -420px;
 
@@ -59,4 +59,15 @@ html, body {
 	cursor: pointer;
 }
 
+.nav {
+  & > li {
+    & > a {
+      color: #000;
 
+      &:hover {
+        background-color: #3A80D2;
+        color: #fff;
+      }
+    }
+  }
+}
