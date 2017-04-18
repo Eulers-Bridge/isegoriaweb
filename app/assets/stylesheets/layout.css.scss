@@ -243,18 +243,24 @@
   background-size: 25px 25px !important;
 }
 .pagination_controls{
-    text-align: right;
-    float: right;
     color: #3A80D2 !important;
+    text-align: center;
     font-size: 175% !important;
+
+    .page_number {
+      margin: 0 4px 0 8px;
+    }
+
+    .nav_control {
+      letter-spacing: -4px;
+
+      &:hover {
+        opacity: 0.70;
+        text-decoration: none;
+      }
+    }
 }
-.pagination_controls .nav_control{
-    color: #3A80D2 !important;
-}
-.pagination_controls .nav_control:hover{
-    opacity: 0.70 !important;
-    text-decoration: none;
-}
+
 .isegoria_navbar_link{
     color: #FFFFFF !important;
     font-weight: normal;
@@ -267,11 +273,13 @@
     img {
       margin-right: 10px;
     }
+
+    &:hover {
+      text-decoration: none;
+      opacity: 0.50;
+    }
 }
-.isegoria_navbar_link:hover{
-  text-decoration: none;
-  opacity: 0.50;
-}
+
 .isegoria_navbar_title{
     text-decoration: none;
     padding: 10px !important;
@@ -303,10 +311,8 @@
      float: right;
      margin-top: -10px;
 }
-.menu_create:hover{
-     opacity: 0.8;
-}
-.isegoria_sidemenu_l1 li{
+
+.isegoria_sidemenu_l1 > li{
     color: #989898 !important;
     margin-top: 25px;
     margin-bottom: 15px;
@@ -314,53 +320,60 @@
     text-transform: uppercase;
     font-weight: bold;
 }
-.isegoria_sidemenu_l2 li{
-    margin-top: -1px !important;
-    margin-bottom: -1px !important;
-    margin-left: 15px !important;
-    border-top-style: solid;
-    border-bottom-style: solid;
-    border-width: 0.5px;
-    border-color: #BBBBBB;
-    text-transform: none;
-    font-weight: bold;
-    font-family: 'SourceSansProLight' !important;
-}
-.isegoria_sidemenu_l2 li:hover{
-    margin-left: 0px !important;
-    padding-left: 15px !important;
-    background-color: #3A80D2 !important;
-    opacity: 0.75;
-}
-.isegoria_sidemenu_l2 li a{
-    color: #000000 !important;
-    padding-left: 0px !important;
 
+.isegoria_sidemenu_l2 {
+    margin: 8px 0;
+
+    li {
+      border-bottom: 1px solid #bbb;
+      text-transform: none;
+      font-weight: bold;
+      font-family: 'SourceSansProLight' !important;
+      padding-left: 10px;
+
+      &:hover {
+        background-color: #3A80D2 !important;
+        opacity: 0.75;
+      }
+
+      &:last-child {
+        border: none;
+      }
+    }
 }
-.isegoria_sidemenu_l2 li a:hover{
-    background-color: #3A80D2 !important;
-    opacity: 0.75;
-    color: #FFFFFF !important;
-}
-.create_link{
-    font-size: 175%;
-}
-.create_link:hover{
-    opacity: 0.70 !important;
-    text-decoration: none;
-}
+
+
+//
+//  Admin list views
+//
+
 .item_image{
-    float: left;
-    margin-right: 20px;
+    display: inline-block;
+    margin: 0 20px 20px 0;
     height: 100%;
+    vertical-align: top;
+}
+.item_content {
+  display: inline-block;
+  vertical-align: top;
+
+  h3 {
+    margin-top: 0;
+  }
+
+  h4 {
+    font-size: 85%;
+    line-height: 150%;
+  }
 }
 .item_controls{
-    float: right;
-    margin-left: 20px;
-    height: 100%;
+  bottom: 10px;
+  position: absolute;
+  right: 10px;
 }
 .edit_link{
     color: #0099FF !important;
+    margin-right: 1em;
 }
 .edit_link:hover{
     opacity: 0.5 !important;

@@ -1,16 +1,19 @@
 <div class="section_controls">
+  <% if @total_pages %>
   <div class="pagination_controls">
     <% if @previous_page >=0 %>
-      <%= link_to "<< ", tickets_path(:page =>@previous_page), :class => 'nav_control' %> 
+      <%= link_to "<< ", tickets_path(:page =>@previous_page), :class => 'nav_control' %>
     <%end%>
     <%=(@page+1)%>
     <% if @next_page >=0 %>
-      <%= link_to " >>", tickets_path(:page =>@next_page), :class => 'nav_control' %> 
-    <%end%> 
+      <%= link_to " >>", tickets_path(:page =>@next_page), :class => 'nav_control' %>
+    <%end%>
   </div>
+  <% end %>
 </div>
 
 <div id="tickets_list">
+<% if @tickets_list %>
   <% @tickets_list.each do |ticket| %>
     <div class="ticket_item">
       <div class="item_controls">
@@ -26,5 +29,7 @@
       </div>
     </div>
   <% end %>
+<% end %>
 </div>
+
 <%= javascript_include_tag "tickets_util" %>

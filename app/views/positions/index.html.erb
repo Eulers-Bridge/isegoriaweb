@@ -1,15 +1,19 @@
 <div class="section_controls">
+<% if @total_pages %>
   <div class="pagination_controls">
     <% if @previous_page >=0 %>
-      <%= link_to "<< ", positions_path(:page =>@previous_page), :class => 'nav_control' %> 
+      <%= link_to "<< ", positions_path(:page =>@previous_page), :class => 'nav_control' %>
     <%end%>
     <%=(@page+1)%>
     <% if @next_page >=0 %>
-      <%= link_to " >>", positions_path(:page =>@next_page), :class => 'nav_control' %> 
-    <%end%> 
+      <%= link_to " >>", positions_path(:page =>@next_page), :class => 'nav_control' %>
+    <%end%>
   </div>
+  <% end %>
 </div>
+
 <div>
+  <% if @position %>
   <%= form_for(@position) do |f| %>
     <%= f.submit capitalize_as_title(t(:add_position)), class: "btn btn-form add_position" %>
     <br>
@@ -26,10 +30,14 @@
     </div>
     <%= f.hidden_field :election_id, value: @election_id %>
   <% end %>
+  <% end %>
 </div>
+
 <div id="positions_list">
   <label class="form-field-label"><%=capitalize_as_title(t(:existing_positions))%></label>
   <hr class="form-field-hr">
+
+  <% if @positions_list %>
   <% @positions_list.each do |position_item| %>
     <div class="position_item">
       <div class="item_controls">
@@ -57,6 +65,7 @@
         <% end %>
       </div>
     </div>
+  <% end %>
   <% end %>
 </div>
 <%= javascript_include_tag "positions_util" %>

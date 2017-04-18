@@ -8,7 +8,9 @@
     </button>
     <%= link_to image_tag("navigation/Home.png", alt:t(:app_name) + t(:home)), events_path, :class => " isegoria_navbar_link navbar-left" %>
     <%= link_to image_tag("navigation/Back.png", alt:t(:app_name) + t(:back)) + t(:back).capitalize , :back, :class => "isegoria_navbar_link navbar-left" %>
-    <%= link_to image_tag("navigation/PlusNav.png", alt:t(:create_article)) + t(:create).capitalize, {:action => :new}, :class=>'isegoria_navbar_link navbar-left'%>
+    <% if controller.action_methods.include?('new') %>
+      <%= link_to image_tag("navigation/PlusNav.png", alt:t(:create_article)) + t(:create).capitalize, {:action => :new}, :class=>'isegoria_navbar_link navbar-left'%>
+    <% end %>
   </div>
   <div class="navbar-collapse collapse" id="top_navbar">
     <%= link_to image_tag("navigation/Log Off.png", alt:t(:logout)), logout_path, method: :delete, :class => "navbar-right isegoria_navbar_link" %>
