@@ -1,20 +1,8 @@
-<div class="section_controls">
-  <div class="pagination_controls">
-    <% if @previous_page >=0 %>
-      <%= link_to "<< ", polls_path(:page =>@previous_page), :class => 'nav_control' %> 
-    <%end%>
-    <%=(@page+1)%>
-    <% if @next_page >=0 %>
-      <%= link_to " >>", polls_path(:page =>@next_page), :class => 'nav_control' %> 
-    <%end%> 
-  </div>
-</div>
-
 <div id="photos_list">
   <% @polls_list.each do |poll| %>
     <div class="poll_item">
       <div class="item_controls">
-        <%= link_to t(:edit).capitalize, edit_poll_path(:id => poll.id), :class => 'edit_link' %> 
+        <%= link_to t(:edit).capitalize, edit_poll_path(:id => poll.id), :class => 'edit_link' %>
         <%= link_to t(:delete).capitalize, poll_path(:id => poll.id), method: :delete, :class => 'delete_link' %>
       </div>
       <div>
@@ -25,4 +13,9 @@
     </div>
   <% end %>
 </div>
+
+<div class="section_controls">
+  <%= render "partials/admin_list_pagination" %>
+</div>
+
 <%= javascript_include_tag "photos_util" %>
