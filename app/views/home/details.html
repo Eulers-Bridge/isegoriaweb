@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Isegoria - Details</title>
+
+  <%= stylesheet_link_tag    'home', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'fonts', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+  <style media="screen" type="text/css">
+    @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700');
+  </style>
+
+  <style media="screen" type="text/css">
+    header:before {
+      content:"";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;  
+      background: none;
+      background-color: #6B7A8A;
+    }
+
+    #navbar label em {
+      font-size: 0.6em;
+      font-style: normal;
+      font-weight: 900;
+      text-transform: uppercase;
+      background: white;
+      color: #6B7A8A;
+      padding: 4px;
+      padding-left: 12px;
+      padding-right: 12px;
+      margin-left: 8px;
+      border-radius: 100px;
+    }
+  </style>
+</head>
+  
+</head>
+
+<body>
+
+  <nav id="navbar">
+    <a class="logo" href="/">
+      Isegoria<em>Beta</em>
+    </a>
+    <a href="/about">About Us</a>
+    <a href="/details">Details</a>
+    <a clas="button" href="/signin" style="margin-left: auto;">Sign In</a>
+  </nav>
+
+
+  <header>
+    <div class="container">
+    <strong>
+    <h1>Need more information?</h1>
+    </strong>
+    <h2>Feel free to ask us any question you may have via our social networks, or on our contact form below. Alternately, browse the Isegoria user guides and FAQs on our support page.</h2>
+    </div>
+    </header>
+
+
+  <section class="page">
+    <div class="container">
+      <h1>Our Policy</h1>
+      <p>See below for our terms of service, which includes user agreements that govern the use of Isegoria, our privacy policy on the information collected and our current security policies and practices.</p>
+      <h5>Read our full content policy</h5>
+      <hr>
+      <h1>Pricing</h1>
+      <p>Isegoria is currently in private beta and details are still being finalized. To find out more about our current pricing mechanism, please contact us and we'll get straight back to you.</p>
+      <hr>
+      <h1>Contact Us</h1>
+      <p>We would love to hear from you. Any queries, requests or feedback are always welcome!</p>
+      <button onclick="window.location.href='mailto:support@eulersbridge.com?subject=Isegoria%20contact'">Get in touch!</button>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+    <nav id="links">
+      <a href="/about">About Us</a>
+      <a href="/details">Details</a>
+    </nav>
+    <hr>
+    <p>&copy; Euler’s Bridge 2017</p>
+    </div>
+  </footer>
+  
+</body>
+</html>

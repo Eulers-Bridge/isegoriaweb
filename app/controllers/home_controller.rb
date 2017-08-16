@@ -59,7 +59,7 @@ protect_from_forgery with: :exception
     if logged_in?
       redirect_to url_for(:controller => :dashboard, :action => :index)
     else
-      @stylesheet = 'landing' #Set the stylesheet
+      # @stylesheet = 'landing' #Set the stylesheet
       return render :layout => false #Disable the default layout
     end
   end
@@ -81,10 +81,18 @@ protect_from_forgery with: :exception
 =end
   def details
     render :layout => false #Disable the default layout
-    @stylesheet = 'more_info' #Set the stylesheet
+    # @stylesheet = 'more_info' #Set the stylesheet
   end
-  
-  
+
+  def about
+    render :layout => false #Disable the default layout
+    # @stylesheet = 'more_info' #Set the stylesheet
+  end
+
+  def signin
+    render :layout => false #Disable the default layout
+    # @stylesheet = 'more_info' #Set the stylesheet
+  end
 =begin
 --------------------------------------------------------------------------------------------------------------------------------
   User Model parameters definition

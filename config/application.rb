@@ -23,6 +23,7 @@ module IsegoriaWeb
 
     #Add the fonts directory to the assets pipeline
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
+    config.assets.paths << Rails.root.join("app", "assets", "resources")
 
     #Compile  images in vendor assets
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
