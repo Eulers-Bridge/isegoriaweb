@@ -248,6 +248,10 @@
   .page:last-of-type, .page:first-of-type, .page.blue {
     border-top: none;
   }
+
+  .page form {
+    width: 100%;
+  }
   
   .page button {
     background-color: #167EFB;
