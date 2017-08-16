@@ -44,7 +44,9 @@
         <%= f.label :password, t(:password).capitalize, class: "sr-only" %>
         <%= f.password_field :password, class: "form-control", placeholder: t(:password).capitalize %>
       </div>
-      <button type="submit" name="commit" value="Log In" class="btn btn-success navbar-button login_form_button">Log In</button>
+      <div class="form-group form-group-btn">
+        <button type="submit" name="commit" value="Log In" class="btn btn-success navbar-button login_form_button">Log In</button>
+      </div>
     <% end %>
     </div>
 
