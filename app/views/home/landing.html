@@ -18,12 +18,12 @@
 <body>
   
   <nav id="navbar">
-    <a href="/">
-      <label>Isegoria<em>Beta</em></label>
+    <a class="logo" href="/">
+      Isegoria<em>Beta</em>
     </a>
     <a href="/about">About Us</a>
     <a href="/details">Details</a>
-    <button style="margin-left: auto;">Sign In</button>
+    <a class="button" href="/signin" style="margin-left: auto;">Sign In</a>
   </nav>
 
 
@@ -32,7 +32,7 @@
     <strong><h1>Bridging Communities, Together.</h1></strong>
     <h2>Introducing Isegoria - a graph analytics platform to empower your
     community.</h2>
-    <button>Request a Demo</button>
+    <button onclick="window.location.href='mailto:support@eulersbridge.com?subject=Request%20Isegoria%20demo'">Request a Demo</button>
     </div>
   </header>
 
@@ -128,7 +128,7 @@
       <h2>Download the app today for both iOS and Android. Alternatively, give us
       a buzz and we'll demonstrate the benefits of Isegoria tailored to your
       organisation.</h2>
-      <button>Request a Demo</button>
+      <button onclick="window.location.href='mailto:support@eulersbridge.com?subject=Request%20Isegoria%20demo'">Request a Demo</button>
 
       <ul>
         <li>Build trust and experience faster sharing and greater productivity</li>
@@ -150,19 +150,20 @@
       Isegoria to your institution, sign up here to find out when we're releasing;
       as well as any important updates related to our grand launch.</h2>
       <div class="grid">
-      <input type="text" placeholder="Email address"> <button>Subscribe</button>
+        <form action="//eulersbridge.us14.list-manage.com/subscribe/post?u=1a8308a6b9e7bab17571028d1&amp;id=2830217c18" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+          <input type="email" placeholder="Email address" id="mce-EMAIL" name="EMAIL">
+          <button type="submit" name="subscribe" id="mc-embedded-subscribe">Subscribe</button>
+          <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1a8308a6b9e7bab17571028d1_2830217c18" tabindex="-1" value=""></div>
+        </form>
       </div>
     </div>
   </section>
 
-
   <footer>
     <div class="container">
     <nav id="links">
-      <a href="/test/">About Us</a>
-      <a href="/test/">Legal</a>
-      <a href="/test/">Support</a>
-      <a href="/test/">Help</a>
+      <a href="/about">About Us</a>
+      <a href="/details">Details</a>
     </nav>
     <hr>
     <p>&copy; Euler’s Bridge 2017</p>

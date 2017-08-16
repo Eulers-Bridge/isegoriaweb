@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get 'home/signup'
   get 'about', to: 'home#about'
   get 'details', to: 'home#details'
+  get 'signin', to: 'home#signin'
   get 'home/unverified_email'
   get 'home/register_successfull'
   get 'home/landing'
