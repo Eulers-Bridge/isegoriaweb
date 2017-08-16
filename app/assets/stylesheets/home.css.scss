@@ -202,13 +202,13 @@
      color: white;
   }
   
-  #navbar label {
+  #navbar label, #navbar .logo {
     font-size: 1.4em;
     font-weight: 700;
     margin-left: 16px;
   }
   
-  #navbar label em {
+  #navbar label em, #navbar .logo em {
     font-size: 0.6em;
     font-style: normal;
     font-weight: 900;
