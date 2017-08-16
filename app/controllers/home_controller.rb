@@ -88,7 +88,11 @@ protect_from_forgery with: :exception
     render :layout => false #Disable the default layout
     # @stylesheet = 'more_info' #Set the stylesheet
   end
-  
+
+  def signin
+    render :layout => false #Disable the default layout
+    # @stylesheet = 'more_info' #Set the stylesheet
+  end
 =begin
 --------------------------------------------------------------------------------------------------------------------------------
   User Model parameters definition

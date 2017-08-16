@@ -112,7 +112,7 @@
     max-width: 640px;
   }
   
-  button {
+  button, a.button {
     font-family: Source Sans Pro, sans-serif;
     font-weight: 600;
     border: none;
@@ -129,7 +129,7 @@
     
   }
   
-  header button {
+  header button, header a.button {
     background-color: rgba(37,27,37,0.5);
     -webkit-backdrop-filter: saturate(300%) brightness(100%) blur(20px);
     -moz-backdrop-filter: saturate(300%) brightness(100%) blur(20px);
@@ -222,7 +222,7 @@
     border-radius: 100px;
   }
   
-  #navbar button {
+  #navbar button, #navbar a.button {
     background-color: rgba(200,200,210,0.2);
     padding-top: 8px;
     padding-bottom: 8px;
@@ -252,8 +252,16 @@
   .page form {
     width: 100%;
   }
+
+  .form-group {
+    margin-top: 1.5em;
+  }
+
+  label {
+    margin-right: 1em;
+  }
   
-  .page button {
+  .page button, .page a.button {
     background-color: #167EFB;
     color: white;
   }
@@ -273,7 +281,7 @@
     color: white;
   }
   
-  .page.blue button {
+  .page.blue button, .page.blue a.button {
     background-color: white;
     color: #167EFB;
   }
