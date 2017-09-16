@@ -1,16 +1,20 @@
   $(document).ready(function(){
-    var preview = $(".upload-preview img");
+    var preview = $(".title_photoheader");
+    var uploadImage = $('.upload-preview img')
 
     $("#event_picture").change(function(event){
-       var input = $(event.currentTarget);
-       var file = input[0].files[0];
-       var reader = new FileReader();
-       reader.onload = function(e){
-           image_base64 = e.target.result;
-           preview.attr("src", image_base64);
-           preview.attr("class", "event_image");
-       };
-       reader.readAsDataURL(file);
+      var input = $(event.currentTarget);
+      var file = input[0].files[0];
+      var reader = new FileReader();
+
+      reader.onload = function(e){
+         image_base64 = e.target.result;
+         preview.css("background-image", 'url("' + image_base64 + '")');
+         
+         uploadImage.attr("src", image_base64);
+         uploadImage.attr("class", "event_image");
+      };
+      reader.readAsDataURL(file);
     });
   });
 

@@ -1,37 +1,37 @@
-// Place all the styles related to the polls controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-.poll_item{
-	margin-top: 30px;
-	margin-bottom: 30px;
-	margin-right: 100px;
-	margin-left: 100px;
-	padding: 10px;
-	border-style: solid;
-	border-width: 0.15px;
-	border-color: #AAAAAA;
-	border-radius: 6px;
-}
-.poll_form{
-	margin: 50px;
-	border-style: solid;
-	border-color: #888888;
-	border-radius: 5px;
-	border-width: 1px;
-	padding-top: 30px;
-	padding-left: 30px;
-	padding-right: 30px;
-	padding-bottom: 20px;
-}
-.save_poll{
-	float: right;
-}
-.poll_question_field{
-	font-size: 200% !important;
-    height: 150px !important;
-    font-family: 'SourceSansProLight' !important;
-    text-align: center;
-}
-#btn_add_option{
-	margin-top: 5px;
-}
+// // Place all the styles related to the polls controller here.
+// // They will automatically be included in application.css.
+// // You can use Sass (SCSS) here: http://sass-lang.com/
+// .poll_item{
+// 	margin-top: 30px;
+// 	margin-bottom: 30px;
+// 	margin-right: 100px;
+// 	margin-left: 100px;
+// 	padding: 10px;
+// 	border-style: solid;
+// 	border-width: 0.15px;
+// 	border-color: #AAAAAA;
+// 	border-radius: 6px;
+// }
+// .poll_form{
+// 	margin: 50px;
+// 	border-style: solid;
+// 	border-color: #888888;
+// 	border-radius: 5px;
+// 	border-width: 1px;
+// 	padding-top: 30px;
+// 	padding-left: 30px;
+// 	padding-right: 30px;
+// 	padding-bottom: 20px;
+// }
+// .save_poll{
+// 	float: right;
+// }
+// .poll_question_field{
+// 	font-size: 200% !important;
+//     height: 150px !important;
+//     font-family: 'SourceSansProLight' !important;
+//     text-align: center;
+// }
+// #btn_add_option{
+// 	margin-top: 5px;
+// }

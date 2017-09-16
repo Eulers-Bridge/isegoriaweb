@@ -84,24 +84,28 @@ class ArticlesController < ApplicationController
 	  end
 	  @article = Article.new(article_params) #Create a new article object with the parameters set by the user in the create form
 	  @article.creator_email = session[:user]['email'] #Set the creator email to the looged user email
-	  resp = @article.save(session[:user]) #Save the new Article object
+    resp = @article.save(session[:user]) #Save the new Article object
+
 	  if resp[0] #Validate if the response was successfull
 	    @article = resp[1] #Get the article object from the server response
 	    if !resp[2] #Validate if the photo creation was successfull
 	      flash[:warning] = t(:article_photo_creation_error_flash) #Set the error message for the user
 	    end
 	    flash[:success] = t(:article_creation_success_flash, article: @article.title) #Set the success message for the user
-	    redirect_to articles_path #Redirect the user to the articles list page
+      redirect_to articles_path and return #Redirect the user to the articles list page
+      
 	  elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
 	    if(resp[1].kind_of?(Array)) #If the response was unsucessful, validate if it was caused by an invalid Article object sent to the model. If so the server would have returned an array with the errors
         flash[:warning] = Util.format_validation_errors(resp[1]) #Set the invalid object message for the user
       end
       flash[:danger] = t(:article_creation_error_flash) #Set the error message for the user
-      @article = Article.new  #Reset the Article object to an empty one
-      redirect_to new_article_path #Redirect the user to the Article creation page
+      redirect_to articles_path and returnrr
+      # @article = Article.new  #Reset the Article object to an empty one
+      # redirect_to new_article_path #Redirect the user to the Article creation page
 	  else 
       return #If not force return to trigger the redirect of the check_session function
     end
+
     rescue #Error Handilng code
       general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end
@@ -218,7 +222,7 @@ end
   	  @article = resp[1] #Set the article object to be deleted
   	elsif validate_authorized_access(resp[1]) #If the response was unsucessful, validate if it was caused by unauthorized access to the app or expired session
   	  flash[:danger] = t(:article_get_error_flash) #Set the error message for the user
-  	  redirect_to articles_path #Redirect the user to the articles list page
+  	  redirect_to articles_path and return#Redirect the user to the articles list page
   	else 
         return #If not force return to trigger the redirect of the check_session function
       end
@@ -230,7 +234,7 @@ end
       else 
         return #If not force return to trigger the redirect of the check_session function
       end
-      redirect_to articles_path #Redirect the user to the articles list page
+      redirect_to articles_path and return#Redirect the user to the articles list page
     rescue #Error Handilng code
       general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
   end

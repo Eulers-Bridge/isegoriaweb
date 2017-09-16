@@ -1,19 +1,32 @@
 <div id="photos_list">
   <% @photos_list.each do |photo| %>
-  <div class="photo_item">
-    <div class="item_image">
-        <%= image_tag photo.file, class: "photo_thumbnail", alt: t(:picture) %>
+
+  <section class="module gallery">
+    <div class="module_container">
+      <div class="module_media">
+      <%= image_tag photo.file, class: "img_tile", alt: t(:picture) %>
+      </div>
+
+      <div class="module_text">
+        <h3><%= photo.title %></h3>
+        <h4><%= photo.date %></h4>
+        <p><%= photo.description %>
+
+        <hr style="visibility: hidden;">
+
+        <%#= <ul> %>
+        <%#=   <li><img alt="Icon" class="img_profile" height="24" src= %>
+        <%#=   "../resources/profiles/alan.jpg" width="24">Added by Alan Gao</li> %>
+        <%#=   <li class="context_tag">Photo Gallery</li> %>
+        <%#=   <li>12 Pictures</li> %>
+        <%#= </ul> %>
+      </div>
     </div>
-    <div class="item_controls">
-      <%= link_to t(:edit).capitalize, edit_photo_path(:id => photo.id), :class => 'edit_link' %>
-      <%= link_to t(:delete).capitalize, photo_path(:id => photo.id), method: :delete, :class => 'delete_link' %>
-    </div>
-    <div>
-      <h3><%=photo.title%></h3>
-      <h4><%=photo.description%></h4>
-    </div>
-  </div>
-  <!--hr-->
+
+    <%= button_to '', photo_path(:id => photo.id), confirm: 'Are you sure?', method: :delete, class: "UI button icon delete red" %>
+    <%= link_to '<button class="UI button icon info blue" name="Button"></button>'.html_safe, edit_photo_path(:id => photo.id) %>
+  </section>
+
   <% end %>
 </div>
 
