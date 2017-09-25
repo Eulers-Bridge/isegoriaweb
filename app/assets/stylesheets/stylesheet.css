@@ -417,8 +417,12 @@
         font-size: 0.9em;
     }
     .UI.editfield.header {
+        color: #000;
         font-size: 1.5em;
         line-height: 1.10em;
+    }
+    .UI.editfield.header.transparent {
+        color: #fff;
     }
     .UI.editfield.subheader {
         font-size: 1.1em;
