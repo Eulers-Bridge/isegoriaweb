@@ -6,13 +6,18 @@ class ApplicationController < ActionController::Base
   helper_method :check_session
   helper_method :validate_authorized_access
   helper_method :general_error_redirection
+  helper_method :current_user
 
   #before_actions will make a method run before actions are evaluated
   before_action :set_no_cache
   before_action :set_locale
 
   $title=''  #Initialize the title variable
- 
+
+  def current_user
+    return session[:user]
+  end
+
   #Function that sets the locale parameter that will determine which language and internacionalization features will be applied
   #Default locale is 'en' for English
   def set_locale
@@ -83,6 +88,7 @@ class ApplicationController < ActionController::Base
   def general_error_redirection(caller,error)
     flash[:danger] = t(:general_error) #Set the error message to the user
     Rails.logger.debug "*[ERROR] @ #{caller}=> #{error}." #Log the error
+    Rails.logger.debug "#{error.backtrace}"
     redirect_to error_general_error_path #Redirect the user to the generic error page
   end
 

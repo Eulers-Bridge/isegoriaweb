@@ -23,14 +23,14 @@ class DashboardController < ApplicationController
     #   general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)  
   end
 
-  def new
-    @menu='Dashboard' #Set the menu variable
-    $title=t(:title_dashboard)  #Set the title variable
-    if !check_session #Validate if the user session is active
-      return #If not force return to trigger the redirect of the check_session function
-    end
-    # @article = Article.new #Set a new article object to be filled by the user form
-    # rescue #Error Handilng code
-    #   general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
-  end
+  # def new
+  #   @menu='Dashboard' #Set the menu variable
+  #   $title=t(:title_dashboard)  #Set the title variable
+  #   if !check_session #Validate if the user session is active
+  #     return #If not force return to trigger the redirect of the check_session function
+  #   end
+  #   # @article = Article.new #Set a new article object to be filled by the user form
+  #   # rescue #Error Handilng code
+  #   #   general_error_redirection('Controller: '+params[:controller]+'.'+action_name,$!)
+  # end
 end

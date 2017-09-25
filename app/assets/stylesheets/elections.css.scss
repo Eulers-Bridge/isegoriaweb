@@ -1,47 +1,47 @@
-// Place all the styles related to the elections controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-.election_item{
-	margin-top: 30px;
-	margin-bottom: 30px;
-	margin-right: 100px;
-	margin-left: 100px;
-	padding: 10px;
-	border-style: solid;
-	border-width: 0.15px;
-	border-color: #AAAAAA;
-	border-radius: 6px;
-}
-.election_form{
-	padding-top: 30px;
-	padding-left: 30px;
-	padding-right: 30px;
-	padding-bottom: 20px;
-}
-.save_election{
-	float: right;
-}
-.election_title_field{
-	font-size: 200% !important;
-	font-weight: bold;
-    height: 70px !important;
-    font-family: 'SourceSansProLight' !important;
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
+// // Place all the styles related to the elections controller here.
+// // They will automatically be included in application.css.
+// // You can use Sass (SCSS) here: http://sass-lang.com/
+// .election_item{
+// 	margin-top: 30px;
+// 	margin-bottom: 30px;
+// 	margin-right: 100px;
+// 	margin-left: 100px;
+// 	padding: 10px;
+// 	border-style: solid;
+// 	border-width: 0.15px;
+// 	border-color: #AAAAAA;
+// 	border-radius: 6px;
+// }
+// .election_form{
+// 	padding-top: 30px;
+// 	padding-left: 30px;
+// 	padding-right: 30px;
+// 	padding-bottom: 20px;
+// }
+// .save_election{
+// 	float: right;
+// }
+// .election_title_field{
+// 	font-size: 200% !important;
+// 	font-weight: bold;
+//     height: 70px !important;
+//     font-family: 'SourceSansProLight' !important;
+//     margin-top: 30px;
+//     margin-bottom: 30px;
+// }
 
-.election_title_field_edit{
-	font-size: 200% !important;
-	font-weight: bold;
-    height: 70px !important;
-    font-family: 'SourceSansProLight' !important;
-    margin-top: 30px;
-    margin-bottom: 5px;
-}
+// .election_title_field_edit{
+// 	font-size: 200% !important;
+// 	font-weight: bold;
+//     height: 70px !important;
+//     font-family: 'SourceSansProLight' !important;
+//     margin-top: 30px;
+//     margin-bottom: 5px;
+// }
 
-.election_date_label{
-	margin-top: -20px !important;
-	font-family: 'SourceSansProLight' !important;
-	color: #888888;
-	padding-left: 15px;
-}
+// .election_date_label{
+// 	margin-top: -20px !important;
+// 	font-family: 'SourceSansProLight' !important;
+// 	color: #888888;
+// 	padding-left: 15px;
+// }

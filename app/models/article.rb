@@ -3,7 +3,7 @@ class Article
   include ApplicationHelper
   require 'photo'
 
-  attr_accessor :title, :content, :picture, :_links, :creator_email, :previous_picture
+  attr_accessor :title, :content, :picture, :_links, :creator_email, :previous_picture, :creatorProfile
   attr_reader :id, :date, :student_year
   @@images_directory = "UniversityOfMelbourne/NewsArticles"
 
@@ -25,6 +25,7 @@ class Article
     @content = attributes[:content]
     @_links = attributes[:_links]
     @creator_email = attributes[:creator_email]
+    @creatorProfile = attributes[:creatorProfile]
     if !attributes[:date].blank?
       @date = attributes[:date]#milliseconds passed since epoch Jan/1/1970
     else
@@ -296,6 +297,7 @@ private
         content: raw_article["content"], 
         picture: picture, 
         creator_email:raw_article["creatorEmail"], 
+        creatorProfile: raw_article["creatorProfile"],
         date: Util.epoch_to_date(raw_article["date"]),#Turn the epoch time to a string date, format defined by the locale parameter
         _links: raw_article["_links"])  
       return article #Return the transformed object  

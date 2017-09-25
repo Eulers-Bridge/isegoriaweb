@@ -1,36 +1,25 @@
 <div id="articles_list">
   <% @articles_list.each do |article| %>
-  <div class="article_item">
-    <div class="item_image">
-        <%= image_tag article.picture.blank? ? GENERIC_ARTICLE_IMAGE : article.picture[0]["url"], class: "article_image_thumbnail", alt: t(:picture) %>
-    </div>
 
-    <div class="item_content">
-      <div class="item_controls">
-        <%= link_to t(:edit).capitalize, edit_article_path(:id => article.id), :class => 'edit_link' %>
-        <a class="delete_link delete_question_control"><%= t(:delete).capitalize%></a>
-      </div>
-      <div class="delete_confirmation_form">
-        <%= t(:are_you_sure).capitalize %>
-        <br>
-        <%= link_to t(:answer_yes).capitalize, article_path(:id => article.id), method: :delete, :class => 'delete_link' %>
-        <a class="delete_link cancel_delete_control"><%= t(:answer_no).capitalize%></a>
-      </div>
-      <div>
-        <h3><%=article.title%></h3>
-        <h4>
-            <span class="creator_span_text"><%=article.creator_email%></span><br />
-            <%=article.date%>
-        </h4>
-      </div>
-    </div>
+    <section class="module news">
+      <div class="module_container">
+        <div class="module_media">
+          <%= image_tag article.picture.blank? ? GENERIC_ARTICLE_IMAGE : article.picture[0]["url"], class: "img_tile", alt: t(:picture) %>
+        </div>      
+        <div class="module_text">
+          <h3><%= article.title %></h3>
+          <h4><%= article.date %></h4>
 
-    <div class="clearfix"></div>
-  </div>
-  <!--hr-->
+          <hr style="visibility: hidden;">
+
+          <ul>
+            <li>Added by <%= article.creatorProfile["givenName"] %> <%= article.creatorProfile["familyName"] %></li>
+          </ul>
+        </div>
+        <%= button_to '', article_path(:id => article.id), confirm: 'Are you sure?', method: :delete, class: "UI button icon delete red" %>
+        <%= link_to '<button class="UI button icon info blue" name="Button"></button>'.html_safe, edit_article_path(:id => article.id) %>
+      </div>
+    </section>
+
   <% end %>
-</div>
-
-<div class="section_controls">
-  <%= render "partials/admin_list_pagination" %>
 </div>

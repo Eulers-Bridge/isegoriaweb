@@ -1,30 +1,40 @@
 <div id="events_list">
   <% @events_list.each do |event| %>
-  <div class="event_item">
-    <div class="item_image">
-        <%= image_tag event.picture.blank? ? '' : event.picture[0]["url"], class: "event_image_thumbnail", alt: t(:picture) %>
+
+    <section class="module news">
+    <div class="module_container">
+      <% if not event.picture[0].blank? %>
+        <div class="module_media">
+          <%= image_tag event.picture.blank? ? '' : event.picture[0]["url"], class: "img_tile", alt: t(:picture) %>
+        </div>
+      <% end %>
+
+      <div class="module_text">
+        <h3><%= event.name %></h3>
+        <h4><%= event.location.name %></h4>
+        <h4>
+          <%= event.start_date %>
+          <% if event.end_date != event.start_date %>
+            – <%= event.end_date %>
+          <% end %>
+        </h4>
+
+        <hr style="visibility: hidden;">
+
+        <ul>
+          <li>Added by <%= event.organizer %></li>
+        </ul>
+      </div>
+
+      <%= button_to '', event_path(:id => event.id), confirm: 'Are you sure?', method: :delete, class: "UI button icon delete red" %>
+      <%= link_to '<button class="UI button icon info blue" name="Button"></button>'.html_safe, edit_event_path(:id => event.id) %>
     </div>
-    <div class="item_controls">
-      <%= link_to t(:edit).upcase, edit_event_path(:id => event.id), :class => 'edit_link' %>
-      <a class="delete_link delete_question_control"><%= t(:delete).upcase%></a>
-    </div>
-    <div class="delete_confirmation_form">
-      <%= t(:are_you_sure).capitalize %>
-      <br>
-      <%= link_to t(:answer_yes).capitalize, event_path(:id => event.id), method: :delete, :class => 'delete_link' %>
-      <a class="delete_link cancel_delete_control"><%= t(:answer_no).capitalize%></a>
-    </div>
-    <div>
-    <h3><%=event.name%></h3>
-    <h4>@ <%=event.location.name%></h4>
-    <h4><%=t(:start_date).capitalize+": "+event.start_date%>. <%=t(:end_date).capitalize+": "+event.end_date%></h4>
-    <h4><%= t(:created_by).capitalize+" "+event.organizer + ' ' + t(:the)+ ' ' + event.created.to_s%></h4>
-    </div>
-  </div>
-  <!--hr-->
+  </section>
+
   <% end %>
 </div>
 
 <div class="section_controls">
   <%= render "partials/admin_list_pagination" %>
 </div>
+

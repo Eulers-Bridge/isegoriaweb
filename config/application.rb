@@ -27,6 +27,8 @@ module IsegoriaWeb
 
     #Compile  images in vendor assets
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+    config.assets.precompile += %w( datepicker.css )
+    config.assets.precompile += %w( datepicker.js )
 
     config.session_store :cookie_store, key: 'EulersBridgeIsegoria1EulersBridgeIsegoria2EulersBridgeIsegoria3EulersBridgeIsegoria4EulersBridgeIsegoria5'
     

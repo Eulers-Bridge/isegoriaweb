@@ -3,13 +3,36 @@
 <%= form_for @event do |f|%>
   <div id="form_header_background"></div>
   <div id="form_header">
+    <% if false %>
     <div id="form_header_top">
       <%= link_to image_tag("home/Camera.png", alt:t(:choose_cover_back)) + capitalize_as_title(t(:choose_cover_back)) , '#', :class => "btn btn_choose_cover" %>
       <%= f.submit capitalize_as_title(t(:save_and_finish)), class: "btn btn-form btn_form_header" %>
     </div>
     <hr>
+    <% end %>
     <%= f.text_field :name, class: "form-control text_field title_text_field", placeholder: t(:field_placeholder, field_name: t(:name)).capitalize %>
+    <hr>
   </div>
+
+
+  <nav class="menubar">
+  <% if false %>
+    <div class="item" style="">
+      <button class="UI button fullheight blue" name="Button">Add Quotation</button>
+      <button class="UI button fullheight blue" name="Button">Add Poll</button>
+    </div>
+  <% end %>
+
+  <div class="item" style="margin-left: auto;">
+    <input
+      class="UI button fullheight green"
+      type="submit"
+      value="<% if action_name == 'edit' %>Finish Editing<% else %>Publish<% end %>"
+      name="commit" />
+  </div>
+  </nav>
+
+
   <div id="form_main">
   <div class="form-group">
     <label class="form-field-label"><%=capitalize_as_title(t(:location))%></label>

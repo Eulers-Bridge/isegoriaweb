@@ -1,36 +1,36 @@
-// Place all the styles related to the positions controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-.position_image{
-  width: 300px;
-  height: 200px;
-}
+// // Place all the styles related to the positions controller here.
+// // They will automatically be included in application.css.
+// // You can use Sass (SCSS) here: http://sass-lang.com/
+// .position_image{
+//   width: 300px;
+//   height: 200px;
+// }
 
-.position_image_thumbnail{
-  width: 100px;
-  height: 75px;
-}
+// .position_image_thumbnail{
+//   width: 100px;
+//   height: 75px;
+// }
 
-.position_item{
-	margin-top: 30px;
-	margin-bottom: 30px;
-	margin-right: 100px;
-	margin-left: 100px;
-	padding: 10px;
-	border-style: solid;
-	border-width: 0.15px;
-	border-color: #AAAAAA;
-	border-radius: 6px;
-}
+// .position_item{
+// 	margin-top: 30px;
+// 	margin-bottom: 30px;
+// 	margin-right: 100px;
+// 	margin-left: 100px;
+// 	padding: 10px;
+// 	border-style: solid;
+// 	border-width: 0.15px;
+// 	border-color: #AAAAAA;
+// 	border-radius: 6px;
+// }
 
-.edit_position_form{
-	display: none;
-	//transition: top 1000ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
-}
-.edit_position_form.show{
-	display: block;
-}
+// .edit_position_form{
+// 	display: none;
+// 	//transition: top 1000ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
+// }
+// .edit_position_form.show{
+// 	display: block;
+// }
 
-.add_position{
-	float: right;
-}
+// .add_position{
+// 	float: right;
+// }
