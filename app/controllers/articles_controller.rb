@@ -99,7 +99,7 @@ class ArticlesController < ApplicationController
         flash[:warning] = Util.format_validation_errors(resp[1]) #Set the invalid object message for the user
       end
       flash[:danger] = t(:article_creation_error_flash) #Set the error message for the user
-      redirect_to articles_path and returnrr
+      redirect_to articles_path and return
       # @article = Article.new  #Reset the Article object to an empty one
       # redirect_to new_article_path #Redirect the user to the Article creation page
 	  else 
