@@ -537,6 +537,7 @@
         padding-top: 96px;
     }
     .sidebar section header {
+        background: none;
         margin: 0;
         padding: 0;
         margin-bottom: 8px;
