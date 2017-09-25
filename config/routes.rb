@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'dashboard/index'
   get 'dashboard/new', to: 'dashboard#new'
 
-  match '/logout', to: 'sessions#destroy',     via: 'delete'
+  match '/logout', to: 'sessions#destroy',     via: ['delete', 'get']
   match '/login', to: 'sessions#create',     via: 'post'
 
   resources :sessions, only: [:create, :destroy]

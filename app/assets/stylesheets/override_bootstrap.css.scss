@@ -1,73 +1,75 @@
 //Override Bootstrap
-
-$navbar-default-bg: #312312;
-$light-orange: #ff8c00;
-$navbar-default-color: $light-orange;
-
-#error_explanation {
-  color: #f00;
-  ul {
-    list-style: none;
-    margin: 0 0 18px 0;
-  }
-}
-
-.field_with_errors {
-  @extend .control-group;
-  @extend .error;
-}
-
 //Use bootsrap-sass gem
 @import "bootstrap";
 
-html, body {
-	height: 100%;
-	width: 100%;
-	margin: 0;
-	font-family: 'MuseoSansRounded100Regular';
-	-webkit-font-smoothing: antialiased;
-	-moz-font-smoothing: antialiased;
-	font-smoothing: antialiased;
-	-webkit-perspective: 1000px;
-}
+// $navbar-default-bg: #312312;
+// $light-orange: #ff8c00;
+// $navbar-default-color: $light-orange;
 
-#off_center_container{
+// #error_explanation {
+//   color: #f00;
+//   ul {
+//     list-style: none;
+//     margin: 0 0 18px 0;
+//   }
+// }
 
-	background-color: none;
-	width: 1300px;
-	height: 840px;
+// .field_with_errors {
+//   @extend .control-group;
+//   @extend .error;
+// }
 
-	position: absolute;
-	top: 50%;
-	left: 50%;
+// //Use bootsrap-sass gem
+// @import "bootstrap";
 
-	margin-left: -650px;
-	margin-top: -420px;
+// html, body {
+// 	height: 100%;
+// 	width: 100%;
+// 	margin: 0;
+// 	font-family: 'MuseoSansRounded100Regular';
+// 	-webkit-font-smoothing: antialiased;
+// 	-moz-font-smoothing: antialiased;
+// 	font-smoothing: antialiased;
+// 	-webkit-perspective: 1000px;
+// }
 
-	border-radius: 8px;
-	z-index: 2;
-}
+// #off_center_container{
 
-.alert{
-	position:fixed;
-    width: 100%;
-    top:50px;
-    z-index: 100;
-}
+// 	background-color: none;
+// 	width: 1300px;
+// 	height: 840px;
 
-.badge{
-	cursor: pointer;
-}
+// 	position: absolute;
+// 	top: 50%;
+// 	left: 50%;
 
-.nav {
-  & > li {
-    & > a {
-      color: #000;
+// 	margin-left: -650px;
+// 	margin-top: -420px;
 
-      &:hover {
-        background-color: #3A80D2;
-        color: #fff;
-      }
-    }
-  }
-}
+// 	border-radius: 8px;
+// 	z-index: 2;
+// }
+
+// .alert{
+// 	position:fixed;
+//     width: 100%;
+//     top:50px;
+//     z-index: 100;
+// }
+
+// .badge{
+// 	cursor: pointer;
+// }
+
+// .nav {
+//   & > li {
+//     & > a {
+//       color: #000;
+
+//       &:hover {
+//         background-color: #3A80D2;
+//         color: #fff;
+//       }
+//     }
+//   }
+// }

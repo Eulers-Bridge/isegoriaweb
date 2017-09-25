@@ -1,4 +1,162 @@
 <% provide(:title, t(:title_edit_event)) %>
+
+<%= form_for(@event, :url => event_path ,:html => {:method => :put}) do |f| %>
+
+<div class="page" style="padding-top:0;">
+  <header class="title_photoheader">
+    <div class="title_menubar">
+      <%= form_for(@event, :url => event_upload_picture_path ,:html => {:method => :post}) do |photo_f| %>
+        <%= photo_f.file_field :picture, accept: "image/png,image/gif,image/jpeg" ,class: 'file_input_control', placeholder: t(:field_placeholder, field_name: t(:picture)).capitalize %>
+        <button class="UI button capsule dark item" name="Publish">Upload Photo</button>
+      <% end %>
+      
+      <% if false %>
+        <button class="UI button capsule dark item" name="Publish">Clear Photo</button>
+        <button class="UI button capsule dark item" name="Publish" style="margin-left: auto;">Delete</button>
+        <button class="UI button capsule dark item" name="Publish">Save to Queue</button>
+        <button class="UI button capsule dark item" name="Publish">Publish</button>
+      <% end %>
+    </div>
+    <%= f.text_field :name, class: "UI editfield header", style: "width: 100%;", placeholder: t(:field_placeholder, field_name: t(:name)).capitalize %>
+  </header>
+
+  <div class="page_container">
+    <nav class="menubar">
+
+      <% if false %>
+        <div class="item" style="">
+          <button class="UI button fullheight blue" name="Button">Hide Notifications</button>
+          <button class="UI button fullheight blue" name="Button">Hide Attendances</button>
+        </div>
+      <% end %>
+
+      <div class="item" style="margin-left: auto;">
+        <button class="UI button fullheight green" name="Button">Finish Editing</button>
+      </div>
+    </nav>
+
+    <div class="UI separator light">
+      <h6 style="margin-right:auto;">Location</h6>
+      <% if false %>
+        <button class="UI button icon plus green active" name="Button"></button>
+        <button class="UI button icon delete red active" name="Button"></button>
+      <% end %>
+    </div>
+    <%= f.text_field :location, class: "UI editfield location", style: "width: 100%;", placeholder: t(:field_placeholder, field_name: t(:location)).capitalize, value: @event.location.name %>
+
+    <% if false %>
+    <section class="module map">
+      <div class="module_container">
+        <div class="module_text">
+          <h3>Melbourne Central</h3>
+          <h6>Shopping Centre</h6>
+          <hr>
+          <p><em>211 La Trobe St<br>
+          Melbourne VIC 3000</em>
+          </p>
+        </div>
+
+        <div class="module_media">
+          <div class="img_map">
+          </div>
+        </div>
+      </div>
+    </section>
+    <% end %>
+
+    <div class="UI separator light">
+      <h6 style="margin-right:auto;">Organizer</h6>
+    </div>
+    <%= f.text_field :organizer, class: "UI editfield organizer", style: "width: 100%;", placeholder: t(:field_placeholder, field_name: t(:organizer)).capitalize %>
+
+    <div class="UI separator light">
+      <h6 style="margin-right:auto;">Organizer Email</h6>
+    </div>
+    <%= f.text_field :organizer_email, class: "UI editfield organizer-email", style: "width: 100%;", placeholder: t(:field_placeholder, field_name: t(:organizer_email)).capitalize %>
+
+    <% if false %>
+    <div class="UI separator light">
+      <h6 style="margin-right:auto;">Subheader</h6>
+    </div>
+    <input class="UI editfield subheader" style="width:100%;" type="text" value="Election night alongside Victoria's best political broadcasters.">
+    <% end %>
+
+    <div class="UI separator light">
+      <h6 style="margin-right:auto;">Description</h6>
+    </div>
+    <%= f.text_area :description, class: "UI editfield body", style: "width: 100%;", placeholder: t(:field_placeholder, field_name: t(:description)).capitalize %>
+
+
+    <!--
+        ##TODO## :: CLEAN UP
+    -->
+    <div class="UI separator light">
+      <h6 style="margin-right:auto;">Schedule</h6>
+    </div>
+
+    <div class="form-group">
+      <label class="form-field-label"><%=capitalize_as_title(t(:start_date))%></label>
+      <hr class="form-field-hr">
+      <div class="input-group date" id="dpk_start_date" >
+        <span class="input-group-addon input-addon-left">
+          <i class="glyphicon glyphicon-calendar"></i>
+        </span>
+        <input type="text" readonly="true" class="form-control date_field" placeholder="Enter date" name="event[start_date]" value="<%=@event.start_date%>">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group bootstrap-timepicker">
+        <span class="input-group-addon input-addon-left"><i class="glyphicon glyphicon-time"></i></span>
+        <input id="tpk_start_date" type="text" class="form-control time_picker" readonly="true" name="event[start_time]" value="<%=@event.start_time%>">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-field-label"><%=capitalize_as_title(t(:end_date))%></label>
+      <hr class="form-field-hr">
+      <div class="input-group date" id="dpk_end_date">
+        <span class="input-group-addon input-addon-left">
+          <i class="glyphicon glyphicon-calendar"></i>
+        </span>
+        <input type="text" readonly="true" class="form-control date_field" placeholder="Enter date" name="event[end_date]" value="<%=@event.end_date%>">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group bootstrap-timepicker">
+        <span class="input-group-addon input-addon-left"><i class="glyphicon glyphicon-time"></i></span>
+        <input id="tpk_end_date" type="text" class="form-control time_picker" readonly="true" name="event[end_time]" value="<%=@event.end_time%>">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<% end %>
+
+
+<%= javascript_include_tag "events_util" %>
+<script type="text/javascript">
+$('#tpk_start_date').timepicker({
+    minuteStep: 5,
+    showMeridian: false
+  });
+  $('#tpk_end_date').timepicker({
+    minuteStep: 5,
+    showMeridian: false
+  });
+  $("#dpk_start_date").datepicker({
+    format: '<%=t(:date_format_javascript)%>',
+    todayBtn: 'linked',
+    autoclose: true
+  });
+  $("#dpk_end_date").datepicker({
+    format: '<%=t(:date_format_javascript)%>',
+    todayBtn: 'linked',
+    autoclose: true
+  });
+</script>
+
+
+<% if false %>
 <div>
 <%= form_for(@event, :url => event_path ,:html => {:method => :put}) do |f| %>
   <div id="form_header_background"></div>
@@ -123,24 +281,5 @@
     </div>
   </div>
 </div>
-<%= javascript_include_tag "events_util" %>
-<script type="text/javascript">
-$('#tpk_start_date').timepicker({
-    minuteStep: 5,
-    showMeridian: false
-  });
-  $('#tpk_end_date').timepicker({
-    minuteStep: 5,
-    showMeridian: false
-  });
-  $("#dpk_start_date").datepicker({
-    format: '<%=t(:date_format_javascript)%>',
-    todayBtn: 'linked',
-    autoclose: true
-  });
-  $("#dpk_end_date").datepicker({
-    format: '<%=t(:date_format_javascript)%>',
-    todayBtn: 'linked',
-    autoclose: true
-  });
-</script>
+<% end %>
+

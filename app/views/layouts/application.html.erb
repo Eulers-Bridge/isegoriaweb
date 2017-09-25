@@ -1,49 +1,93 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
-    <meta charset="utf-8">
-    <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>Isegoria Web</title>
-    <!--%= render "partials/googleMaps_API" %-->
-  </head>
-  <body id="logged_body">
-    <% check_session %>
-    <!--%= render "partials/facebook_SDK" %-->
-    <!--NAVIGATION BAR-->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <%= render "partials/header_in" %>
-    </nav>
-    <!--ERROR MESSAGES-->
-    <%= render "partials/flash_messages" %>
-    <!--MAIN CONTAINER-->
-    <div class="container-fluid">
-      <div class="row">
-        <!--SIDE MAIN MENU-->
-        <div id="isegoria_menu_sidebar" class="col-sm-3 col-md-2">
-          <%= render "partials/main_menu" %>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Isegoria Administration - Newsfeed (New)</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <link href="/assets/reset.css" rel="stylesheet" type="text/css">
+  <style media="screen" type="text/css">
+        @import url('/assets/fonts.css');
+  </style>
+  <link href="/assets/stylesheet.css" rel="stylesheet" type="text/css">
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+</head>
+
+<body>
+  <nav class="navbar" role="navigation">
+    <a href="/">
+      <%= current_user['givenName'] %> <%= current_user['familyName'] %>
+    </a>
+    
+    <% if false %>
+    <img alt="Back" 
+      src="/assets/nav/back.png"
+      srcset="/assets/nav/back@2x.png 2x"><a>Back</a>
+    <% end %>
+
+    <% if controller.action_methods.include?('new') %> 
+      <%= link_to image_tag("nav/plus.png", alt:t(:create_article)) + t(:create).capitalize, {:action => :new}, :class=>'isegoria_navbar_link navbar-left' %>
+    <% end %>
+
+    <a class="navbar_title"><%= controller_name.capitalize %></a> 
+    
+    <% if false %>
+    <img alt="Activity"
+      src="/assets/nav/activity.png"
+      srcset="/assets/nav/activity@2x.png 2x">
+    <% end %>
+    
+    <% if false %>
+    <img alt="Notifications"
+      src="/assets/nav/notifications.png"
+      srcset="/assets/nav/notifications@2x.png 2x">
+    <% end %>
+    
+    <%= link_to image_tag("nav/logoff.png", alt:t(:logout)), logout_path, method: :delete, :class => "navbar-right isegoria_navbar_link" %>
+  </nav>
+
+
+  <aside class="sidebar">
+    <%= render "partials/main_menu" %>
+  </aside>
+
+
+  <div class="page">
+    <div class="page_container">
+
+      <% if false %>
+      <nav class="menubar">
+        <div class="item" style="flex:0;">
+          <button class="UI button fullheight blue" name="Button">Filter</button>
         </div>
-        <!--CONTENT HOLDER-->
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
-          <%= yield %>
+
+        <div class="item" style="flex:2;">
+          <nav class="UI segmented blue">
+            <input id="example1" name="seg-1" type="radio" value="Event Details"><label for="example1">Post Queue</label>
+            <input id="example2" name="seg-2" type="radio" value="Volunteering"><label for="example2">Online</label>
+          </nav>
         </div>
-      </div>
+
+        <div class="item" style="flex:1;">
+          <input class="UI fullheight search" type="search">
+        </div>
+      </nav>
+      <% end %>
+
+      <%= yield %>
+
     </div>
-    <!--FOOTER-->
-      <!--%= render "partials/footer" %-->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-91233938-1', 'auto');
-      ga('send', 'pageview');
-    </script>
-  </body>
+  </div>
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-91233938-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
 </html>

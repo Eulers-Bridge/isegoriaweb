@@ -1,4 +1,77 @@
 <% provide(:title, t(:title_edit_article)) %>
+
+<header 
+class="title_photoheader"
+  <% if @article.picture[0] %>
+  style="background: url(<%= @article.picture[0]["url"] %>);"
+  <% end %>
+  />
+  <div class="title_menubar">
+    <%= form_for(@article, :url => article_upload_picture_path ,:html => {:method => :post}) do |photo_f| %>
+      <%= photo_f.file_field :picture, accept: "image/png,image/gif,image/jpeg" ,class: 'file_input_control', placeholder: t(:field_placeholder, field_name: t(:picture)).capitalize %>
+      <button class="UI button capsule dark item" name="Publish">Upload Photo</button>
+    <% end %>
+
+    <% if false %>
+      <button class="UI button capsule dark item" name="Publish">Clear Photo</button>
+      <button class="UI button capsule dark item" name="Publish" style="margin-left: auto;">Delete</button>
+      <button class="UI button capsule dark item" name="Publish">Save to Queue</button>
+      <button class="UI button capsule dark item" name="Publish">Publish</button>
+    <% end %>
+  </div>
+  <%= form_for(@article, :url => article_path ,:html => {:method => :put}) do |f| %>
+  <%= f.text_field :title, class: "UI editfield header transparent", style: "width: 80%; max-width: 560px;", placeholder: t(:field_placeholder, field_name: t(:title)).capitalize %>
+</header> 
+
+<div class="page_container">
+  <nav class="menubar">
+    <% if false %>
+      <div class="item" style="">
+        <button class="UI button fullheight blue" name="Button">Add Quotation</button>
+        <button class="UI button fullheight blue" name="Button">Add Poll</button>
+      </div>
+    <% end %>
+
+    <div class="item" style="margin-left: auto;">
+      <input
+        class="UI button fullheight green"
+        type="submit"
+        value="<% if action_name == 'edit' %>Finish Editing<% else %>Publish<% end %>"
+        name="commit" />
+    </div>
+  </nav>
+
+  <% if false %>
+    <div class="UI separator light">
+      <h6 style="margin-right:auto;">Subheader</h6>
+      <% if false %><h6>250/500 Words</h6><% end %>
+    </div>
+    <input class="UI editfield subheader" style="width:100%;" type="text" value="Document Subheader">
+  <% end %>
+
+  <div class="UI separator light">
+    <h6 style="margin-right:auto;">Body Text</h6>
+    <% if false %><h6>250/1500 Words</h6><% end %>
+  </div>
+  <%= f.text_area :content, class: "UI editfield body", style: "width: 100%; min-height: 250px;", placeholder: t(:field_placeholder, field_name: t(:content)).capitalize %>
+</div>
+<% end %>
+
+<%= javascript_include_tag "articles_util" %>
+<script type="text/javascript">
+  $("#dpk_date").datepicker({
+    format: '<%=t(:date_format_javascript)%>',
+    todayBtn: 'linked',
+    autoclose: true
+  });
+</script>
+
+
+
+
+
+<% if false %>
+
 <div>
 <%= form_for(@article, :url => article_path ,:html => {:method => :put}) do |f| %>
 <div id="form_header_background"></div>
@@ -57,11 +130,5 @@
   <% end %>
   </div>
 </div>
-<%= javascript_include_tag "articles_util" %>
-<script type="text/javascript">
-  $("#dpk_date").datepicker({
-    format: '<%=t(:date_format_javascript)%>',
-    todayBtn: 'linked',
-    autoclose: true
-  });
-</script>
+
+<% end %>
