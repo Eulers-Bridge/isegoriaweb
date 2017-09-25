@@ -174,8 +174,12 @@
   }
   
   input:focus {
-    border-bottom: solid 2px rgba(22,126,251,1);
-    background-color: rgba(22,126,251,0.2);
+    // border-bottom: solid 2px rgba(22,126,251,1);
+    // background-color: rgba(22,126,251,0.2);
+    // transition: 0.2s ease-in-out;
+    border-bottom: solid 2px rgba(126,126,126,1);
+    background-color: rgba(126,126,126,0.2);
+    color: #fff;
     transition: 0.2s ease-in-out;
   }
 
