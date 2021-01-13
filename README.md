@@ -1,5 +1,7 @@
 # README #
 
+This is a legacy repository and was superseded by the javascript repository. Do not use. 
+
 **Currently on Ruby 2.1.8, Rails 4.1.0**
 
 ### Getting started ###
